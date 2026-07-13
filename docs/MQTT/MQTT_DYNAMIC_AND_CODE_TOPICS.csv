@@ -1,0 +1,108 @@
+category,topic_literal,flow,node_type,node_name,review_status
+Comandi app,${APP_BASE}/ac_auto/set,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Impianti termici,${APP_BASE}/acsPufferTemp,Android APP Bridge,function,Gateway Energia,manual review required
+Luci,${APP_BASE}/eco_lights/set,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Powerwall,${APP_BASE}/energy/battery,Android APP Bridge,function,Gateway Energia,manual review required
+Energia e fotovoltaico,${APP_BASE}/energy/consumption,Android APP Bridge,function,Gateway Energia,manual review required
+Energia e fotovoltaico,${APP_BASE}/energy/grid,Android APP Bridge,function,Gateway Energia,manual review required
+Energia e fotovoltaico,${APP_BASE}/energy/production,Android APP Bridge,function,Gateway Energia,manual review required
+Energia e fotovoltaico,${APP_BASE}/energy/surplus,Android APP Bridge,function,Gateway Energia,manual review required
+Comandi app,${APP_BASE}/env/humBedroom,Android APP Bridge,function,Gateway Ambienti,manual review required
+Comandi app,${APP_BASE}/env/humLiving,Android APP Bridge,function,Gateway Ambienti,manual review required
+Comandi app,${APP_BASE}/env/humOutdoor,Android APP Bridge,function,Gateway Ambienti,manual review required
+Sensori ambientali,${APP_BASE}/env/humidexBedroom,Android APP Bridge,function,Gateway Ambienti,manual review required
+Sensori ambientali,${APP_BASE}/env/humidexLiving,Android APP Bridge,function,Gateway Ambienti,manual review required
+Sensori ambientali,${APP_BASE}/env/tempBedroom,Android APP Bridge,function,Gateway Ambienti,manual review required
+Sensori ambientali,${APP_BASE}/env/tempLiving,Android APP Bridge,function,Gateway Ambienti,manual review required
+Sensori ambientali,${APP_BASE}/env/tempOutdoor,Android APP Bridge,function,Gateway Ambienti,manual review required
+Comandi app,${APP_BASE}/holiday/set,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Luci,${APP_BASE}/pool_lights_auto/set,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Sensori ambientali,${APP_BASE}/pufferAltoTemp,Android APP Bridge,function,Gateway Energia,manual review required
+Sensori ambientali,${APP_BASE}/pufferBassoTemp,Android APP Bridge,function,Gateway Energia,manual review required
+Comandi app,${APP_BASE}/system/enabled/set,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+VMC,${APP_BASE}/vmc/maxNightSpeed/set,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Altro / da classificare,${baseTopic}/ac_auto/state,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Clima,${baseTopic}/casa/clima/stato_completo,AI climate,function,Machine Learning domotico locale ad alta precisione,manual review required
+Altro / da classificare,${baseTopic}/casa/stufa/stat/acceso,Android APP Bridge,function,Ponte Traduttore Caminetto,manual review required
+Altro / da classificare,${baseTopic}/casa/stufa/stat/modalita,Android APP Bridge,function,Ponte Traduttore Caminetto,manual review required
+Altro / da classificare,${baseTopic}/casa/stufa/stat/potenza,Android APP Bridge,function,Ponte Traduttore Caminetto,manual review required
+Luci,${baseTopic}/eco_lights/state,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Clima,${baseTopic}/history/ac/response,Android APP Bridge,function,Formatta Response App,manual review required
+Altro / da classificare,${baseTopic}/holiday/state,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Luci,${baseTopic}/light/${targetDevice}/state,Android APP Bridge,function,Outbound Router Luci,manual review required
+Luci,${baseTopic}/pool_lights_auto/state,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Altro / da classificare,${baseTopic}/system/ac_auto/set,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Altro / da classificare,${baseTopic}/system/ac_auto/state,Android APP Bridge,function,Outbound Router Settaggi,manual review required
+Altro / da classificare,${baseTopic}/system/enabled/state,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Altro / da classificare,${baseTopic}/system/holiday/set,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Altro / da classificare,${baseTopic}/system/holiday/state,Android APP Bridge,function,Outbound Router Settaggi,manual review required
+Altro / da classificare,${baseTopic}/system/luci_eco/set,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Altro / da classificare,${baseTopic}/system/luci_eco/state,Android APP Bridge,function,Outbound Router Settaggi,manual review required
+Piscina,${baseTopic}/system/luci_piscina_auto/set,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Piscina,${baseTopic}/system/luci_piscina_auto/state,Android APP Bridge,function,Outbound Router Settaggi,manual review required
+Sensori ambientali,${baseTopic}/system/sensore_portico/set,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Sensori ambientali,${baseTopic}/system/sensore_portico/state,Android APP Bridge,function,Outbound Router Settaggi,manual review required
+Altro / da classificare,${baseTopic}/system/set,Android APP Bridge,function,Outbound Router Settaggi,manual review required
+Altro / da classificare,${baseTopic}/system/time_range/set,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Altro / da classificare,${baseTopic}/system/time_range/state,Android APP Bridge,function,Outbound Router Settaggi,manual review required
+Termostati,${baseTopic}/thermostat/${targetRoom}/target/state,Android APP Bridge,function,Outbound Router Termostati,manual review required
+VMC,${baseTopic}/vmc/maxNightSpeed/set,Android APP Bridge,function,Outbound Router Settaggi,manual review required
+VMC,${baseTopic}/vmc/maxNightSpeed/state,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+VMC,${baseTopic}/vmc/speed/state,Android APP Bridge,function,Outbound Router VMC,manual review required
+Impianti termici,/esp8266/palazzetti,Android APP Bridge,function,Ponte Traduttore Caminetto,manual review required
+Clima,/history/ac/request,Android APP Bridge,function,function 33,manual review required
+Luci,/light/sala/set,Android APP Bridge,function,App Main Router,manual review required
+Diagnostica,/log/message,Android APP Bridge,function,Ponte Traduttore Caminetto,manual review required
+Altro / da classificare,/maxNightSpeed/set,Android APP Bridge,function,App Main Router,manual review required
+Altro / da classificare,/scene/set,Android APP Bridge,function,Inbound Router Luci,manual review required
+Termostati,/target/set,Android APP Bridge,function,Inbound Router Termostati,manual review required
+Clima,Europe/Rome,AI climate,function,Machine Learning domotico locale ad alta precisione,manual review required
+Clima,Europe/Rome,AI climate,function,Registrazione consumi ML,manual review required
+Clima,N/A,AI climate,function,Machine Learning domotico locale ad alta precisione,manual review required
+Alexa e voce,alexa/caminetto/command,Android APP Bridge,function,Ponte Traduttore Caminetto,manual review required
+Alexa e voce,alexa/caminetto/power,Android APP Bridge,function,Ponte Traduttore Caminetto,manual review required
+Altro / da classificare,application/json,Google Webhook,function,,manual review required
+Clima,broadlink/cmd,AI climate,function,Machine Learning domotico locale ad alta precisione,manual review required
+Telecamere,casa/cameraMatrimoniale/humidex,Dashboard Android App,function,function 23,manual review required
+Diagnostica,casa/clima/log_database,AI climate,function,Registrazione consumi ML,manual review required
+Clima,casa/clima/previsione_meteo,AI climate,function,function 22,manual review required
+Sensori ambientali,casa/stanza1/humidex,Dashboard Android App,function,function 23,manual review required
+Presenza,owntracks/emonpi/lex2/event,OwnTracks,function,,manual review required
+Altro / da classificare,shellies/shelly1-esterno,Android APP Bridge,function,Outbound Router Luci,manual review required
+Luci,shellies/shelly1-esterno/relay/0/command,Android APP Bridge,function,Inbound Router Luci,manual review required
+Clima,system/boot,AI climate,function,Machine Learning domotico locale ad alta precisione,manual review required
+Comandi app,zara/android/domotica,AI climate,function,Machine Learning domotico locale ad alta precisione,manual review required
+Comandi app,zara/android/domotica,Android APP Bridge,function,App Main Router,manual review required
+Comandi app,zara/android/domotica,Android APP Bridge,function,Configurazione Sottoscrizione Dinamica,manual review required
+Comandi app,zara/android/domotica,Android APP Bridge,function,Formatta Response App,manual review required
+Comandi app,zara/android/domotica,Android APP Bridge,function,Gateway Ambienti,manual review required
+Comandi app,zara/android/domotica,Android APP Bridge,function,Gateway Energia,manual review required
+Comandi app,zara/android/domotica,Android APP Bridge,function,Inbound Router Luci,manual review required
+Comandi app,zara/android/domotica,Android APP Bridge,function,Inbound Router Settaggi,manual review required
+Termostati,zara/android/domotica,Android APP Bridge,function,Inbound Router Termostati,manual review required
+VMC,zara/android/domotica,Android APP Bridge,function,Inbound Router VMC,manual review required
+Comandi app,zara/android/domotica,Android APP Bridge,function,Outbound Router Luci,manual review required
+Comandi app,zara/android/domotica,Android APP Bridge,function,Outbound Router Settaggi,manual review required
+Termostati,zara/android/domotica,Android APP Bridge,function,Outbound Router Termostati,manual review required
+VMC,zara/android/domotica,Android APP Bridge,function,Outbound Router VMC,manual review required
+Comandi app,zara/android/domotica,Android APP Bridge,function,Ponte Traduttore Caminetto,manual review required
+Comandi app,zara/android/domotica,Android APP Bridge,function,function 29,manual review required
+Comandi app,zara/android/domotica,Android APP Bridge,function,function 33,manual review required
+VMC,zara/android/domotica/ac_auto/set,Android APP Bridge,function,Outbound Router VMC,manual review required
+Luci,zara/android/domotica/eco_lights/set,Android APP Bridge,function,Outbound Router VMC,manual review required
+VMC,zara/android/domotica/holiday/set,Android APP Bridge,function,Outbound Router VMC,manual review required
+Luci,zara/android/domotica/light/${targetDevice}/state,Android APP Bridge,function,Outbound Router Luci,manual review required
+Luci,zara/android/domotica/light/sala/set,Android APP Bridge,function,App Main Router,manual review required
+Luci,zara/android/domotica/pool_lights_auto/set,Android APP Bridge,function,Outbound Router VMC,manual review required
+VMC,zara/android/domotica/system/set,Android APP Bridge,function,Outbound Router VMC,manual review required
+Termostati,zara/android/domotica/thermostat/${targetRoom}/target/state,Android APP Bridge,function,Outbound Router Termostati,manual review required
+VMC,zara/android/domotica/vmc/maxNightSpeed/set,Android APP Bridge,function,Outbound Router VMC,manual review required
+VMC,zara/android/domotica/vmc/speed/state,Android APP Bridge,function,Outbound Router VMC,manual review required
+Impianti termici,zara/domotics/palazzetti/set/modalita,Android APP Bridge,function,Ponte Traduttore Caminetto,manual review required
+Luci,zigbee2mqtt/Luce_Cucina,Android APP Bridge,function,Outbound Router Luci,manual review required
+Luci,zigbee2mqtt/Luce_Cucina/set,Android APP Bridge,function,Inbound Router Luci,manual review required
+Luci,zigbee2mqtt/Luce_Libreria,Android APP Bridge,function,Outbound Router Luci,manual review required
+Termostati,zigbee2mqtt/Termostato_Bagnetto,Android APP Bridge,function,Outbound Router Termostati,manual review required
+Termostati,zigbee2mqtt/Termostato_Bagnetto/set,Android APP Bridge,function,Inbound Router Termostati,manual review required
+Termostati,zigbee2mqtt/Termostato_Bagno,Android APP Bridge,function,Outbound Router Termostati,manual review required
+Termostati,zigbee2mqtt/Termostato_Bagno/set,Android APP Bridge,function,Inbound Router Termostati,manual review required
