@@ -14,4 +14,5 @@ src/domoticsai_core_engine.egg-info/SOURCES.txt
 src/domoticsai_core_engine.egg-info/dependency_links.txt
 src/domoticsai_core_engine.egg-info/requires.txt
 src/domoticsai_core_engine.egg-info/top_level.txt
+tests/test_persistent_twin.py
 tests/test_topic_mapper.py
