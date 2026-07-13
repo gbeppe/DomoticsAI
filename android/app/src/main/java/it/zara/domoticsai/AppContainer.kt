@@ -1,6 +1,7 @@
 package it.zara.domoticsai
 
 import android.content.Context
+import it.zara.domoticsai.data.core.CoreEngineRepository
 import it.zara.domoticsai.data.mqtt.DomoticsRepository
 import it.zara.domoticsai.data.mqtt.MqttClientService
 import it.zara.domoticsai.data.settings.SecureCredentialStore
@@ -10,6 +11,7 @@ class AppContainer(context: Context) {
     val settingsRepository = SettingsRepository(context)
     val credentialStore = SecureCredentialStore(context)
     val mqttClientService = MqttClientService()
+    val coreEngineRepository = CoreEngineRepository()
 
     val domoticsRepository = DomoticsRepository(
         mqttClientService = mqttClientService,

@@ -8,11 +8,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import it.zara.domoticsai.domain.model.ConnectionSettings
+import it.zara.domoticsai.ui.diagnostics.*
 import it.zara.domoticsai.ui.home.*
 import it.zara.domoticsai.ui.logs.LogsScreen
 import it.zara.domoticsai.ui.settings.SettingsScreen
@@ -22,7 +24,6 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val container = (application as DomoticsAiApplication).container
 
         setContent {
@@ -32,18 +33,24 @@ class MainActivity : ComponentActivity() {
                 )
                 val logs by container.domoticsRepository.logs.collectAsState()
                 val scope = rememberCoroutineScope()
-                var destination by remember {
-                    mutableStateOf(Destination.HOME)
-                }
+                var destination by remember { mutableStateOf(Destination.HOME) }
 
                 val homeViewModel: HomeViewModel = viewModel(
                     factory = SimpleViewModelFactory {
                         HomeViewModel(
-                            repository = container.domoticsRepository,
-                            credentialStore = container.credentialStore
+                            container.domoticsRepository,
+                            container.credentialStore
                         )
                     }
                 )
+
+                val diagnosticsViewModel: DiagnosticsViewModel = viewModel(
+                    factory = SimpleViewModelFactory {
+                        DiagnosticsViewModel(container.coreEngineRepository)
+                    }
+                )
+
+                val diagnosticsState by diagnosticsViewModel.state.collectAsState()
 
                 Scaffold(
                     bottomBar = {
@@ -55,12 +62,10 @@ class MainActivity : ComponentActivity() {
                                     icon = {
                                         Icon(
                                             when (item) {
-                                                Destination.HOME ->
-                                                    Icons.Default.Home
-                                                Destination.LOGS ->
-                                                    Icons.Default.List
-                                                Destination.SETTINGS ->
-                                                    Icons.Default.Settings
+                                                Destination.HOME -> Icons.Default.Home
+                                                Destination.LOGS -> Icons.Default.List
+                                                Destination.CORE -> Icons.Default.Storage
+                                                Destination.SETTINGS -> Icons.Default.Settings
                                             },
                                             contentDescription = item.label
                                         )
@@ -71,32 +76,26 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 ) { outerPadding ->
-                    Box(
-                        Modifier
-                            .fillMaxSize()
-                            .padding(outerPadding)
-                    ) {
+                    Box(Modifier.fillMaxSize().padding(outerPadding)) {
                         when (destination) {
-                            Destination.HOME -> {
-                                HomeScreen(homeViewModel, settings)
-                            }
-
-                            Destination.LOGS -> {
-                                LogsScreen(logs)
-                            }
-
-                            Destination.SETTINGS -> {
-                                SettingsScreen(
-                                    initial = settings,
-                                    initialCredentials =
-                                        container.credentialStore.load()
-                                ) { newSettings, credentials ->
-                                    container.credentialStore.save(credentials)
-                                    scope.launch {
-                                        container.settingsRepository.save(
-                                            newSettings
-                                        )
-                                    }
+                            Destination.HOME -> HomeScreen(homeViewModel, settings)
+                            Destination.LOGS -> LogsScreen(logs)
+                            Destination.CORE -> DiagnosticsScreen(
+                                state = diagnosticsState,
+                                baseUrl = "http://192.168.1.40:8090",
+                                onRefresh = {
+                                    diagnosticsViewModel.refresh(
+                                        "http://192.168.1.40:8090"
+                                    )
+                                }
+                            )
+                            Destination.SETTINGS -> SettingsScreen(
+                                initial = settings,
+                                initialCredentials = container.credentialStore.load()
+                            ) { newSettings, credentials ->
+                                container.credentialStore.save(credentials)
+                                scope.launch {
+                                    container.settingsRepository.save(newSettings)
                                 }
                             }
                         }
@@ -110,5 +109,6 @@ class MainActivity : ComponentActivity() {
 private enum class Destination(val label: String) {
     HOME("Home"),
     LOGS("Log"),
+    CORE("Core"),
     SETTINGS("Impostazioni")
 }
