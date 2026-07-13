@@ -36,3 +36,10 @@ dist/
 out/
 tmp/
 coverage/
+
+# Node-RED runtime data
+gateway/context/
+gateway/.config.runtime.json
+
+# Local backups
+gateway-backup-*/

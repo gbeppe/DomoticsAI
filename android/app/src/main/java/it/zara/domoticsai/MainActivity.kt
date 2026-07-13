@@ -22,6 +22,7 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val container = (application as DomoticsAiApplication).container
 
         setContent {
@@ -31,11 +32,16 @@ class MainActivity : ComponentActivity() {
                 )
                 val logs by container.domoticsRepository.logs.collectAsState()
                 val scope = rememberCoroutineScope()
-                var destination by remember { mutableStateOf(Destination.HOME) }
+                var destination by remember {
+                    mutableStateOf(Destination.HOME)
+                }
 
                 val homeViewModel: HomeViewModel = viewModel(
                     factory = SimpleViewModelFactory {
-                        HomeViewModel(container.domoticsRepository)
+                        HomeViewModel(
+                            repository = container.domoticsRepository,
+                            credentialStore = container.credentialStore
+                        )
                     }
                 )
 
@@ -49,9 +55,12 @@ class MainActivity : ComponentActivity() {
                                     icon = {
                                         Icon(
                                             when (item) {
-                                                Destination.HOME -> Icons.Default.Home
-                                                Destination.LOGS -> Icons.Default.List
-                                                Destination.SETTINGS -> Icons.Default.Settings
+                                                Destination.HOME ->
+                                                    Icons.Default.Home
+                                                Destination.LOGS ->
+                                                    Icons.Default.List
+                                                Destination.SETTINGS ->
+                                                    Icons.Default.Settings
                                             },
                                             contentDescription = item.label
                                         )
@@ -62,12 +71,33 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 ) { outerPadding ->
-                    Box(Modifier.fillMaxSize().padding(outerPadding)) {
+                    Box(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(outerPadding)
+                    ) {
                         when (destination) {
-                            Destination.HOME -> HomeScreen(homeViewModel, settings)
-                            Destination.LOGS -> LogsScreen(logs)
-                            Destination.SETTINGS -> SettingsScreen(settings) {
-                                scope.launch { container.settingsRepository.save(it) }
+                            Destination.HOME -> {
+                                HomeScreen(homeViewModel, settings)
+                            }
+
+                            Destination.LOGS -> {
+                                LogsScreen(logs)
+                            }
+
+                            Destination.SETTINGS -> {
+                                SettingsScreen(
+                                    initial = settings,
+                                    initialCredentials =
+                                        container.credentialStore.load()
+                                ) { newSettings, credentials ->
+                                    container.credentialStore.save(credentials)
+                                    scope.launch {
+                                        container.settingsRepository.save(
+                                            newSettings
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
@@ -78,5 +108,7 @@ class MainActivity : ComponentActivity() {
 }
 
 private enum class Destination(val label: String) {
-    HOME("Home"), LOGS("Log"), SETTINGS("Impostazioni")
+    HOME("Home"),
+    LOGS("Log"),
+    SETTINGS("Impostazioni")
 }

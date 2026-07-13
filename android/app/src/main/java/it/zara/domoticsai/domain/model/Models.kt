@@ -17,8 +17,18 @@ data class BrokerEndpoint(
 
 data class ConnectionSettings(
     val mode: ConnectionMode = ConnectionMode.AUTO,
-    val local: BrokerEndpoint = BrokerEndpoint("192.168.1.40", 1883),
-    val remote: BrokerEndpoint = BrokerEndpoint("", 1883)
+    val local: BrokerEndpoint = BrokerEndpoint("192.168.1.40", 1884),
+    val remote: BrokerEndpoint = BrokerEndpoint("", 1884)
+)
+
+data class BrokerCredentials(
+    val username: String = "",
+    val password: String = ""
+)
+
+data class AppCredentials(
+    val local: BrokerCredentials = BrokerCredentials(),
+    val remote: BrokerCredentials = BrokerCredentials()
 )
 
 data class EnergyState(

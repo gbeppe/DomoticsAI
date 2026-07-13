@@ -52,7 +52,7 @@
         "id": "73fb6eba0e0c4fb0",
         "type": "mqtt-broker",
         "name": "DomoticsAI Test Broker",
-        "broker": "127.0.0.1",
+        "broker": "192.168.1.40",
         "port": "1883",
         "clientid": "domoticsai-gateway-test",
         "autoConnect": true,
