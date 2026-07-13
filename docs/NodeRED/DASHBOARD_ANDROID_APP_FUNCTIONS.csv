@@ -1,0 +1,79 @@
+node_id,name,code_lines,code_chars,declared_outputs,wired_inputs,wired_outputs,disabled
+4ca047bf.0cd01,,19,455,1,2,2,False
+7a1a5e29.70851,,4,63,1,1,2,False
+3ad7925.a3b846e,,2,48,1,1,2,False
+a2b18bed.5c2cd,,8,152,1,1,1,False
+7ff0d0ab.7a36,,13,208,1,1,1,False
+e5419d0e.b2a138,,2,34,1,1,2,False
+82f439bf.2f3ab,,13,208,1,1,1,False
+9c52de7b.1f7ac8,va bene . accendo le luci della sala,2,65,1,1,1,False
+2f519325.fa6bbc,va bene . accendo le luci in libreria,2,66,1,1,1,False
+a251278a.30f7c,va bene . accendo la lampada televisione,2,69,1,1,1,False
+bd6038b3.431d2,va bene . attivo modalità televisione,2,66,1,1,1,False
+586bc80f.7550f,va bene . attivo modalità buio notte,2,65,1,1,1,False
+da2e3634.05537,va bene .  velocità ventilazione impostata,2,87,1,1,1,False
+a38b9128.4175d8,va bene . accendo il caminetto,2,59,1,1,1,False
+41aa2364.e368ac,"va bene, spengo il caminetto",2,57,1,1,1,False
+914a71d0.781fd8,"va bene, regolo la potenza del caminetto a",2,86,1,1,1,False
+f5631c9.3befa6,"va bene, regolo la temperatura dell'aria condizionata a",2,110,1,1,1,False
+fd03aec8.be6d78,"va bene, accendo l'aria condizionata",2,65,1,1,1,False
+c1fe2af4.05e61,"va bene, spengo l'aria condizionata",2,64,1,1,1,False
+f37946b.c0543b8,"va bene, regolo la temperatura della pompa di calore a",2,109,1,1,1,False
+49d5624b.33ea44,"va bene, accendo la pompa di calore",2,64,1,1,1,False
+2e571e8f.459f32,"va bene, spengo la pompa di calore",2,63,1,1,1,False
+f71a3e69.df29,,30,852,3,2,3,False
+a03df4e3.483688,,8,151,1,1,1,True
+ce80344d.c7b87,,8,174,1,1,1,False
+8cdae963.ca5c5,va bene . accendo tutte le luci,2,60,1,1,1,False
+c748956b.440de8,va bene . spengo tutte le luci,2,59,1,1,1,False
+30d8f988.be5cde,,33,1290,2,4,5,True
+46afa2e3.5946f4,va bene . accendo le luci della pedana della piscina,2,81,1,1,1,False
+5e451e.37d9f2e4,va bene . accendo le luci della piscina,2,68,1,1,1,False
+b68db6ef.61184,va bene . accendo lo skimmer della piscina,2,71,1,1,1,False
+3189b260.4ca936,va bene . accendo la pompa filtro della piscina,2,76,1,1,1,False
+250913dd.5b2ef4,,7,154,2,1,2,False
+16a94456.9081e4,,5,196,1,1,1,False
+b075f5de.8d3a28,,5,199,1,1,1,False
+17c12ba8.009184,,7,154,2,1,2,False
+4c3c2759.a96868,,6,194,1,1,1,False
+5e71bedf.693798,,5,195,1,1,1,False
+7919434f.40de94,,5,131,1,1,1,False
+556a8d3a.bd89e4,,5,130,1,1,1,False
+b65510fb.7d5b08,get startTime,2,61,1,1,1,False
+82caa6e2.da329,get stopTime,2,60,1,1,1,False
+aa64faa6.eb1d38,,3,64,1,1,1,False
+5814aa90.9ea9bc,,3,61,1,1,1,False
+2162083b.40a,,5,126,1,1,1,False
+2d7950d.070d93,get modalita,2,60,1,1,1,False
+10b777c5.044d88,,3,63,1,1,1,False
+cc02a044.fcd4b,global vars,2,51,1,1,0,False
+848c486f.e9dd88,start/stop AC 25 Eco at night,43,1257,1,1,1,True
+816f87f1.fdeb1,,3,58,1,1,0,False
+42474f12.c19108,,5,135,1,1,1,True
+b99c201f.436e,,3,70,1,1,1,True
+4d4b9159.b21668,get modalita,2,70,1,1,1,True
+27ddde57.ea1662,,2,12,1,1,1,False
+bbca0a2da0d0a1f5,,2,79,1,1,1,False
+708ee83c9397abac,,2,79,1,1,1,False
+8f691b093d10b3ee,regolazione termostati a 17,6,118,1,1,2,False
+8f2063c50153934e,regolazione termostati assenza/vacnza,6,140,1,1,2,False
+3148ab1f49616a54,,3,62,1,1,1,True
+c8ea712efd6913c8,get luciECO,2,57,1,1,1,True
+da2b0841d5b90464,,5,123,1,1,1,True
+f5c9c515cf42d334,,3,58,1,1,0,False
+e44964b4fae70a87,,3,70,1,1,1,True
+53301fe20b6e9be9,get luciPiscinaAUTO,2,65,1,1,1,True
+c92c37bef71ddc13,,5,135,1,1,1,True
+f6acc7720b681b77,,3,66,1,1,0,False
+61a20ed0764251fe,lampadario ,3,132,1,1,1,False
+343382afed30d1f9,function 9,11,354,1,1,1,False
+7f5c66bf680c81e2,function 10,6,158,1,1,1,False
+3dbd3b0db5f5962d,function 11,3,153,1,1,0,False
+6018aa5bef3e0f41,,3,61,1,1,1,True
+ec22cf26e5af06f4,get luciPiscinaAUTO,2,56,1,1,1,True
+02e6e414771821cb,,5,126,1,1,1,True
+f58b780782821937,,3,57,1,1,0,False
+46e5f22bb686e6d5,function 15,3,81,1,1,1,False
+310e4d7ecb47f945,,2,79,1,1,1,False
+38ad1f4937437ea3,function 23,58,1927,2,4,4,False
+71abe7c41c12fa36,function 31,3,137,1,2,1,True

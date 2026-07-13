@@ -1,0 +1,358 @@
+node_id,type,name,topic,group_id,disabled,wired_inputs,wired_outputs,x,y
+7cc35f13028d320b,ui_spacer,spacer,,cb9fc429ce2122c2,False,0,0,,
+c0c8b1fef5a96e04,ui_spacer,spacer,,cb9fc429ce2122c2,False,0,0,,
+8a7ea2ab5ebee693,ui_spacer,spacer,,48196d137af1665e,False,0,0,,
+1cd96cb0c358e6d8,ui_spacer,spacer,,48196d137af1665e,False,0,0,,
+8aa981ccbe24b4ad,ui_spacer,spacer,,945edaef9a208643,False,0,0,,
+e0f43d4aa1a32fb3,ui_spacer,spacer,,945edaef9a208643,False,0,0,,
+c4779277.322ff8,ui_template,Clock Toolbar,,964f674b220c5b67,True,0,0,140,20
+45d314fcacd88210,mqtt in,shellies/shelly1-771284/relay/0,shellies/shelly1-771284/relay/0,,False,0,0,230,40
+b97bc1c0.cb899,ui_template,Clock Toolbar,,c982fbb8.1deb38,False,0,0,140,60
+defc514c59ae12fb,link call,call alexa speak,,,False,1,0,1100,80
+f4f2bfdda005961c,ui_switch,Lampada HiFi,cmnd/tasmota_86AD14/POWER,e9c5dc64.9d6d28,False,0,1,680,180
+0cfe277a93d1cd75,mqtt out,TasmotaLampadaHifi,cmnd/tasmota_86AD14/POWER,,False,1,0,1080,180
+d694fd2e2b456420,mqtt in,zara/domotics/lights/readinglight,zara/domotics/lights/readinglight,,False,0,1,190,220
+d17c748ec892c494,ui_switch,Tavolino lettura,,e9c5dc64.9d6d28,False,1,1,680,220
+dbe9efe6cb7e4b41,link out,reading lamp,,,False,1,0,895,220
+5dc51dac.197b0c,mqtt in,shellies/shelly1-98F4ABF294D7/relay/0,shellies/shelly1-98F4ABF294D7/relay/0,,False,0,1,210,260
+7d047340.054a54,rbe,rbe,,,False,1,1,470,260
+109744d2.bd61ab,ui_switch,Bagno,,e9c5dc64.9d6d28,True,1,1,650,260
+30358ed.8c33b72,link out,bagno,,,False,1,0,895,260
+135da1cb.992dc6,mqtt in,shellies/shelly1-771284/relay/0,shellies/shelly1-771284/relay/0,,False,0,1,190,300
+153df7fc.c0c5,rbe,rbe,,,False,1,1,470,300
+2f7737f3.e2ff58,ui_switch,Portico Ingresso,,e9c5dc64.9d6d28,False,1,1,680,300
+e051d71a.90b038,link out,portico ingresso,,,False,1,0,895,300
+91f56f2b.a00b28,mqtt in,shellies/shelly1-B8B350/relay/0,shellies/shelly1-B8B350/relay/0,,False,0,1,190,340
+af504cd8.7d0d38,rbe,rbe,,,False,1,1,470,340
+aace977d.16b25,ui_switch,Lampadario tv,,e9c5dc64.9d6d28,True,1,2,680,340
+445cfecc.5d08a,link out,lampadario tv,,,False,1,0,895,340
+61a20ed0764251fe,function,lampadario ,,,False,1,1,1270,340
+7c3ea414.4a201c,mqtt in,shellies/shelly1-B92AF0/relay/0,shellies/shelly1-B92AF0/relay/0,,False,0,1,190,380
+53cb6ad6.72f3a4,rbe,rbe,,,False,1,1,470,380
+c93d56eb.b0f16,ui_switch,Ingresso Servizio,,e9c5dc64.9d6d28,False,1,1,690,380
+9101bd1e.39a53,link out,luce ingresso servizio,,,False,1,0,895,380
+89889195.c423e8,mqtt in,shellies/shelly1-B8C284/relay/0,shellies/shelly1-B8C284/relay/0,,False,0,1,190,420
+ea4791bd.2aac98,rbe,rbe,,,False,1,1,470,420
+a0b2b287.eaf528,ui_switch,Lavanderia,,e9c5dc64.9d6d28,False,1,1,670,420
+cde68aa1.4a5fc,link out,luce lavanderia,,,False,1,0,895,420
+46ead469.e672d4,link out,pool pump,,,False,1,0,835,440
+371a41d3.98ead6,mqtt in,zara/domotics/lights/poolpump,zara/domotics/lights/poolpump,,False,0,1,190,460
+56cc08d8.9817a8,ui_switch,Pompa Filtro,,2dd97f9f.5dd9e8,False,1,2,670,460
+3189b260.4ca936,function,va bene . accendo la pompa filtro della piscina,,,False,1,1,1380,460
+c228c9a9.95362,link out,pool skimmer,,,False,1,0,835,480
+d977f16d.6e08b8,mqtt in,zara/domotics/lights/poolskimmer,zara/domotics/lights/poolskimmer,,False,0,1,200,500
+c271f396.13951,ui_switch,Skimmer,,2dd97f9f.5dd9e8,False,1,2,660,500
+b68db6ef.61184,function,va bene . accendo lo skimmer della piscina,,,False,1,1,1370,500
+a3e508a8.9c9528,link out,pool light,,,False,1,0,835,520
+32a2db32.980c34,mqtt in,zara/domotics/lights/poollight,zara/domotics/lights/poollight,,False,0,1,180,540
+cd1ccb1e.905148,ui_switch,Luci Piscina,,2dd97f9f.5dd9e8,False,1,2,670,540
+5e451e.37d9f2e4,function,va bene . accendo le luci della piscina,,,False,1,1,1350,540
+8e300a92.ca8158,link out,pool floor,,,False,1,0,835,560
+18ad57fe.745928,mqtt in,zara/domotics/lights/poolfloor,zara/domotics/lights/poolfloor,,False,0,1,180,580
+b60e2fe7.7ab5d,ui_switch,Luci Pedana,,2dd97f9f.5dd9e8,False,1,2,670,580
+46afa2e3.5946f4,function,va bene . accendo le luci della pedana della piscina,,,False,1,1,1400,580
+9843c77b.00e0c8,link out,alarm lamp,,,False,1,0,835,640
+2a6979e9.508f96,mqtt in,zara/domotics/lights/prolunga,zara/domotics/lights/prolunga,,False,0,1,180,660
+935580ba.7a1ab,ui_switch,Alarm,,e9c5dc64.9d6d28,False,1,1,650,660
+887d9ca0.763ad,link out,living lamp,,,False,1,0,835,680
+48557148.a3cff8,mqtt in,zara/domotics/lights/livinglamp,zara/domotics/lights/livinglamp,,False,0,1,190,700
+da2e1f45.33e288,ui_switch,Sala,,e9c5dc64.9d6d28,False,1,2,650,700
+9c52de7b.1f7ac8,function,va bene . accendo le luci della sala,,,False,1,1,1340,700
+c14c803c.86e27,link out,shelf lamp,,,False,1,0,835,720
+ab057036.42d5c,mqtt in,zara/domotics/lights/shelflamp,zara/domotics/lights/shelflamp,,False,0,1,190,740
+ad32e56b.84cfe,ui_switch,Libreria,,e9c5dc64.9d6d28,False,1,2,660,740
+2f519325.fa6bbc,function,va bene . accendo le luci in libreria,,,False,1,1,1340,740
+7cb25150.0bde78,link out,tv lamp,,,False,1,0,835,760
+fb736ecf.73fcb,mqtt in,zara/domotics/lights/tvlamp,zara/domotics/lights/tvlamp,,False,0,1,180,780
+7a84beaa.30de78,ui_switch,Televisione,,e9c5dc64.9d6d28,False,1,2,670,780
+a251278a.30f7c,function,va bene . accendo la lampada televisione,,,False,1,1,1360,780
+63eaa703.fd98c,link out,tv mode,,,False,1,0,835,820
+71aeaed6.a4d5b8,ui_button,TV Mode,,e9c5dc64.9d6d28,False,0,2,660,840
+bd6038b3.431d2,function,va bene . attivo modalità televisione,,,False,1,1,1350,840
+a901336b.d16cb8,link out,sleep mode,,,False,1,0,835,860
+53b3ae4.c08ccd,ui_button,Sleep Mode,,e9c5dc64.9d6d28,False,0,2,670,880
+586bc80f.7550f,function,va bene . attivo modalità buio notte,,,False,1,1,1340,880
+739a7011.c5a33,inject,on,on,,False,0,1,310,900
+f05d5124.911a38,link out,all lights on,,,False,1,0,835,900
+a52920f.8a0476,ui_button,Tutte accese,,e9c5dc64.9d6d28,False,0,2,670,920
+8cdae963.ca5c5,function,va bene . accendo tutte le luci,,,False,1,1,1330,920
+473f5068.10fbb8,link out,all lights off,,,False,1,0,835,940
+e5c6a02.cf0d46,ui_button,Tutte spente,,e9c5dc64.9d6d28,False,1,2,670,960
+c748956b.440de8,function,va bene . spengo tutte le luci,,,False,1,1,1320,960
+8c268bf6.9d46a,mqtt in,emon/emontx3/power1,emon/emontx3/power1,,False,0,2,160,1020
+7a1a5e29.70851,function,function,,,False,1,2,430,1020
+7a8867d5.22928,ui_gauge,watt,,41f18059.3065d,False,1,0,650,1020
+2cd6dfa8.fbf38,ui_chart,ui_chart,,338f2c50.20567c,False,1,0,650,1060
+4ca047bf.0cd01,function,function,,,False,2,2,430,1080
+3277f0b9.66be28,ui_gauge,watt,,41f18059.3065d,False,1,0,660,1100
+589220e6.708458,mqtt in,emon/emontx3/power2,emon/emontx3/power2,,False,0,2,160,1140
+c34afda4.5fb698,ui_gauge,watt,,41f18059.3065d,False,1,0,670,1140
+f558b36d.f31058,ui_chart,ui_chart,,bbed8397.3dda,False,1,0,650,1180
+aea2fd10.acc5b,mqtt in,/esp8266/brink/fanspeed,/esp8266/brink/fanspeed,,False,0,1,170,1240
+3ad7925.a3b846e,function,function,,,False,1,2,430,1240
+d9e717a8.22bbd8,ui_gauge,Fan Speed,,e579367e.084b38,False,1,0,670,1240
+52266b5f.aec394,ui_slider,ui_slider,,e579367e.084b38,False,1,2,650,1280
+da2e3634.05537,function,va bene .  velocità ventilazione impostata,,,False,1,1,1360,1280
+8e96c03e.1975a8,link out,vmc fanspeed,,,False,1,0,835,1300
+2162083b.40a,function,function,,,False,1,1,430,1320
+9362a82d.a490f,mqtt in,zara/domotics/palazzetti/modalita,zara/domotics/palazzetti/modalita,,False,0,2,190,1360
+f411d570.e8603,ui_dropdown,Modalità,,714b9948.bd615,False,1,1,660,1380
+6fe78dd6.110eec,mqtt out,zara/domotics/palazzetti/modalita,zara/domotics/palazzetti/modalita,,False,2,0,990,1380
+a38b9128.4175d8,function,va bene . accendo il caminetto,,,False,1,1,1330,1380
+c363553f.d9f778,mqtt in,zara/domotics/palazzetti/acceso,zara/domotics/palazzetti/acceso,,False,0,1,190,1400
+a2b18bed.5c2cd,function,function,,,False,1,1,430,1420
+b2d18fc6.b31b28,ui_switch,{{msg.topic}},,714b9948.bd615,False,1,2,650,1420
+5afc8341.32195c,switch,switch,,,False,1,2,910,1420
+41aa2364.e368ac,function,"va bene, spengo il caminetto",,,False,1,1,1320,1420
+6aab2064.09d29,mqtt in,emon/focolare/powerraw,emon/focolare/powerraw,,False,0,2,170,1440
+f8704c83.c71d3,ui_slider,ui_slider,,714b9948.bd615,False,1,2,650,1460
+914a71d0.781fd8,function,"va bene, regolo la potenza del caminetto a",,,False,1,1,1370,1460
+2702970a.7a31f8,light-scheduler,2d daily start ,,,False,0,1,130,1480
+e269cc43.ce33f,link out,fireplace,,,False,3,0,895,1500
+79f13b45.97b324,ui_gauge,Livello Potenza,,714b9948.bd615,False,1,0,680,1520
+946739a6.89787,mqtt in,zara/domotics/palazzetti/oraavvio,zara/domotics/palazzetti/oraavvio,,False,0,3,200,1540
+250913dd.5b2ef4,function,function,,,False,1,2,490,1540
+71df72.4af1f09,ui_numeric,Ora avvio,,714b9948.bd615,True,1,1,840,1540
+16a94456.9081e4,function,function,,,False,1,1,1010,1540
+d69205f8.c93028,mqtt out,zara/domotics/palazzetti/oraavvio,zara/domotics/palazzetti/oraavvio,,False,4,0,1440,1540
+7919434f.40de94,function,function,,,False,1,1,350,1580
+8a7f1773.ada928,ui_numeric,Min avvio,,714b9948.bd615,True,1,1,840,1580
+b075f5de.8d3a28,function,function,,,False,1,1,1010,1580
+9304c080.4e8648,ui_audio,ui_audio,,317db321.171764,False,21,0,2240,1580
+556a8d3a.bd89e4,function,function,,,False,1,1,350,1620
+52a23e3e.61a5d,mqtt in,zara/domotics/palazzetti/oraspegnimento,zara/domotics/palazzetti/oraspegnimento,,False,0,3,220,1660
+17c12ba8.009184,function,function,,,False,1,2,490,1660
+31fd687b.0377c8,ui_numeric,Ora spegnimento,,714b9948.bd615,True,1,1,870,1660
+4c3c2759.a96868,function,function,,,False,1,1,1050,1660
+9e15623.b7152a,mqtt out,zara/domotics/palazzetti/oraspegnimento,zara/domotics/palazzetti/oraspegnimento,,False,4,0,1460,1680
+18d604a7.feec63,ui_numeric,Min spegnimento,,714b9948.bd615,True,1,1,870,1700
+5e71bedf.693798,function,function,,,False,1,1,1050,1700
+f564b03505444bdd,mqtt in,zara/domotics/controlloAutomaticoPotenzaCaminetto,zara/domotics/controlloAutomaticoPotenzaCaminetto,,False,0,1,250,1720
+fe9e45776117b3ef,ui_switch,Controllo Automatico Potenza,topic,714b9948.bd615,False,1,1,230,1760
+aa64faa6.eb1d38,function,function,,,False,1,1,1110,1760
+6136963cd78ed054,mqtt out,zara/domotics/controlloAutomaticoPotenzaCaminetto,zara/domotics/controlloAutomaticoPotenzaCaminetto,,False,1,0,280,1800
+4ceb56a5.59dba,switch,switch,,,False,1,3,970,1800
+5814aa90.9ea9bc,function,function,,,False,1,1,1110,1800
+b65510fb.7d5b08,function,get startTime,,,False,1,1,370,1840
+10b777c5.044d88,function,function,,,False,1,1,1110,1840
+7ef51e19.1f5ba,inject,inject,,,False,0,7,180,1860
+477d8eef.2087,mysql,ZaraDomotica / ZaraDomotica,,,False,6,1,670,1860
+82caa6e2.da329,function,get stopTime,,,False,1,1,370,1880
+2d7950d.070d93,function,get modalita,,,False,1,1,370,1920
+343382afed30d1f9,function,function 9,,,False,1,1,1000,1920
+8f8545dee9ee759f,ui_text_input,<font size=5>Avvio,topic,714b9948.bd615,False,1,1,1310,1920
+4a0aba0372fad07c,moment,moment,,,False,1,1,1580,1920
+7f5c66bf680c81e2,function,function 10,,,False,1,1,990,1980
+9b61cf5580a45fcd,ui_text_input,<font size=5>Spegnimento,topic,714b9948.bd615,False,1,1,1280,1980
+a4161beb612ac6e3,moment,moment,,,False,1,1,1580,1980
+cc02a044.fcd4b,function,global vars,,,False,1,0,500,2020
+f88327af.1c1ac8,mqtt in,emon/emonth5/temperature_calibrated,emon/emonth5/temperature_calibrated,,False,0,3,210,2140
+27ddde57.ea1662,function,function,,,False,1,1,460,2140
+d18037e8.b36368,ui_gauge,°C,,317db321.171764,False,1,0,670,2140
+1397736.389d18d,mqtt in,emon/weather/extTemp,emon/weather/extTemp,,False,0,1,160,2180
+6f149299.5cb66c,ui_gauge,°C,,317db321.171764,False,1,0,680,2180
+360f60a3.4489c,mqtt in,emon/cameraMatrimoniale/temperature,emon/cameraMatrimoniale/temperature,,False,0,4,210,2220
+e1e32b35.e52bd,ui_gauge,°C,,317db321.171764,False,1,0,680,2220
+31655777.f25ac,mqtt in,emon/emonth5/humidity,emon/emonth5/humidity,,False,0,3,170,2280
+b4d30aad.66d788,ui_gauge,%,,317db321.171764,False,1,0,680,2280
+ce6c94ac.3012d,mqtt in,emon/weather/RelativeHumidity,emon/weather/RelativeHumidity,,True,0,1,200,2320
+af505d22.639058,ui_gauge,%,,317db321.171764,False,2,0,680,2320
+08db19e17a531f07,mqtt in,emon/weather/RelativeHumidity,emon/weather/extHumidity,,False,0,1,190,2360
+d0897d5b.aa1ac,ui_gauge,%,,317db321.171764,False,1,0,680,2360
+1ff6727a.90bc4e,link out,AC 25 dry eco,,,False,1,0,1545,2380
+196a3db4.d49aca,mqtt in,emon/cameraMatrimoniale/humidity,emon/cameraMatrimoniale/humidity,,False,0,3,200,2400
+848c486f.e9dd88,function,start/stop AC 25 Eco at night,,,True,1,1,720,2420
+c94eb21e.05dbd8,rbe,rbe,,,False,1,1,1090,2420
+8cbd4485.37e93,switch,switch,,,False,1,3,1270,2420
+dd4cbb85.367938,link out,AC 26 dry,,,False,1,0,1545,2420
+38ad1f4937437ea3,function,function 23,,,False,4,4,130,2460
+30d8f988.be5cde,function,function,,,True,4,5,430,2460
+5b09c0b9.4337a8,ui_gauge,%,,317db321.171764,False,2,0,680,2460
+293b9ba9.b8a3cc,link out,AC off,,,False,1,0,1545,2460
+68a719f0.7b201,ui_gauge,%,,317db321.171764,False,2,0,690,2500
+6133291c.dec6b8,ui_text,20 to 29: Little to no discomfort,,317db321.171764,False,0,0,730,2540
+43cfe2f970bb9c81,mqtt out,emon/cameraMatrimoniale/humidex,emon/cameraMatrimoniale/humidex,,False,2,0,340,2580
+d2c1fbdb.a11fd,ui_text,30 to 39: Some discomfort,,317db321.171764,False,0,0,720,2580
+0b4112e939342807,mqtt out,emon/emonth5/humidex,emon/emonth5/humidex,,False,2,0,230,2620
+54a78b50.d8d164,ui_text,40 to 45: Great discomfort; avoid exertion,,317db321.171764,False,0,0,760,2620
+c1dd0739.a1085,ui_text,Above 45: Dangerous; heat stroke quite possible,,317db321.171764,False,0,0,790,2660
+d9f7778d.18854,mqtt in,emon/resolDL2/sensor2,emon/resolDL2/sensor2,,False,0,1,170,2720
+2857c6d4.4058c2,ui_gauge,°C,,50fbd9b6.397468,False,1,0,670,2720
+262ce4b6.c83ccc,mqtt in,emon/resolDL2/sensor3,emon/resolDL2/sensor3,,False,0,1,170,2760
+be60be33.05f138,ui_gauge,°C,,50fbd9b6.397468,False,1,0,670,2760
+9aac4866.042dc,mqtt in,emon/resolDL2/sensor1,emon/resolDL2/sensor1,,False,0,1,170,2800
+87954e09.e579d8,ui_gauge,°C,,e5869a29.e5b8a,False,1,0,680,2800
+e5fe808aac72557a,mqtt in,emon/shellyACS/tempACS,emon/shellyACS/tempACS,,False,0,1,190,2840
+f14c930f38c55622,ui_gauge,°C,,50fbd9b6.397468,False,1,0,680,2840
+600374ae.ee6e04,mqtt in,emon/OTGcaldaia/flame,emon/OTGcaldaia/flame,,False,0,1,170,2880
+7ff0d0ab.7a36,function,function,,,False,1,1,390,2880
+669bf54a.91031c,ui_switch,{{msg.topic}},,dc2ce469.bc4ee8,False,1,0,650,2880
+5ff75a7c.7f2474,mqtt in,emon/OTGcaldaia/modulation,emon/OTGcaldaia/modulation,,False,0,1,180,2920
+e5419d0e.b2a138,function,function,,,False,1,2,390,2920
+4b70e660.2e1ac,ui_gauge,%,,dc2ce469.bc4ee8,False,1,0,700,2920
+5106781e.4510f8,ui_chart,ui_chart,,dc2ce469.bc4ee8,False,1,0,650,2960
+62735af0.f4234c,mqtt in,emon/resolDL2/pump1,emon/resolDL2/pump1,,False,0,1,160,3000
+440c7fad.dc5698,ui_gauge,%,,e5869a29.e5b8a,False,1,0,700,3000
+1a72f1db.486a06,mqtt in,zara/domotics/pompapavimento/abilitata,zara/domotics/pompapavimento/abilitata,,False,0,1,220,3060
+9362f9dc.d6cf28,ui_switch,abilitata,,f501f4eb.e83f98,False,1,1,660,3060
+3cf47e89.a14372,mqtt out,zara/domotics/pompapavimento/abilitata,zara/domotics/pompapavimento/abilitata,,False,1,0,920,3060
+e70845ea.ee8558,mqtt in,zara/domotics/floorpumpstate,zara/domotics/floorpumpstate,,False,0,1,180,3100
+82f439bf.2f3ab,function,function,,,False,1,1,390,3100
+117544a9.1ec7cb,ui_switch,{{msg.topic}},,f501f4eb.e83f98,False,1,0,650,3100
+cb66f5c8.2fe798,ui_text,ui_text,,f501f4eb.e83f98,False,0,0,650,3140
+fd03aec8.be6d78,function,"va bene, accendo l'aria condizionata",,,False,1,1,1330,3180
+24316620.bfee82,mqtt in,emon/AC/ACstatus,emon/AC/ACstatus,,False,0,1,150,3200
+a03df4e3.483688,function,function,,,True,1,1,390,3200
+6b9c0d86.28690c,ui_switch,{{msg.topic}},,17459f3a.593b69,False,2,2,650,3200
+331a4162.556b36,switch,switch,,,False,1,2,1050,3200
+2c45a94.669d156,link out,ac,,,False,2,0,895,3220
+c1fe2af4.05e61,function,"va bene, spengo l'aria condizionata",,,False,1,1,1330,3220
+571e702d.9d50f,ui_numeric,Auto,,17459f3a.593b69,False,1,2,650,3260
+f5631c9.3befa6,function,"va bene, regolo la temperatura dell'aria condizionata a",,,False,1,1,1390,3260
+c7e0b7e6.14d62,mqtt in,/esp8266/hitachiAC/command,/esp8266/hitachiAC/command,,True,0,1,180,3280
+f71a3e69.df29,function,function,,,False,2,3,390,3280
+b0585e6a.102df8,ui_numeric,Eco,,20053532.acb9fa,False,1,2,650,3300
+f37946b.c0543b8,function,"va bene, regolo la temperatura della pompa di calore a",,,False,1,1,1390,3300
+c367ab1d7f57744a,mqtt in,zara/domotics/AC/command,zara/domotics/AC/command,,False,0,1,180,3320
+324bf2f9.d56abe,link out,heat pump,,,False,2,0,895,3340
+49d5624b.33ea44,function,"va bene, accendo la pompa di calore",,,False,1,1,1330,3340
+6af029e7.bd4e6,mqtt in,emon/AC/HPstatus,emon/AC/HPstatus,,False,0,1,150,3360
+ce80344d.c7b87,function,function,,,False,1,1,390,3360
+6a5b9988.ef37d,ui_switch,{{msg.topic}},,20053532.acb9fa,False,1,2,650,3360
+7854814d.1c0f38,switch,switch,,,False,1,2,1050,3360
+2e571e8f.459f32,function,"va bene, spengo la pompa di calore",,,False,1,1,1330,3380
+2156d0164e4ef3d0,mqtt in,zara/domotics/HP/abilitata,zara/domotics/HP/abilitata,,False,0,1,180,3420
+e675fa6bcc079df7,ui_switch,abilitata,,20053532.acb9fa,False,1,1,660,3420
+c5fc3b056689bd92,mqtt out,zara/domotics/HP/abilitata,zara/domotics/HP/abilitata,,False,1,0,870,3420
+d85f5996e699f6c4,mqtt in,zara/domotics/HP/solardivertmode,zara/domotics/HP/solardivertmode,,False,0,1,220,3480
+f08605cca57e4ea0,ui_switch,Solar Divert Mode,,20053532.acb9fa,False,1,1,690,3480
+8a433f258fd9ae4c,mqtt out,zara/domotics/HP/solardivertmode,zara/domotics/HP/solardivertmode,,False,1,0,1020,3480
+816f87f1.fdeb1,function,function,,,False,1,0,520,3560
+8c82fefe.37a248,mqtt out,zara/domotics/modalitavacanza,zara/domotics/modalitavacanza,,False,2,0,1070,3600
+c99f7204.ae3e6,mqtt in,zara/domotics/modalitavacanza,zara/domotics/modalitavacanza,,False,0,2,310,3620
+b6228a3a.440988,ui_switch,Casa modalità vacanza,,8d8d37.4822d2c8,False,1,2,700,3620
+42474f12.c19108,function,function,,,True,1,1,930,3640
+4d4b9159.b21668,function,get modalita,,,True,1,1,210,3740
+70e74445.fe63c4,mysql,ZaraDomotica / ZaraDomotica,,,True,2,1,490,3740
+32f17ee0.02e022,switch,switch,,,True,1,1,750,3740
+b99c201f.436e,function,function,,,True,1,1,890,3740
+3f57b0cc029f679e,mqtt in,zara/domotics/luciECO,zara/domotics/luciECO,,False,0,2,300,3800
+a6f747ee71a32d88,ui_switch,Accensione luci ECO,,8d8d37.4822d2c8,False,1,2,700,3800
+22d71c9a6065fe9b,mqtt out,zara/domotics/luciECO,zara/domotics/luciECO,,False,2,0,1000,3800
+d036429f3415b306,mqtt in,zara/domotics/luciPiscinaAuto,zara/domotics/luciPiscinaAuto,,False,0,2,1300,3800
+c68af5b84f78c92e,ui_switch,Luci Piscina AUTO,,8d8d37.4822d2c8,False,1,2,1650,3800
+9fa00d7a7ba8f2c7,mqtt in,zara/domotics/ACAuto,zara/domotics/ACAuto,,False,0,2,2300,3800
+365a8c9483f36fdb,ui_switch,AC Auto,,8d8d37.4822d2c8,False,1,2,2640,3800
+865af8e6972b8bc3,mqtt out,zara/domotics/luciPiscinaAuto,zara/domotics/luciPiscinaAuto,,False,2,0,1990,3820
+0dd49f645bf50359,mqtt out,zara/domotics/ACAuto,zara/domotics/ACAuto,,False,2,0,2980,3820
+f5c9c515cf42d334,function,function,,,False,1,0,500,3840
+da2b0841d5b90464,function,function,,,True,1,1,700,3840
+f6acc7720b681b77,function,function,,,False,1,0,1460,3860
+c92c37bef71ddc13,function,function,,,True,1,1,1660,3860
+f58b780782821937,function,function,,,False,1,0,2480,3860
+02e6e414771821cb,function,function,,,True,1,1,2680,3860
+c8ea712efd6913c8,function,get luciECO,,,True,1,1,310,3880
+71d072bea6c33cb2,mysql,ZaraDomotica / ZaraDomotica,,,True,2,1,550,3880
+74952642d2098464,switch,switch,,,True,1,1,810,3880
+3148ab1f49616a54,function,function,,,True,1,1,950,3880
+53301fe20b6e9be9,function,get luciPiscinaAUTO,,,True,1,1,1240,3900
+ba20a2b4665205cc,mysql,ZaraDomotica / ZaraDomotica,,,True,2,1,1510,3900
+7d8e5e88b771ec32,switch,switch,,,True,1,1,1770,3900
+e44964b4fae70a87,function,function,,,True,1,1,1910,3900
+ec22cf26e5af06f4,function,get luciPiscinaAUTO,,,True,1,1,2260,3900
+f456208cde9489f6,mysql,ZaraDomotica / ZaraDomotica,,,True,2,1,2530,3900
+ea3caa2b1235ae7c,switch,switch,,,True,1,1,2790,3900
+6018aa5bef3e0f41,function,function,,,True,1,1,2930,3900
+faf3c84d.76b24,ui_text,Cancello garage,,65075bb7.fa3d34,False,0,0,340,3940
+72c793a1.5f37fc,ui_button,Apri 1st button,,65075bb7.fa3d34,False,0,1,540,3940
+c9cb829c.b514f8,link out,cancelloGarage,,,False,1,0,680,3940
+31482396d58350b8,mqtt in,zara/domotics/porch_sensor,zara/domotics/porch_sensor,,False,0,2,1220,3960
+3ec10f2b39bea533,ui_switch,Sensore Portico,,8d8d37.4822d2c8,False,1,1,1520,3960
+ecd6f9eba4b883a3,mqtt out,zara/domotics/porch_sensor,zara/domotics/porch_sensor,,False,2,0,1800,3960
+4687ef00.94af98,ui_button,Apri 2nd button,,65075bb7.fa3d34,False,0,1,540,3980
+7e3aa695.5a4558,link out,cancelloGarage2nd,,,False,1,0,690,3980
+3dbd3b0db5f5962d,function,function 11,,,False,1,0,1350,4020
+c42e2225a8053c7a,bigtimer,Big Timer,,,False,0,1,1560,4020
+a8d77a891d51129e,comment,termostati,,,False,0,0,80,4040
+2155a2d0524e330a,comment,living,,,False,0,0,70,4080
+746669b3d131813f,ui_switch,Acceso,topic,cb9fc429ce2122c2,True,0,1,680,4100
+53234a63c7edbaf9,mqtt out,cmnd/tasmota_F32F4F/THERMOSTATMODESET,cmnd/tasmota_F32F4F/THERMOSTATMODESET,,False,1,0,970,4100
+a947d635cc060e6f,mqtt in,emon/emonth5/temperature_calibrated,emon/emonth5/temperature_calibrated,,False,0,1,170,4140
+bbca0a2da0d0a1f5,function,function,,,False,1,1,440,4140
+1c1f687e73114a51,ui_gauge,°C,,cb9fc429ce2122c2,False,1,0,670,4140
+aff34d4d75143af9,bigtimer,Big Timer,,,True,0,1,1340,4140
+71abe7c41c12fa36,function,function 31,,,True,2,1,1550,4140
+e5245e96c84ff633,ui_switch,Sensore Portico,,8d8d37.4822d2c8,True,1,1,1760,4140
+40a2297948c01af7,mqtt in,cmnd/tasmota_F32F4F/TEMPTARGETSET,cmnd/tasmota_F32F4F/TEMPTARGETSET,,False,0,1,180,4180
+6377419bf79690b0,ui_slider,topic,topic,cb9fc429ce2122c2,False,1,1,670,4180
+536b72c34561348b,mqtt out,cmnd/tasmota_F32F4F/TEMPTARGETSET,cmnd/tasmota_F32F4F/TEMPTARGETSET,,False,3,0,970,4180
+05c65bc43d4ae28d,light-scheduler,living thermostat timer,,,True,1,1,160,4240
+0d3db1e90f0911e0,change,change,,,False,1,1,460,4240
+a836c202e981967b,mqtt in,emon/TermostatLiving/Switch,emon/TermostatLiving/Switch,,False,0,1,140,4300
+d5fa4e8ebd2af62a,change,change,,,False,1,1,400,4300
+ce4c07901d9df049,ui_switch,topic,topic,cb9fc429ce2122c2,False,1,0,630,4300
+a25310cb7a5acd42,inject,inject,,,False,0,1,470,4360
+e1aa6d4c58cd04d2,mqtt in,zara/domotics/livingThemostatMinValue,zara/domotics/livingThemostatMinValue,,False,0,1,170,4400
+edd359e59e9359f9,ui_slider,Min temp,topic,cb9fc429ce2122c2,False,2,1,700,4400
+78f46048539b022f,change,change,,,False,1,1,920,4400
+8b5131fe86d70e81,mqtt out,zara/domotics/livingThemostatMinValue,zara/domotics/livingThemostatMinValue,,False,1,0,1300,4400
+719a9c6bd05f9d29,mqtt in,zara/domotics/livingThemostatMaxValue,zara/domotics/livingThemostatMaxValue,,False,0,1,170,4440
+eeb42973ece4688b,ui_slider,Max temp,topic,cb9fc429ce2122c2,False,2,1,700,4440
+339ba97c20ed9d38,change,change,,,False,1,1,920,4440
+1231be7b548cdaa8,mqtt out,zara/domotics/livingThemostatMaxValue,zara/domotics/livingThemostatMaxValue,,False,1,0,1300,4440
+4cd86e00dca662e5,inject,inject,,,False,0,1,470,4480
+515f1a8f257a4255,comment,bagno camera,,,False,0,0,90,4540
+8d118ed51f489093,ui_switch,Acceso,topic,48196d137af1665e,True,0,1,740,4580
+c784eb3294af2fd6,mqtt out,cmnd/tasmota_F294D7/THERMOSTATMODESET,cmnd/tasmota_F294D7/THERMOSTATMODESET,,False,1,0,1030,4580
+61b6483e29d346e6,mqtt in,emon/shellyBagnocamera/temperature_calibrated,emon/shellyBagnocamera/temperature_calibrated,,False,0,1,220,4620
+708ee83c9397abac,function,function,,,False,1,1,500,4620
+1039ed727c58e23f,ui_gauge,°C,,48196d137af1665e,False,1,0,730,4620
+6f4423c1a841e1d0,mqtt in,cmnd/tasmota_F294D7/TEMPTARGETSET,cmnd/tasmota_F294D7/TEMPTARGETSET,,False,0,1,210,4660
+b48573a35c749d95,ui_slider,topic,topic,48196d137af1665e,False,1,1,730,4660
+20b9defaf96a4368,light-scheduler,bathroom thermostat timer,,,True,1,1,160,4720
+bb4c520aea6a0ce0,change,change,,,False,1,1,480,4720
+32b91d408bec92d0,mqtt out,cmnd/tasmota_F294D7/TEMPTARGETSET,cmnd/tasmota_F294D7/TEMPTARGETSET,,False,3,0,1010,4720
+64a70a959c5a5b96,mqtt in,emon/TermostatMainBathroom/Switch,emon/TermostatMainBathroom/Switch,,False,0,1,190,4780
+ea021744c6694724,change,change,,,False,1,1,480,4780
+bb426f0e6391e527,ui_switch,topic,topic,48196d137af1665e,False,1,0,730,4780
+5187804ab84b3d3e,comment,Bagno Servizio,,,False,0,0,120,4900
+bce4805d1ff68a2e,ui_switch,Acceso,topic,945edaef9a208643,True,0,1,700,4920
+0a00c1b4d8e1e3b1,mqtt out,cmnd/SmallBathroomThermostat/THERMOSTATMODESET,cmnd/SmallBathroomThermostat/THERMOSTATMODESET,,False,1,0,1020,4920
+1ecc2374fb50c3c8,mqtt in,emon/bagnoServizio/temperature,emon/bagnoServizio/temperature,,False,0,1,170,4960
+310e4d7ecb47f945,function,function,,,False,1,1,460,4960
+9aed7fe92d283193,ui_gauge,°C,,945edaef9a208643,False,1,0,690,4960
+0299dab27d7f86b5,mqtt in,cmnd/SmallBathroomThermostat/TEMPTARGETSET,cmnd/SmallBathroomThermostat/TEMPTARGETSET,,False,0,1,230,5000
+3e61d0cfe952044f,ui_slider,topic,topic,945edaef9a208643,False,1,1,690,5000
+58751d9fae3db0b1,mqtt out,cmnd/SmallBathroomThermostat/TEMPTARGETSET,cmnd/SmallBathroomThermostat/TEMPTARGETSET,,False,2,0,1020,5000
+1dbc672f4ae32fae,light-scheduler,bagno servizio thermostat timer,,,True,0,1,210,5060
+51b60e3776e614f3,change,change,,,False,1,1,480,5060
+640beab93ecc16d5,mqtt in,emon/bagnoServizio/Switch,emon/bagnoServizio/Switch,,False,0,1,160,5120
+02203dd29b1ea54d,change,change,,,False,1,1,420,5120
+7c2c8d08421e6e75,ui_switch,topic,topic,945edaef9a208643,False,1,0,650,5120
+270b711ae74078b0,inject,inject,,,False,0,2,520,5180
+319d24de17cbec63,mqtt in,zara/domotics/SmallBathroomThermostatMinValue,zara/domotics/SmallBathroomThermostatMinValue,,False,0,2,230,5220
+814e40e68d1cc9c9,ui_text_input,Min temp,topic,945edaef9a208643,True,2,1,720,5220
+229316b4e9e7ac36,change,change,,,False,2,1,970,5220
+672bbe5e1d0b113d,mqtt out,zara/domotics/SmallBathroomThermostatMinValue,zara/domotics/SmallBathroomThermostatMinValue,,False,1,0,1350,5220
+bae566f7c8849a82,mqtt in,zara/domotics/SmallBathroomThermostatMaxValue,zara/domotics/SmallBathroomThermostatMaxValue,,False,0,2,230,5260
+0e211eaa88c0bfce,ui_text_input,Max temp,topic,945edaef9a208643,True,2,1,720,5260
+6889de3e0afea8a3,change,change,,,False,2,1,970,5260
+7d28c8c458bcf67f,mqtt out,zara/domotics/SmallBathroomThermostatMaxValue,zara/domotics/SmallBathroomThermostatMaxValue,,False,1,0,1350,5260
+2f0b3352ed0ea368,inject,inject,,,False,0,2,520,5300
+b7a9ec63ac2f5757,ui_slider,Min temp,topic,945edaef9a208643,False,2,1,780,5380
+a409927c4e7d7dd2,ui_slider,Max temp,topic,945edaef9a208643,False,2,1,780,5420
+bd10bc4fddbbdf95,ui_button,Tasmota Settings,,945edaef9a208643,False,0,1,790,5760
+8f2063c50153934e,function,regolazione termostati assenza/vacnza,,,False,1,2,410,5800
+7db57965.76d468,ui_button,Tasmota Settings,,cb9fc429ce2122c2,False,0,1,790,5800
+ece06122.7e762,trigger,reset msg,topic,,False,3,1,1000,5800
+5e1f0081.6dc3c,ui_template,window redirect,,cb9fc429ce2122c2,False,1,0,1240,5800
+ebb0f92477748866,inject,inject,,,True,0,2,140,5820
+8f691b093d10b3ee,function,regolazione termostati a 17,,,False,1,2,380,5840
+23caf401.9d6d4c,ui_button,Tasmota Settings,,48196d137af1665e,False,0,1,790,5840
+7f18e1cc67d66009,mqtt in,TeslaPowerwall/site_instant_power,TeslaPowerwall/site_instant_power,,False,0,1,180,5980
+46e5f22bb686e6d5,function,function 15,,,False,1,1,410,5980
+7f4c5ab7d06972f4,ui_chart,ui_chart,,b2afdb29f0818310,False,1,0,630,5980
+befea991116a2325,link out,link out 1,,,False,1,0,395,6060
+bdedc751c74c7950,link out,dashboard out,,,False,1,0,395,6100
+b0bc205fa5169a65,mqtt in,homeassistant_voice,homeassistant_voice,,False,0,3,160,6160
+4779910914cbd26b,ui_toast,ui_toast,,,False,1,0,610,6160

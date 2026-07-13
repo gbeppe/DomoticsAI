@@ -1,0 +1,107 @@
+node_id,widget_type,ui_tab,ui_group,label,min,max,format
+c34afda4.5fb698,ui_gauge,Energia,Energia,watt,0,3000,{{value}}
+3277f0b9.66be28,ui_gauge,Energia,Energia,watt,0,3000,{{value}}
+7a8867d5.22928,ui_gauge,Energia,Energia,watt,-3000,3000,{{value}}
+d9e717a8.22bbd8,ui_gauge,VMC,VMC,Fan Speed,1,4,{{value}}
+79f13b45.97b324,ui_gauge,Impianti Termici,Termo Focolare,Livello Potenza,1,6,{{value}}
+d18037e8.b36368,ui_gauge,Ambienti,Ambiente,°C,15,30,{{value | number:1}}
+b4d30aad.66d788,ui_gauge,Ambienti,Ambiente,%,30,70,{{value | number:1}}
+6f149299.5cb66c,ui_gauge,Ambienti,Ambiente,°C,-10,50,{{value | number:1}}
+af505d22.639058,ui_gauge,Ambienti,Ambiente,%,40,100,{{value | number:1}}
+e1e32b35.e52bd,ui_gauge,Ambienti,Ambiente,°C,10,30,{{value | number:1}}
+d0897d5b.aa1ac,ui_gauge,Ambienti,Ambiente,%,30,70,{{value | number:1}}
+2857c6d4.4058c2,ui_gauge,Impianti Termici,Riserva Energia,°C,15,60,{{value}}
+be60be33.05f138,ui_gauge,Impianti Termici,Riserva Energia,°C,15,60,{{value}}
+87954e09.e579d8,ui_gauge,Impianti Termici,Solare,°C,30,60,{{value}}
+4b70e660.2e1ac,ui_gauge,Impianti Termici,Caldaia Gas,%,0,100,{{value}}
+440c7fad.dc5698,ui_gauge,Impianti Termici,Solare,%,0,100,{{value}}
+2cd6dfa8.fbf38,ui_chart,Energia,Potenza Impegnata,,,,
+5106781e.4510f8,ui_chart,Impianti Termici,Caldaia Gas,,,,
+cb66f5c8.2fe798,ui_text,Impianti Termici,Pompa Pavimento,,,,{{msg.payload}}
+f558b36d.f31058,ui_chart,Energia,Immissione Rete,,,,
+5b09c0b9.4337a8,ui_gauge,Ambienti,Ambiente,%,20,40,{{value}}
+68a719f0.7b201,ui_gauge,Ambienti,Ambiente,%,20,40,{{value}}
+6133291c.dec6b8,ui_text,Ambienti,Ambiente,20 to 29: Little to no discomfort,,,{{msg.payload}}
+d2c1fbdb.a11fd,ui_text,Ambienti,Ambiente,30 to 39: Some discomfort,,,{{msg.payload}}
+54a78b50.d8d164,ui_text,Ambienti,Ambiente,40 to 45: Great discomfort; avoid exertion,,,{{msg.payload}}
+c1dd0739.a1085,ui_text,Ambienti,Ambiente,Above 45: Dangerous; heat stroke quite possible,,,{{msg.payload}}
+c4779277.322ff8,ui_template,AI managed,AC / Heat Pump,Clock Toolbar,,,"<div ng-init=""
+    addToolbarWidget('<div id=\'clockbox\' style=\'float: right; margin-right: 15px; font-size: 16px; font-weight: bold;\'></div>');
+    startClock()"">
+</div>
+
+<script>
+    scope.startClock = function() {
+        setInterval(function() {
+            var t = new Date();
+            var format = t.toLocaleDateString() + ' ' + t.toLocaleTimeString();
+            document.getElementById('clockbox').innerHTML = format;
+        }, 1000);
+    };
+</script>
+"
+faf3c84d.76b24,ui_text,Ingressi,Cancello garage,Cancello garage,,,{{msg.payload}}
+1c1f687e73114a51,ui_gauge,Termostati,Living,°C,16.0,22.0,{{value}}
+1039ed727c58e23f,ui_gauge,Termostati,Bagno Camera,°C,16.0,22.0,{{value}}
+5e1f0081.6dc3c,ui_template,Termostati,Living,window redirect,,,"<script>
+(function(scope) {
+    scope.$watch('msg.payload', function(data) {
+        if (data == ""TasmotaLiving"") {
+          //window.location.href = ""http://192.168.1.69"";
+          window.open('http://192.168.1.69','_blank'); // <- This is what makes it open in a new window.
+        } 
+        if (data == ""TasmotaSmallBathroom"") {
+          //window.location.href = ""http://192.168.1.68"";
+          window.open('http://192.168.1.67','_blank'); // <- This is what makes it open in a new window.
+        }
+        if (data == ""TasmotaBathroom"") {
+          //window.location.href = ""http://192.168.1.68"";
+          window.open('http://192.168.1.68','_blank'); // <- This is what makes it open in a new window.
+        } 
+    });
+})(scope);
+</script>"
+f14c930f38c55622,ui_gauge,Impianti Termici,Riserva Energia,°C,15,60,{{value}}
+7f4c5ab7d06972f4,ui_chart,Impianti Termici,Immissione in Rete,,,,
+9aed7fe92d283193,ui_gauge,Termostati,Bagno Servizio,°C,16.0,22.0,{{value}}
+b97bc1c0.cb899,ui_template,Zooland Sys,hidden_group,Clock Toolbar,,,"<script id=""titleScript"" type=""text/javascript"">
+
+$(function() {
+    if($('.md-toolbar-tools').length != 0){
+        loadClock();
+    }else setTimeout(loadClock, 500)
+});
+
+function loadClock(){
+    $('#clock').remove();
+    var toolbar = $('.md-toolbar-tools');
+    
+    var div = $('<div/>');
+    var p = $('<p/ id=""clock"">');
+    
+    div.append(p);
+    div[0].style.margin = '5px 5px 5px auto';
+    toolbar.append(div);
+
+    function displayTitle(lh) {
+        p.text(lh); 
+    }
+    
+    function upTime() {
+        var d = new Date();
+        const options = {
+            dateStyle: ""full"",
+            timeStyle: ""medium"",
+        };
+        p.text(d.toLocaleString(""it-IT"", options));
+    }
+
+    if(document.clockInterval){ 
+            clearInterval(document.clockInterval);
+            document.clockInterval = null;
+    }
+        
+    document.clockInterval = setInterval(upTime,1000);
+}
+
+</script>"

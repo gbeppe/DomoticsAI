@@ -1,0 +1,66 @@
+node_id,widget_type,ui_tab,ui_group,label,topic,min,max,step,downstream
+da2e1f45.33e288,ui_switch,Illuminazione,Illuminazione,Sala,,,,,living lamp | va bene . accendo le luci della sala
+ad32e56b.84cfe,ui_switch,Illuminazione,Illuminazione,Libreria,,,,,shelf lamp | va bene . accendo le luci in libreria
+7a84beaa.30de78,ui_switch,Illuminazione,Illuminazione,Televisione,,,,,tv lamp | va bene . accendo la lampada televisione
+52266b5f.aec394,ui_slider,VMC,VMC,,,1,4,1,va bene .  velocità ventilazione impostata | vmc fanspeed
+b2d18fc6.b31b28,ui_switch,Impianti Termici,Termo Focolare,{{msg.topic}},,,,,fireplace | switch
+f8704c83.c71d3,ui_slider,Impianti Termici,Termo Focolare,,,1,6,1,"fireplace | va bene, regolo la potenza del caminetto a"
+71aeaed6.a4d5b8,ui_button,Illuminazione,Illuminazione,TV Mode,,,,,tv mode | va bene . attivo modalità televisione
+53b3ae4.c08ccd,ui_button,Illuminazione,Illuminazione,Sleep Mode,,,,,sleep mode | va bene . attivo modalità buio notte
+571e702d.9d50f,ui_numeric,Impianti Termici,Raffrescamento,Auto,,23,25,1,"va bene, regolo la temperatura dell'aria condizionata a | ac"
+b0585e6a.102df8,ui_numeric,Impianti Termici,Pompa Calore,Eco,,16,22,1,"va bene, regolo la temperatura della pompa di calore a | heat pump"
+6a5b9988.ef37d,ui_switch,Impianti Termici,Pompa Calore,{{msg.topic}},,,,,switch | heat pump
+6b9c0d86.28690c,ui_switch,Impianti Termici,Raffrescamento,{{msg.topic}},,,,,switch | ac
+669bf54a.91031c,ui_switch,Impianti Termici,Caldaia Gas,{{msg.topic}},,,,,
+117544a9.1ec7cb,ui_switch,Impianti Termici,Pompa Pavimento,{{msg.topic}},,,,,
+a52920f.8a0476,ui_button,Illuminazione,Illuminazione,Tutte accese,,,,,all lights on | va bene . accendo tutte le luci
+e5c6a02.cf0d46,ui_button,Illuminazione,Illuminazione,Tutte spente,,,,,va bene . spengo tutte le luci | all lights off
+b60e2fe7.7ab5d,ui_switch,Piscina,Piscina,Luci Pedana,,,,,va bene . accendo le luci della pedana della piscina | pool floor
+cd1ccb1e.905148,ui_switch,Piscina,Piscina,Luci Piscina,,,,,va bene . accendo le luci della piscina | pool light
+c271f396.13951,ui_switch,Piscina,Piscina,Skimmer,,,,,va bene . accendo lo skimmer della piscina | pool skimmer
+56cc08d8.9817a8,ui_switch,Piscina,Piscina,Pompa Filtro,,,,,va bene . accendo la pompa filtro della piscina | pool pump
+935580ba.7a1ab,ui_switch,Illuminazione,Illuminazione,Alarm,,,,,alarm lamp
+f411d570.e8603,ui_dropdown,Impianti Termici,Termo Focolare,Modalità,,,,,zara/domotics/palazzetti/modalita
+71df72.4af1f09,ui_numeric,Impianti Termici,Termo Focolare,Ora avvio,,0,24,1,function
+8a7f1773.ada928,ui_numeric,Impianti Termici,Termo Focolare,Min avvio,,0,45,15,function
+31fd687b.0377c8,ui_numeric,Impianti Termici,Termo Focolare,Ora spegnimento,,0,24,1,function
+18d604a7.feec63,ui_numeric,Impianti Termici,Termo Focolare,Min spegnimento,,0,45,15,function
+a0b2b287.eaf528,ui_switch,Illuminazione,Illuminazione,Lavanderia,,,,,luce lavanderia
+c93d56eb.b0f16,ui_switch,Illuminazione,Illuminazione,Ingresso Servizio,,,,,luce ingresso servizio
+9362f9dc.d6cf28,ui_switch,Impianti Termici,Pompa Pavimento,abilitata,,,,,zara/domotics/pompapavimento/abilitata
+aace977d.16b25,ui_switch,Illuminazione,Illuminazione,Lampadario tv,,,,,lampadario tv | lampadario 
+2f7737f3.e2ff58,ui_switch,Illuminazione,Illuminazione,Portico Ingresso,,,,,portico ingresso
+109744d2.bd61ab,ui_switch,Illuminazione,Illuminazione,Bagno,,,,,bagno
+b6228a3a.440988,ui_switch,Settaggi,Automatismi,Casa modalità vacanza,,,,,function | zara/domotics/modalitavacanza
+72c793a1.5f37fc,ui_button,Ingressi,Cancello garage,Apri 1st button,,,,,cancelloGarage
+4687ef00.94af98,ui_button,Ingressi,Cancello garage,Apri 2nd button,,,,,cancelloGarage2nd
+d17c748ec892c494,ui_switch,Illuminazione,Illuminazione,Tavolino lettura,,,,,reading lamp
+746669b3d131813f,ui_switch,Termostati,Living,Acceso,topic,,,,cmnd/tasmota_F32F4F/THERMOSTATMODESET
+6377419bf79690b0,ui_slider,Termostati,Living,,topic,10,22,0.5,cmnd/tasmota_F32F4F/TEMPTARGETSET
+ce4c07901d9df049,ui_switch,Termostati,Living,,topic,,,,
+8d118ed51f489093,ui_switch,Termostati,Bagno Camera,Acceso,topic,,,,cmnd/tasmota_F294D7/THERMOSTATMODESET
+b48573a35c749d95,ui_slider,Termostati,Bagno Camera,,topic,10,22,0.5,cmnd/tasmota_F294D7/TEMPTARGETSET
+bb426f0e6391e527,ui_switch,Termostati,Bagno Camera,,topic,,,,
+a6f747ee71a32d88,ui_switch,Settaggi,Automatismi,Accensione luci ECO,,,,,zara/domotics/luciECO | function
+7db57965.76d468,ui_button,Termostati,Living,Tasmota Settings,,,,,reset msg
+23caf401.9d6d4c,ui_button,Termostati,Bagno Camera,Tasmota Settings,,,,,reset msg
+c68af5b84f78c92e,ui_switch,Settaggi,Automatismi,Luci Piscina AUTO,,,,,zara/domotics/luciPiscinaAuto | function
+e675fa6bcc079df7,ui_switch,Impianti Termici,Pompa Calore,abilitata,,,,,zara/domotics/HP/abilitata
+8f8545dee9ee759f,ui_text_input,Impianti Termici,Termo Focolare,<font size=5>Avvio,topic,,,,moment
+9b61cf5580a45fcd,ui_text_input,Impianti Termici,Termo Focolare,<font size=5>Spegnimento,topic,,,,moment
+3ec10f2b39bea533,ui_switch,Settaggi,Automatismi,Sensore Portico,,,,,zara/domotics/porch_sensor
+365a8c9483f36fdb,ui_switch,Settaggi,Automatismi,AC Auto,,,,,zara/domotics/ACAuto | function
+f08605cca57e4ea0,ui_switch,Impianti Termici,Pompa Calore,Solar Divert Mode,,,,,zara/domotics/HP/solardivertmode
+f4f2bfdda005961c,ui_switch,Illuminazione,Illuminazione,Lampada HiFi,cmnd/tasmota_86AD14/POWER,,,,TasmotaLampadaHifi
+fe9e45776117b3ef,ui_switch,Impianti Termici,Termo Focolare,Controllo Automatico Potenza,topic,,,,zara/domotics/controlloAutomaticoPotenzaCaminetto
+bce4805d1ff68a2e,ui_switch,Termostati,Bagno Servizio,Acceso,topic,,,,cmnd/SmallBathroomThermostat/THERMOSTATMODESET
+3e61d0cfe952044f,ui_slider,Termostati,Bagno Servizio,,topic,10,22,0.5,cmnd/SmallBathroomThermostat/TEMPTARGETSET
+7c2c8d08421e6e75,ui_switch,Termostati,Bagno Servizio,,topic,,,,
+814e40e68d1cc9c9,ui_text_input,Termostati,Bagno Servizio,Min temp,topic,,,,change
+0e211eaa88c0bfce,ui_text_input,Termostati,Bagno Servizio,Max temp,topic,,,,change
+bd10bc4fddbbdf95,ui_button,Termostati,Bagno Servizio,Tasmota Settings,,,,,reset msg
+b7a9ec63ac2f5757,ui_slider,Termostati,Bagno Servizio,Min temp,topic,16,22,0.5,change
+a409927c4e7d7dd2,ui_slider,Termostati,Bagno Servizio,Max temp,topic,16,22,0.5,change
+edd359e59e9359f9,ui_slider,Termostati,Living,Min temp,topic,16,22,0.5,change
+eeb42973ece4688b,ui_slider,Termostati,Living,Max temp,topic,16,22,0.5,change
+e5245e96c84ff633,ui_switch,Settaggi,Automatismi,Sensore Portico,,,,,function 31

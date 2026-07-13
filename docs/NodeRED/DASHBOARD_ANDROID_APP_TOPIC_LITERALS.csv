@@ -1,0 +1,13 @@
+topic_literal,node_id,node_type,node_name
+emon/emontx3/power1,4ca047bf.0cd01,function,
+emon/emontx3/power2,4ca047bf.0cd01,function,
+emon/cameraMatrimoniale/humidity,30d8f988.be5cde,function,
+emon/cameraMatrimoniale/temperature,30d8f988.be5cde,function,
+emon/emonth5/humidity,30d8f988.be5cde,function,
+emon/emonth5/temperature_calibrated,30d8f988.be5cde,function,
+casa/cameraMatrimoniale/humidex,38ad1f4937437ea3,function,function 23
+casa/stanza1/humidex,38ad1f4937437ea3,function,function 23
+emon/cameraMatrimoniale/humidity,38ad1f4937437ea3,function,function 23
+emon/cameraMatrimoniale/temperature,38ad1f4937437ea3,function,function 23
+emon/emonth5/humidity,38ad1f4937437ea3,function,function 23
+emon/emonth5/temperature_calibrated,38ad1f4937437ea3,function,function 23

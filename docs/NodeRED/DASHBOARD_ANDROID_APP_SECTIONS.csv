@@ -1,0 +1,13 @@
+ui_tab,widget_count,groups,widget_types
+AI managed,1,AC / Heat Pump,ui_template:1
+Ambienti,13,Ambiente,ui_audio:1 | ui_gauge:8 | ui_text:4
+Energia,5,Energia | Immissione Rete | Potenza Impegnata,ui_chart:2 | ui_gauge:3
+Illuminazione,15,Illuminazione,ui_button:4 | ui_switch:11
+Impianti Termici,29,Caldaia Gas | Immissione in Rete | Pompa Calore | Pompa Pavimento | Raffrescamento | Riserva Energia | Solare | Termo Focolare,ui_chart:2 | ui_dropdown:1 | ui_gauge:7 | ui_numeric:6 | ui_slider:1 | ui_switch:9 | ui_text:1 | ui_text_input:2
+Ingressi,3,Cancello garage,ui_button:2 | ui_text:1
+Piscina,4,Piscina,ui_switch:4
+Senza tab,1,,ui_toast:1
+Settaggi,6,Automatismi,ui_switch:6
+Termostati,28,Bagno Camera | Bagno Servizio | Living,ui_button:3 | ui_gauge:3 | ui_slider:7 | ui_spacer:6 | ui_switch:6 | ui_template:1 | ui_text_input:2
+VMC,2,VMC,ui_gauge:1 | ui_slider:1
+Zooland Sys,1,hidden_group,ui_template:1
