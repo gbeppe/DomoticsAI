@@ -1,0 +1,29 @@
+flow_id,flow_name,disabled,total_nodes,function_nodes,mqtt_in,mqtt_out,ui_nodes,inject_nodes,debug_nodes
+e262c7c317aeee62,4 relays,False,27,4,0,0,4,9,0
+84d784119db55d44,AI bollette luce gas,False,10,2,0,0,1,2,1
+2cc001ef3d59afd2,AI climate,False,105,18,22,8,14,5,0
+e141894f92e50703,Alexa Speak,False,6,0,0,0,0,2,0
+1f6dc345.d2b8c5,Amazon Echo,False,117,6,0,11,0,1,0
+4dd176bbb0a9fd30,Android APP Bridge,True,83,16,33,8,0,3,3
+684cf25501f3e8a6,Android APP Bridge,False,99,18,43,13,0,1,0
+a29bd73d.0c987,broadlink lights,False,184,37,7,11,0,14,2
+bf02f13c67c1b1bc,Broadlink RM Pro,False,18,9,0,0,0,3,2
+536c2447ed13d27b,ChatGPT,True,40,0,0,0,0,16,6
+acb2bb816d7b454b,ChatGPT,True,40,0,0,0,0,16,6
+ab4429e1.433be8,Dashboard Android App,False,357,78,66,25,108,7,0
+5689a9933e238e57,Diverter,True,81,1,1,1,5,15,8
+1989fd4301f25459,Dulo (New Amazon Echo),False,2,0,0,0,0,0,0
+93fffb81777d26fa,emoncms devices,True,7,1,1,0,0,0,2
+fecc03a2.c4a43,Flow 1,True,27,9,0,0,1,13,1
+c7cce41b770609d1,Flow 2,True,14,2,0,0,0,7,1
+68c3550f.087564,Google Webhook,True,61,20,2,0,0,0,2
+50c7faecf65ebdcf,Host Ping Test,False,14,4,0,0,0,1,0
+ac72d3b5.be33c8,Light Sensors,False,1,0,1,0,0,0,0
+62e0ef0f59657427,mqtt to emoncms,False,8,2,1,4,0,1,0
+3b55bce5.4009a4,opensprinkler relay,False,3,1,1,1,0,0,0
+77fa036c.484e1c,OwnTracks,False,14,3,2,2,0,2,0
+b18cbb68.6eaf7,PTZ camera,False,24,10,0,0,0,4,0
+bb7b2455ed68c7d8,start local scripts,False,17,1,1,0,0,2,3
+6484aa22bdd36904,TpLink TAPO,False,47,0,0,0,0,11,9
+c3b954de32b9a130,Whatsapp,True,9,1,0,0,0,4,1
+1a0fa5bb.deee82,ZigBee sensors,False,92,23,14,11,0,10,2

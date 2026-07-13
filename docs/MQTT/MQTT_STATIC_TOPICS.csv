@@ -1,0 +1,145 @@
+topic,subscribe_nodes,publish_nodes,flows,brokers,qos,retain
+/esp8266/brink/fanspeed,1,0,Dashboard Android App,emoncms mqtt,2,
+/esp8266/hitachiAC/command,1,0,Dashboard Android App,emoncms mqtt,2,
+/esp8266/lightSensor_1/#,1,0,Light Sensors,domopi mqtt,2,
+GiuseppeHomePresence,1,2,OwnTracks | broadlink lights,domopi mqtt | emoncms mqtt,0 | 2,true
+LGtv/Toast/,1,0,broadlink lights,domopi mqtt,0,
+LGtv/power/,1,0,broadlink lights,domopi mqtt,0,
+LGtv/power/status,1,1,broadlink lights,domopi mqtt,0,
+PWMController/value,0,1,Diverter,domopi mqtt,,
+TeslaPowerwall/SOE,3,0,AI climate | Android APP Bridge,emoncms mqtt,2,
+TeslaPowerwall/load_instant_power,3,0,AI climate | Android APP Bridge,emoncms mqtt,2,
+TeslaPowerwall/site_instant_power,2,0,Android APP Bridge | Dashboard Android App,emoncms mqtt,2,
+TeslaPowerwall/site_intant_power,1,0,Diverter,emoncms mqtt,2,
+TeslaPowerwall/solar_instant_power,3,0,AI climate | Android APP Bridge,emoncms mqtt,2,
+alexa/ac,0,1,Amazon Echo,emoncms mqtt,0,false
+alexa/caminetto,1,1,Amazon Echo | Android APP Bridge,emoncms mqtt,0,false
+alexa/heatpump,0,1,Amazon Echo,emoncms mqtt,0,false
+alexa/resetCaminetto,0,1,Amazon Echo,emoncms mqtt,0,false
+alexa/vmc,2,2,AI climate | Amazon Echo | Android APP Bridge,emoncms mqtt,0 | 1,false
+casa/clima/cmnd/+,1,0,AI climate,domopi mqtt,2,
+casa/clima/cmnd/AI_climate_enabling,3,2,AI climate | Android APP Bridge,domopi mqtt,2,
+casa/clima/cmnd/deficit_tolerance_time,1,0,AI climate,domopi mqtt,1,
+casa/clima/cmnd/emergency_humidex_away,1,0,AI climate,domopi mqtt,1,
+casa/clima/cmnd/grace_mode_solar,1,0,AI climate,domopi mqtt,1,
+casa/clima/cmnd/min_off_time,1,0,AI climate,domopi mqtt,1,
+casa/clima/cmnd/min_run_time,1,0,AI climate,domopi mqtt,1,
+casa/clima/cmnd/target_humidex,1,0,AI climate,domopi mqtt,1,
+casa/clima/cmnd/vmc_max_notte,1,2,AI climate | Android APP Bridge,domopi mqtt,1,true
+casa/clima/log_eventi,1,0,AI climate,domopi mqtt,2,
+casa/clima/stat/vmc_max_notte,2,0,Android APP Bridge,domopi mqtt,2,
+casa/clima/stato_completo,3,1,AI climate | Android APP Bridge,domopi mqtt,1 | 2,
+cmnd/SmallBathroomThermostat/TEMPTARGETSET,1,1,Dashboard Android App,domopi mqtt,2,true
+cmnd/SmallBathroomThermostat/THERMOSTATMODESET,0,1,Dashboard Android App,domopi mqtt,,true
+cmnd/tasmotaFrigorifero/PowerOnState,0,1,mqtt to emoncms,domopi mqtt,,
+cmnd/tasmota_86AD14/POWER,0,1,Dashboard Android App,emoncms mqtt,,true
+cmnd/tasmota_F294D7/TEMPTARGETSET,1,1,Dashboard Android App,domopi mqtt,2,true
+cmnd/tasmota_F294D7/THERMOSTATMODESET,0,1,Dashboard Android App,domopi mqtt,,true
+cmnd/tasmota_F32F4F/#,1,0,emoncms devices,domopi mqtt,2,
+cmnd/tasmota_F32F4F/TEMPTARGETSET,1,1,Dashboard Android App,domopi mqtt,2,true
+cmnd/tasmota_F32F4F/THERMOSTATMODESET,0,1,Dashboard Android App,domopi mqtt,,true
+emon/AC/ACstatus,1,0,Dashboard Android App,emoncms mqtt,2,
+emon/AC/HPstatus,1,0,Dashboard Android App,emoncms mqtt,2,
+emon/AC/command,1,2,AI climate,emoncms mqtt,2,true
+emon/AC/emeter_power,1,0,AI climate,emoncms mqtt,2,
+emon/OTGcaldaia/flame,1,0,Dashboard Android App,emoncms mqtt,2,
+emon/OTGcaldaia/modulation,1,0,Dashboard Android App,emoncms mqtt,2,
+emon/TermostatLiving/Switch,1,0,Dashboard Android App,emoncms mqtt,2,
+emon/TermostatMainBathroom/Switch,1,0,Dashboard Android App,emoncms mqtt,2,
+emon/bagnoServizio/Switch,1,0,Dashboard Android App,emoncms mqtt,2,
+emon/bagnoServizio/humidity,0,1,ZigBee sensors,emoncms mqtt,2,true
+emon/bagnoServizio/temperature,1,1,Dashboard Android App | ZigBee sensors,emoncms mqtt,2,true
+emon/cameraMatrimoniale/humidex,1,1,Android APP Bridge | Dashboard Android App,emoncms mqtt,2,
+emon/cameraMatrimoniale/humidity,1,1,Dashboard Android App | ZigBee sensors,emoncms mqtt,2,true
+emon/cameraMatrimoniale/temperature,2,1,AI climate | Dashboard Android App | ZigBee sensors,emoncms mqtt,2,true
+emon/cameretta/humidity,0,1,ZigBee sensors,emoncms mqtt,2,true
+emon/cameretta/temperature,0,1,ZigBee sensors,emoncms mqtt,2,true
+emon/centraleTermica/humidity,0,1,ZigBee sensors,emoncms mqtt,2,true
+emon/centraleTermica/temperature,0,1,ZigBee sensors,emoncms mqtt,2,true
+emon/emonth5/humidex,1,1,Android APP Bridge | Dashboard Android App,emoncms mqtt,2,
+emon/emonth5/humidity,3,0,Android APP Bridge | Dashboard Android App,emoncms mqtt,2,
+emon/emonth5/temperature_calibrated,5,0,AI climate | Android APP Bridge | Dashboard Android App,emoncms mqtt,2,
+emon/emontx3/power1,2,0,Dashboard Android App | Google Webhook,emoncms mqtt,2,
+emon/emontx3/power2,3,0,Dashboard Android App | Google Webhook | broadlink lights,emoncms mqtt,2,
+emon/focolare/powerraw,2,0,Android APP Bridge | Dashboard Android App,emoncms mqtt,2,
+emon/resolDL2/pump1,1,0,Dashboard Android App,emoncms mqtt,2,
+emon/resolDL2/sensor1,3,0,Android APP Bridge | Dashboard Android App,emoncms mqtt,2,
+emon/resolDL2/sensor2,3,0,Android APP Bridge | Dashboard Android App,emoncms mqtt,2,
+emon/resolDL2/sensor3,3,0,Android APP Bridge | Dashboard Android App,emoncms mqtt,2,
+emon/shellyACS/tempACS,3,0,Android APP Bridge | Dashboard Android App,emoncms mqtt,2,
+emon/shellyBagnocamera/temperature_calibrated,1,0,Dashboard Android App,emoncms mqtt,2,
+emon/tasmotaFrigorifero/power,0,1,mqtt to emoncms,emoncms mqtt,2,true
+emon/tasmotaFrigorifero/tasmotaCurrent,0,1,mqtt to emoncms,emoncms mqtt,2,true
+emon/tasmotaFrigorifero/tasmotaVoltage,0,1,mqtt to emoncms,emoncms mqtt,2,true
+emon/weather/RelativeHumidity,1,0,Dashboard Android App,emoncms mqtt,2,
+emon/weather/extHumidity,1,1,Dashboard Android App | ZigBee sensors,emoncms mqtt,2,true
+emon/weather/extTemp,1,1,Dashboard Android App | ZigBee sensors,emoncms mqtt,2,true
+emon/weather/tomorrowSolarIrradiance,1,0,start local scripts,emoncms mqtt,2,
+homeassistant_voice,1,0,Dashboard Android App,domopi mqtt,2,
+opensprinkler/#,1,0,opensprinkler relay,domopi mqtt,2,
+owntracks/#,1,0,OwnTracks,domopi mqtt,2,
+owntracks/zaradomo/giuseppe/event,1,0,OwnTracks,domopi mqtt,2,
+shellies/shelly1-771284/relay/0,4,0,Android APP Bridge | Dashboard Android App,emoncms mqtt,2,
+shellies/shelly1-771284/relay/0/command,0,1,Amazon Echo,emoncms mqtt,,true
+shellies/shelly1-98F4ABF294D7/relay/0,1,0,Dashboard Android App,emoncms mqtt,2,
+shellies/shelly1-98F4ABF294D7/relay/0/command,0,1,Amazon Echo,emoncms mqtt,,true
+shellies/shelly1-B8B350/relay/0,1,0,Dashboard Android App,emoncms mqtt,2,
+shellies/shelly1-B8B350/relay/0/command,0,1,Amazon Echo,emoncms mqtt,,true
+shellies/shelly1-B8C284/relay/0,3,0,Android APP Bridge | Dashboard Android App,emoncms mqtt,2,
+shellies/shelly1-B8C284/relay/0/command,0,1,Amazon Echo,emoncms mqtt,,true
+shellies/shelly1-B92AF0/relay/0,3,0,Android APP Bridge | Dashboard Android App,emoncms mqtt,2,
+shellies/shelly1-B92AF0/relay/0/command,0,1,Amazon Echo,emoncms mqtt,,true
+tele/tasmotaFrigorifero/SENSOR,1,0,mqtt to emoncms,domopi mqtt,2,
+zara/android/domotica/#,1,0,Android APP Bridge,domopi mqtt,2,
+zara/android/domotica/scene/set,2,0,Android APP Bridge,domopi mqtt,2,
+zara/domotics/AC/command,2,1,AI climate | Dashboard Android App,domopi mqtt,2,
+zara/domotics/ACAuto,3,3,Android APP Bridge | Dashboard Android App,domopi mqtt,0 | 2,true
+zara/domotics/BedroomHumidex,1,0,AI climate,emoncms mqtt,2,
+zara/domotics/HP/abilitata,1,1,Dashboard Android App,emoncms mqtt,2,true
+zara/domotics/HP/solardivertmode,1,1,Dashboard Android App,emoncms mqtt,2,true
+zara/domotics/LivingHumidex,1,0,AI climate,emoncms mqtt,2,
+zara/domotics/SmallBathroomThermostatMaxValue,1,1,Dashboard Android App,emoncms mqtt,0 | 2,true
+zara/domotics/SmallBathroomThermostatMinValue,1,1,Dashboard Android App,emoncms mqtt,0 | 2,true
+zara/domotics/attivaACS,0,1,Amazon Echo,emoncms mqtt,1,true
+zara/domotics/clima_log_eventi,1,1,AI climate,emoncms mqtt,2,
+zara/domotics/controlloAutomaticoPotenzaCaminetto,1,1,Dashboard Android App,emoncms mqtt,0 | 2,true
+zara/domotics/floorpumpstate,1,0,Dashboard Android App,emoncms mqtt,2,
+zara/domotics/lights/bedroomlight,0,1,broadlink lights,domopi mqtt,,true
+zara/domotics/lights/livinglamp,3,1,Android APP Bridge | Dashboard Android App | broadlink lights,domopi mqtt,2,true
+zara/domotics/lights/poolfloor,3,1,Android APP Bridge | Dashboard Android App | broadlink lights,domopi mqtt,2,true
+zara/domotics/lights/poollight,3,1,Android APP Bridge | Dashboard Android App | broadlink lights,domopi mqtt,2,true
+zara/domotics/lights/poolpump,4,1,Android APP Bridge | Dashboard Android App | broadlink lights,domopi mqtt,2,true
+zara/domotics/lights/poolskimmer,4,1,Android APP Bridge | Dashboard Android App | broadlink lights,domopi mqtt,2,true
+zara/domotics/lights/prolunga,1,1,Dashboard Android App | broadlink lights,domopi mqtt,2,true
+zara/domotics/lights/readinglight,2,1,Android APP Bridge | Dashboard Android App | broadlink lights,domopi mqtt,2,true
+zara/domotics/lights/shelflamp,3,1,Android APP Bridge | Dashboard Android App | broadlink lights,domopi mqtt,2,true
+zara/domotics/lights/tvlamp,3,1,Android APP Bridge | Dashboard Android App | broadlink lights,domopi mqtt,2,true
+zara/domotics/livingThemostatMaxValue,1,1,Dashboard Android App,emoncms mqtt,0 | 2,true
+zara/domotics/livingThemostatMinValue,1,1,Dashboard Android App,emoncms mqtt,0 | 2,true
+zara/domotics/luciECO,3,3,Android APP Bridge | Dashboard Android App,domopi mqtt,0 | 2,true
+zara/domotics/luciPiscinaAuto,3,3,Android APP Bridge | Dashboard Android App,domopi mqtt,0 | 2,true
+zara/domotics/modalitavacanza,3,3,Android APP Bridge | Dashboard Android App,domopi mqtt,0 | 2,true
+zara/domotics/palazzetti/#,1,0,Android APP Bridge,emoncms mqtt,0,
+zara/domotics/palazzetti/acceso,1,0,Dashboard Android App,emoncms mqtt,2,
+zara/domotics/palazzetti/modalita,1,1,Dashboard Android App,emoncms mqtt,0 | 2,true
+zara/domotics/palazzetti/oraavvio,1,1,Dashboard Android App,emoncms mqtt,2,true
+zara/domotics/palazzetti/oraspegnimento,1,1,Dashboard Android App,emoncms mqtt,2,true
+zara/domotics/pompapavimento/abilitata,1,1,Dashboard Android App,emoncms mqtt,2,true
+zara/domotics/porch_sensor,2,2,Android APP Bridge | Dashboard Android App,domopi mqtt,0,true
+zara/domotics/time_range,0,1,Android APP Bridge,domopi mqtt,,true
+zigbee2mqtt/+,2,0,Android APP Bridge,domopi mqtt,1,
+zigbee2mqtt/IkeaMotion_cucina_outdoor,1,0,ZigBee sensors,domopi mqtt,2,
+zigbee2mqtt/IkeaMotion_ingresso_principale,1,0,ZigBee sensors,domopi mqtt,2,
+zigbee2mqtt/IkeaMotion_ingresso_secondario,1,0,ZigBee sensors,domopi mqtt,2,
+zigbee2mqtt/IkeaMotion_lavanderia,1,0,ZigBee sensors,domopi mqtt,2,
+zigbee2mqtt/IkeaMotion_pompeiana,1,0,ZigBee sensors,domopi mqtt,2,
+zigbee2mqtt/Sonoff AirGuard TH camera matrimoniale,3,0,Android APP Bridge | ZigBee sensors,domopi mqtt | emoncms mqtt,2,
+zigbee2mqtt/Sonoff AirGuard TH esterno cucina,3,0,Android APP Bridge | ZigBee sensors,domopi mqtt,2,
+zigbee2mqtt/TU-bagnoServizio,1,0,ZigBee sensors,domopi mqtt,2,
+zigbee2mqtt/TU-cameraMatrimoniale,1,0,ZigBee sensors,domopi mqtt,2,
+zigbee2mqtt/TU-cameretta,1,0,ZigBee sensors,domopi mqtt,2,
+zigbee2mqtt/TU-centraleTermica,1,0,ZigBee sensors,domopi mqtt,2,
+zigbee2mqtt/TU-cucinaEsterno,4,0,AI climate | Android APP Bridge | ZigBee sensors,domopi mqtt,2,
+zigbee2mqtt/bridge/info,1,0,ZigBee sensors,domopi mqtt,2,
+zigbee2mqtt/bridge/response/health_check,0,1,ZigBee sensors,domopi mqtt,2,
+zigbee2mqtt/bridge/state,1,0,ZigBee sensors,domopi mqtt,2,

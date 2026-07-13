@@ -1,0 +1,334 @@
+flow,node_id,node_type,node_name,topic_literal
+Android APP Bridge,router_in_lights,function,Inbound Router Luci,/scene/set
+Android APP Bridge,router_in_lights,function,Inbound Router Luci,shellies/shelly1-esterno/relay/0/command
+Android APP Bridge,router_in_lights,function,Inbound Router Luci,zara/android/domotica
+Android APP Bridge,router_in_lights,function,Inbound Router Luci,zigbee2mqtt/Luce_Cucina/set
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,shellies/shelly1-771284/relay/0
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,shellies/shelly1-B8C284/relay/0
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,shellies/shelly1-B92AF0/relay/0
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,shellies/shelly1-esterno
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,zara/android/domotica/light/${targetDevice}/state
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,zara/domotics/lights/livinglamp
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,zara/domotics/lights/poolfloor
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,zara/domotics/lights/poollight
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,zara/domotics/lights/poolpump
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,zara/domotics/lights/poolskimmer
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,zara/domotics/lights/readinglight
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,zara/domotics/lights/shelflamp
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,zara/domotics/lights/tvlamp
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,zigbee2mqtt/Luce_Cucina
+Android APP Bridge,router_out_lights,function,Outbound Router Luci,zigbee2mqtt/Luce_Libreria
+Android APP Bridge,931ae7ea951269b3,function,Gateway Energia,${APP_BASE}/acsPufferTemp
+Android APP Bridge,931ae7ea951269b3,function,Gateway Energia,${APP_BASE}/energy/battery
+Android APP Bridge,931ae7ea951269b3,function,Gateway Energia,${APP_BASE}/energy/consumption
+Android APP Bridge,931ae7ea951269b3,function,Gateway Energia,${APP_BASE}/energy/production
+Android APP Bridge,931ae7ea951269b3,function,Gateway Energia,${APP_BASE}/pufferAltoTemp
+Android APP Bridge,931ae7ea951269b3,function,Gateway Energia,${APP_BASE}/pufferBassoTemp
+Android APP Bridge,931ae7ea951269b3,function,Gateway Energia,TeslaPowerwall/SOE
+Android APP Bridge,931ae7ea951269b3,function,Gateway Energia,TeslaPowerwall/load_instant_power
+Android APP Bridge,931ae7ea951269b3,function,Gateway Energia,TeslaPowerwall/solar_instant_power
+Android APP Bridge,931ae7ea951269b3,function,Gateway Energia,emon/resolDL2/sensor2
+Android APP Bridge,931ae7ea951269b3,function,Gateway Energia,emon/resolDL2/sensor3
+Android APP Bridge,931ae7ea951269b3,function,Gateway Energia,emon/shellyACS/tempACS
+Android APP Bridge,931ae7ea951269b3,function,Gateway Energia,zara/android/domotica
+Android APP Bridge,inbound_router_thermostats,function,Inbound Router Termostati,/target/set
+Android APP Bridge,inbound_router_thermostats,function,Inbound Router Termostati,zara/android/domotica
+Android APP Bridge,inbound_router_thermostats,function,Inbound Router Termostati,zara/domotics/AC/command
+Android APP Bridge,inbound_router_thermostats,function,Inbound Router Termostati,zigbee2mqtt/Termostato_Bagnetto/set
+Android APP Bridge,inbound_router_thermostats,function,Inbound Router Termostati,zigbee2mqtt/Termostato_Bagno/set
+Android APP Bridge,outbound_router_thermostats,function,Outbound Router Termostati,casa/clima/stato_completo
+Android APP Bridge,outbound_router_thermostats,function,Outbound Router Termostati,zara/android/domotica/thermostat/${targetRoom}/target/state
+Android APP Bridge,outbound_router_thermostats,function,Outbound Router Termostati,zigbee2mqtt/Termostato_Bagnetto
+Android APP Bridge,outbound_router_thermostats,function,Outbound Router Termostati,zigbee2mqtt/Termostato_Bagno
+Android APP Bridge,6250ba4fd5d0e8f6,function,Inbound Router VMC,/esp8266/brink/fanspeed
+Android APP Bridge,6250ba4fd5d0e8f6,function,Inbound Router VMC,zara/android/domotica
+Android APP Bridge,40bbafe2b380d97f,function,Outbound Router VMC,alexa/vmc
+Android APP Bridge,40bbafe2b380d97f,function,Outbound Router VMC,casa/clima/stato_completo
+Android APP Bridge,40bbafe2b380d97f,function,Outbound Router VMC,zara/android/domotica/vmc/speed/state
+Android APP Bridge,ec7b23eb2a3e02e5,function,Gateway Ambienti,${APP_BASE}/env/humBedroom
+Android APP Bridge,ec7b23eb2a3e02e5,function,Gateway Ambienti,${APP_BASE}/env/humLiving
+Android APP Bridge,ec7b23eb2a3e02e5,function,Gateway Ambienti,${APP_BASE}/env/humOutdoor
+Android APP Bridge,ec7b23eb2a3e02e5,function,Gateway Ambienti,${APP_BASE}/env/tempBedroom
+Android APP Bridge,ec7b23eb2a3e02e5,function,Gateway Ambienti,${APP_BASE}/env/tempLiving
+Android APP Bridge,ec7b23eb2a3e02e5,function,Gateway Ambienti,${APP_BASE}/env/tempOutdoor
+Android APP Bridge,ec7b23eb2a3e02e5,function,Gateway Ambienti,emon/cameraMatrimoniale/humidity
+Android APP Bridge,ec7b23eb2a3e02e5,function,Gateway Ambienti,emon/cameraMatrimoniale/temperature
+Android APP Bridge,ec7b23eb2a3e02e5,function,Gateway Ambienti,emon/emonth5/humidity
+Android APP Bridge,ec7b23eb2a3e02e5,function,Gateway Ambienti,emon/emonth5/temperature_calibrated
+Android APP Bridge,ec7b23eb2a3e02e5,function,Gateway Ambienti,zara/android/domotica
+Android APP Bridge,ccb6fb43483367ea,function,Inbound Router Settaggi,${baseTopic}/ac_auto/state
+Android APP Bridge,ccb6fb43483367ea,function,Inbound Router Settaggi,${baseTopic}/eco_lights/state
+Android APP Bridge,ccb6fb43483367ea,function,Inbound Router Settaggi,${baseTopic}/holiday/state
+Android APP Bridge,ccb6fb43483367ea,function,Inbound Router Settaggi,${baseTopic}/pool_lights_auto/state
+Android APP Bridge,ccb6fb43483367ea,function,Inbound Router Settaggi,${baseTopic}/system/enabled/state
+Android APP Bridge,ccb6fb43483367ea,function,Inbound Router Settaggi,${baseTopic}/vmc/maxNightSpeed/state
+Android APP Bridge,ccb6fb43483367ea,function,Inbound Router Settaggi,zara/android/domotica
+Android APP Bridge,8c0810b9f0a64f02,function,App Main Router,/light/sala/set
+Android APP Bridge,8c0810b9f0a64f02,function,App Main Router,/maxNightSpeed/set
+Android APP Bridge,8c0810b9f0a64f02,function,App Main Router,zara/android/domotica
+Android APP Bridge,8c0810b9f0a64f02,function,App Main Router,zara/android/domotica/light/sala/set
+Android APP Bridge,ee2a2ba92d28ea5a,function,Inbound Router Luci,shellies/shelly1-esterno/relay/0/command
+Android APP Bridge,ee2a2ba92d28ea5a,function,Inbound Router Luci,zara/android/domotica
+Android APP Bridge,ee2a2ba92d28ea5a,function,Inbound Router Luci,zigbee2mqtt/Luce_Cucina/set
+Android APP Bridge,24455c4a2ada8d2d,function,Inbound Router Settaggi,${APP_BASE}/ac_auto/set
+Android APP Bridge,24455c4a2ada8d2d,function,Inbound Router Settaggi,${APP_BASE}/eco_lights/set
+Android APP Bridge,24455c4a2ada8d2d,function,Inbound Router Settaggi,${APP_BASE}/holiday/set
+Android APP Bridge,24455c4a2ada8d2d,function,Inbound Router Settaggi,${APP_BASE}/pool_lights_auto/set
+Android APP Bridge,24455c4a2ada8d2d,function,Inbound Router Settaggi,${APP_BASE}/system/enabled/set
+Android APP Bridge,24455c4a2ada8d2d,function,Inbound Router Settaggi,${APP_BASE}/vmc/maxNightSpeed/set
+Android APP Bridge,24455c4a2ada8d2d,function,Inbound Router Settaggi,zara/android/domotica
+Android APP Bridge,78a60fefa1ad4a40,function,function 29,zara/android/domotica
+Android APP Bridge,aeb73ee940afc11b,function,Inbound Router VMC,/esp8266/brink/fanspeed
+Android APP Bridge,cc1f896ddfdf9b70,function,Inbound Router Termostati,zara/android/domotica
+Android APP Bridge,cc1f896ddfdf9b70,function,Inbound Router Termostati,zara/domotics/AC/command
+Android APP Bridge,cc1f896ddfdf9b70,function,Inbound Router Termostati,zigbee2mqtt/Termostato_Bagnetto/set
+Android APP Bridge,cc1f896ddfdf9b70,function,Inbound Router Termostati,zigbee2mqtt/Termostato_Bagno/set
+Android APP Bridge,fd03955d71b3ad94,function,Outbound Router VMC,casa/clima/cmnd/AI_climate_enabling
+Android APP Bridge,fd03955d71b3ad94,function,Outbound Router VMC,casa/clima/stat/vmc_max_notte
+Android APP Bridge,fd03955d71b3ad94,function,Outbound Router VMC,zara/android/domotica/ac_auto/set
+Android APP Bridge,fd03955d71b3ad94,function,Outbound Router VMC,zara/android/domotica/eco_lights/set
+Android APP Bridge,fd03955d71b3ad94,function,Outbound Router VMC,zara/android/domotica/holiday/set
+Android APP Bridge,fd03955d71b3ad94,function,Outbound Router VMC,zara/android/domotica/pool_lights_auto/set
+Android APP Bridge,fd03955d71b3ad94,function,Outbound Router VMC,zara/android/domotica/system/set
+Android APP Bridge,fd03955d71b3ad94,function,Outbound Router VMC,zara/android/domotica/vmc/maxNightSpeed/set
+Android APP Bridge,fd03955d71b3ad94,function,Outbound Router VMC,zara/domotics/ACAuto
+Android APP Bridge,fd03955d71b3ad94,function,Outbound Router VMC,zara/domotics/luciECO
+Android APP Bridge,fd03955d71b3ad94,function,Outbound Router VMC,zara/domotics/luciPiscinaAuto
+Android APP Bridge,fd03955d71b3ad94,function,Outbound Router VMC,zara/domotics/modalitavacanza
+Android APP Bridge,029b611c762d7219,function,Inbound Router Luci,/scene/set
+Android APP Bridge,029b611c762d7219,function,Inbound Router Luci,shellies/shelly1-esterno/relay/0/command
+Android APP Bridge,029b611c762d7219,function,Inbound Router Luci,zara/android/domotica
+Android APP Bridge,029b611c762d7219,function,Inbound Router Luci,zigbee2mqtt/Luce_Cucina/set
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,${baseTopic}/light/${targetDevice}/state
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,shellies/shelly1-771284/relay/0
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,shellies/shelly1-B8C284/relay/0
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,shellies/shelly1-B92AF0/relay/0
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,shellies/shelly1-esterno
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,zara/android/domotica
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,zara/domotics/lights/livinglamp
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,zara/domotics/lights/poolfloor
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,zara/domotics/lights/poollight
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,zara/domotics/lights/poolpump
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,zara/domotics/lights/poolskimmer
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,zara/domotics/lights/readinglight
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,zara/domotics/lights/shelflamp
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,zara/domotics/lights/tvlamp
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,zigbee2mqtt/Luce_Cucina
+Android APP Bridge,b5960f2b4677e29c,function,Outbound Router Luci,zigbee2mqtt/Luce_Libreria
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,${APP_BASE}/acsPufferTemp
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,${APP_BASE}/energy/battery
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,${APP_BASE}/energy/consumption
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,${APP_BASE}/energy/grid
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,${APP_BASE}/energy/production
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,${APP_BASE}/energy/surplus
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,${APP_BASE}/pufferAltoTemp
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,${APP_BASE}/pufferBassoTemp
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,TeslaPowerwall/SOE
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,TeslaPowerwall/load_instant_power
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,TeslaPowerwall/site_instant_power
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,TeslaPowerwall/solar_instant_power
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,emon/resolDL2/sensor2
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,emon/resolDL2/sensor3
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,emon/shellyACS/tempACS
+Android APP Bridge,966f722b97b6dfd5,function,Gateway Energia,zara/android/domotica
+Android APP Bridge,bd8d66b09aae991f,function,Inbound Router Termostati,zara/android/domotica
+Android APP Bridge,bd8d66b09aae991f,function,Inbound Router Termostati,zara/domotics/AC/command
+Android APP Bridge,bd8d66b09aae991f,function,Inbound Router Termostati,zigbee2mqtt/Termostato_Bagnetto/set
+Android APP Bridge,bd8d66b09aae991f,function,Inbound Router Termostati,zigbee2mqtt/Termostato_Bagno/set
+Android APP Bridge,fc51aac30db89430,function,Outbound Router Termostati,${baseTopic}/thermostat/${targetRoom}/target/state
+Android APP Bridge,fc51aac30db89430,function,Outbound Router Termostati,casa/clima/stato_completo
+Android APP Bridge,fc51aac30db89430,function,Outbound Router Termostati,zara/android/domotica
+Android APP Bridge,fc51aac30db89430,function,Outbound Router Termostati,zigbee2mqtt/Termostato_Bagnetto
+Android APP Bridge,fc51aac30db89430,function,Outbound Router Termostati,zigbee2mqtt/Termostato_Bagno
+Android APP Bridge,893cab22b022f9f7,function,Inbound Router VMC,/esp8266/brink/fanspeed
+Android APP Bridge,893cab22b022f9f7,function,Inbound Router VMC,zara/android/domotica
+Android APP Bridge,cb6b6b6eff77245e,function,Outbound Router VMC,${baseTopic}/vmc/speed/state
+Android APP Bridge,cb6b6b6eff77245e,function,Outbound Router VMC,alexa/vmc
+Android APP Bridge,cb6b6b6eff77245e,function,Outbound Router VMC,casa/clima/stato_completo
+Android APP Bridge,cb6b6b6eff77245e,function,Outbound Router VMC,zara/android/domotica
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,${APP_BASE}/env/humBedroom
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,${APP_BASE}/env/humLiving
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,${APP_BASE}/env/humOutdoor
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,${APP_BASE}/env/humidexBedroom
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,${APP_BASE}/env/humidexLiving
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,${APP_BASE}/env/tempBedroom
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,${APP_BASE}/env/tempLiving
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,${APP_BASE}/env/tempOutdoor
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,emon/cameraMatrimoniale/humidex
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,emon/cameraMatrimoniale/humidity
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,emon/cameraMatrimoniale/temperature
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,emon/emonth5/humidex
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,emon/emonth5/humidity
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,emon/emonth5/temperature_calibrated
+Android APP Bridge,84374abab73c53ba,function,Gateway Ambienti,zara/android/domotica
+Android APP Bridge,01283d5864cde9b4,function,Inbound Router Settaggi,${baseTopic}/system/ac_auto/set
+Android APP Bridge,01283d5864cde9b4,function,Inbound Router Settaggi,${baseTopic}/system/enabled/state
+Android APP Bridge,01283d5864cde9b4,function,Inbound Router Settaggi,${baseTopic}/system/holiday/set
+Android APP Bridge,01283d5864cde9b4,function,Inbound Router Settaggi,${baseTopic}/system/luci_eco/set
+Android APP Bridge,01283d5864cde9b4,function,Inbound Router Settaggi,${baseTopic}/system/luci_piscina_auto/set
+Android APP Bridge,01283d5864cde9b4,function,Inbound Router Settaggi,${baseTopic}/system/sensore_portico/set
+Android APP Bridge,01283d5864cde9b4,function,Inbound Router Settaggi,${baseTopic}/system/time_range/set
+Android APP Bridge,01283d5864cde9b4,function,Inbound Router Settaggi,${baseTopic}/vmc/maxNightSpeed/state
+Android APP Bridge,01283d5864cde9b4,function,Inbound Router Settaggi,zara/android/domotica
+Android APP Bridge,ef9798fe30ae6866,function,App Main Router,/maxNightSpeed/set
+Android APP Bridge,ef9798fe30ae6866,function,App Main Router,zara/android/domotica
+Android APP Bridge,ad2a868186bbe8b6,function,function 29,zara/android/domotica
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,${baseTopic}/system/ac_auto/state
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,${baseTopic}/system/holiday/state
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,${baseTopic}/system/luci_eco/state
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,${baseTopic}/system/luci_piscina_auto/state
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,${baseTopic}/system/sensore_portico/state
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,${baseTopic}/system/set
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,${baseTopic}/system/time_range/state
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,${baseTopic}/vmc/maxNightSpeed/set
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,casa/clima/cmnd/AI_climate_enabling
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,casa/clima/stat/vmc_max_notte
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,zara/android/domotica
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,zara/domotics/ACAuto
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,zara/domotics/luciECO
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,zara/domotics/luciPiscinaAuto
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,zara/domotics/modalitavacanza
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,zara/domotics/porch_sensor
+Android APP Bridge,cf899af1e8162086,function,Outbound Router Settaggi,zara/domotics/time_range
+Android APP Bridge,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto,${baseTopic}/casa/stufa/stat/acceso
+Android APP Bridge,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto,${baseTopic}/casa/stufa/stat/modalita
+Android APP Bridge,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto,${baseTopic}/casa/stufa/stat/potenza
+Android APP Bridge,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto,/esp8266/palazzetti
+Android APP Bridge,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto,/log/message
+Android APP Bridge,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto,alexa/caminetto
+Android APP Bridge,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto,alexa/caminetto/command
+Android APP Bridge,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto,alexa/caminetto/power
+Android APP Bridge,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto,emon/focolare/powerraw
+Android APP Bridge,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto,zara/android/domotica
+Android APP Bridge,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto,zara/domotics/palazzetti/set/modalita
+Android APP Bridge,ab8e8c591cefc337,function,Configurazione Sottoscrizione Dinamica,zara/android/domotica
+Android APP Bridge,47032d1afbd3badf,function,Formatta Response App,${baseTopic}/history/ac/response
+Android APP Bridge,47032d1afbd3badf,function,Formatta Response App,zara/android/domotica
+Android APP Bridge,bb9aca93c54b36f1,function,function 33,/history/ac/request
+Android APP Bridge,bb9aca93c54b36f1,function,function 33,zara/android/domotica
+Dashboard Android App,4ca047bf.0cd01,function,,emon/emontx3/power1
+Dashboard Android App,4ca047bf.0cd01,function,,emon/emontx3/power2
+Dashboard Android App,30d8f988.be5cde,function,,emon/cameraMatrimoniale/humidity
+Dashboard Android App,30d8f988.be5cde,function,,emon/cameraMatrimoniale/temperature
+Dashboard Android App,30d8f988.be5cde,function,,emon/emonth5/humidity
+Dashboard Android App,30d8f988.be5cde,function,,emon/emonth5/temperature_calibrated
+Dashboard Android App,38ad1f4937437ea3,function,function 23,casa/cameraMatrimoniale/humidex
+Dashboard Android App,38ad1f4937437ea3,function,function 23,casa/stanza1/humidex
+Dashboard Android App,38ad1f4937437ea3,function,function 23,emon/cameraMatrimoniale/humidity
+Dashboard Android App,38ad1f4937437ea3,function,function 23,emon/cameraMatrimoniale/temperature
+Dashboard Android App,38ad1f4937437ea3,function,function 23,emon/emonth5/humidity
+Dashboard Android App,38ad1f4937437ea3,function,function 23,emon/emonth5/temperature_calibrated
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,${baseTopic}/casa/clima/stato_completo
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,/esp8266/brink/fanspeed
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,Europe/Rome
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,N/A
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,TeslaPowerwall/SOE
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,TeslaPowerwall/load_instant_power
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,TeslaPowerwall/solar_instant_power
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,broadlink/cmd
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,casa/clima/log_eventi
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,casa/clima/stato_completo
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,emon/AC/emeter_power
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,emon/cameraMatrimoniale/temperature
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,emon/emonth5/temperature_calibrated
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,system/boot
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,zara/android/domotica
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,zara/domotics/BedroomHumidex
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,zara/domotics/LivingHumidex
+AI climate,61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,zigbee2mqtt/TU-cucinaEsterno
+AI climate,e987e367138f30ef,function,function 22,casa/clima/previsione_meteo
+AI climate,5eef15f00d7a6c51,function,Registrazione consumi ML,Europe/Rome
+AI climate,5eef15f00d7a6c51,function,Registrazione consumi ML,TeslaPowerwall/load_instant_power
+AI climate,5eef15f00d7a6c51,function,Registrazione consumi ML,TeslaPowerwall/solar_instant_power
+AI climate,5eef15f00d7a6c51,function,Registrazione consumi ML,casa/clima/log_database
+AI climate,c62d3a1ac2f90baf,change,,zara/domotics/BedroomHumidex
+AI climate,c62d3a1ac2f90baf,change,,zara/domotics/LivingHumidex
+AI climate,cdf7b32e8316a813,change,Salva VMC Notte,casa/clima/stat/vmc_max_notte
+AI climate,421b22f34085b3a4,change,Salva Min Off,casa/clima/stat/min_off_time
+AI climate,57450c9a56563e38,change,Salva Min Run,casa/clima/stat/min_run_time
+AI climate,c02bfb5d7e893f49,change,Salva Target Humidex,casa/clima/stat/target_humidex
+AI climate,2796fd499f6b3ae2,function,Recupero Variabili File System per UI,casa/clima/cmnd/deficit_tolerance_time
+AI climate,2796fd499f6b3ae2,function,Recupero Variabili File System per UI,casa/clima/cmnd/min_off_time
+AI climate,2796fd499f6b3ae2,function,Recupero Variabili File System per UI,casa/clima/cmnd/min_run_time
+AI climate,2796fd499f6b3ae2,function,Recupero Variabili File System per UI,casa/clima/cmnd/target_humidex
+AI climate,2796fd499f6b3ae2,function,Recupero Variabili File System per UI,casa/clima/cmnd/vmc_max_notte
+AI climate,c5776fb6e9ed4862,switch,Router UI,casa/clima/cmnd/deficit_tolerance_time
+AI climate,c5776fb6e9ed4862,switch,Router UI,casa/clima/cmnd/min_off_time
+AI climate,c5776fb6e9ed4862,switch,Router UI,casa/clima/cmnd/min_run_time
+AI climate,c5776fb6e9ed4862,switch,Router UI,casa/clima/cmnd/target_humidex
+AI climate,c5776fb6e9ed4862,switch,Router UI,casa/clima/cmnd/vmc_max_notte
+AI climate,1892365e63ba846f,change,Salva Deficit Tolerance Time,casa/clima/stat/deficit_tolerance_time
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,/esp8266/brink/fanspeed
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,Europe/Rome
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,N/A
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,TeslaPowerwall/SOE
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,TeslaPowerwall/load_instant_power
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,TeslaPowerwall/solar_instant_power
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,broadlink/cmd
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,casa/clima/log_eventi
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,casa/clima/stato_completo
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,emon/AC/emeter_power
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,emon/cameraMatrimoniale/temperature
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,emon/emonth5/temperature_calibrated
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,system/boot
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,zara/domotics/BedroomHumidex
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,zara/domotics/LivingHumidex
+AI climate,ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,zigbee2mqtt/TU-cucinaEsterno
+AI climate,change_grace_mode,change,Salva Grace Mode,casa/clima/stat/grace_mode_solar
+AI climate,change_emergency,change,Salva Emergency Humidex,casa/clima/stat/emergency_humidex_away
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,${baseTopic}/casa/clima/stato_completo
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,/esp8266/brink/fanspeed
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,Europe/Rome
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,N/A
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,TeslaPowerwall/SOE
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,TeslaPowerwall/load_instant_power
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,TeslaPowerwall/solar_instant_power
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,broadlink/cmd
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,casa/clima/log_eventi
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,casa/clima/stato_completo
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,emon/AC/emeter_power
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,emon/cameraMatrimoniale/temperature
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,emon/emonth5/temperature_calibrated
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,system/boot
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,zara/android/domotica
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,zara/domotics/BedroomHumidex
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,zara/domotics/LivingHumidex
+AI climate,96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,zigbee2mqtt/TU-cucinaEsterno
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,${baseTopic}/casa/clima/stato_completo
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,/esp8266/brink/fanspeed
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,Europe/Rome
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,N/A
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,TeslaPowerwall/SOE
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,TeslaPowerwall/load_instant_power
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,TeslaPowerwall/solar_instant_power
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,broadlink/cmd
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,casa/clima/log_eventi
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,casa/clima/stato_completo
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,emon/AC/emeter_power
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,emon/cameraMatrimoniale/temperature
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,emon/emonth5/temperature_calibrated
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,system/boot
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,zara/android/domotica
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,zara/domotics/BedroomHumidex
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,zara/domotics/LivingHumidex
+AI climate,bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,zigbee2mqtt/TU-cucinaEsterno
+broadlink lights,da3f61ba.d6d85,function,,zara/domotics/lights/poolskimmer
+Amazon Echo,c2c4c5f318910c45,function,function 16,zara/domotics/attivaACS
+OwnTracks,e4209f86.9a29f,function,,owntracks/emonpi/lex2/event
+ZigBee sensors,4977de5e4ca7ab01,function,function 8,zigbee2mqtt/bridge/state
+Google Webhook,af445acb.8dd568,function,,application/json
+Google Webhook,c0bc4291.27fcc8,function,,application/json
+Google Webhook,2a240fcb.72e0d,function,,application/json
+Google Webhook,c5221a0.e8fe9e8,function,,application/json
+Google Webhook,ce1e9d9.db52a6,function,,application/json
+Google Webhook,1156765e.13e4ba,function,,application/json
+Google Webhook,9049f6e.81e7e88,function,,application/json
+Google Webhook,b5ca79eb.798a88,function,,application/json
+Google Webhook,6d985889.c594c,function,,application/json
+Google Webhook,79608a2f.8845a4,function,,application/json
+Google Webhook,e94032bf.66faf8,function,,application/json
+Google Webhook,60df49f5.61637,function,,application/json
+Google Webhook,1e7fabda.1943e4,function,,application/json
+Google Webhook,b10543f8.ac91e,function,,application/json
+Google Webhook,b10543f8.ac91e,function,,emon/emontx3/power1
+Google Webhook,b10543f8.ac91e,function,,emon/emontx3/power2

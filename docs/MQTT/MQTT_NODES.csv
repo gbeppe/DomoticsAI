@@ -1,0 +1,291 @@
+node_id,direction,flow,node_name,topic,dynamic_topic,qos,retain,datatype,broker_name,broker_host,broker_port,disabled
+hw_out_lights,PUBLISH,Android APP Bridge,Esecuzione Hardware,,yes,1,false,,domopi mqtt,192.168.1.20,1883,False
+hw_in_lights,SUBSCRIBE,Android APP Bridge,Ascolto Hardware Reale,zigbee2mqtt/+,no,1,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+app_out_lights,PUBLISH,Android APP Bridge,Aggiorna Stato App (Retain),,yes,1,true,,domopi mqtt,192.168.1.20,1883,False
+inbound_ai_state,SUBSCRIBE,Android APP Bridge,Ascolto Stato AI e TRV,casa/clima/stato_completo,no,1,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+ae105ac39cf8d437,SUBSCRIBE,Android APP Bridge,App -> Target VMC,alexa/vmc,no,1,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+bc94f80f947a2d8c,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/livinglamp,no,2,,,domopi mqtt,192.168.1.20,1883,False
+f13717d8ae984865,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/shelflamp,no,2,,,domopi mqtt,192.168.1.20,1883,False
+f86a7cc8da46c17c,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/tvlamp,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+ffb89f556b69bad9,SUBSCRIBE,Android APP Bridge,,shellies/shelly1-771284/relay/0,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+d80b504c3542ed41,SUBSCRIBE,Android APP Bridge,,shellies/shelly1-B92AF0/relay/0,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+9d345c39c11d08e0,SUBSCRIBE,Android APP Bridge,,shellies/shelly1-B8C284/relay/0,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+7ac055f1194b954f,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/poollight,no,2,,,domopi mqtt,192.168.1.20,1883,False
+12ce2a07cacee23c,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/poolfloor,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+127d0632ac89c84f,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/poolskimmer,no,2,,,domopi mqtt,192.168.1.20,1883,False
+ee0b6b372d422913,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/poolpump,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+6900d290267e5b2b,SUBSCRIBE,Android APP Bridge,App -> Comando Scene Luci,zara/android/domotica/scene/set,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+8a31cf269cb50bd6,SUBSCRIBE,Android APP Bridge,zigbee2mqtt/Sonoff AirGuard TH camera matrimoniale,zigbee2mqtt/Sonoff AirGuard TH camera matrimoniale,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+79b18325390859ee,SUBSCRIBE,Android APP Bridge,MQTT SOC Batt,TeslaPowerwall/SOE,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+251eb9fa94e68b82,SUBSCRIBE,Android APP Bridge,MQTT Potenza Casa (Load W),TeslaPowerwall/load_instant_power,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+1796015fc377fc15,SUBSCRIBE,Android APP Bridge,MQTT Potenza Produzione FV (FV W),TeslaPowerwall/solar_instant_power,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+3a1687834f97dcc0,SUBSCRIBE,Android APP Bridge,MQTT temperatura living,emon/emonth5/temperature_calibrated,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+1abcd43bb0caf145,SUBSCRIBE,Android APP Bridge,,zigbee2mqtt/TU-cucinaEsterno,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+878f81d62bc42fe1,SUBSCRIBE,Android APP Bridge,,emon/resolDL2/sensor2,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+0e3973ecc6e2a4b0,SUBSCRIBE,Android APP Bridge,,emon/resolDL2/sensor3,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+e6a84ff2c20ff624,SUBSCRIBE,Android APP Bridge,,emon/resolDL2/sensor1,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+f68a501926879a9b,SUBSCRIBE,Android APP Bridge,,emon/shellyACS/tempACS,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+4c7f5cd004f3b05c,SUBSCRIBE,Android APP Bridge,MQTT humidity living,emon/emonth5/humidity,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+d18ded1a6be37694,SUBSCRIBE,Android APP Bridge,MQTT Sonoff AirGuard TH esterno cucina,zigbee2mqtt/Sonoff AirGuard TH esterno cucina,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+78a377746af16450,PUBLISH,Android APP Bridge,,zara/domotics/modalitavacanza,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+68a51e52050bfcc2,PUBLISH,Android APP Bridge,,zara/domotics/luciECO,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+d7c4304da1eb87f3,PUBLISH,Android APP Bridge,,zara/domotics/luciPiscinaAuto,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+6232e0d219686299,SUBSCRIBE,Android APP Bridge,,zara/android/domotica/#,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+b2e51b1cae6471eb,PUBLISH,Android APP Bridge,,zara/domotics/ACAuto,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+4a56c5bdf2ff7f04,PUBLISH,Android APP Bridge,,casa/clima/cmnd/vmc_max_notte,no,,true,,domopi mqtt,192.168.1.20,1883,False
+e7c88fdff8f2e145,PUBLISH,Android APP Bridge,,casa/clima/cmnd/AI_climate_enabling,no,,,,domopi mqtt,192.168.1.20,1883,False
+4c10798673cc1165,SUBSCRIBE,Android APP Bridge,,casa/clima/cmnd/AI_climate_enabling,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+81c761fd020759e4,SUBSCRIBE,Android APP Bridge,,zara/domotics/modalitavacanza,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+c85cfb8e7c5106cf,SUBSCRIBE,Android APP Bridge,,zara/domotics/luciECO,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+0309941fbac047f4,SUBSCRIBE,Android APP Bridge,,zara/domotics/luciPiscinaAuto,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+15a65d96aa22110a,SUBSCRIBE,Android APP Bridge,,zara/domotics/ACAuto,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+588bcc62a39e06e9,SUBSCRIBE,Android APP Bridge,,casa/clima/stat/vmc_max_notte,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+8c073d7419d1dffd,PUBLISH,Android APP Bridge,Esecuzione Hardware,,yes,1,false,,domopi mqtt,192.168.1.20,1883,True
+ba0948194022d617,SUBSCRIBE,Android APP Bridge,Ascolto Hardware Reale,zigbee2mqtt/+,no,1,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+e21a5bab7aaa539f,PUBLISH,Android APP Bridge,Aggiorna Stato App (Retain),,yes,1,true,,domopi mqtt,192.168.1.20,1883,False
+ac1dc3384afb5a6b,SUBSCRIBE,Android APP Bridge,Ascolto Stato AI e TRV,casa/clima/stato_completo,no,1,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+5268685dd658fbe0,SUBSCRIBE,Android APP Bridge,App -> Target VMC,alexa/vmc,no,1,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+b49453f6cdbbab3d,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/livinglamp,no,2,,,domopi mqtt,192.168.1.20,1883,False
+8e3fcbfc031083cc,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/shelflamp,no,2,,,domopi mqtt,192.168.1.20,1883,False
+f169b915a19f8af6,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/tvlamp,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+118da562063f2d9a,SUBSCRIBE,Android APP Bridge,,shellies/shelly1-771284/relay/0,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+3f0b0e50b51f8568,SUBSCRIBE,Android APP Bridge,,shellies/shelly1-B92AF0/relay/0,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+e338f28f56433e4c,SUBSCRIBE,Android APP Bridge,,shellies/shelly1-B8C284/relay/0,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+c5fbbdc4bdf7fbe0,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/poollight,no,2,,,domopi mqtt,192.168.1.20,1883,False
+3174da2bdd10ea30,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/poolfloor,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+3f8fefa8f0d98ffd,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/poolskimmer,no,2,,,domopi mqtt,192.168.1.20,1883,False
+04eee2d096fc8523,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/poolpump,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+30036127a21d4c88,SUBSCRIBE,Android APP Bridge,App -> Comando Scene Luci,zara/android/domotica/scene/set,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,True
+c8bf45a2bc859241,SUBSCRIBE,Android APP Bridge,zigbee2mqtt/Sonoff AirGuard TH camera matrimoniale,zigbee2mqtt/Sonoff AirGuard TH camera matrimoniale,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+69d0e373d832b240,SUBSCRIBE,Android APP Bridge,MQTT SOC Batt,TeslaPowerwall/SOE,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+326768da85a5d990,SUBSCRIBE,Android APP Bridge,MQTT Potenza Casa (Load W),TeslaPowerwall/load_instant_power,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+6223c2899c0ae992,SUBSCRIBE,Android APP Bridge,MQTT Potenza Produzione FV (FV W),TeslaPowerwall/solar_instant_power,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+1c21da7cdc55c2ae,SUBSCRIBE,Android APP Bridge,MQTT temperatura living,emon/emonth5/temperature_calibrated,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+cee938eea10f7bd4,SUBSCRIBE,Android APP Bridge,,zigbee2mqtt/TU-cucinaEsterno,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+efe270ec96f87af7,SUBSCRIBE,Android APP Bridge,,emon/resolDL2/sensor2,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+0b370faa3935fe88,SUBSCRIBE,Android APP Bridge,,emon/resolDL2/sensor3,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+9ac2eb0ded5a2efd,SUBSCRIBE,Android APP Bridge,,emon/resolDL2/sensor1,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+8c0fe215629e8f46,SUBSCRIBE,Android APP Bridge,,emon/shellyACS/tempACS,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+232f8e2188161e4c,SUBSCRIBE,Android APP Bridge,MQTT humidity living,emon/emonth5/humidity,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+11f0be7d90a47f54,SUBSCRIBE,Android APP Bridge,MQTT Sonoff AirGuard TH esterno cucina,zigbee2mqtt/Sonoff AirGuard TH esterno cucina,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+1d09b533095d68c1,PUBLISH,Android APP Bridge,,zara/domotics/modalitavacanza,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+b51bd73002b7f88b,PUBLISH,Android APP Bridge,,zara/domotics/luciECO,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+3bfeb435fb6e3132,PUBLISH,Android APP Bridge,,zara/domotics/luciPiscinaAuto,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+42c039cfb62a43a2,SUBSCRIBE,Android APP Bridge,,,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+a40733727fb29c55,PUBLISH,Android APP Bridge,,zara/domotics/ACAuto,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+3db3a26c676e583c,PUBLISH,Android APP Bridge,,casa/clima/cmnd/vmc_max_notte,no,,true,,domopi mqtt,192.168.1.20,1883,False
+0af2db132cc8cd0f,PUBLISH,Android APP Bridge,,casa/clima/cmnd/AI_climate_enabling,no,,,,domopi mqtt,192.168.1.20,1883,False
+4b484152120e2d18,SUBSCRIBE,Android APP Bridge,,casa/clima/cmnd/AI_climate_enabling,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+28256464972b2329,SUBSCRIBE,Android APP Bridge,,zara/domotics/modalitavacanza,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+c698d126b68e11f8,SUBSCRIBE,Android APP Bridge,,zara/domotics/luciECO,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+5b7675e55cbc4b81,SUBSCRIBE,Android APP Bridge,,zara/domotics/luciPiscinaAuto,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+6571bf1f8e667903,SUBSCRIBE,Android APP Bridge,,zara/domotics/ACAuto,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+6bf7b6d43cfb3fc3,SUBSCRIBE,Android APP Bridge,,casa/clima/stat/vmc_max_notte,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+fc0ba16b2241adf1,SUBSCRIBE,Android APP Bridge,,zara/domotics/porch_sensor,no,0,,auto,domopi mqtt,192.168.1.20,1883,False
+d073880643e29f9e,PUBLISH,Android APP Bridge,,zara/domotics/porch_sensor,no,,,,domopi mqtt,192.168.1.20,1883,False
+fe21b464ce170529,SUBSCRIBE,Android APP Bridge,,casa/clima/stato_completo,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+db523ff6c9bae47c,SUBSCRIBE,Android APP Bridge,MQTT Potenza Produzione FV (FV W),TeslaPowerwall/site_instant_power,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+f22c31479e1b1d5b,SUBSCRIBE,Android APP Bridge,,emon/cameraMatrimoniale/humidex,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+831724587f5922f7,SUBSCRIBE,Android APP Bridge,humidex living,emon/emonth5/humidex,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+mqtt_in_palazzetti,SUBSCRIBE,Android APP Bridge,zara/domotics/palazzetti/#,zara/domotics/palazzetti/#,no,0,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+mqtt_in_app_cmnd,SUBSCRIBE,Android APP Bridge,alexa/caminetto,alexa/caminetto,no,0,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+mqtt_out_locale,PUBLISH,Android APP Bridge,MQTT Locale (App & ESP),,yes,1,true,,domopi mqtt,192.168.1.20,1883,False
+mqtt_out_alexa,PUBLISH,Android APP Bridge,MQTT Esterno (Alexa),,yes,1,false,,,,,True
+8022e945f076fa2f,SUBSCRIBE,Android APP Bridge,,emon/focolare/powerraw,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+5d2d6ba3ad4c3262,SUBSCRIBE,Android APP Bridge,,zara/domotics/lights/readinglight,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+2b99835ee36a758d,PUBLISH,Android APP Bridge,,zara/domotics/time_range,no,,true,,domopi mqtt,192.168.1.20,1883,False
+59b830f96fe6bb19,SUBSCRIBE,Android APP Bridge,,,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+302a2960a9fdf64f,PUBLISH,Android APP Bridge,,,yes,1,false,,domopi mqtt,192.168.1.20,1883,False
+48557148.a3cff8,SUBSCRIBE,Dashboard Android App,,zara/domotics/lights/livinglamp,no,2,,,domopi mqtt,192.168.1.20,1883,False
+ab057036.42d5c,SUBSCRIBE,Dashboard Android App,,zara/domotics/lights/shelflamp,no,2,,,domopi mqtt,192.168.1.20,1883,False
+fb736ecf.73fcb,SUBSCRIBE,Dashboard Android App,,zara/domotics/lights/tvlamp,no,2,,,domopi mqtt,192.168.1.20,1883,False
+589220e6.708458,SUBSCRIBE,Dashboard Android App,,emon/emontx3/power2,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+8c268bf6.9d46a,SUBSCRIBE,Dashboard Android App,,emon/emontx3/power1,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+aea2fd10.acc5b,SUBSCRIBE,Dashboard Android App,,/esp8266/brink/fanspeed,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+6aab2064.09d29,SUBSCRIBE,Dashboard Android App,,emon/focolare/powerraw,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+c363553f.d9f778,SUBSCRIBE,Dashboard Android App,,zara/domotics/palazzetti/acceso,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+f88327af.1c1ac8,SUBSCRIBE,Dashboard Android App,,emon/emonth5/temperature_calibrated,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+31655777.f25ac,SUBSCRIBE,Dashboard Android App,,emon/emonth5/humidity,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+1397736.389d18d,SUBSCRIBE,Dashboard Android App,,emon/weather/extTemp,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+ce6c94ac.3012d,SUBSCRIBE,Dashboard Android App,emon/weather/RelativeHumidity,emon/weather/RelativeHumidity,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,True
+360f60a3.4489c,SUBSCRIBE,Dashboard Android App,,emon/cameraMatrimoniale/temperature,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+196a3db4.d49aca,SUBSCRIBE,Dashboard Android App,,emon/cameraMatrimoniale/humidity,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+d9f7778d.18854,SUBSCRIBE,Dashboard Android App,,emon/resolDL2/sensor2,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+262ce4b6.c83ccc,SUBSCRIBE,Dashboard Android App,,emon/resolDL2/sensor3,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+9aac4866.042dc,SUBSCRIBE,Dashboard Android App,,emon/resolDL2/sensor1,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+600374ae.ee6e04,SUBSCRIBE,Dashboard Android App,,emon/OTGcaldaia/flame,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+5ff75a7c.7f2474,SUBSCRIBE,Dashboard Android App,,emon/OTGcaldaia/modulation,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+62735af0.f4234c,SUBSCRIBE,Dashboard Android App,,emon/resolDL2/pump1,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+e70845ea.ee8558,SUBSCRIBE,Dashboard Android App,,zara/domotics/floorpumpstate,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+c7e0b7e6.14d62,SUBSCRIBE,Dashboard Android App,,/esp8266/hitachiAC/command,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,True
+6af029e7.bd4e6,SUBSCRIBE,Dashboard Android App,,emon/AC/HPstatus,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+24316620.bfee82,SUBSCRIBE,Dashboard Android App,,emon/AC/ACstatus,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+18ad57fe.745928,SUBSCRIBE,Dashboard Android App,,zara/domotics/lights/poolfloor,no,2,,,domopi mqtt,192.168.1.20,1883,False
+32a2db32.980c34,SUBSCRIBE,Dashboard Android App,,zara/domotics/lights/poollight,no,2,,,domopi mqtt,192.168.1.20,1883,False
+d977f16d.6e08b8,SUBSCRIBE,Dashboard Android App,,zara/domotics/lights/poolskimmer,no,2,,,domopi mqtt,192.168.1.20,1883,False
+371a41d3.98ead6,SUBSCRIBE,Dashboard Android App,,zara/domotics/lights/poolpump,no,2,,,domopi mqtt,192.168.1.20,1883,False
+2a6979e9.508f96,SUBSCRIBE,Dashboard Android App,,zara/domotics/lights/prolunga,no,2,,,domopi mqtt,192.168.1.20,1883,False
+9362a82d.a490f,SUBSCRIBE,Dashboard Android App,,zara/domotics/palazzetti/modalita,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+6fe78dd6.110eec,PUBLISH,Dashboard Android App,,zara/domotics/palazzetti/modalita,no,0,true,,emoncms mqtt,192.168.1.15,1883,False
+946739a6.89787,SUBSCRIBE,Dashboard Android App,,zara/domotics/palazzetti/oraavvio,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+52a23e3e.61a5d,SUBSCRIBE,Dashboard Android App,,zara/domotics/palazzetti/oraspegnimento,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+d69205f8.c93028,PUBLISH,Dashboard Android App,,zara/domotics/palazzetti/oraavvio,no,,true,,emoncms mqtt,192.168.1.15,1883,False
+9e15623.b7152a,PUBLISH,Dashboard Android App,,zara/domotics/palazzetti/oraspegnimento,no,,true,,emoncms mqtt,192.168.1.15,1883,False
+89889195.c423e8,SUBSCRIBE,Dashboard Android App,,shellies/shelly1-B8C284/relay/0,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+7c3ea414.4a201c,SUBSCRIBE,Dashboard Android App,,shellies/shelly1-B92AF0/relay/0,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+3cf47e89.a14372,PUBLISH,Dashboard Android App,,zara/domotics/pompapavimento/abilitata,no,,true,,emoncms mqtt,192.168.1.15,1883,False
+1a72f1db.486a06,SUBSCRIBE,Dashboard Android App,,zara/domotics/pompapavimento/abilitata,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+91f56f2b.a00b28,SUBSCRIBE,Dashboard Android App,,shellies/shelly1-B8B350/relay/0,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+135da1cb.992dc6,SUBSCRIBE,Dashboard Android App,,shellies/shelly1-771284/relay/0,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+5dc51dac.197b0c,SUBSCRIBE,Dashboard Android App,,shellies/shelly1-98F4ABF294D7/relay/0,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+8c82fefe.37a248,PUBLISH,Dashboard Android App,,zara/domotics/modalitavacanza,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+c99f7204.ae3e6,SUBSCRIBE,Dashboard Android App,,zara/domotics/modalitavacanza,no,0,,auto,domopi mqtt,192.168.1.20,1883,False
+d694fd2e2b456420,SUBSCRIBE,Dashboard Android App,,zara/domotics/lights/readinglight,no,2,,auto,domopi mqtt,192.168.1.20,1883,False
+53234a63c7edbaf9,PUBLISH,Dashboard Android App,,cmnd/tasmota_F32F4F/THERMOSTATMODESET,no,,true,,domopi mqtt,192.168.1.20,1883,False
+a947d635cc060e6f,SUBSCRIBE,Dashboard Android App,,emon/emonth5/temperature_calibrated,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+40a2297948c01af7,SUBSCRIBE,Dashboard Android App,,cmnd/tasmota_F32F4F/TEMPTARGETSET,no,2,,auto,domopi mqtt,192.168.1.20,1883,False
+536b72c34561348b,PUBLISH,Dashboard Android App,,cmnd/tasmota_F32F4F/TEMPTARGETSET,no,,true,,domopi mqtt,192.168.1.20,1883,False
+a836c202e981967b,SUBSCRIBE,Dashboard Android App,,emon/TermostatLiving/Switch,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+c784eb3294af2fd6,PUBLISH,Dashboard Android App,,cmnd/tasmota_F294D7/THERMOSTATMODESET,no,,true,,domopi mqtt,192.168.1.20,1883,False
+6f4423c1a841e1d0,SUBSCRIBE,Dashboard Android App,,cmnd/tasmota_F294D7/TEMPTARGETSET,no,2,,auto,domopi mqtt,192.168.1.20,1883,False
+32b91d408bec92d0,PUBLISH,Dashboard Android App,,cmnd/tasmota_F294D7/TEMPTARGETSET,no,,true,,domopi mqtt,192.168.1.20,1883,False
+64a70a959c5a5b96,SUBSCRIBE,Dashboard Android App,,emon/TermostatMainBathroom/Switch,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+61b6483e29d346e6,SUBSCRIBE,Dashboard Android App,,emon/shellyBagnocamera/temperature_calibrated,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+3f57b0cc029f679e,SUBSCRIBE,Dashboard Android App,,zara/domotics/luciECO,no,0,,auto,domopi mqtt,192.168.1.20,1883,False
+22d71c9a6065fe9b,PUBLISH,Dashboard Android App,,zara/domotics/luciECO,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+d036429f3415b306,SUBSCRIBE,Dashboard Android App,,zara/domotics/luciPiscinaAuto,no,0,,auto,domopi mqtt,192.168.1.20,1883,False
+865af8e6972b8bc3,PUBLISH,Dashboard Android App,,zara/domotics/luciPiscinaAuto,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+e5fe808aac72557a,SUBSCRIBE,Dashboard Android App,,emon/shellyACS/tempACS,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+c5fc3b056689bd92,PUBLISH,Dashboard Android App,,zara/domotics/HP/abilitata,no,,true,,emoncms mqtt,192.168.1.15,1883,False
+2156d0164e4ef3d0,SUBSCRIBE,Dashboard Android App,,zara/domotics/HP/abilitata,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+9fa00d7a7ba8f2c7,SUBSCRIBE,Dashboard Android App,,zara/domotics/ACAuto,no,0,,auto,domopi mqtt,192.168.1.20,1883,False
+0dd49f645bf50359,PUBLISH,Dashboard Android App,,zara/domotics/ACAuto,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+d85f5996e699f6c4,SUBSCRIBE,Dashboard Android App,,zara/domotics/HP/solardivertmode,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+8a433f258fd9ae4c,PUBLISH,Dashboard Android App,,zara/domotics/HP/solardivertmode,no,,true,,emoncms mqtt,192.168.1.15,1883,False
+7f18e1cc67d66009,SUBSCRIBE,Dashboard Android App,,TeslaPowerwall/site_instant_power,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+c367ab1d7f57744a,SUBSCRIBE,Dashboard Android App,,zara/domotics/AC/command,no,2,,auto,domopi mqtt,192.168.1.20,1883,False
+0cfe277a93d1cd75,PUBLISH,Dashboard Android App,TasmotaLampadaHifi,cmnd/tasmota_86AD14/POWER,no,,true,,emoncms mqtt,192.168.1.15,1883,False
+8b5131fe86d70e81,PUBLISH,Dashboard Android App,,zara/domotics/livingThemostatMinValue,no,0,true,,emoncms mqtt,192.168.1.15,1883,False
+1231be7b548cdaa8,PUBLISH,Dashboard Android App,,zara/domotics/livingThemostatMaxValue,no,0,true,,emoncms mqtt,192.168.1.15,1883,False
+e1aa6d4c58cd04d2,SUBSCRIBE,Dashboard Android App,,zara/domotics/livingThemostatMinValue,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+719a9c6bd05f9d29,SUBSCRIBE,Dashboard Android App,,zara/domotics/livingThemostatMaxValue,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+6136963cd78ed054,PUBLISH,Dashboard Android App,,zara/domotics/controlloAutomaticoPotenzaCaminetto,no,0,true,,emoncms mqtt,192.168.1.15,1883,False
+f564b03505444bdd,SUBSCRIBE,Dashboard Android App,,zara/domotics/controlloAutomaticoPotenzaCaminetto,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+b0bc205fa5169a65,SUBSCRIBE,Dashboard Android App,,homeassistant_voice,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+0a00c1b4d8e1e3b1,PUBLISH,Dashboard Android App,,cmnd/SmallBathroomThermostat/THERMOSTATMODESET,no,,true,,domopi mqtt,192.168.1.20,1883,False
+1ecc2374fb50c3c8,SUBSCRIBE,Dashboard Android App,,emon/bagnoServizio/temperature,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+0299dab27d7f86b5,SUBSCRIBE,Dashboard Android App,,cmnd/SmallBathroomThermostat/TEMPTARGETSET,no,2,,auto,domopi mqtt,192.168.1.20,1883,False
+58751d9fae3db0b1,PUBLISH,Dashboard Android App,,cmnd/SmallBathroomThermostat/TEMPTARGETSET,no,,true,,domopi mqtt,192.168.1.20,1883,False
+640beab93ecc16d5,SUBSCRIBE,Dashboard Android App,,emon/bagnoServizio/Switch,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+672bbe5e1d0b113d,PUBLISH,Dashboard Android App,,zara/domotics/SmallBathroomThermostatMinValue,no,0,true,,emoncms mqtt,192.168.1.15,1883,False
+7d28c8c458bcf67f,PUBLISH,Dashboard Android App,,zara/domotics/SmallBathroomThermostatMaxValue,no,0,true,,emoncms mqtt,192.168.1.15,1883,False
+319d24de17cbec63,SUBSCRIBE,Dashboard Android App,,zara/domotics/SmallBathroomThermostatMinValue,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+bae566f7c8849a82,SUBSCRIBE,Dashboard Android App,,zara/domotics/SmallBathroomThermostatMaxValue,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+43cfe2f970bb9c81,PUBLISH,Dashboard Android App,,emon/cameraMatrimoniale/humidex,no,,,,emoncms mqtt,192.168.1.15,1883,False
+0b4112e939342807,PUBLISH,Dashboard Android App,,emon/emonth5/humidex,no,,,,emoncms mqtt,192.168.1.15,1883,False
+08db19e17a531f07,SUBSCRIBE,Dashboard Android App,emon/weather/RelativeHumidity,emon/weather/extHumidity,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+45d314fcacd88210,SUBSCRIBE,Dashboard Android App,,shellies/shelly1-771284/relay/0,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+ecd6f9eba4b883a3,PUBLISH,Dashboard Android App,,zara/domotics/porch_sensor,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+31482396d58350b8,SUBSCRIBE,Dashboard Android App,,zara/domotics/porch_sensor,no,0,,auto,domopi mqtt,192.168.1.20,1883,False
+ab7d6c30422ecc82,SUBSCRIBE,AI climate,EmonCMS Setpoint,emon/AC/command,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+e881e9441da96819,PUBLISH,AI climate,EmonCMS Setpoint,emon/AC/command,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+5d5092c20b221701,PUBLISH,AI climate,,casa/clima/stato_completo,no,,,,domopi mqtt,192.168.1.20,1883,False
+967f5b09eecc39c0,SUBSCRIBE,AI climate,MQTT bedroom humidex,zara/domotics/BedroomHumidex,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+4cb939ccb3e11c7f,SUBSCRIBE,AI climate,MQTT living humidex,zara/domotics/LivingHumidex,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+21d6585848d13e87,SUBSCRIBE,AI climate,MQTT SOC Batt,TeslaPowerwall/SOE,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+3d009f9701cfbcad,SUBSCRIBE,AI climate,MQTT Potenza Casa (Load W),TeslaPowerwall/load_instant_power,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+aa9bad7c1fd25c9e,SUBSCRIBE,AI climate,MQTT Potenza Produzione FV (FV W),TeslaPowerwall/solar_instant_power,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+4f51be0bb2407353,SUBSCRIBE,AI climate,MQTT temperatura living,emon/emonth5/temperature_calibrated,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+9b107edb60e160c7,SUBSCRIBE,AI climate,MQTT AC Power,emon/AC/emeter_power,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+6ef6713e949f314d,PUBLISH,AI climate,MQTT Clima Comando,zara/domotics/AC/command,no,,,,domopi mqtt,192.168.1.20,1883,False
+211aa45d39e85052,PUBLISH,AI climate,,alexa/vmc,no,0,false,,emoncms mqtt,192.168.1.15,1883,False
+9174f8e2f9a59d15,PUBLISH,AI climate,,zara/domotics/clima_log_eventi,no,,,,emoncms mqtt,192.168.1.15,1883,False
+4c010ca56b63a35a,SUBSCRIBE,AI climate,,zigbee2mqtt/TU-cucinaEsterno,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+e79697439834214f,SUBSCRIBE,AI climate,cmnd/vmc_max_notte,casa/clima/cmnd/vmc_max_notte,no,1,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+c2be297c7c72b3ed,SUBSCRIBE,AI climate,cmnd/min_off_time,casa/clima/cmnd/min_off_time,no,1,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+38506c0a385cc7f2,SUBSCRIBE,AI climate,cmnd/min_run_time,casa/clima/cmnd/min_run_time,no,1,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+428a528fe43820d5,SUBSCRIBE,AI climate,cmnd/target_humidex,casa/clima/cmnd/target_humidex,no,1,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+f8c0341febc8db4d,PUBLISH,AI climate,MQTT Pubblica Stato,,yes,1,true,,domopi mqtt,192.168.1.20,1883,False
+b3513e59ea2aff51,SUBSCRIBE,AI climate,MQTT Clima Comando,zara/domotics/AC/command,no,2,,auto,domopi mqtt,192.168.1.20,1883,False
+e71747aa1eb36dbb,PUBLISH,AI climate,EmonCMS Setpoint,emon/AC/command,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+a9439746b542f7aa,SUBSCRIBE,AI climate,MQTT temperatura camera matrimoniale,emon/cameraMatrimoniale/temperature,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+23f1684c4b4f8f1a,SUBSCRIBE,AI climate,,casa/clima/cmnd/+,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+27df66489554f4f7,PUBLISH,AI climate,,,yes,,,,emoncms mqtt,192.168.1.15,1883,False
+4c383f56eeebd066,SUBSCRIBE,AI climate,cmnd/deficit_tolerance_time,casa/clima/cmnd/deficit_tolerance_time,no,1,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+b473d3282822b433,SUBSCRIBE,AI climate,,casa/clima/cmnd/AI_climate_enabling,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+mqtt_in_grace_mode,SUBSCRIBE,AI climate,cmnd/grace_mode_solar,casa/clima/cmnd/grace_mode_solar,no,1,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+mqtt_in_emergency,SUBSCRIBE,AI climate,cmnd/emergency_humidex_away,casa/clima/cmnd/emergency_humidex_away,no,1,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+cd2d44d667aa4546,SUBSCRIBE,AI climate,,zara/domotics/clima_log_eventi,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False
+c9da61399ea20bf9,SUBSCRIBE,AI climate,,casa/clima/log_eventi,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+855eae97.45875,SUBSCRIBE,broadlink lights,,GiuseppeHomePresence,no,2,,,domopi mqtt,192.168.1.20,1883,False
+4c3db21d.73e22c,PUBLISH,broadlink lights,,zara/domotics/lights/livinglamp,no,,true,,domopi mqtt,192.168.1.20,1883,False
+a9d973a9.ca666,PUBLISH,broadlink lights,,zara/domotics/lights/shelflamp,no,,true,,domopi mqtt,192.168.1.20,1883,False
+7ef048a0.7bf07,PUBLISH,broadlink lights,,zara/domotics/lights/tvlamp,no,,true,,domopi mqtt,192.168.1.20,1883,False
+f4b93906.78c038,PUBLISH,broadlink lights,,zara/domotics/lights/poolfloor,no,,true,,domopi mqtt,192.168.1.20,1883,False
+57163eb6.11361,PUBLISH,broadlink lights,,zara/domotics/lights/poollight,no,,true,,domopi mqtt,192.168.1.20,1883,False
+460cbdd5.11dc5c,PUBLISH,broadlink lights,,zara/domotics/lights/poolskimmer,no,,true,,domopi mqtt,192.168.1.20,1883,False
+7fb19688.1f8b3,PUBLISH,broadlink lights,,zara/domotics/lights/poolpump,no,,true,,domopi mqtt,192.168.1.20,1883,False
+62a0e5b2.cc441c,SUBSCRIBE,broadlink lights,,emon/emontx3/power2,no,2,,auto,emoncms mqtt,192.168.1.15,1883,False
+51d1f589.026fb4,SUBSCRIBE,broadlink lights,,zara/domotics/lights/poolpump,no,2,,,domopi mqtt,192.168.1.20,1883,False
+ff0709d8.b27b28,SUBSCRIBE,broadlink lights,,zara/domotics/lights/poolskimmer,no,2,,,domopi mqtt,192.168.1.20,1883,False
+7eeb65ca.76930c,PUBLISH,broadlink lights,,zara/domotics/lights/prolunga,no,,true,,domopi mqtt,192.168.1.20,1883,False
+279aab3a.e79b14,PUBLISH,broadlink lights,,zara/domotics/lights/bedroomlight,no,,true,,domopi mqtt,192.168.1.20,1883,False
+2c53a89cb0d491bc,PUBLISH,broadlink lights,,zara/domotics/lights/readinglight,no,,true,,domopi mqtt,192.168.1.20,1883,False
+b2df9d03.86f89,SUBSCRIBE,broadlink lights,From LGTV,LGtv/Toast/,no,0,,auto,domopi mqtt,192.168.1.20,1883,False
+493d47e8.92f8f8,SUBSCRIBE,broadlink lights,From LGTV,LGtv/power/,no,0,,auto,domopi mqtt,192.168.1.20,1883,False
+daa02bcc.ab4158,PUBLISH,broadlink lights,,LGtv/power/status,no,0,,,domopi mqtt,192.168.1.20,1883,False
+7dffb6bd4d8ed545,SUBSCRIBE,broadlink lights,From LGTV,LGtv/power/status,no,0,,utf8,domopi mqtt,192.168.1.20,1883,False
+ef088f5328f83bfc,SUBSCRIBE,mqtt to emoncms,,tele/tasmotaFrigorifero/SENSOR,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+4daa01b7c59354ec,PUBLISH,mqtt to emoncms,,emon/tasmotaFrigorifero/power,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+d67426a945affe95,PUBLISH,mqtt to emoncms,,emon/tasmotaFrigorifero/tasmotaVoltage,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+2f81d0897a9a2aa1,PUBLISH,mqtt to emoncms,,cmnd/tasmotaFrigorifero/PowerOnState,no,,,,domopi mqtt,192.168.1.20,1883,False
+6c99b0a362520faa,PUBLISH,mqtt to emoncms,,emon/tasmotaFrigorifero/tasmotaCurrent,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+08d69022888b30e4,SUBSCRIBE,start local scripts,,emon/weather/tomorrowSolarIrradiance,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,True
+aad866f9.491f98,PUBLISH,Amazon Echo,,alexa/caminetto,no,0,false,,emoncms mqtt,192.168.1.15,1883,False
+a1660e08.30f1d,PUBLISH,Amazon Echo,,alexa/vmc,no,0,false,,emoncms mqtt,192.168.1.15,1883,False
+4e3186c6.76a36,PUBLISH,Amazon Echo,,alexa/ac,no,0,false,,emoncms mqtt,192.168.1.15,1883,False
+3550d974.56579e,PUBLISH,Amazon Echo,,alexa/heatpump,no,0,false,,emoncms mqtt,192.168.1.15,1883,False
+586006fd.94e,PUBLISH,Amazon Echo,,alexa/resetCaminetto,no,0,false,,emoncms mqtt,192.168.1.15,1883,False
+a4999728.3f7868,PUBLISH,Amazon Echo,,shellies/shelly1-B8C284/relay/0/command,no,,true,,emoncms mqtt,192.168.1.15,1883,False
+140c8f41.289a81,PUBLISH,Amazon Echo,,shellies/shelly1-B92AF0/relay/0/command,no,,true,,emoncms mqtt,192.168.1.15,1883,False
+bf090f4a.4ff59,PUBLISH,Amazon Echo,,shellies/shelly1-B8B350/relay/0/command,no,,true,,emoncms mqtt,192.168.1.15,1883,False
+dd2082bb.de78e8,PUBLISH,Amazon Echo,,shellies/shelly1-771284/relay/0/command,no,,true,,emoncms mqtt,192.168.1.15,1883,False
+a8d5e704.072bd8,PUBLISH,Amazon Echo,,shellies/shelly1-98F4ABF294D7/relay/0/command,no,,true,,emoncms mqtt,192.168.1.15,1883,False
+5f292e3229b8cad1,PUBLISH,Amazon Echo,,zara/domotics/attivaACS,no,1,true,,emoncms mqtt,192.168.1.15,1883,False
+57ba378e.80ce78,SUBSCRIBE,Light Sensors,,/esp8266/lightSensor_1/#,no,2,,,domopi mqtt,192.168.1.20,1883,False
+cdbc321e.68aeb,SUBSCRIBE,OwnTracks,,owntracks/#,no,2,,,domopi mqtt,192.168.1.20,1883,False
+7e2c8f53.9c58c8,SUBSCRIBE,OwnTracks,,owntracks/zaradomo/giuseppe/event,no,2,,,domopi mqtt,192.168.1.20,1883,False
+fd5dfe08.28c948,PUBLISH,OwnTracks,emoncms GiuseppeHomePresence,GiuseppeHomePresence,no,0,true,,emoncms mqtt,192.168.1.15,1883,False
+2c8d6313.5bd76c,PUBLISH,OwnTracks,local GiuseppeHomePresence,GiuseppeHomePresence,no,0,true,,domopi mqtt,192.168.1.20,1883,False
+562cb1cb.1daff8,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/bridge/info,no,2,,auto,domopi mqtt,192.168.1.20,1883,False
+2bfb85b9.7f3ad2,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/IkeaMotion_ingresso_principale,no,2,,json,domopi mqtt,192.168.1.20,1883,False
+4ba3c807.351a2,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/IkeaMotion_ingresso_secondario,no,2,,json,domopi mqtt,192.168.1.20,1883,False
+1edd1fb0.25e7d,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/IkeaMotion_lavanderia,no,2,,json,domopi mqtt,192.168.1.20,1883,False
+0dcfa64b91d5943f,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/IkeaMotion_pompeiana,no,2,,json,domopi mqtt,192.168.1.20,1883,False
+d1ea62629f1947c3,PUBLISH,ZigBee sensors,,zigbee2mqtt/bridge/response/health_check,no,2,,,domopi mqtt,192.168.1.20,1883,False
+e58adb7af8afe911,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/bridge/state,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+75bdad847c03443c,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/IkeaMotion_cucina_outdoor,no,2,,json,domopi mqtt,192.168.1.20,1883,False
+049bcf3e907e8dcd,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/TU-centraleTermica,no,2,,auto,domopi mqtt,192.168.1.20,1883,False
+1ce5c2963e0137e9,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/TU-cameraMatrimoniale,no,2,,auto,domopi mqtt,192.168.1.20,1883,True
+0bfd78cd4d80d6f8,PUBLISH,ZigBee sensors,,emon/centraleTermica/temperature,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+ec468e1fc94565f9,PUBLISH,ZigBee sensors,,emon/centraleTermica/humidity,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+e4859aab94de7cae,PUBLISH,ZigBee sensors,,emon/cameraMatrimoniale/temperature,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+df1d8a96e09bc6f6,PUBLISH,ZigBee sensors,,emon/cameraMatrimoniale/humidity,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+a30457bf679f7fa6,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/TU-cameretta,no,2,,auto,domopi mqtt,192.168.1.20,1883,False
+9848d9dc59a1ac04,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/TU-bagnoServizio,no,2,,auto,domopi mqtt,192.168.1.20,1883,False
+2076483514080df8,PUBLISH,ZigBee sensors,,emon/cameretta/temperature,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+453f0627b835bbe7,PUBLISH,ZigBee sensors,,emon/cameretta/humidity,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+2769afc85e9923b1,PUBLISH,ZigBee sensors,,emon/bagnoServizio/temperature,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+08cf0342c1d51037,PUBLISH,ZigBee sensors,,emon/bagnoServizio/humidity,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+9171a11589f37c77,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/TU-cucinaEsterno,no,2,,auto,domopi mqtt,192.168.1.20,1883,True
+539cddd44fd10b2c,PUBLISH,ZigBee sensors,,emon/weather/extTemp,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+6a848cc7c0d01fca,PUBLISH,ZigBee sensors,,emon/weather/extHumidity,no,2,true,,emoncms mqtt,192.168.1.15,1883,False
+3904eb33631e3a2a,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/Sonoff AirGuard TH esterno cucina,no,2,,auto,domopi mqtt,192.168.1.20,1883,False
+cae48a9f3bae4832,SUBSCRIBE,ZigBee sensors,,zigbee2mqtt/Sonoff AirGuard TH camera matrimoniale,no,2,,auto,domopi mqtt,192.168.1.20,1883,False
+b97a6c18.61fc9,SUBSCRIBE,opensprinkler relay,,opensprinkler/#,no,2,,auto,domopi mqtt,192.168.1.20,1883,False
+700f2593.4b01dc,PUBLISH,opensprinkler relay,,,yes,,true,,emoncms mqtt,192.168.1.15,1883,False
+e62cfd76.cc93d,SUBSCRIBE,Google Webhook,foto voltaico,emon/emontx3/power2,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+e62ce8f3.56b1e,SUBSCRIBE,Google Webhook,home power,emon/emontx3/power1,no,2,,,emoncms mqtt,192.168.1.15,1883,False
+f243a1e0889b3bc9,SUBSCRIBE,emoncms devices,,cmnd/tasmota_F32F4F/#,no,2,,auto-detect,domopi mqtt,192.168.1.20,1883,False
+beb976f6e584d4b5,PUBLISH,Diverter,,PWMController/value,no,,,,domopi mqtt,192.168.1.20,1883,False
+bdd90eedd2a2fcb6,SUBSCRIBE,Diverter,,TeslaPowerwall/site_intant_power,no,2,,auto-detect,emoncms mqtt,192.168.1.15,1883,False

@@ -1,0 +1,550 @@
+scope,operation,variable,store_hint,flow,node_id,node_name
+global,get,app_base_topic,,Android APP Bridge,router_in_lights,Inbound Router Luci
+global,get,app_base_topic,,Android APP Bridge,931ae7ea951269b3,Gateway Energia
+flow,get,last_prod,,Android APP Bridge,931ae7ea951269b3,Gateway Energia
+flow,set,last_prod,,Android APP Bridge,931ae7ea951269b3,Gateway Energia
+flow,get,last_cons,,Android APP Bridge,931ae7ea951269b3,Gateway Energia
+flow,set,last_cons,,Android APP Bridge,931ae7ea951269b3,Gateway Energia
+global,get,app_base_topic,,Android APP Bridge,inbound_router_thermostats,Inbound Router Termostati
+global,get,app_base_topic,,Android APP Bridge,6250ba4fd5d0e8f6,Inbound Router VMC
+global,get,app_base_topic,,Android APP Bridge,ec7b23eb2a3e02e5,Gateway Ambienti
+global,get,app_base_topic,,Android APP Bridge,ccb6fb43483367ea,Inbound Router Settaggi
+global,get,app_base_topic,,Android APP Bridge,8c0810b9f0a64f02,App Main Router
+global,get,app_base_topic,,Android APP Bridge,ee2a2ba92d28ea5a,Inbound Router Luci
+global,get,app_base_topic,,Android APP Bridge,24455c4a2ada8d2d,Inbound Router Settaggi
+global,set,system_enabled,file,Android APP Bridge,24455c4a2ada8d2d,Inbound Router Settaggi
+global,set,holiday,file,Android APP Bridge,24455c4a2ada8d2d,Inbound Router Settaggi
+global,set,AI_climate_enabling,file,Android APP Bridge,24455c4a2ada8d2d,Inbound Router Settaggi
+global,set,user_vmc_max_notte,file,Android APP Bridge,24455c4a2ada8d2d,Inbound Router Settaggi
+global,set,app_base_topic,file,Android APP Bridge,78a60fefa1ad4a40,function 29
+global,get,app_base_topic,,Android APP Bridge,cc1f896ddfdf9b70,Inbound Router Termostati
+global,get,app_base_topic,,Android APP Bridge,029b611c762d7219,Inbound Router Luci
+global,get,app_base_topic,,Android APP Bridge,b5960f2b4677e29c,Outbound Router Luci
+global,get,app_base_topic,,Android APP Bridge,966f722b97b6dfd5,Gateway Energia
+flow,get,last_prod,,Android APP Bridge,966f722b97b6dfd5,Gateway Energia
+flow,set,last_prod,,Android APP Bridge,966f722b97b6dfd5,Gateway Energia
+flow,get,last_cons,,Android APP Bridge,966f722b97b6dfd5,Gateway Energia
+flow,set,last_cons,,Android APP Bridge,966f722b97b6dfd5,Gateway Energia
+global,get,app_base_topic,,Android APP Bridge,bd8d66b09aae991f,Inbound Router Termostati
+global,get,app_base_topic,,Android APP Bridge,fc51aac30db89430,Outbound Router Termostati
+global,get,app_base_topic,,Android APP Bridge,893cab22b022f9f7,Inbound Router VMC
+global,get,app_base_topic,,Android APP Bridge,cb6b6b6eff77245e,Outbound Router VMC
+global,get,app_base_topic,,Android APP Bridge,84374abab73c53ba,Gateway Ambienti
+global,get,app_base_topic,,Android APP Bridge,01283d5864cde9b4,Inbound Router Settaggi
+global,set,grace_period_time_range,file,Android APP Bridge,01283d5864cde9b4,Inbound Router Settaggi
+global,get,app_base_topic,,Android APP Bridge,ef9798fe30ae6866,App Main Router
+global,get,app_base_topic,,Android APP Bridge,ad2a868186bbe8b6,function 29
+global,set,app_base_topic,file,Android APP Bridge,ad2a868186bbe8b6,function 29
+global,get,app_base_topic,,Android APP Bridge,cf899af1e8162086,Outbound Router Settaggi
+global,get,app_base_topic,,Android APP Bridge,funzione_ponte_caminetto,Ponte Traduttore Caminetto
+global,get,app_base_topic,,Android APP Bridge,ab8e8c591cefc337,Configurazione Sottoscrizione Dinamica
+global,get,app_base_topic,,Android APP Bridge,47032d1afbd3badf,Formatta Response App
+global,get,app_base_topic,,Android APP Bridge,bb9aca93c54b36f1,function 33
+global,set,gridPower,,Dashboard Android App,4ca047bf.0cd01,
+global,set,solarPower,,Dashboard Android App,4ca047bf.0cd01,
+global,get,gridPower,,Dashboard Android App,4ca047bf.0cd01,
+global,get,solarPower,,Dashboard Android App,4ca047bf.0cd01,
+global,set,homePower,,Dashboard Android App,4ca047bf.0cd01,
+global,get,homePower,,Dashboard Android App,4ca047bf.0cd01,
+flow,set,livingTemp,,Dashboard Android App,30d8f988.be5cde,
+flow,set,bedroomTemp,,Dashboard Android App,30d8f988.be5cde,
+flow,set,livingHumidity,,Dashboard Android App,30d8f988.be5cde,
+flow,set,bedroomHumidity,,Dashboard Android App,30d8f988.be5cde,
+flow,get,livingTemp,,Dashboard Android App,30d8f988.be5cde,
+flow,get,bedroomTemp,,Dashboard Android App,30d8f988.be5cde,
+flow,get,livingHumidity,,Dashboard Android App,30d8f988.be5cde,
+flow,get,bedroomHumidity,,Dashboard Android App,30d8f988.be5cde,
+global,set,starthour,,Dashboard Android App,16a94456.9081e4,
+global,get,starthour,,Dashboard Android App,16a94456.9081e4,
+global,get,startminute,,Dashboard Android App,16a94456.9081e4,
+global,set,startminute,,Dashboard Android App,b075f5de.8d3a28,
+global,get,starthour,,Dashboard Android App,b075f5de.8d3a28,
+global,get,startminute,,Dashboard Android App,b075f5de.8d3a28,
+global,set,stophour,,Dashboard Android App,4c3c2759.a96868,
+global,get,stophour,,Dashboard Android App,4c3c2759.a96868,
+global,get,stopminute,,Dashboard Android App,4c3c2759.a96868,
+global,set,stopminute,,Dashboard Android App,5e71bedf.693798,
+global,get,stophour,,Dashboard Android App,5e71bedf.693798,
+global,get,stopminute,,Dashboard Android App,5e71bedf.693798,
+global,set,bedroomTemp,,Dashboard Android App,cc02a044.fcd4b,global vars
+global,get,bedroomTemp,,Dashboard Android App,848c486f.e9dd88,start/stop AC 25 Eco at night
+global,get,ACRaffrescamento,,Dashboard Android App,848c486f.e9dd88,start/stop AC 25 Eco at night
+global,get,ACAUTO,,Dashboard Android App,848c486f.e9dd88,start/stop AC 25 Eco at night
+global,set,ACRaffrescamento,,Dashboard Android App,848c486f.e9dd88,start/stop AC 25 Eco at night
+global,set,ACRaffrescamento,,Dashboard Android App,848c486f.e9dd88,start/stop AC 25 Eco at night
+global,set,ACRaffrescamento,,Dashboard Android App,848c486f.e9dd88,start/stop AC 25 Eco at night
+global,set,ACRaffrescamento,,Dashboard Android App,848c486f.e9dd88,start/stop AC 25 Eco at night
+global,set,ACRaffrescamento,,Dashboard Android App,848c486f.e9dd88,start/stop AC 25 Eco at night
+global,set,ACRaffrescamento,,Dashboard Android App,848c486f.e9dd88,start/stop AC 25 Eco at night
+global,set,holiday,file,Dashboard Android App,816f87f1.fdeb1,
+global,get,holiday,,Dashboard Android App,8f691b093d10b3ee,regolazione termostati a 17
+global,get,holiday,,Dashboard Android App,8f2063c50153934e,regolazione termostati assenza/vacnza
+global,set,luciECO,file,Dashboard Android App,f5c9c515cf42d334,
+global,set,luciPiscinaAUTO,file,Dashboard Android App,f6acc7720b681b77,
+global,set,SensorePorticoAbilitato,file,Dashboard Android App,3dbd3b0db5f5962d,function 11
+global,set,SensorePorticoAbilitato,file,Dashboard Android App,3dbd3b0db5f5962d,function 11
+global,set,ACAUTO,file,Dashboard Android App,f58b780782821937,
+global,set,SensorePorticoAbilitato,,Dashboard Android App,71abe7c41c12fa36,function 31
+global,set,SensorePorticoAbilitato,,Dashboard Android App,71abe7c41c12fa36,function 31
+flow,set,AC_Winter_LastCommand,file,AI climate,4d8e955d1ce128dd,flow.set AC_Winter_LastCommand
+flow,get,AC_Winter_LastCommand,,AI climate,8ba4936278470454,flow.get AC_Winter_LastCommand
+flow,set,produzione,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,consumo,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,powerwall_soc,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,temperatura,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,humidex_giorno,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,humidex_notte,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,temp_esterno,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,umidita_esterno,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,temp_cameraMatrimoniale,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ac_power,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,temp_esterno,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,umidita_esterno,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,condizionatore_stato,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,get,ultimo_avvio,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,get,ultimo_spegnimento,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,get,user_min_run_time,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,get,user_min_off_time,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,get,user_deficit_tolerance_time,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,get,user_vmc_max_notte,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,get,user_target_humidex_estate,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,get,user_emergency_humidex_away,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,produzione,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,consumo,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,powerwall_soc,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,powerwall_soc,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,temperatura,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,humidex_giorno,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,humidex_notte,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,temp_cameraMatrimoniale,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,ac_power,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,previsione_kwh_domani,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,previsione_data_domani,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,tutte_medie_storiche,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,efficienza_ricarica_storica,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,AI_climate_enabling,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,AI_climate_enabling,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,system_was_disabled,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,system_was_disabled,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,system_was_disabled,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,tentativi_riavvio_ac,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,tentativi_riavvio_ac,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,tentativi_riavvio_ac,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,AI_climate_enabling,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,tentativi_riavvio_ac,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,get,grace_period_time_range,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,get,grace_mode_solar,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,get,grace_mode_solar,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,ultimo_spegnimento_notte,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,inizio_deficit_surplus,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,inizio_deficit_surplus,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ultimo_spegnimento_notte,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,umidita_bedroom,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,umidita_living,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,vmc_ultimo_cambio_ms,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,vmc_velocita_inviata,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_ultimo_cambio_ms,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_velocita_inviata,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_fanspeed,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,ac_log_temp,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,ac_log_mode,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,log_ultimo_stato_ac,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,log_ultima_vmc,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,log_ultimo_stato_ac,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,log_ultima_vmc,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+global,get,app_base_topic,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,get,vmc_velocita_inviata,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_velocita_inviata,,AI climate,61992c8879c11f66,Machine Learning domotico locale ad alta precisione
+flow,set,previsione_kwh_domani,,AI climate,e987e367138f30ef,function 22
+flow,set,previsione_kwh_domani,,AI climate,e987e367138f30ef,function 22
+flow,set,previsione_data_domani,,AI climate,e987e367138f30ef,function 22
+flow,set,consumo_istantaneo_registratore,,AI climate,5eef15f00d7a6c51,Registrazione consumi ML
+flow,set,produzione_istantanea_registratore,,AI climate,5eef15f00d7a6c51,Registrazione consumi ML
+flow,get,consumo_istantaneo_registratore,,AI climate,5eef15f00d7a6c51,Registrazione consumi ML
+flow,get,produzione_istantanea_registratore,,AI climate,5eef15f00d7a6c51,Registrazione consumi ML
+flow,set,tutte_medie_storiche,,AI climate,5eef15f00d7a6c51,Registrazione consumi ML
+flow,set,efficienza_ricarica_storica,,AI climate,5eef15f00d7a6c51,Registrazione consumi ML
+flow,set,condizionatore_stato,,AI climate,249be69cffcb1f5f,function 30
+flow,set,AI_climate_enabling,file,AI climate,5297875258c91adf,Salva Stato su File
+global,get,ir_dictionary,,AI climate,aca24c631dec754b,AC Controller & Parser
+global,get,user_min_run_time,,AI climate,2796fd499f6b3ae2,Recupero Variabili File System per UI
+global,get,user_min_off_time,,AI climate,2796fd499f6b3ae2,Recupero Variabili File System per UI
+global,get,user_target_humidex_estate,,AI climate,2796fd499f6b3ae2,Recupero Variabili File System per UI
+global,get,user_vmc_max_notte,,AI climate,2796fd499f6b3ae2,Recupero Variabili File System per UI
+global,get,user_deficit_tolerance_time,,AI climate,2796fd499f6b3ae2,Recupero Variabili File System per UI
+flow,get,AI_climate_enabling,,AI climate,2796fd499f6b3ae2,Recupero Variabili File System per UI
+global,set,grace_mode_solar,file,AI climate,18cd61655da131ad,Gestore Impostazioni UI & Android
+global,set,user_emergency_humidex_away,file,AI climate,18cd61655da131ad,Gestore Impostazioni UI & Android
+global,set,user_min_run_time,file,AI climate,18cd61655da131ad,Gestore Impostazioni UI & Android
+global,set,user_min_off_time,file,AI climate,18cd61655da131ad,Gestore Impostazioni UI & Android
+global,set,user_target_humidex_estate,file,AI climate,18cd61655da131ad,Gestore Impostazioni UI & Android
+global,set,user_vmc_max_notte,,AI climate,18cd61655da131ad,Gestore Impostazioni UI & Android
+global,set,user_deficit_tolerance_time,file,AI climate,18cd61655da131ad,Gestore Impostazioni UI & Android
+flow,set,AI_climate_enabling,file,AI climate,18cd61655da131ad,Gestore Impostazioni UI & Android
+flow,set,system_was_disabled,,AI climate,18cd61655da131ad,Gestore Impostazioni UI & Android
+global,set,grace_mode_solar,file,AI climate,5188761e59169fdc,Salva modalita 
+global,set,user_emergency_humidex_away,,AI climate,337ad3eb52fe5d9c,function 28
+global,set,user_deficit_tolerance_time,file,AI climate,0f8b4e9cfb64bb9a,global.user_deficit_tolerance_time al valore 20
+flow,set,produzione,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,consumo,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,powerwall_soc,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,temperatura,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,humidex_giorno,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,humidex_notte,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,temp_esterno,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,umidita_esterno,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,temp_cameraMatrimoniale,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,ac_power,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,temp_esterno,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,umidita_esterno,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,condizionatore_stato,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,get,ultimo_avvio,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,get,ultimo_spegnimento,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,get,user_min_run_time,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,get,user_min_off_time,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,get,user_deficit_tolerance_time,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,get,user_vmc_max_notte,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,get,user_target_humidex_estate,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,get,user_emergency_humidex_away,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,produzione,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,consumo,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,powerwall_soc,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,powerwall_soc,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,temperatura,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,humidex_giorno,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,humidex_notte,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,temp_cameraMatrimoniale,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,ac_power,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,get,grace_mode_solar,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,previsione_kwh_domani,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,previsione_data_domani,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,tutte_medie_storiche,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,efficienza_ricarica_storica,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,AI_climate_enabling,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,AI_climate_enabling,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,system_was_disabled,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,system_was_disabled,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,system_was_disabled,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,tentativi_riavvio_ac,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,tentativi_riavvio_ac,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,tentativi_riavvio_ac,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,AI_climate_enabling,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,tentativi_riavvio_ac,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,get,grace_mode_solar,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,get,grace_mode_solar,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,inizio_deficit_surplus,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,inizio_deficit_surplus,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,umidita_bedroom,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,umidita_living,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_fanspeed,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,ac_log_temp,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,ac_log_mode,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,log_ultimo_stato_ac,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,log_ultima_vmc,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,log_ultimo_stato_ac,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,log_ultima_vmc,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,get,vmc_velocita_inviata,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_velocita_inviata,,AI climate,ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione
+flow,set,produzione,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,consumo,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,powerwall_soc,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,temperatura,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,humidex_giorno,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,humidex_notte,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,temp_esterno,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,umidita_esterno,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,temp_cameraMatrimoniale,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,ac_power,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,temp_esterno,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,umidita_esterno,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,condizionatore_stato,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,get,ultimo_avvio,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,get,ultimo_spegnimento,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,get,user_min_run_time,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,get,user_min_off_time,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,get,user_deficit_tolerance_time,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,get,user_vmc_max_notte,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,get,user_target_humidex_estate,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,get,user_emergency_humidex_away,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,produzione,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,consumo,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,powerwall_soc,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,powerwall_soc,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,temperatura,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,humidex_giorno,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,humidex_notte,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,temp_cameraMatrimoniale,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,ac_power,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,previsione_kwh_domani,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,previsione_data_domani,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,tutte_medie_storiche,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,efficienza_ricarica_storica,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,AI_climate_enabling,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,AI_climate_enabling,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,system_was_disabled,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,system_was_disabled,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,system_was_disabled,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,tentativi_riavvio_ac,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,tentativi_riavvio_ac,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,tentativi_riavvio_ac,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,AI_climate_enabling,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,tentativi_riavvio_ac,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,get,grace_period_time_range,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,get,grace_mode_solar,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,get,grace_mode_solar,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,inizio_deficit_surplus,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,inizio_deficit_surplus,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,umidita_bedroom,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,umidita_living,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,vmc_ultimo_cambio_ms,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,vmc_velocita_inviata,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_ultimo_cambio_ms,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_velocita_inviata,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_fanspeed,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,ac_log_temp,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,ac_log_mode,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,log_ultimo_stato_ac,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,log_ultima_vmc,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,log_ultimo_stato_ac,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,log_ultima_vmc,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+global,get,app_base_topic,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,get,vmc_velocita_inviata,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_velocita_inviata,,AI climate,96e723769e300aec,Machine Learning domotico locale ad alta precisione
+flow,set,produzione,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,consumo,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,powerwall_soc,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,temperatura,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,humidex_giorno,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,humidex_notte,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,temp_esterno,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,umidita_esterno,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,temp_cameraMatrimoniale,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,ac_power,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,temp_esterno,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,umidita_esterno,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,condizionatore_stato,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,get,ultimo_avvio,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,get,ultimo_spegnimento,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,get,user_min_run_time,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,get,user_min_off_time,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,get,user_deficit_tolerance_time,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,get,user_vmc_max_notte,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,get,user_target_humidex_estate,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,get,user_emergency_humidex_away,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,produzione,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,consumo,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,powerwall_soc,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,powerwall_soc,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,temperatura,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,humidex_giorno,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,humidex_notte,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,temp_cameraMatrimoniale,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,ac_power,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,previsione_kwh_domani,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,previsione_data_domani,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,tutte_medie_storiche,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,efficienza_ricarica_storica,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,AI_climate_enabling,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,AI_climate_enabling,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,system_was_disabled,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,system_was_disabled,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,system_was_disabled,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,tentativi_riavvio_ac,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,tentativi_riavvio_ac,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,tentativi_riavvio_ac,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,AI_climate_enabling,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,tentativi_riavvio_ac,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,get,grace_period_time_range,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,get,grace_mode_solar,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,get,grace_mode_solar,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_avvio,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,inizio_deficit_surplus,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,inizio_deficit_surplus,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,condizionatore_stato,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,set,ultimo_spegnimento,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,inizio_deficit_surplus,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,umidita_bedroom,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,umidita_living,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,vmc_ultimo_cambio_ms,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,vmc_velocita_inviata,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_ultimo_cambio_ms,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_velocita_inviata,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_fanspeed,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_temp,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,ac_log_mode,file,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,ac_log_temp,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,ac_log_mode,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,log_ultimo_stato_ac,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,log_ultima_vmc,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,log_ultimo_stato_ac,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,log_ultima_vmc,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,get,app_base_topic,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,get,vmc_velocita_inviata,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+flow,set,vmc_velocita_inviata,,AI climate,bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione
+global,get,holiday,,broadlink lights,c5fe6b1c.89db88,ON
+global,get,holiday,,broadlink lights,a348ed52.3708f,holiday ?
+global,get,holiday,,broadlink lights,6492e091.1cb7d,holiday or luciPiscinaAUTO ?
+global,get,luciPiscinaAUTO,,broadlink lights,6492e091.1cb7d,holiday or luciPiscinaAUTO ?
+global,get,holiday,,broadlink lights,8ad856af.4a0ea8,holiday or luciPiscinaAUTO ?
+global,get,luciPiscinaAUTO,,broadlink lights,8ad856af.4a0ea8,holiday or luciPiscinaAUTO ?
+flow,set,SolarIrradiance,,start local scripts,7fcb34dde7c4bb44,function 12
+global,get,onvifModule,,PTZ camera,e9b2c2ce.d2c25,floreon 192.168.1.13
+flow,get,isNight,,ZigBee sensors,976625b3.d8ed6,on
+flow,get,isNight,,ZigBee sensors,562feb36.e6289c,on
+flow,get,isNightOutdoor,,ZigBee sensors,8fecb2d0.f05288,on
+flow,set,isNightOutdoor,,ZigBee sensors,7f6d38e5.eab28,"flow.set(""isNightOutdoor"")"
+flow,set,isNight,,ZigBee sensors,c4473207.af258,"flow.set(""isNight"")"
+global,get,SensorePorticoAbilitato,,ZigBee sensors,b2f2ca3617573acb,
+flow,set,isNight,,ZigBee sensors,95a126ea98427313,metto a TRUE per accendere sempre
+global,get,ZigbeeState,,ZigBee sensors,72de8f25d6ff90f6,function 6
+global,set,ZigbeeState,,ZigBee sensors,4977de5e4ca7ab01,function 8
+global,get,ZigbeeState,,ZigBee sensors,4977de5e4ca7ab01,function 8
+global,set,ZigbeeState,,ZigBee sensors,4977de5e4ca7ab01,function 8
+flow,get,firstFloorState,,Flow 1,c2f588a4.6cd34,
+flow,set,firstFloorState,,Flow 1,c2f588a4.6cd34,
+flow,set,fv,,Google Webhook,b10543f8.ac91e,
+flow,set,homwpwr,,Google Webhook,b10543f8.ac91e,
+flow,get,fv,,Google Webhook,b10543f8.ac91e,
+flow,get,homepwr,,Google Webhook,b10543f8.ac91e,
+flow,get,setpoint,,Diverter,a841c39dc4d2ac12,PID
+flow,set,setpoint,,Diverter,a841c39dc4d2ac12,PID
+flow,set,thermostat_min,,Flow 2,c8e9d9dcbf2503eb,function 17
+flow,set,thermostat_max,,Flow 2,c8e9d9dcbf2503eb,function 17

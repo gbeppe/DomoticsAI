@@ -1,0 +1,79 @@
+scope,variable,get_count,set_count,stores,flows
+flow,AC_Winter_LastCommand,1,1,file,AI climate
+flow,AI_climate_enabling,5,10,file,AI climate
+flow,SolarIrradiance,0,1,,start local scripts
+flow,ac_log_mode,4,24,file,AI climate
+flow,ac_log_temp,4,24,file,AI climate
+flow,ac_power,4,4,,AI climate
+flow,bedroomHumidity,1,1,,Dashboard Android App
+flow,bedroomTemp,1,1,,Dashboard Android App
+flow,condizionatore_stato,4,37,file,AI climate
+flow,consumo,4,4,,AI climate
+flow,consumo_istantaneo_registratore,1,1,,AI climate
+flow,efficienza_ricarica_storica,4,1,,AI climate
+flow,firstFloorState,1,1,,Flow 1
+flow,fv,1,1,,Google Webhook
+flow,homepwr,1,0,,Google Webhook
+flow,homwpwr,0,1,,Google Webhook
+flow,humidex_giorno,4,4,,AI climate
+flow,humidex_notte,4,4,,AI climate
+flow,inizio_deficit_surplus,8,20,,AI climate
+flow,isNight,2,2,,ZigBee sensors
+flow,isNightOutdoor,1,1,,ZigBee sensors
+flow,last_cons,2,2,,Android APP Bridge
+flow,last_prod,2,2,,Android APP Bridge
+flow,livingHumidity,1,1,,Dashboard Android App
+flow,livingTemp,1,1,,Dashboard Android App
+flow,log_ultima_vmc,4,4,,AI climate
+flow,log_ultimo_stato_ac,4,4,,AI climate
+flow,powerwall_soc,8,4,,AI climate
+flow,previsione_data_domani,4,1,,AI climate
+flow,previsione_kwh_domani,4,2,,AI climate
+flow,produzione,4,4,,AI climate
+flow,produzione_istantanea_registratore,1,1,,AI climate
+flow,setpoint,1,1,,Diverter
+flow,system_was_disabled,4,9,,AI climate
+flow,temp_cameraMatrimoniale,4,4,,AI climate
+flow,temp_esterno,4,4,,AI climate
+flow,temperatura,4,4,,AI climate
+flow,tentativi_riavvio_ac,4,12,,AI climate
+flow,thermostat_max,0,1,,Flow 2
+flow,thermostat_min,0,1,,Flow 2
+flow,tutte_medie_storiche,4,1,,AI climate
+flow,ultimo_spegnimento_notte,1,1,file,AI climate
+flow,umidita_bedroom,4,0,,AI climate
+flow,umidita_esterno,4,4,,AI climate
+flow,umidita_living,4,0,,AI climate
+flow,vmc_fanspeed,0,4,,AI climate
+flow,vmc_ultimo_cambio_ms,3,3,,AI climate
+flow,vmc_velocita_inviata,7,7,,AI climate
+global,ACAUTO,1,1,file,Dashboard Android App
+global,ACRaffrescamento,1,6,,Dashboard Android App
+global,AI_climate_enabling,0,1,file,Android APP Bridge
+global,SensorePorticoAbilitato,1,4,file,Dashboard Android App | ZigBee sensors
+global,ZigbeeState,2,2,,ZigBee sensors
+global,app_base_topic,29,2,file,AI climate | Android APP Bridge
+global,bedroomTemp,1,1,,Dashboard Android App
+global,grace_mode_solar,9,2,file,AI climate
+global,grace_period_time_range,3,1,file,AI climate | Android APP Bridge
+global,gridPower,1,1,,Dashboard Android App
+global,holiday,6,2,file,Android APP Bridge | Dashboard Android App | broadlink lights
+global,homePower,1,1,,Dashboard Android App
+global,ir_dictionary,1,0,,AI climate
+global,luciECO,0,1,file,Dashboard Android App
+global,luciPiscinaAUTO,2,1,file,Dashboard Android App | broadlink lights
+global,onvifModule,1,0,,PTZ camera
+global,solarPower,1,1,,Dashboard Android App
+global,starthour,2,1,,Dashboard Android App
+global,startminute,2,1,,Dashboard Android App
+global,stophour,2,1,,Dashboard Android App
+global,stopminute,2,1,,Dashboard Android App
+global,system_enabled,0,1,file,Android APP Bridge
+global,ultimo_avvio,4,16,file,AI climate
+global,ultimo_spegnimento,4,24,file,AI climate
+global,user_deficit_tolerance_time,5,2,file,AI climate
+global,user_emergency_humidex_away,4,2,file,AI climate
+global,user_min_off_time,5,1,file,AI climate
+global,user_min_run_time,5,1,file,AI climate
+global,user_target_humidex_estate,5,1,file,AI climate
+global,user_vmc_max_notte,5,2,file,AI climate | Android APP Bridge
