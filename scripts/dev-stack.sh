@@ -31,10 +31,19 @@ port_open() {
 }
 
 gateway_running() {
-    [[ -f "$PID_FILE" ]] || return 1
-    local pid
-    pid="$(cat "$PID_FILE")"
-    kill -0 "$pid" 2>/dev/null
+    if [[ -f "$PID_FILE" ]]; then
+        local pid
+        pid="$(cat "$PID_FILE")"
+
+        if kill -0 "$pid" 2>/dev/null; then
+            return 0
+        fi
+
+        rm -f "$PID_FILE"
+    fi
+
+    port_open "127.0.0.1" "$NODE_RED_PORT" ||
+        port_open "$DEV_IP" "$NODE_RED_PORT"
 }
 
 start_broker() {
@@ -84,9 +93,20 @@ start_gateway() {
 
     green "Avvio Node-RED Gateway..."
     (
-        cd "$GATEWAY_DIR"
-        nohup npm start >>"$LOG_FILE" 2>&1 &
-        echo $! >"$PID_FILE"
+        local node_red_binary="$GATEWAY_DIR/node_modules/.bin/node-red"
+
+if [[ ! -x "$node_red_binary" ]]; then
+    red "Eseguibile Node-RED non trovato: $node_red_binary"
+    exit 1
+fi
+
+nohup "$node_red_binary" \
+    --userDir "$GATEWAY_DIR" \
+    --settings "$GATEWAY_DIR/settings.js" \
+    "$GATEWAY_DIR/flows.json" \
+    >>"$LOG_FILE" 2>&1 &
+
+echo $! >"$PID_FILE"
     )
 
     for _ in {1..30}; do
@@ -174,20 +194,26 @@ case "${1:-start}" in
     start)
         start_broker
         start_gateway
+	"$PROJECT_ROOT/core-engine/scripts/core-engine.sh" start
         status_stack
         ;;
     stop)
         stop_gateway
+	"$PROJECT_ROOT/core-engine/scripts/core-engine.sh" stop
         green "Mosquitto resta attivo perché è un servizio di sistema."
         ;;
     restart)
-        stop_gateway
-        start_broker
-        start_gateway
-        status_stack
+	"$PROJECT_ROOT/core-engine/scripts/core-engine.sh" stop
+	stop_gateway
+	start_broker
+	start_gateway
+	"$PROJECT_ROOT/core-engine/scripts/core-engine.sh" start
+	status_stack
+	"$PROJECT_ROOT/core-engine/scripts/core-engine.sh" status
         ;;
     status)
         status_stack
+	"$PROJECT_ROOT/core-engine/scripts/core-engine.sh" status
         ;;
     logs)
         show_logs
