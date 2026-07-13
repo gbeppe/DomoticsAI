@@ -7,9 +7,13 @@ RUN_DIR="$PROJECT_ROOT/.run"
 LOG_DIR="$PROJECT_ROOT/.logs"
 
 DEV_IP="192.168.1.40"
-MQTT_GATEWAY_PORT="1883"
-MQTT_APP_PORT="1884"
+
 NODE_RED_PORT="1881"
+MQTT_GATEWAY_HOST="127.0.0.1"
+MQTT_GATEWAY_PORT="1883"
+
+MQTT_APP_HOST="192.168.1.40"
+MQTT_APP_PORT="1884"
 
 PID_FILE="$RUN_DIR/gateway.pid"
 LOG_FILE="$LOG_DIR/gateway.log"
@@ -43,12 +47,19 @@ start_broker() {
     }
 
     for port in "$MQTT_GATEWAY_PORT" "$MQTT_APP_PORT"; do
-        if port_open "$DEV_IP" "$port"; then
-            green "MQTT disponibile su $DEV_IP:$port"
-        else
-            red "MQTT non raggiungibile su $DEV_IP:$port"
-            exit 1
-        fi
+        if port_open "$MQTT_GATEWAY_HOST" "$MQTT_GATEWAY_PORT"; then
+    green "MQTT Gateway disponibile su $MQTT_GATEWAY_HOST:$MQTT_GATEWAY_PORT"
+else
+    red "MQTT Gateway non raggiungibile su $MQTT_GATEWAY_HOST:$MQTT_GATEWAY_PORT"
+    exit 1
+fi
+
+if port_open "$MQTT_APP_HOST" "$MQTT_APP_PORT"; then
+    green "MQTT App disponibile su $MQTT_APP_HOST:$MQTT_APP_PORT"
+else
+    red "MQTT App non raggiungibile su $MQTT_APP_HOST:$MQTT_APP_PORT"
+    exit 1
+fi
     done
 }
 
@@ -126,11 +137,19 @@ status_stack() {
     fi
 
     for port in "$MQTT_GATEWAY_PORT" "$MQTT_APP_PORT"; do
-        if port_open "$DEV_IP" "$port"; then
-            green "MQTT $DEV_IP:$port: OK"
-        else
-            red "MQTT $DEV_IP:$port: NON RAGGIUNGIBILE"
-        fi
+        if port_open "$MQTT_GATEWAY_HOST" "$MQTT_GATEWAY_PORT"; then
+    green "MQTT Gateway disponibile su $MQTT_GATEWAY_HOST:$MQTT_GATEWAY_PORT"
+else
+    red "MQTT Gateway non raggiungibile su $MQTT_GATEWAY_HOST:$MQTT_GATEWAY_PORT"
+    exit 1
+fi
+
+if port_open "$MQTT_APP_HOST" "$MQTT_APP_PORT"; then
+    green "MQTT App disponibile su $MQTT_APP_HOST:$MQTT_APP_PORT"
+else
+    red "MQTT App non raggiungibile su $MQTT_APP_HOST:$MQTT_APP_PORT"
+    exit 1
+fi
     done
 
     if gateway_running; then
