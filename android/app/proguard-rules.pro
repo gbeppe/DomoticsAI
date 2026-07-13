@@ -1,0 +1,3 @@
+-keepclassmembernames class io.netty.** { *; }
+-keepclassmembers class org.jctools.** { *; }
+-dontwarn org.bouncycastle.**
