@@ -1,0 +1,38 @@
+# Android / Gradle
+.gradle/
+**/build/
+local.properties
+*.iml
+.idea/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Node / Node-RED
+node_modules/
+.npm/
+*.log
+flows_cred.json
+*.backup
+
+# Secrets and local configuration
+.env
+.env.*
+secrets/
+*.jks
+*.keystore
+*.pem
+*.key
+*.p12
+
+# OS / Editors
+.DS_Store
+Thumbs.db
+*~
+.vscode/
+
+# Generated
+dist/
+out/
+tmp/
+coverage/
