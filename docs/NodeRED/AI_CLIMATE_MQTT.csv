@@ -1,0 +1,31 @@
+node_id,direction,node_name,topic,dynamic_topic,qos,retain,disabled,wired_inputs,wired_outputs
+ab7d6c30422ecc82,SUBSCRIBE,EmonCMS Setpoint,emon/AC/command,no,2,,False,0,1
+e881e9441da96819,PUBLISH,EmonCMS Setpoint,emon/AC/command,no,2,true,False,1,0
+5d5092c20b221701,PUBLISH,,casa/clima/stato_completo,no,,,False,1,0
+967f5b09eecc39c0,SUBSCRIBE,MQTT bedroom humidex,zara/domotics/BedroomHumidex,no,2,,False,0,2
+4cb939ccb3e11c7f,SUBSCRIBE,MQTT living humidex,zara/domotics/LivingHumidex,no,2,,False,0,2
+21d6585848d13e87,SUBSCRIBE,MQTT SOC Batt,TeslaPowerwall/SOE,no,2,,False,0,1
+3d009f9701cfbcad,SUBSCRIBE,MQTT Potenza Casa (Load W),TeslaPowerwall/load_instant_power,no,2,,False,0,2
+aa9bad7c1fd25c9e,SUBSCRIBE,MQTT Potenza Produzione FV (FV W),TeslaPowerwall/solar_instant_power,no,2,,False,0,2
+4f51be0bb2407353,SUBSCRIBE,MQTT temperatura living,emon/emonth5/temperature_calibrated,no,2,,False,0,1
+9b107edb60e160c7,SUBSCRIBE,MQTT AC Power,emon/AC/emeter_power,no,2,,False,0,1
+6ef6713e949f314d,PUBLISH,MQTT Clima Comando,zara/domotics/AC/command,no,,,False,1,0
+211aa45d39e85052,PUBLISH,,alexa/vmc,no,0,false,False,1,0
+9174f8e2f9a59d15,PUBLISH,,zara/domotics/clima_log_eventi,no,,,False,1,0
+4c010ca56b63a35a,SUBSCRIBE,,zigbee2mqtt/TU-cucinaEsterno,no,2,,False,0,1
+e79697439834214f,SUBSCRIBE,cmnd/vmc_max_notte,casa/clima/cmnd/vmc_max_notte,no,1,,False,0,1
+c2be297c7c72b3ed,SUBSCRIBE,cmnd/min_off_time,casa/clima/cmnd/min_off_time,no,1,,False,0,1
+38506c0a385cc7f2,SUBSCRIBE,cmnd/min_run_time,casa/clima/cmnd/min_run_time,no,1,,False,0,1
+428a528fe43820d5,SUBSCRIBE,cmnd/target_humidex,casa/clima/cmnd/target_humidex,no,1,,False,0,1
+f8c0341febc8db4d,PUBLISH,MQTT Pubblica Stato,,yes,1,true,False,9,0
+b3513e59ea2aff51,SUBSCRIBE,MQTT Clima Comando,zara/domotics/AC/command,no,2,,False,0,1
+e71747aa1eb36dbb,PUBLISH,EmonCMS Setpoint,emon/AC/command,no,2,true,False,1,0
+a9439746b542f7aa,SUBSCRIBE,MQTT temperatura camera matrimoniale,emon/cameraMatrimoniale/temperature,no,2,,False,0,1
+23f1684c4b4f8f1a,SUBSCRIBE,,casa/clima/cmnd/+,no,2,,False,0,1
+27df66489554f4f7,PUBLISH,,,yes,,,False,1,0
+4c383f56eeebd066,SUBSCRIBE,cmnd/deficit_tolerance_time,casa/clima/cmnd/deficit_tolerance_time,no,1,,False,0,1
+b473d3282822b433,SUBSCRIBE,,casa/clima/cmnd/AI_climate_enabling,no,2,,False,0,1
+mqtt_in_grace_mode,SUBSCRIBE,cmnd/grace_mode_solar,casa/clima/cmnd/grace_mode_solar,no,1,,False,0,1
+mqtt_in_emergency,SUBSCRIBE,cmnd/emergency_humidex_away,casa/clima/cmnd/emergency_humidex_away,no,1,,False,0,1
+cd2d44d667aa4546,SUBSCRIBE,,zara/domotics/clima_log_eventi,no,2,,False,0,1
+c9da61399ea20bf9,SUBSCRIBE,,casa/clima/log_eventi,no,2,,False,0,0

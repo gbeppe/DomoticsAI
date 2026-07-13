@@ -1,0 +1,106 @@
+node_id,type,name,topic,disabled,x,y,wired_inputs,wired_outputs
+5dfcc0757cb95c35,RM,Broadlink Sender,,False,950,40,1,0
+2b14d96a05d61526,link in,AC 25 dry eco,,False,225,80,0,1
+b0a555b2eb467bb2,change,Forza eco25dry,,False,380,80,1,1
+aca24c631dec754b,function,AC Controller & Parser,,False,680,80,4,2
+5995cac53851d83d,link in,AC 26 dry,,False,225,120,0,1
+bb898269481b9a93,change,Forza eco26dry,,False,380,120,1,1
+e71747aa1eb36dbb,mqtt out,EmonCMS Setpoint,emon/AC/command,False,950,120,1,0
+bc24db62da87d201,function,AC Controller & Parser,,False,660,140,0,0
+76429272fe9a2e44,link in,AC off,,False,225,160,0,1
+2a6c7ae912516551,change,Forza OFF,,False,370,160,1,1
+b3513e59ea2aff51,mqtt in,MQTT Clima Comando,zara/domotics/AC/command,False,320,220,0,1
+ab7d6c30422ecc82,mqtt in,EmonCMS Setpoint,emon/AC/command,False,230,380,0,1
+4d8e955d1ce128dd,function,flow.set AC_Winter_LastCommand,,False,560,380,1,0
+ec51705040476c04,inject,ogni 1 minuti,,False,280,440,0,1
+8ba4936278470454,function,flow.get AC_Winter_LastCommand,,False,560,440,1,1
+e881e9441da96819,mqtt out,EmonCMS Setpoint,emon/AC/command,False,910,440,1,0
+19dd000abb51d333,comment,START - AI Gemini code for controlling AC,,False,280,500,0,0
+5eef15f00d7a6c51,function,Registrazione consumi ML,,False,740,540,2,1
+c18340e5e78b0f20,json,json,,False,1010,540,1,1
+dd04905161a99080,file,file,,False,1300,540,1,0
+3d009f9701cfbcad,mqtt in,MQTT Potenza Casa (Load W),TeslaPowerwall/load_instant_power,False,290,620,0,2
+aa9bad7c1fd25c9e,mqtt in,MQTT Potenza Produzione FV (FV W),TeslaPowerwall/solar_instant_power,False,270,660,0,2
+83d185b0177f6834,change,change,,False,1340,680,1,1
+6ef6713e949f314d,mqtt out,MQTT Clima Comando,zara/domotics/AC/command,False,1570,680,1,0
+4c010ca56b63a35a,mqtt in,zigbee2mqtt/TU-cucinaEsterno,zigbee2mqtt/TU-cucinaEsterno,False,290,700,0,1
+5d5092c20b221701,mqtt out,casa/clima/stato_completo,casa/clima/stato_completo,False,1580,720,1,0
+21d6585848d13e87,mqtt in,MQTT SOC Batt,TeslaPowerwall/SOE,False,340,740,0,1
+211aa45d39e85052,mqtt out,alexa/vmc,alexa/vmc,False,1520,760,1,0
+4f51be0bb2407353,mqtt in,MQTT temperatura living,emon/emonth5/temperature_calibrated,False,310,780,0,1
+2e8c56cc6b84b54d,switch,switch,,False,590,780,10,1
+61992c8879c11f66,function,Machine Learning domotico locale ad alta precisione,,False,900,780,1,9
+9174f8e2f9a59d15,mqtt out,zara/domotics/clima_log_eventi,zara/domotics/clima_log_eventi,False,1590,800,1,0
+a9439746b542f7aa,mqtt in,MQTT temperatura camera matrimoniale,emon/cameraMatrimoniale/temperature,False,260,820,0,1
+3b41a6b4894b81f3,json,json,,False,1290,840,1,1
+80d9202afcddf612,file,file,,False,1610,840,1,0
+9b107edb60e160c7,mqtt in,MQTT AC Power,emon/AC/emeter_power,False,340,860,0,1
+bd8f422a0d46006f,function,Machine Learning domotico locale ad alta precisione,,False,860,880,0,0
+e6d567a073b356b9,change,AC / Heat Pump,,False,1320,880,1,1
+d0011545aa353cc0,ui_template,ui_template,,False,1680,880,1,0
+4cb939ccb3e11c7f,mqtt in,MQTT living humidex,zara/domotics/LivingHumidex,False,320,900,0,2
+96e723769e300aec,function,Machine Learning domotico locale ad alta precisione,,False,880,900,0,0
+ea54c259689cd3c1,function,Machine Learning domotico locale ad alta precisione,,False,900,920,0,0
+d1281d40174e02cc,change,AC / Heat Pump,,False,1320,920,1,1
+d437b2a2c0feb054,msg-resend,msg-resend,,False,1530,920,1,1
+f0305a0134a4e482,ui_chart,ui_chart,,False,1670,920,1,0
+967f5b09eecc39c0,mqtt in,MQTT bedroom humidex,zara/domotics/BedroomHumidex,False,310,940,0,2
+3d6ad7eb4b8bba04,change,VMC,,False,1290,960,1,1
+59cfb437e33e8fe5,msg-resend,msg-resend,,False,1530,960,1,1
+205967df3a0ccf56,ui_chart,ui_chart,,False,1670,960,1,0
+cca2cd5030165db6,rbe,rbe,,False,1030,1000,2,1
+c62d3a1ac2f90baf,change,change,,False,1320,1000,1,1
+f26667e327bd1f1b,msg-resend,msg-resend,,False,1530,1000,1,1
+935cdc3a02dc0b3a,ui_chart,ui_chart,,False,1670,1000,1,0
+cdfcc5188e8c52f6,inject,inject,,True,200,1120,0,1
+249be69cffcb1f5f,function,function 30,,True,510,1120,1,0
+6916979d5a52f89e,inject,alle 23:00 ogni giono,,False,240,1200,0,1
+6ba4fd927988c70b,http request,previsione 2 gg api.open-meteo,,False,570,1200,1,1
+e987e367138f30ef,function,function 22,,False,890,1200,1,1
+63143d1907ca3d72,file,file,,False,1250,1200,1,0
+292a0c0b5b7e109a,template,IR Dictionary JSON,,False,490,1300,1,1
+a99a165c76a6acbb,change,Save to Global,,False,700,1300,1,0
+0f8b4e9cfb64bb9a,function,global.user_deficit_tolerance_time al valore 20,,False,560,1360,1,0
+38506c0a385cc7f2,mqtt in,cmnd/min_run_time,casa/clima/cmnd/min_run_time,False,1130,1400,0,1
+63e39c4846d741a3,ui_numeric,Min ON Time,casa/clima/cmnd/min_run_time,False,1150,1440,2,1
+57450c9a56563e38,change,Salva Min Run,,False,1480,1440,2,2
+f8c0341febc8db4d,mqtt out,MQTT Pubblica Stato,,False,1820,1440,9,0
+f5f1d5c5ea663663,inject,Boot Sync UI (10s),system/boot,False,210,1460,0,6
+2796fd499f6b3ae2,function,Recupero Variabili File System per UI,,False,510,1460,1,1
+c5776fb6e9ed4862,switch,Router UI,,False,780,1460,1,6
+c2be297c7c72b3ed,mqtt in,cmnd/min_off_time,casa/clima/cmnd/min_off_time,False,1130,1500,0,1
+5b5d488941cef0af,ui_numeric,Min OFF Time,casa/clima/cmnd/min_off_time,False,1140,1540,2,1
+421b22f34085b3a4,change,Salva Min Off,,False,1480,1540,2,2
+3ae96e2d06d4e21e,inject,inject,,False,550,1560,0,1
+b2f3fb91a5f30a07,link out,link out 4,,False,165,1580,1,0
+428a528fe43820d5,mqtt in,cmnd/target_humidex,casa/clima/cmnd/target_humidex,False,1120,1600,0,1
+94110e1cdf7ba7a3,link out,link out 5,,False,165,1640,1,0
+554945980f6404c3,ui_numeric,Target Humidex,casa/clima/cmnd/target_humidex,False,1140,1640,2,1
+c02bfb5d7e893f49,change,Salva Target Humidex,,False,1460,1640,2,2
+b473d3282822b433,mqtt in,casa/clima/cmnd/AI_climate_enabling,casa/clima/cmnd/AI_climate_enabling,False,690,1700,0,1
+385ad4e88548dd1f,ui_switch,Interruttore abilitazione sistema,casa/clima/cmnd/AI_climate_enabling,False,1090,1700,3,2
+5297875258c91adf,function,Salva Stato su File,,True,1470,1700,1,0
+e79697439834214f,mqtt in,cmnd/vmc_max_notte,casa/clima/cmnd/vmc_max_notte,False,1120,1760,0,1
+5132161c0569eb79,note,note,,False,3460,1780,0,0
+252bec555b47fa90,ui_slider,VMC Max Notte,casa/clima/cmnd/vmc_max_notte,False,1140,1800,2,1
+cdf7b32e8316a813,change,Salva VMC Notte,,False,1470,1800,2,2
+4c383f56eeebd066,mqtt in,cmnd/deficit_tolerance_time,casa/clima/cmnd/deficit_tolerance_time,False,1100,1860,0,1
+0a5095cb0740b796,ui_numeric,Tolleranza Deficit (min),casa/clima/cmnd/deficit_tolerance_time,False,1120,1900,2,1
+1892365e63ba846f,change,Salva Deficit Tolerance Time,,False,1440,1900,2,2
+23f1684c4b4f8f1a,mqtt in,casa/clima/cmnd/+,casa/clima/cmnd/+,False,210,1960,0,1
+18cd61655da131ad,function,Gestore Impostazioni UI & Android,,False,540,1960,1,1
+27df66489554f4f7,mqtt out,mqtt out,,False,830,1960,1,0
+mqtt_in_grace_mode,mqtt in,cmnd/grace_mode_solar,casa/clima/cmnd/grace_mode_solar,False,1090,2080,0,1
+33b3d43c7493bddd,ui_switch,Gestione Mattino (08-12),topic,True,430,2100,0,1
+5188761e59169fdc,function,Salva modalita ,,True,680,2100,1,0
+ui_switch_grace,ui_switch,Gestione Mattino (08-12),casa/clima/cmnd/grace_mode_solar,False,1090,2120,1,1
+change_grace_mode,change,Salva Grace Mode,,False,1430,2120,2,2
+mqtt_in_emergency,mqtt in,cmnd/emergency_humidex_away,casa/clima/cmnd/emergency_humidex_away,False,1110,2180,0,1
+b4b684bdf4fd25fe,ui_numeric,Soglia Emergenza Humidex (Mattino),topic,True,470,2200,0,1
+337ad3eb52fe5d9c,function,function 28,,True,770,2200,1,0
+ui_numeric_emergency,ui_numeric,Soglia Emergenza,casa/clima/cmnd/emergency_humidex_away,False,1070,2220,1,1
+change_emergency,change,Salva Emergency Humidex,,False,1450,2220,2,2
+cd2d44d667aa4546,mqtt in,zara/domotics/clima_log_eventi,zara/domotics/clima_log_eventi,False,190,2440,0,1
+8d4381294fd7a73c,function,Prepara INSERT Clima,,False,570,2440,1,1
+ec800657ed13e4d1,mysql,MariaDB domotica ZaraDomotica / ZaraDomotica,,False,1110,2440,1,0
+c9da61399ea20bf9,mqtt in,casa/clima/log_eventi,casa/clima/log_eventi,False,160,2500,0,0

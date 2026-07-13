@@ -1,0 +1,19 @@
+node_id,name,disabled,code_lines,code_chars,declared_outputs,wired_inputs,wired_outputs,orphan_or_unwired
+4d8e955d1ce128dd,flow.set AC_Winter_LastCommand,False,3,68,1,1,0,no
+8ba4936278470454,flow.get AC_Winter_LastCommand,False,3,74,1,1,1,no
+61992c8879c11f66,Machine Learning domotico locale ad alta precisione,False,647,31674,4,1,9,no
+e987e367138f30ef,function 22,False,63,2037,1,1,1,no
+5eef15f00d7a6c51,Registrazione consumi ML,False,85,4226,1,2,1,no
+249be69cffcb1f5f,function 30,True,2,59,1,1,0,no
+5297875258c91adf,Salva Stato su File,True,1,66,1,1,0,no
+aca24c631dec754b,AC Controller & Parser,False,22,659,2,4,2,no
+2796fd499f6b3ae2,Recupero Variabili File System per UI,False,24,1265,1,1,1,no
+18cd61655da131ad,Gestore Impostazioni UI & Android,False,83,2490,1,1,1,no
+5188761e59169fdc,Salva modalita ,True,4,117,1,1,0,no
+337ad3eb52fe5d9c,function 28,True,2,87,1,1,0,no
+0f8b4e9cfb64bb9a,global.user_deficit_tolerance_time al valore 20,False,2,67,1,1,0,no
+bc24db62da87d201,AC Controller & Parser,False,40,18837,2,0,0,yes
+ea54c259689cd3c1,Machine Learning domotico locale ad alta precisione,False,588,27628,4,0,0,yes
+8d4381294fd7a73c,Prepara INSERT Clima,False,32,1258,1,1,1,no
+96e723769e300aec,Machine Learning domotico locale ad alta precisione,False,633,30587,4,0,0,yes
+bd8f422a0d46006f,Machine Learning domotico locale ad alta precisione,False,633,30643,4,0,0,yes
