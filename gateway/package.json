@@ -1,0 +1,12 @@
+{
+  "name": "domoticsai-node-red-gateway",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Safe, separate Node-RED MQTT gateway for DomoticsAI",
+  "scripts": {
+    "start": "node-red --userDir ."
+  },
+  "dependencies": {
+    "node-red": "^4.0.0"
+  }
+}
