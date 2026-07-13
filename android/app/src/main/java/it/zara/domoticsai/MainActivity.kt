@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val container = (application as DomoticsAiApplication).container
 
         setContent {
@@ -33,24 +34,31 @@ class MainActivity : ComponentActivity() {
                 )
                 val logs by container.domoticsRepository.logs.collectAsState()
                 val scope = rememberCoroutineScope()
-                var destination by remember { mutableStateOf(Destination.HOME) }
+                var destination by remember {
+                    mutableStateOf(Destination.HOME)
+                }
 
                 val homeViewModel: HomeViewModel = viewModel(
                     factory = SimpleViewModelFactory {
                         HomeViewModel(
-                            container.domoticsRepository,
-                            container.credentialStore
+                            repository = container.domoticsRepository,
+                            credentialStore = container.credentialStore,
+                            coreEngineRepository =
+                                container.coreEngineRepository
                         )
                     }
                 )
 
                 val diagnosticsViewModel: DiagnosticsViewModel = viewModel(
                     factory = SimpleViewModelFactory {
-                        DiagnosticsViewModel(container.coreEngineRepository)
+                        DiagnosticsViewModel(
+                            repository = container.coreEngineRepository
+                        )
                     }
                 )
 
-                val diagnosticsState by diagnosticsViewModel.state.collectAsState()
+                val diagnosticsState by
+                    diagnosticsViewModel.state.collectAsState()
 
                 Scaffold(
                     bottomBar = {
@@ -62,10 +70,14 @@ class MainActivity : ComponentActivity() {
                                     icon = {
                                         Icon(
                                             when (item) {
-                                                Destination.HOME -> Icons.Default.Home
-                                                Destination.LOGS -> Icons.Default.List
-                                                Destination.CORE -> Icons.Default.Storage
-                                                Destination.SETTINGS -> Icons.Default.Settings
+                                                Destination.HOME ->
+                                                    Icons.Default.Home
+                                                Destination.LOGS ->
+                                                    Icons.Default.List
+                                                Destination.CORE ->
+                                                    Icons.Default.Storage
+                                                Destination.SETTINGS ->
+                                                    Icons.Default.Settings
                                             },
                                             contentDescription = item.label
                                         )
@@ -76,26 +88,50 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 ) { outerPadding ->
-                    Box(Modifier.fillMaxSize().padding(outerPadding)) {
+                    Box(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(outerPadding)
+                    ) {
                         when (destination) {
-                            Destination.HOME -> HomeScreen(homeViewModel, settings)
-                            Destination.LOGS -> LogsScreen(logs)
-                            Destination.CORE -> DiagnosticsScreen(
-                                state = diagnosticsState,
-                                baseUrl = "http://192.168.1.40:8090",
-                                onRefresh = {
-                                    diagnosticsViewModel.refresh(
-                                        "http://192.168.1.40:8090"
+                            Destination.HOME -> {
+                                HomeScreen(
+                                    homeViewModel,
+                                    settings
+                                )
+                            }
+
+                            Destination.LOGS -> {
+                                LogsScreen(logs)
+                            }
+
+                            Destination.CORE -> {
+                                DiagnosticsScreen(
+                                    state = diagnosticsState,
+                                    baseUrl =
+                                        "http://192.168.1.40:8090",
+                                    onRefresh = {
+                                        diagnosticsViewModel.refresh(
+                                            "http://192.168.1.40:8090"
+                                        )
+                                    }
+                                )
+                            }
+
+                            Destination.SETTINGS -> {
+                                SettingsScreen(
+                                    initial = settings,
+                                    initialCredentials =
+                                        container.credentialStore.load()
+                                ) { newSettings, credentials ->
+                                    container.credentialStore.save(
+                                        credentials
                                     )
-                                }
-                            )
-                            Destination.SETTINGS -> SettingsScreen(
-                                initial = settings,
-                                initialCredentials = container.credentialStore.load()
-                            ) { newSettings, credentials ->
-                                container.credentialStore.save(credentials)
-                                scope.launch {
-                                    container.settingsRepository.save(newSettings)
+                                    scope.launch {
+                                        container.settingsRepository.save(
+                                            newSettings
+                                        )
+                                    }
                                 }
                             }
                         }
