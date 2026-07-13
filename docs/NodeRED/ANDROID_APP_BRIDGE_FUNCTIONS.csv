@@ -1,0 +1,19 @@
+node_id,name,disabled,code_lines,code_chars,declared_outputs,wired_inputs,wired_outputs
+029b611c762d7219,Inbound Router Luci,False,80,2142,2,1,3
+b5960f2b4677e29c,Outbound Router Luci,False,78,2904,1,12,1
+966f722b97b6dfd5,Gateway Energia,False,67,2003,1,9,1
+bd8d66b09aae991f,Inbound Router Termostati,False,44,1187,1,1,1
+fc51aac30db89430,Outbound Router Termostati,False,27,964,1,1,1
+893cab22b022f9f7,Inbound Router VMC,False,24,570,1,1,1
+cb6b6b6eff77245e,Outbound Router VMC,False,19,504,1,1,1
+84374abab73c53ba,Gateway Ambienti,False,85,3056,1,6,1
+01283d5864cde9b4,Inbound Router Settaggi,False,91,2734,1,1,1
+ef9798fe30ae6866,App Main Router,False,30,750,4,1,4
+ad2a868186bbe8b6,function 29,False,6,218,1,1,0
+cf899af1e8162086,Outbound Router Settaggi,False,61,1918,1,7,1
+d433e0dab61b2778,function 32,False,11,265,1,1,1
+funzione_ponte_caminetto,Ponte Traduttore Caminetto,False,63,2330,2,3,2
+ab8e8c591cefc337,Configurazione Sottoscrizione Dinamica,False,18,625,1,1,1
+c8bcd6a16c1bb598,Query Storico 7gg,False,20,745,1,1,1
+47032d1afbd3badf,Formatta Response App,False,6,209,1,1,1
+bb9aca93c54b36f1,function 33,False,16,479,1,1,1

@@ -1,0 +1,12 @@
+domain,node_id,router_name,direction_hint,code_lines
+Luci,029b611c762d7219,Inbound Router Luci,Inbound,80
+Luci,b5960f2b4677e29c,Outbound Router Luci,Outbound,78
+Energia / Puffer,966f722b97b6dfd5,Gateway Energia,Gateway,67
+Termostati,bd8d66b09aae991f,Inbound Router Termostati,Inbound,44
+Termostati,fc51aac30db89430,Outbound Router Termostati,Outbound,27
+VMC,893cab22b022f9f7,Inbound Router VMC,Inbound,24
+VMC,cb6b6b6eff77245e,Outbound Router VMC,Outbound,19
+Altro,84374abab73c53ba,Gateway Ambienti,Gateway,85
+Altro,01283d5864cde9b4,Inbound Router Settaggi,Inbound,91
+Clima,ef9798fe30ae6866,App Main Router,Gateway,30
+Altro,cf899af1e8162086,Outbound Router Settaggi,Outbound,61

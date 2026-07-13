@@ -1,0 +1,112 @@
+topic_literal,node_id,node_type,node_name
+/scene/set,029b611c762d7219,function,Inbound Router Luci
+shellies/shelly1-esterno/relay/0/command,029b611c762d7219,function,Inbound Router Luci
+zara/android/domotica,029b611c762d7219,function,Inbound Router Luci
+zigbee2mqtt/Luce_Cucina/set,029b611c762d7219,function,Inbound Router Luci
+${baseTopic}/light/${targetDevice}/state,b5960f2b4677e29c,function,Outbound Router Luci
+shellies/shelly1-771284/relay/0,b5960f2b4677e29c,function,Outbound Router Luci
+shellies/shelly1-B8C284/relay/0,b5960f2b4677e29c,function,Outbound Router Luci
+shellies/shelly1-B92AF0/relay/0,b5960f2b4677e29c,function,Outbound Router Luci
+shellies/shelly1-esterno,b5960f2b4677e29c,function,Outbound Router Luci
+zara/android/domotica,b5960f2b4677e29c,function,Outbound Router Luci
+zara/domotics/lights/livinglamp,b5960f2b4677e29c,function,Outbound Router Luci
+zara/domotics/lights/poolfloor,b5960f2b4677e29c,function,Outbound Router Luci
+zara/domotics/lights/poollight,b5960f2b4677e29c,function,Outbound Router Luci
+zara/domotics/lights/poolpump,b5960f2b4677e29c,function,Outbound Router Luci
+zara/domotics/lights/poolskimmer,b5960f2b4677e29c,function,Outbound Router Luci
+zara/domotics/lights/readinglight,b5960f2b4677e29c,function,Outbound Router Luci
+zara/domotics/lights/shelflamp,b5960f2b4677e29c,function,Outbound Router Luci
+zara/domotics/lights/tvlamp,b5960f2b4677e29c,function,Outbound Router Luci
+zigbee2mqtt/Luce_Cucina,b5960f2b4677e29c,function,Outbound Router Luci
+zigbee2mqtt/Luce_Libreria,b5960f2b4677e29c,function,Outbound Router Luci
+${APP_BASE}/acsPufferTemp,966f722b97b6dfd5,function,Gateway Energia
+${APP_BASE}/energy/battery,966f722b97b6dfd5,function,Gateway Energia
+${APP_BASE}/energy/consumption,966f722b97b6dfd5,function,Gateway Energia
+${APP_BASE}/energy/grid,966f722b97b6dfd5,function,Gateway Energia
+${APP_BASE}/energy/production,966f722b97b6dfd5,function,Gateway Energia
+${APP_BASE}/energy/surplus,966f722b97b6dfd5,function,Gateway Energia
+${APP_BASE}/pufferAltoTemp,966f722b97b6dfd5,function,Gateway Energia
+${APP_BASE}/pufferBassoTemp,966f722b97b6dfd5,function,Gateway Energia
+TeslaPowerwall/SOE,966f722b97b6dfd5,function,Gateway Energia
+TeslaPowerwall/load_instant_power,966f722b97b6dfd5,function,Gateway Energia
+TeslaPowerwall/site_instant_power,966f722b97b6dfd5,function,Gateway Energia
+TeslaPowerwall/solar_instant_power,966f722b97b6dfd5,function,Gateway Energia
+emon/resolDL2/sensor2,966f722b97b6dfd5,function,Gateway Energia
+emon/resolDL2/sensor3,966f722b97b6dfd5,function,Gateway Energia
+emon/shellyACS/tempACS,966f722b97b6dfd5,function,Gateway Energia
+zara/android/domotica,966f722b97b6dfd5,function,Gateway Energia
+zara/android/domotica,bd8d66b09aae991f,function,Inbound Router Termostati
+zara/domotics/AC/command,bd8d66b09aae991f,function,Inbound Router Termostati
+zigbee2mqtt/Termostato_Bagnetto/set,bd8d66b09aae991f,function,Inbound Router Termostati
+zigbee2mqtt/Termostato_Bagno/set,bd8d66b09aae991f,function,Inbound Router Termostati
+${baseTopic}/thermostat/${targetRoom}/target/state,fc51aac30db89430,function,Outbound Router Termostati
+casa/clima/stato_completo,fc51aac30db89430,function,Outbound Router Termostati
+zara/android/domotica,fc51aac30db89430,function,Outbound Router Termostati
+zigbee2mqtt/Termostato_Bagnetto,fc51aac30db89430,function,Outbound Router Termostati
+zigbee2mqtt/Termostato_Bagno,fc51aac30db89430,function,Outbound Router Termostati
+/esp8266/brink/fanspeed,893cab22b022f9f7,function,Inbound Router VMC
+zara/android/domotica,893cab22b022f9f7,function,Inbound Router VMC
+${baseTopic}/vmc/speed/state,cb6b6b6eff77245e,function,Outbound Router VMC
+alexa/vmc,cb6b6b6eff77245e,function,Outbound Router VMC
+casa/clima/stato_completo,cb6b6b6eff77245e,function,Outbound Router VMC
+zara/android/domotica,cb6b6b6eff77245e,function,Outbound Router VMC
+${APP_BASE}/env/humBedroom,84374abab73c53ba,function,Gateway Ambienti
+${APP_BASE}/env/humLiving,84374abab73c53ba,function,Gateway Ambienti
+${APP_BASE}/env/humOutdoor,84374abab73c53ba,function,Gateway Ambienti
+${APP_BASE}/env/humidexBedroom,84374abab73c53ba,function,Gateway Ambienti
+${APP_BASE}/env/humidexLiving,84374abab73c53ba,function,Gateway Ambienti
+${APP_BASE}/env/tempBedroom,84374abab73c53ba,function,Gateway Ambienti
+${APP_BASE}/env/tempLiving,84374abab73c53ba,function,Gateway Ambienti
+${APP_BASE}/env/tempOutdoor,84374abab73c53ba,function,Gateway Ambienti
+emon/cameraMatrimoniale/humidex,84374abab73c53ba,function,Gateway Ambienti
+emon/cameraMatrimoniale/humidity,84374abab73c53ba,function,Gateway Ambienti
+emon/cameraMatrimoniale/temperature,84374abab73c53ba,function,Gateway Ambienti
+emon/emonth5/humidex,84374abab73c53ba,function,Gateway Ambienti
+emon/emonth5/humidity,84374abab73c53ba,function,Gateway Ambienti
+emon/emonth5/temperature_calibrated,84374abab73c53ba,function,Gateway Ambienti
+zara/android/domotica,84374abab73c53ba,function,Gateway Ambienti
+${baseTopic}/system/ac_auto/set,01283d5864cde9b4,function,Inbound Router Settaggi
+${baseTopic}/system/enabled/state,01283d5864cde9b4,function,Inbound Router Settaggi
+${baseTopic}/system/holiday/set,01283d5864cde9b4,function,Inbound Router Settaggi
+${baseTopic}/system/luci_eco/set,01283d5864cde9b4,function,Inbound Router Settaggi
+${baseTopic}/system/luci_piscina_auto/set,01283d5864cde9b4,function,Inbound Router Settaggi
+${baseTopic}/system/sensore_portico/set,01283d5864cde9b4,function,Inbound Router Settaggi
+${baseTopic}/system/time_range/set,01283d5864cde9b4,function,Inbound Router Settaggi
+${baseTopic}/vmc/maxNightSpeed/state,01283d5864cde9b4,function,Inbound Router Settaggi
+zara/android/domotica,01283d5864cde9b4,function,Inbound Router Settaggi
+/maxNightSpeed/set,ef9798fe30ae6866,function,App Main Router
+zara/android/domotica,ef9798fe30ae6866,function,App Main Router
+zara/android/domotica,ad2a868186bbe8b6,function,function 29
+${baseTopic}/system/ac_auto/state,cf899af1e8162086,function,Outbound Router Settaggi
+${baseTopic}/system/holiday/state,cf899af1e8162086,function,Outbound Router Settaggi
+${baseTopic}/system/luci_eco/state,cf899af1e8162086,function,Outbound Router Settaggi
+${baseTopic}/system/luci_piscina_auto/state,cf899af1e8162086,function,Outbound Router Settaggi
+${baseTopic}/system/sensore_portico/state,cf899af1e8162086,function,Outbound Router Settaggi
+${baseTopic}/system/set,cf899af1e8162086,function,Outbound Router Settaggi
+${baseTopic}/system/time_range/state,cf899af1e8162086,function,Outbound Router Settaggi
+${baseTopic}/vmc/maxNightSpeed/set,cf899af1e8162086,function,Outbound Router Settaggi
+casa/clima/cmnd/AI_climate_enabling,cf899af1e8162086,function,Outbound Router Settaggi
+casa/clima/stat/vmc_max_notte,cf899af1e8162086,function,Outbound Router Settaggi
+zara/android/domotica,cf899af1e8162086,function,Outbound Router Settaggi
+zara/domotics/ACAuto,cf899af1e8162086,function,Outbound Router Settaggi
+zara/domotics/luciECO,cf899af1e8162086,function,Outbound Router Settaggi
+zara/domotics/luciPiscinaAuto,cf899af1e8162086,function,Outbound Router Settaggi
+zara/domotics/modalitavacanza,cf899af1e8162086,function,Outbound Router Settaggi
+zara/domotics/porch_sensor,cf899af1e8162086,function,Outbound Router Settaggi
+zara/domotics/time_range,cf899af1e8162086,function,Outbound Router Settaggi
+${baseTopic}/casa/stufa/stat/acceso,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto
+${baseTopic}/casa/stufa/stat/modalita,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto
+${baseTopic}/casa/stufa/stat/potenza,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto
+/esp8266/palazzetti,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto
+/log/message,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto
+alexa/caminetto,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto
+alexa/caminetto/command,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto
+alexa/caminetto/power,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto
+emon/focolare/powerraw,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto
+zara/android/domotica,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto
+zara/domotics/palazzetti/set/modalita,funzione_ponte_caminetto,function,Ponte Traduttore Caminetto
+zara/android/domotica,ab8e8c591cefc337,function,Configurazione Sottoscrizione Dinamica
+${baseTopic}/history/ac/response,47032d1afbd3badf,function,Formatta Response App
+zara/android/domotica,47032d1afbd3badf,function,Formatta Response App
+/history/ac/request,bb9aca93c54b36f1,function,function 33
+zara/android/domotica,bb9aca93c54b36f1,function,function 33

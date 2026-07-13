@@ -1,0 +1,12 @@
+node_id,name,code_lines,declared_outputs,wired_inputs,wired_outputs
+029b611c762d7219,Inbound Router Luci,80,2,1,3
+b5960f2b4677e29c,Outbound Router Luci,78,1,12,1
+966f722b97b6dfd5,Gateway Energia,67,1,9,1
+bd8d66b09aae991f,Inbound Router Termostati,44,1,1,1
+fc51aac30db89430,Outbound Router Termostati,27,1,1,1
+893cab22b022f9f7,Inbound Router VMC,24,1,1,1
+cb6b6b6eff77245e,Outbound Router VMC,19,1,1,1
+84374abab73c53ba,Gateway Ambienti,85,1,6,1
+01283d5864cde9b4,Inbound Router Settaggi,91,1,1,1
+ef9798fe30ae6866,App Main Router,30,4,1,4
+cf899af1e8162086,Outbound Router Settaggi,61,1,7,1
