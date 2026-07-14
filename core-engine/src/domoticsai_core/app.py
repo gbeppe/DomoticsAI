@@ -15,6 +15,9 @@ from .digital_twin import DigitalTwinStore
 from .event_store import EventStore
 from .mqtt_service import MqttService
 from .websocket_hub import WebSocketHub
+from .command_manager import CommandManager
+from .command_manager_models import CreateCommandRequest
+from .command_store import CommandStore
 from .command_models import LightCommandRequest
 from .lights_commands import LightsCommandService
 
@@ -25,9 +28,23 @@ event_store = EventStore(settings.db_path)
 twin_store = DigitalTwinStore(event_store)
 hub = WebSocketHub()
 
+command_store = CommandStore(settings.db_path)
+command_manager = None
+
+def handle_mqtt_message(topic: str, payload: str):
+    twin_store.update_from_mqtt(topic, payload)
+    if command_manager is not None:
+        command_manager.handle_mqtt_message(topic, payload)
+
 mqtt_service = MqttService(
     settings,
-    twin_store.update_from_mqtt,
+    handle_mqtt_message,
+)
+
+command_manager = CommandManager(
+    command_store,
+    mqtt_service,
+    simulation_mode=True,
 )
 lights_command_service = LightsCommandService(
     mqtt_service,
@@ -42,6 +59,7 @@ async def lifespan(app):
     hub.bind_loop(asyncio.get_running_loop())
     mqtt_service.start()
     yield
+    command_manager.stop()
     mqtt_service.stop()
 
 
@@ -136,6 +154,27 @@ def command_light(
         request=request,
     )
 
+
+
+@app.post("/api/v1/commands")
+def create_command(request: CreateCommandRequest):
+    return command_manager.create(request)
+
+
+@app.get("/api/v1/commands")
+def list_commands(limit: int = Query(100, ge=1, le=1000)):
+    return {"items": command_manager.recent(limit)}
+
+
+@app.get("/api/v1/commands/{command_id}")
+def get_command(command_id: str):
+    command = command_manager.get(command_id)
+    if command is None:
+        raise HTTPException(404, "Command not found")
+    return {
+        "command": command,
+        "events": command_manager.events(command_id),
+    }
 
 @app.get("/api/v1/events")
 def get_events(
