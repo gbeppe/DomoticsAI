@@ -81,9 +81,22 @@ class CoreEngineClient {
             state = parseCommandState(
                 obj.optString("state")
             ),
-            message = obj.optString(
-                "error"
-            ).takeIf { it.isNotBlank() }
+            message =
+                if (
+                    !obj.has("error") ||
+                    obj.isNull("error")
+                ) {
+                    null
+                } else {
+                    obj.optString("error")
+                        .takeIf {
+                            it.isNotBlank() &&
+                                !it.equals(
+                                    "null",
+                                    ignoreCase = true
+                                )
+                        }
+                }
         )
     }
 
@@ -103,9 +116,22 @@ class CoreEngineClient {
             state = parseCommandState(
                 command.optString("state")
             ),
-            message = command.optString(
-                "error"
-            ).takeIf { it.isNotBlank() }
+            message =
+                if (
+                    !command.has("error") ||
+                    command.isNull("error")
+                ) {
+                    null
+                } else {
+                    command.optString("error")
+                        .takeIf {
+                            it.isNotBlank() &&
+                                !it.equals(
+                                    "null",
+                                    ignoreCase = true
+                                )
+                        }
+                }
         )
     }
 
