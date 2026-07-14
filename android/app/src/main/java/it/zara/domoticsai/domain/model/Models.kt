@@ -34,6 +34,8 @@ data class AppCredentials(
 data class EnergyState(
     val solarPowerW: Double? = null,
     val homeLoadW: Double? = null,
+    val gridPowerW: Double? = null,
+    val batteryPowerW: Double? = null,
     val powerwallSocPct: Double? = null
 )
 
