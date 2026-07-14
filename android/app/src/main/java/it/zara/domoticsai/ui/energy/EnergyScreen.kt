@@ -57,7 +57,10 @@ fun EnergyScreen(
                     .fillMaxWidth()
                     .height(4.dp)
             ) {
-                if (state.loading) {
+                if (
+                    state.loading &&
+                    state.source == EnergyDataSource.NONE
+                ) {
                     LinearProgressIndicator(
                         modifier = Modifier.fillMaxWidth()
                     )

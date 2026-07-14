@@ -84,11 +84,26 @@ class CoreEngineRepository(
     }
 
     suspend fun refreshEnergy(baseUrl: String) {
-        _energyState.value =
+/*        _energyState.value =
             _energyState.value.copy(
                 loading = true,
                 error = null
             )
+*/
+val current = _energyState.value
+
+val hasExistingData =
+    current.raw.solarPowerW != null ||
+        current.raw.homeLoadW != null ||
+        current.raw.gridPowerW != null ||
+        current.raw.batteryPowerW != null ||
+        current.raw.powerwallSocPct != null
+
+_energyState.value =
+    current.copy(
+        loading = !hasExistingData,
+        error = null
+    )
 
         runCatching {
             withContext(Dispatchers.IO) {
