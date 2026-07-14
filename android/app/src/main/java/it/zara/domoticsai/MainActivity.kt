@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Storage
@@ -18,6 +19,7 @@ import it.zara.domoticsai.domain.model.ConnectionSettings
 import it.zara.domoticsai.ui.diagnostics.*
 import it.zara.domoticsai.ui.energy.*
 import it.zara.domoticsai.ui.home.*
+import it.zara.domoticsai.ui.lights.*
 import it.zara.domoticsai.ui.logs.LogsScreen
 import it.zara.domoticsai.ui.settings.SettingsScreen
 import it.zara.domoticsai.ui.theme.DomoticsAiTheme
@@ -81,6 +83,17 @@ class MainActivity : ComponentActivity() {
                             }
                     )
 
+                val lightsViewModel: LightsViewModel =
+                    viewModel(
+                        factory =
+                            SimpleViewModelFactory {
+                                LightsViewModel(
+                                    repository =
+                                        container.coreEngineRepository
+                                )
+                            }
+                    )
+
                 val diagnosticsViewModel:
                     DiagnosticsViewModel =
                     viewModel(
@@ -95,6 +108,10 @@ class MainActivity : ComponentActivity() {
 
                 val energyState by
                     energyViewModel.state
+                        .collectAsState()
+
+                val lightsState by
+                    lightsViewModel.state
                         .collectAsState()
 
                 val diagnosticsState by
@@ -119,6 +136,8 @@ class MainActivity : ComponentActivity() {
                                                         Icons.Default.Home
                                                     Destination.ENERGY ->
                                                         Icons.Default.Bolt
+                                                    Destination.LIGHTS ->
+                                                        Icons.Default.Lightbulb
                                                     Destination.LOGS ->
                                                         Icons.Default.List
                                                     Destination.CORE ->
@@ -155,6 +174,13 @@ class MainActivity : ComponentActivity() {
                                     state = energyState,
                                     onRefresh =
                                         energyViewModel::refresh
+                                )
+
+                            Destination.LIGHTS ->
+                                LightsScreen(
+                                    state = lightsState,
+                                    onRefresh =
+                                        lightsViewModel::refresh
                                 )
 
                             Destination.LOGS ->
@@ -202,6 +228,7 @@ private enum class Destination(
 ) {
     HOME("Home"),
     ENERGY("Energia"),
+    LIGHTS("Luci"),
     LOGS("Log"),
     CORE("Core"),
     SETTINGS("Impostazioni")

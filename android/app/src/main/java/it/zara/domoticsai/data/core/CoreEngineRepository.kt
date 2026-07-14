@@ -3,6 +3,7 @@ package it.zara.domoticsai.data.core
 import it.zara.domoticsai.domain.model.CoreDiagnosticsState
 import it.zara.domoticsai.domain.model.CoreTwinState
 import it.zara.domoticsai.domain.model.EnergyDashboardState
+import it.zara.domoticsai.domain.model.LightsDashboardState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,6 +24,10 @@ class CoreEngineRepository(
     private val _energyState =
         MutableStateFlow(EnergyDashboardState())
     val energyState = _energyState.asStateFlow()
+
+    private val _lightsState =
+        MutableStateFlow(LightsDashboardState())
+    val lightsState = _lightsState.asStateFlow()
 
     suspend fun refresh(baseUrl: String) {
         _state.value =
@@ -84,26 +89,20 @@ class CoreEngineRepository(
     }
 
     suspend fun refreshEnergy(baseUrl: String) {
-/*        _energyState.value =
-            _energyState.value.copy(
-                loading = true,
+        val current = _energyState.value
+
+        val hasExistingData =
+            current.raw.solarPowerW != null ||
+                current.raw.homeLoadW != null ||
+                current.raw.gridPowerW != null ||
+                current.raw.batteryPowerW != null ||
+                current.raw.powerwallSocPct != null
+
+        _energyState.value =
+            current.copy(
+                loading = !hasExistingData,
                 error = null
             )
-*/
-val current = _energyState.value
-
-val hasExistingData =
-    current.raw.solarPowerW != null ||
-        current.raw.homeLoadW != null ||
-        current.raw.gridPowerW != null ||
-        current.raw.batteryPowerW != null ||
-        current.raw.powerwallSocPct != null
-
-_energyState.value =
-    current.copy(
-        loading = !hasExistingData,
-        error = null
-    )
 
         runCatching {
             withContext(Dispatchers.IO) {
@@ -120,6 +119,38 @@ _energyState.value =
         }.onFailure { error ->
             _energyState.value =
                 _energyState.value.copy(
+                    loading = false,
+                    error =
+                        error.message
+                            ?: error.javaClass.simpleName
+                )
+        }
+    }
+
+    suspend fun refreshLights(baseUrl: String) {
+        val current = _lightsState.value
+
+        _lightsState.value =
+            current.copy(
+                loading = current.devices.isEmpty(),
+                error = null
+            )
+
+        runCatching {
+            withContext(Dispatchers.IO) {
+                LightsParser.parse(
+                    client.fetchLights(baseUrl)
+                )
+            }
+        }.onSuccess { parsed ->
+            _lightsState.value =
+                parsed.copy(
+                    loading = false,
+                    error = null
+                )
+        }.onFailure { error ->
+            _lightsState.value =
+                current.copy(
                     loading = false,
                     error =
                         error.message

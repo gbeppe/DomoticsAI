@@ -35,6 +35,11 @@ class CoreEngineClient {
             "${baseUrl.trimEnd('/')}/api/v1/energy"
         )
 
+    fun fetchLights(baseUrl: String): String =
+        requestJson(
+            "${baseUrl.trimEnd('/')}/api/v1/lights"
+        )
+
     private fun requestJson(url: String): String {
         val connection =
             URL(url).openConnection() as HttpURLConnection
