@@ -26,14 +26,11 @@ import it.zara.domoticsai.ui.theme.DomoticsAiTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(
-        savedInstanceState: Bundle?
-    ) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val container =
-            (application as DomoticsAiApplication)
-                .container
+            (application as DomoticsAiApplication).container
 
         setContent {
             DomoticsAiTheme {
@@ -107,53 +104,46 @@ class MainActivity : ComponentActivity() {
                     )
 
                 val energyState by
-                    energyViewModel.state
-                        .collectAsState()
+                    energyViewModel.state.collectAsState()
 
                 val lightsState by
-                    lightsViewModel.state
-                        .collectAsState()
+                    lightsViewModel.state.collectAsState()
+
+                val lightCommands by
+                    lightsViewModel.commands.collectAsState()
 
                 val diagnosticsState by
-                    diagnosticsViewModel.state
-                        .collectAsState()
+                    diagnosticsViewModel.state.collectAsState()
 
                 Scaffold(
                     bottomBar = {
                         NavigationBar {
-                            Destination.entries
-                                .forEach { item ->
-                                    NavigationBarItem(
-                                        selected =
-                                            destination == item,
-                                        onClick = {
-                                            destination = item
-                                        },
-                                        icon = {
-                                            Icon(
-                                                when (item) {
-                                                    Destination.HOME ->
-                                                        Icons.Default.Home
-                                                    Destination.ENERGY ->
-                                                        Icons.Default.Bolt
-                                                    Destination.LIGHTS ->
-                                                        Icons.Default.Lightbulb
-                                                    Destination.LOGS ->
-                                                        Icons.Default.List
-                                                    Destination.CORE ->
-                                                        Icons.Default.Storage
-                                                    Destination.SETTINGS ->
-                                                        Icons.Default.Settings
-                                                },
-                                                contentDescription =
-                                                    item.label
-                                            )
-                                        },
-                                        label = {
-                                            Text(item.label)
-                                        }
-                                    )
-                                }
+                            Destination.entries.forEach { item ->
+                                NavigationBarItem(
+                                    selected = destination == item,
+                                    onClick = { destination = item },
+                                    icon = {
+                                        Icon(
+                                            when (item) {
+                                                Destination.HOME ->
+                                                    Icons.Default.Home
+                                                Destination.ENERGY ->
+                                                    Icons.Default.Bolt
+                                                Destination.LIGHTS ->
+                                                    Icons.Default.Lightbulb
+                                                Destination.LOGS ->
+                                                    Icons.Default.List
+                                                Destination.CORE ->
+                                                    Icons.Default.Storage
+                                                Destination.SETTINGS ->
+                                                    Icons.Default.Settings
+                                            },
+                                            contentDescription = item.label
+                                        )
+                                    },
+                                    label = { Text(item.label) }
+                                )
+                            }
                         }
                     }
                 ) { outerPadding ->
@@ -179,8 +169,14 @@ class MainActivity : ComponentActivity() {
                             Destination.LIGHTS ->
                                 LightsScreen(
                                     state = lightsState,
+                                    commandStates =
+                                        lightCommands,
                                     onRefresh =
-                                        lightsViewModel::refresh
+                                        lightsViewModel::refresh,
+                                    onToggleSimulation =
+                                        lightsViewModel::simulateToggle,
+                                    onClearCommand =
+                                        lightsViewModel::clearCommand
                                 )
 
                             Destination.LOGS ->

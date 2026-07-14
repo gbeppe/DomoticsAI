@@ -20,7 +20,10 @@ import it.zara.domoticsai.domain.model.*
 @Composable
 fun LightsScreen(
     state: LightsDashboardState,
-    onRefresh: () -> Unit
+    commandStates: Map<String, DeviceCommandUiState>,
+    onRefresh: () -> Unit,
+    onToggleSimulation: (LightDevice) -> Unit,
+    onClearCommand: (LightDevice) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -46,7 +49,18 @@ fun LightsScreen(
                 Arrangement.spacedBy(12.dp)
         ) {
             item {
-                if (state.loading) {
+                AssistChip(
+                    onClick = {},
+                    label = {
+                        Text(
+                            "Modalità comandi: simulazione"
+                        )
+                    }
+                )
+            }
+
+            if (state.loading) {
+                item {
                     LinearProgressIndicator(
                         Modifier.fillMaxWidth()
                     )
@@ -90,24 +104,26 @@ fun LightsScreen(
                     )
                 }
 
-                if (devices.isEmpty()) {
-                    item {
-                        Text(
-                            "Nessun dispositivo disponibile",
-                            style =
-                                MaterialTheme.typography
-                                    .bodyMedium
-                        )
+                items(
+                    items = devices,
+                    key = {
+                        "${it.area.name}-${it.id}"
                     }
-                } else {
-                    items(
-                        items = devices,
-                        key = {
-                            "${it.area.name}-${it.id}"
+                ) { device ->
+                    val key =
+                        "${device.area.name}/${device.id}"
+
+                    DeviceCard(
+                        device = device,
+                        commandState =
+                            commandStates[key],
+                        onToggleSimulation = {
+                            onToggleSimulation(device)
+                        },
+                        onClearCommand = {
+                            onClearCommand(device)
                         }
-                    ) { device ->
-                        DeviceCard(device)
-                    }
+                    )
                 }
             }
 
@@ -132,9 +148,7 @@ fun LightsScreen(
 private fun SummaryCard(
     summary: LightsSummary
 ) {
-    Card(
-        shape = RoundedCornerShape(24.dp)
-    ) {
+    Card(shape = RoundedCornerShape(24.dp)) {
         Column(
             Modifier.padding(18.dp),
             verticalArrangement =
@@ -145,123 +159,210 @@ private fun SummaryCard(
                 style =
                     MaterialTheme.typography.titleMedium
             )
-
             Text(
                 "Luci accese: ${summary.lightsOnTotal}",
                 style =
                     MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold
             )
-
             Text(
                 "Relè attivi: ${summary.relaysOnTotal}"
             )
-
             Text(
                 "Interno ${summary.internalOn}/${summary.internalTotal} · " +
                     "Esterno ${summary.externalOn}/${summary.externalTotal} · " +
                     "Piscina ${summary.poolOn}/${summary.poolTotal}"
             )
-
-            if (summary.unknownTotal > 0) {
-                AssistChip(
-                    onClick = {},
-                    label = {
-                        Text(
-                            "Stato sconosciuto: ${summary.unknownTotal}"
-                        )
-                    }
-                )
-            }
         }
     }
 }
 
 @Composable
 private fun DeviceCard(
-    device: LightDevice
+    device: LightDevice,
+    commandState: DeviceCommandUiState?,
+    onToggleSimulation: () -> Unit,
+    onClearCommand: () -> Unit
 ) {
-    Card(
-        shape = RoundedCornerShape(20.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment =
-                Alignment.CenterVertically
+    val pending =
+        commandState?.state in setOf(
+            UiCommandState.SENDING,
+            UiCommandState.WAITING_CONFIRMATION
+        )
+
+    Card(shape = RoundedCornerShape(20.dp)) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement =
+                Arrangement.spacedBy(10.dp)
         ) {
-            Icon(
-                imageVector =
-                    if (
-                        device.type ==
-                        LightDeviceType.RELAY
-                    ) {
-                        Icons.Default
-                            .ElectricalServices
-                    } else {
-                        Icons.Default.Lightbulb
-                    },
-                contentDescription = device.label
-            )
-
-            Spacer(Modifier.width(14.dp))
-
-            Column(
-                modifier = Modifier.weight(1f)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment =
+                    Alignment.CenterVertically
             ) {
-                Text(
-                    device.label,
-                    style =
-                        MaterialTheme.typography
-                            .titleMedium,
-                    fontWeight = FontWeight.SemiBold
+                Icon(
+                    imageVector =
+                        if (
+                            device.type ==
+                            LightDeviceType.RELAY
+                        ) {
+                            Icons.Default
+                                .ElectricalServices
+                        } else {
+                            Icons.Default.Lightbulb
+                        },
+                    contentDescription = device.label
                 )
 
-                Text(
-                    when (device.type) {
-                        LightDeviceType.LIGHT ->
-                            "Luce"
-                        LightDeviceType.RELAY ->
-                            "Relè"
-                    },
-                    style =
-                        MaterialTheme.typography
-                            .bodySmall
+                Spacer(Modifier.width(14.dp))
+
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(
+                        device.label,
+                        style =
+                            MaterialTheme.typography
+                                .titleMedium,
+                        fontWeight =
+                            FontWeight.SemiBold
+                    )
+                    Text(
+                        when (device.type) {
+                            LightDeviceType.LIGHT ->
+                                "Luce"
+                            LightDeviceType.RELAY ->
+                                "Relè"
+                        },
+                        style =
+                            MaterialTheme.typography
+                                .bodySmall
+                    )
+                }
+
+                AssistChip(
+                    onClick = {},
+                    label = {
+                        Text(
+                            when {
+                                !device.available ->
+                                    "Non disponibile"
+                                device.state == LightState.ON ->
+                                    "ON"
+                                device.state == LightState.OFF ->
+                                    "OFF"
+                                else ->
+                                    "?"
+                            }
+                        )
+                    }
                 )
             }
 
-            StatusPill(device)
+            Button(
+                onClick = onToggleSimulation,
+                enabled =
+                    device.available &&
+                        !pending,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    if (device.state == LightState.ON) {
+                        "Simula spegnimento"
+                    } else {
+                        "Simula accensione"
+                    }
+                )
+            }
+
+            commandState?.let {
+                CommandStatusCard(
+                    state = it,
+                    onClear = onClearCommand
+                )
+            }
         }
     }
 }
 
 @Composable
-private fun StatusPill(
-    device: LightDevice
+private fun CommandStatusCard(
+    state: DeviceCommandUiState,
+    onClear: () -> Unit
 ) {
-    val label =
-        if (!device.available) {
-            "Non disponibile"
-        } else {
-            when (device.state) {
-                LightState.ON -> "ON"
-                LightState.OFF -> "OFF"
-                LightState.UNKNOWN -> "?"
+    val label = when (state.state) {
+        UiCommandState.IDLE ->
+            "Pronto"
+        UiCommandState.SENDING ->
+            "Invio…"
+        UiCommandState.WAITING_CONFIRMATION ->
+            "In attesa di ACK…"
+        UiCommandState.SIMULATED ->
+            "Comando simulato"
+        UiCommandState.CONFIRMED ->
+            "Comando confermato"
+        UiCommandState.REJECTED ->
+            "Comando rifiutato"
+        UiCommandState.TIMEOUT ->
+            "Timeout"
+        UiCommandState.FAILED ->
+            "Errore"
+    }
+
+    Surface(
+        shape = RoundedCornerShape(16.dp),
+        tonalElevation = 2.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            verticalAlignment =
+                Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    label,
+                    fontWeight = FontWeight.SemiBold
+                )
+                state.desiredState?.let {
+                    Text(
+                        "Richiesto: ${it.name}",
+                        style =
+                            MaterialTheme.typography
+                                .bodySmall
+                    )
+                }
+                state.message?.let {
+                    Text(
+                        it,
+                        style =
+                            MaterialTheme.typography
+                                .bodySmall
+                    )
+                }
+            }
+
+            if (
+                state.state !in setOf(
+                    UiCommandState.SENDING,
+                    UiCommandState.WAITING_CONFIRMATION
+                )
+            ) {
+                TextButton(onClick = onClear) {
+                    Text("Chiudi")
+                }
             }
         }
-
-    AssistChip(
-        onClick = {},
-        label = { Text(label) }
-    )
+    }
 }
 
 @Composable
 private fun ScenesReadOnlyCard() {
-    Card(
-        shape = RoundedCornerShape(20.dp)
-    ) {
+    Card(shape = RoundedCornerShape(20.dp)) {
         Column(
             Modifier.padding(16.dp),
             verticalArrangement =
@@ -270,7 +371,7 @@ private fun ScenesReadOnlyCard() {
             Text("ALL_ON · ALL_OFF")
             Text("TV_MODE · SLEEP_MODE")
             Text(
-                "I comandi saranno abilitati nella fase successiva.",
+                "Gli scenari saranno collegati al Command Manager nel prossimo incremento.",
                 style =
                     MaterialTheme.typography.bodySmall
             )
