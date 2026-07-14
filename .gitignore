@@ -1,45 +1,48 @@
+###############################################################################
+# DomoticsAI
+###############################################################################
+
+# Runtime
+.run/
+*.pid
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+
+# Build Python
+*.egg-info/
+build/
+dist/
+
 # Android / Gradle
 .gradle/
-**/build/
 local.properties
-*.iml
-.idea/
 captures/
-.externalNativeBuild/
-.cxx/
 
-# Node / Node-RED
-node_modules/
-.npm/
-*.log
-flows_cred.json
-*.backup
+# Android Studio
+.idea/
+*.iml
 
-# Secrets and local configuration
-.env
-.env.*
-secrets/
-*.jks
-*.keystore
-*.pem
-*.key
-*.p12
-
-# OS / Editors
-.DS_Store
-Thumbs.db
-*~
-.vscode/
-
-# Generated
-dist/
-out/
-tmp/
-coverage/
-
-# Node-RED runtime data
+# Node-RED runtime
 gateway/context/
-gateway/.config.runtime.json
 
-# Local backups
-gateway-backup-*/
+# Logs
+.logs/
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*~

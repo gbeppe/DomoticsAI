@@ -1,9 +1,0 @@
-{
-    "domoticsai_config": {
-        "baseTopic": "domoticsai/v1",
-        "version": "0.1.0",
-        "mode": "LIVE_READ_ONLY",
-        "allowLegacyCommands": false,
-        "startedAt": "2026-07-13T19:37:50.982Z"
-    }
-}
