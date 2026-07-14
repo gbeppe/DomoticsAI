@@ -8,6 +8,7 @@ from .energy_derived import (
     calculate_energy_derived,
     read_energy_raw,
 )
+from .lights_derived import calculate_lights_derived
 from .models import DigitalTwin, TwinValue
 from .topic_mapper import map_state_topic
 
@@ -26,6 +27,10 @@ class DigitalTwinStore:
 
         self._restore_from_database()
         self._recalculate_energy_derived(
+            notify=False,
+            persist=True,
+        )
+        self._recalculate_lights_derived(
             notify=False,
             persist=True,
         )
@@ -141,6 +146,12 @@ class DigitalTwinStore:
                 persist=True,
             )
 
+        if address.domain == "lights":
+            self._recalculate_lights_derived(
+                notify=True,
+                persist=True,
+            )
+
         event = {
             "type": "twin_update",
             "domain": address.domain,
@@ -173,30 +184,68 @@ class DigitalTwinStore:
                 read_energy_raw(energy)
             )
 
-            timestamp = utc_now_iso()
-            derived_domain = self._twin.domains.setdefault(
-                "energy_derived",
+        self._store_derived_domain(
+            domain_name="energy_derived",
+            values=derived_values,
+            notify=notify,
+            persist=persist,
+        )
+
+    def _recalculate_lights_derived(
+        self,
+        *,
+        notify: bool,
+        persist: bool,
+    ):
+        with self._lock:
+            lights = self._twin.domains.get("lights")
+
+            if not lights:
+                return
+
+            derived_values = calculate_lights_derived(lights)
+
+        self._store_derived_domain(
+            domain_name="lights_derived",
+            values=derived_values,
+            notify=notify,
+            persist=persist,
+        )
+
+    def _store_derived_domain(
+        self,
+        *,
+        domain_name: str,
+        values: dict,
+        notify: bool,
+        persist: bool,
+    ):
+        timestamp = utc_now_iso()
+
+        with self._lock:
+            target = self._twin.domains.setdefault(
+                domain_name,
                 {},
             )
             listeners = list(self._listeners)
 
-        for entity, raw_value in derived_values.items():
+        for entity, raw_value in values.items():
             twin_value = TwinValue(
                 value=raw_value,
                 unit=self._derived_unit(entity),
                 quality="calculated",
                 source="core-engine",
                 timestamp=timestamp,
-                topic=f"internal://energy-derived/{entity}",
+                topic=f"internal://{domain_name}/{entity}",
             )
 
             with self._lock:
-                derived_domain[entity] = twin_value
+                target[entity] = twin_value
                 self._twin.updated_at = timestamp
 
             if persist:
                 self._persist_twin_value(
-                    domain="energy_derived",
+                    domain=domain_name,
                     entity=entity,
                     value=twin_value,
                     updated_at=timestamp,
@@ -205,7 +254,7 @@ class DigitalTwinStore:
             if notify:
                 event = {
                     "type": "twin_update",
-                    "domain": "energy_derived",
+                    "domain": domain_name,
                     "entity": entity,
                     "data": twin_value.model_dump(),
                     "updatedAt": timestamp,

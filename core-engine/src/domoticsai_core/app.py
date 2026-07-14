@@ -42,7 +42,7 @@ async def lifespan(app):
 
 app = FastAPI(
     title="DomoticsAI Core Engine",
-    version="0.3.1",
+    version="0.4.0",
     lifespan=lifespan,
 )
 
@@ -57,7 +57,7 @@ def health():
 
     return {
         "status": "ok",
-        "version": "0.3.1",
+        "version": "0.4.0",
         "mqttConnected": mqtt_service.connected,
         "mqttBroker": (
             f"{settings.mqtt_host}:{settings.mqtt_port}"
@@ -69,6 +69,9 @@ def health():
         "persistentTwin": True,
         "derivedEnergy": (
             "energy_derived" in snapshot.domains
+        ),
+        "derivedLights": (
+            "lights_derived" in snapshot.domains
         ),
     }
 
@@ -100,6 +103,17 @@ def get_energy_view():
         "raw": twin_store.domain("energy") or {},
         "derived": (
             twin_store.domain("energy_derived")
+            or {}
+        ),
+    }
+
+
+@app.get("/api/v1/lights")
+def get_lights_view():
+    return {
+        "raw": twin_store.domain("lights") or {},
+        "derived": (
+            twin_store.domain("lights_derived")
             or {}
         ),
     }
