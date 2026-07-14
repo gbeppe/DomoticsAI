@@ -6,8 +6,24 @@ from .command_manager_models import CommandEvent, CommandRecord, CommandSource, 
 
 class CommandStore:
     def __init__(self, db_path: str):
-        self._path = Path(db_path)
-        self._path.parent.mkdir(parents=True, exist_ok=True)
+        configured_path = Path(db_path).expanduser()
+
+        if configured_path.is_absolute():
+            resolved_path = configured_path
+        else:
+            core_engine_root = (
+                Path(__file__).resolve().parents[2]
+            )
+            resolved_path = (
+                core_engine_root / configured_path
+            ).resolve()
+
+        resolved_path.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        self._path = resolved_path
         self._lock = threading.RLock()
         self._initialize()
 
