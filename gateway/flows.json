@@ -1168,5 +1168,135 @@
     "x": 820,
     "y": 340,
     "wires": []
+  },
+  {
+    "id": "a1827b3a2f1448a5",
+    "type": "tab",
+    "label": "03 Lights",
+    "disabled": false,
+    "info": "Read-only lights adapter",
+    "env": []
+  },
+  {
+    "id": "3851db0ee91e460c",
+    "type": "mqtt in",
+    "z": "a1827b3a2f1448a5",
+    "name": "Production Lights State",
+    "topic": "zara/android/domotica/light/+/state",
+    "qos": "1",
+    "datatype": "auto-detect",
+    "broker": "27cc6314b4e24703",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 120,
+    "wires": [
+      [
+        "32a057c755334d28"
+      ]
+    ]
+  },
+  {
+    "id": "32a057c755334d28",
+    "type": "function",
+    "z": "a1827b3a2f1448a5",
+    "name": "Normalize Active Lights",
+    "func": "const devices = {\"tavolinoLettura\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Tavolino lettura\"}, \"libreria\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Libreria\"}, \"sala\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Sala\"}, \"televisione\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Televisione\"}, \"lavanderia\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Lavanderia\"}, \"ingressoServizio\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Ingresso servizio\"}, \"portico\": {\"area\": \"external\", \"type\": \"light\", \"label\": \"Portico\"}, \"luciPiscina\": {\"area\": \"pool\", \"type\": \"light\", \"label\": \"Luci piscina\"}, \"luciPedanaPiscina\": {\"area\": \"pool\", \"type\": \"light\", \"label\": \"Luci pedana piscina\"}, \"skimmerPiscina\": {\"area\": \"pool\", \"type\": \"relay\", \"label\": \"Skimmer piscina\"}, \"pompaPiscina\": {\"area\": \"pool\", \"type\": \"relay\", \"label\": \"Pompa piscina\"}};\nconst match = msg.topic.match(/^zara\\/android\\/domotica\\/light\\/([^/]+)\\/state$/);\nif (!match) return null;\n\nconst deviceId = match[1];\nconst metadata = devices[deviceId];\nif (!metadata) {\n    node.warn(`Ignored inactive or unknown light device: ${deviceId}`);\n    return null;\n}\n\nconst raw = String(msg.payload).trim().toUpperCase();\nlet state = null;\nif ([\"ON\", \"1\", \"TRUE\"].includes(raw)) state = \"ON\";\nelse if ([\"OFF\", \"0\", \"FALSE\"].includes(raw)) state = \"OFF\";\nelse return null;\n\nconst sourceTopic = msg.topic;\nmsg.topic = `domoticsai/v1/state/lights/${metadata.area}/${deviceId}`;\nmsg.payload = JSON.stringify({\n    value: state,\n    state: state,\n    area: metadata.area,\n    deviceType: metadata.type,\n    label: metadata.label,\n    quality: \"good\",\n    source: \"legacy\",\n    ts: new Date().toISOString(),\n    sourceTopic: sourceTopic\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 470,
+    "y": 120,
+    "wires": [
+      [
+        "83d890bd138c418f"
+      ]
+    ]
+  },
+  {
+    "id": "83d890bd138c418f",
+    "type": "mqtt out",
+    "z": "a1827b3a2f1448a5",
+    "name": "Publish Normalized Lights",
+    "topic": "",
+    "qos": "",
+    "retain": "",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "73fb6eba0e0c4fb0",
+    "x": 780,
+    "y": 120,
+    "wires": []
+  },
+  {
+    "id": "16d5f92906cf4caa",
+    "type": "inject",
+    "z": "a1827b3a2f1448a5",
+    "name": "Publish Lights Registry",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": true,
+    "onceDelay": 1,
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 190,
+    "y": 220,
+    "wires": [
+      [
+        "fc04005da1804cbe"
+      ]
+    ]
+  },
+  {
+    "id": "fc04005da1804cbe",
+    "type": "function",
+    "z": "a1827b3a2f1448a5",
+    "name": "Build Lights Registry",
+    "func": "msg.topic = \"domoticsai/v1/meta/lights/registry\";\nmsg.payload = \"{\\\"version\\\": \\\"1.0\\\", \\\"baseTopic\\\": \\\"zara/android/domotica\\\", \\\"devices\\\": [{\\\"id\\\": \\\"tavolinoLettura\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Tavolino lettura\\\"}, {\\\"id\\\": \\\"libreria\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Libreria\\\"}, {\\\"id\\\": \\\"sala\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Sala\\\"}, {\\\"id\\\": \\\"televisione\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Televisione\\\"}, {\\\"id\\\": \\\"lavanderia\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Lavanderia\\\"}, {\\\"id\\\": \\\"ingressoServizio\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Ingresso servizio\\\"}, {\\\"id\\\": \\\"portico\\\", \\\"area\\\": \\\"external\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Portico\\\"}, {\\\"id\\\": \\\"luciPiscina\\\", \\\"area\\\": \\\"pool\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Luci piscina\\\"}, {\\\"id\\\": \\\"luciPedanaPiscina\\\", \\\"area\\\": \\\"pool\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Luci pedana piscina\\\"}, {\\\"id\\\": \\\"skimmerPiscina\\\", \\\"area\\\": \\\"pool\\\", \\\"type\\\": \\\"relay\\\", \\\"label\\\": \\\"Skimmer piscina\\\"}, {\\\"id\\\": \\\"pompaPiscina\\\", \\\"area\\\": \\\"pool\\\", \\\"type\\\": \\\"relay\\\", \\\"label\\\": \\\"Pompa piscina\\\"}], \\\"scenes\\\": [\\\"ALL_ON\\\", \\\"ALL_OFF\\\", \\\"TV_MODE\\\", \\\"SLEEP_MODE\\\"]}\";\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 470,
+    "y": 220,
+    "wires": [
+      [
+        "7046062d94904681"
+      ]
+    ]
+  },
+  {
+    "id": "7046062d94904681",
+    "type": "mqtt out",
+    "z": "a1827b3a2f1448a5",
+    "name": "Publish Lights Registry",
+    "topic": "",
+    "qos": "",
+    "retain": "",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "73fb6eba0e0c4fb0",
+    "x": 780,
+    "y": 220,
+    "wires": []
   }
 ]
