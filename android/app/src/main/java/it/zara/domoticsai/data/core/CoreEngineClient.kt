@@ -1,6 +1,7 @@
 package it.zara.domoticsai.data.core
 
 import it.zara.domoticsai.domain.model.CommandReceiptDto
+import it.zara.domoticsai.domain.model.CommandHistoryItem
 import it.zara.domoticsai.domain.model.CoreHealth
 import it.zara.domoticsai.domain.model.LightDevice
 import it.zara.domoticsai.domain.model.LightState
@@ -133,6 +134,26 @@ class CoreEngineClient {
                         }
                 }
         )
+    }
+
+    fun fetchCommands(
+        baseUrl: String
+    ): List<CommandHistoryItem> {
+        val root = JSONObject(
+            requestJson(
+                "${baseUrl.trimEnd('/')}/api/v1/commands"
+            )
+        )
+        val items = root.optJSONArray("items")
+            ?: return emptyList()
+
+        return buildList {
+            for (index in 0 until items.length()) {
+                val item = items.optJSONObject(index)
+                    ?: continue
+                add(CommandJson.parseHistoryItem(item))
+            }
+        }
     }
 
     private fun parseCommandState(

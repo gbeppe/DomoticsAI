@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
@@ -16,6 +17,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import it.zara.domoticsai.domain.model.ConnectionSettings
+import it.zara.domoticsai.ui.commands.*
 import it.zara.domoticsai.ui.diagnostics.*
 import it.zara.domoticsai.ui.energy.*
 import it.zara.domoticsai.ui.home.*
@@ -91,6 +93,15 @@ class MainActivity : ComponentActivity() {
                             }
                     )
 
+                val commandsViewModel:
+                    CommandsViewModel =
+                    viewModel(
+                        factory =
+                            SimpleViewModelFactory {
+                                CommandsViewModel()
+                            }
+                    )
+
                 val diagnosticsViewModel:
                     DiagnosticsViewModel =
                     viewModel(
@@ -112,6 +123,9 @@ class MainActivity : ComponentActivity() {
                 val lightCommands by
                     lightsViewModel.commands.collectAsState()
 
+                val commandsState by
+                    commandsViewModel.state.collectAsState()
+
                 val diagnosticsState by
                     diagnosticsViewModel.state.collectAsState()
 
@@ -131,6 +145,8 @@ class MainActivity : ComponentActivity() {
                                                     Icons.Default.Bolt
                                                 Destination.LIGHTS ->
                                                     Icons.Default.Lightbulb
+                                                Destination.COMMANDS ->
+                                                    Icons.Default.History
                                                 Destination.LOGS ->
                                                     Icons.Default.List
                                                 Destination.CORE ->
@@ -179,6 +195,13 @@ class MainActivity : ComponentActivity() {
                                         lightsViewModel::clearCommand
                                 )
 
+                            Destination.COMMANDS ->
+                                CommandsScreen(
+                                    state = commandsState,
+                                    onRefresh =
+                                        commandsViewModel::refresh
+                                )
+
                             Destination.LOGS ->
                                 LogsScreen(logs)
 
@@ -225,6 +248,7 @@ private enum class Destination(
     HOME("Home"),
     ENERGY("Energia"),
     LIGHTS("Luci"),
+    COMMANDS("Comandi"),
     LOGS("Log"),
     CORE("Core"),
     SETTINGS("Impostazioni")
