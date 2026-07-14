@@ -46,3 +46,5 @@ gateway/context/
 *.tmp
 *.bak
 *~
+gateway/*.backup
+gateway/.*.backup
