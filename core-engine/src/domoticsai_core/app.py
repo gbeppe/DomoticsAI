@@ -1,10 +1,14 @@
-from __future__ import annotations
-
 import asyncio
 from contextlib import asynccontextmanager
 import logging
 
-from fastapi import FastAPI, HTTPException, Query, WebSocket, WebSocketDisconnect
+from fastapi import (
+    FastAPI,
+    HTTPException,
+    Query,
+    WebSocket,
+    WebSocketDisconnect,
+)
 
 from .config import Settings
 from .digital_twin import DigitalTwinStore
@@ -13,27 +17,24 @@ from .mqtt_service import MqttService
 from .websocket_hub import WebSocketHub
 
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s %(name)s %(message)s",
-)
+logging.basicConfig(level=logging.INFO)
 
 settings = Settings.from_env()
 event_store = EventStore(settings.db_path)
 twin_store = DigitalTwinStore(event_store)
-websocket_hub = WebSocketHub()
+hub = WebSocketHub()
 
 mqtt_service = MqttService(
-    settings=settings,
-    on_message=twin_store.update_from_mqtt,
+    settings,
+    twin_store.update_from_mqtt,
 )
 
-twin_store.add_listener(websocket_hub.publish_from_thread)
+twin_store.add_listener(hub.publish_from_thread)
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
-    websocket_hub.bind_loop(asyncio.get_running_loop())
+async def lifespan(app):
+    hub.bind_loop(asyncio.get_running_loop())
     mqtt_service.start()
     yield
     mqtt_service.stop()
@@ -41,28 +42,34 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="DomoticsAI Core Engine",
-    version="0.2.0",
+    version="0.3.1",
     lifespan=lifespan,
 )
 
 
 @app.get("/health")
-def health() -> dict[str, object]:
+def health():
     snapshot = twin_store.snapshot()
+    entity_count = sum(
+        len(domain)
+        for domain in snapshot.domains.values()
+    )
 
     return {
         "status": "ok",
-        "version": "0.2.0",
+        "version": "0.3.1",
         "mqttConnected": mqtt_service.connected,
-        "mqttBroker": f"{settings.mqtt_host}:{settings.mqtt_port}",
+        "mqttBroker": (
+            f"{settings.mqtt_host}:{settings.mqtt_port}"
+        ),
         "mqttTopic": settings.mqtt_topic,
         "digitalTwinUpdatedAt": snapshot.updated_at,
         "digitalTwinDomains": len(snapshot.domains),
-        "digitalTwinEntities": sum(
-            len(entities)
-            for entities in snapshot.domains.values()
-        ),
+        "digitalTwinEntities": entity_count,
         "persistentTwin": True,
+        "derivedEnergy": (
+            "energy_derived" in snapshot.domains
+        ),
     }
 
 
@@ -74,19 +81,38 @@ def get_twin():
 @app.get("/api/v1/twin/{domain_name}")
 def get_domain(domain_name: str):
     domain = twin_store.domain(domain_name)
+
     if domain is None:
         raise HTTPException(
-            status_code=404,
-            detail=f"Domain not found: {domain_name}",
+            404,
+            f"Domain not found: {domain_name}",
         )
+
     return {
         "domain": domain_name,
         "entities": domain,
     }
 
 
+@app.get("/api/v1/energy")
+def get_energy_view():
+    return {
+        "raw": twin_store.domain("energy") or {},
+        "derived": (
+            twin_store.domain("energy_derived")
+            or {}
+        ),
+    }
+
+
 @app.get("/api/v1/events")
-def get_events(limit: int = Query(default=100, ge=1, le=1000)):
+def get_events(
+    limit: int = Query(
+        100,
+        ge=1,
+        le=1000,
+    )
+):
     return {
         "items": event_store.recent(limit),
         "limit": limit,
@@ -94,20 +120,26 @@ def get_events(limit: int = Query(default=100, ge=1, le=1000)):
 
 
 @app.websocket("/ws/twin")
-async def twin_websocket(websocket: WebSocket):
-    await websocket_hub.connect(websocket)
+async def ws_twin(websocket: WebSocket):
+    await hub.connect(websocket)
 
     try:
         await websocket.send_json(
             {
                 "type": "twin_snapshot",
-                "data": twin_store.snapshot().model_dump(),
+                "data": (
+                    twin_store
+                    .snapshot()
+                    .model_dump()
+                ),
             }
         )
 
         while True:
             await websocket.receive_text()
+
     except WebSocketDisconnect:
-        await websocket_hub.disconnect(websocket)
+        await hub.disconnect(websocket)
+
     except Exception:
-        await websocket_hub.disconnect(websocket)
+        await hub.disconnect(websocket)

@@ -1,47 +1,106 @@
-from __future__ import annotations
-
 from copy import deepcopy
 from datetime import datetime, timezone
+import inspect
 import json
 import threading
-from typing import Any, Callable
 
-from .event_store import EventStore
+from .energy_derived import (
+    calculate_energy_derived,
+    read_energy_raw,
+)
 from .models import DigitalTwin, TwinValue
 from .topic_mapper import map_state_topic
 
 
-def utc_now_iso() -> str:
+def utc_now_iso():
     return datetime.now(timezone.utc).isoformat()
 
 
 class DigitalTwinStore:
-    def __init__(self, event_store: EventStore) -> None:
+    def __init__(self, event_store):
         self._event_store = event_store
         self._lock = threading.RLock()
-        self._listeners: list[Callable[[dict[str, Any]], None]] = []
+        self._twin = DigitalTwin()
+        self._listeners = []
+        self._restored_entities = 0
 
-        restored_domains = self._event_store.load_twin_state()
-        restored_at = self._latest_timestamp(restored_domains)
-
-        self._twin = DigitalTwin(
-            updated_at=restored_at or utc_now_iso(),
-            domains=restored_domains,
+        self._restore_from_database()
+        self._recalculate_energy_derived(
+            notify=False,
+            persist=True,
         )
 
-    def add_listener(self, listener: Callable[[dict[str, Any]], None]) -> None:
+    @property
+    def restored_entities(self):
+        return self._restored_entities
+
+    def _restore_from_database(self):
+        restored = self._event_store.load_twin_state()
+
+        if not restored:
+            return
+
+        newest_timestamp = None
+        entity_count = 0
+
+        with self._lock:
+            for domain_name, entities in restored.items():
+                target = self._twin.domains.setdefault(
+                    domain_name,
+                    {},
+                )
+
+                for entity_name, value in entities.items():
+                    target[entity_name] = value
+                    entity_count += 1
+
+                    if (
+                        newest_timestamp is None
+                        or value.timestamp > newest_timestamp
+                    ):
+                        newest_timestamp = value.timestamp
+
+            if newest_timestamp is not None:
+                self._twin.updated_at = newest_timestamp
+
+            self._restored_entities = entity_count
+
+    def _persist_twin_value(
+        self,
+        *,
+        domain: str,
+        entity: str,
+        value: TwinValue,
+        updated_at: str,
+    ):
+        method = self._event_store.upsert_twin_value
+        parameters = inspect.signature(method).parameters
+
+        kwargs = {
+            "domain": domain,
+            "entity": entity,
+            "value": value,
+        }
+
+        if "updated_at" in parameters:
+            kwargs["updated_at"] = updated_at
+
+        method(**kwargs)
+
+    def add_listener(self, listener):
         with self._lock:
             self._listeners.append(listener)
 
-    def update_from_mqtt(self, topic: str, payload_text: str) -> bool:
+    def update_from_mqtt(self, topic, payload_text):
         address = map_state_topic(topic)
+
         if address is None:
             return False
 
         received_at = utc_now_iso()
         parsed = self._parse_payload(payload_text)
 
-        twin_value = TwinValue(
+        value = TwinValue(
             value=parsed["value"],
             unit=parsed.get("unit"),
             quality=parsed.get("quality", "unknown"),
@@ -51,9 +110,20 @@ class DigitalTwinStore:
         )
 
         with self._lock:
-            domain = self._twin.domains.setdefault(address.domain, {})
-            domain[address.entity] = twin_value
+            self._twin.domains.setdefault(
+                address.domain,
+                {},
+            )[address.entity] = value
+
             self._twin.updated_at = received_at
+            listeners = list(self._listeners)
+
+        self._persist_twin_value(
+            domain=address.domain,
+            entity=address.entity,
+            value=value,
+            updated_at=received_at,
+        )
 
         self._event_store.append(
             received_at=received_at,
@@ -61,26 +131,23 @@ class DigitalTwinStore:
             domain=address.domain,
             entity=address.entity,
             payload=payload_text,
-            parsed_value=twin_value.value,
-            quality=twin_value.quality,
+            parsed_value=value.value,
+            quality=value.quality,
         )
 
-        self._event_store.upsert_twin_value(
-            domain=address.domain,
-            entity=address.entity,
-            value=twin_value,
-        )
+        if address.domain == "energy":
+            self._recalculate_energy_derived(
+                notify=True,
+                persist=True,
+            )
 
         event = {
             "type": "twin_update",
             "domain": address.domain,
             "entity": address.entity,
-            "data": twin_value.model_dump(),
+            "data": value.model_dump(),
             "updatedAt": received_at,
         }
-
-        with self._lock:
-            listeners = list(self._listeners)
 
         for listener in listeners:
             try:
@@ -90,46 +157,104 @@ class DigitalTwinStore:
 
         return True
 
-    def snapshot(self) -> DigitalTwin:
+    def _recalculate_energy_derived(
+        self,
+        *,
+        notify: bool,
+        persist: bool,
+    ):
+        with self._lock:
+            energy = self._twin.domains.get("energy")
+
+            if not energy:
+                return
+
+            derived_values = calculate_energy_derived(
+                read_energy_raw(energy)
+            )
+
+            timestamp = utc_now_iso()
+            derived_domain = self._twin.domains.setdefault(
+                "energy_derived",
+                {},
+            )
+            listeners = list(self._listeners)
+
+        for entity, raw_value in derived_values.items():
+            twin_value = TwinValue(
+                value=raw_value,
+                unit=self._derived_unit(entity),
+                quality="calculated",
+                source="core-engine",
+                timestamp=timestamp,
+                topic=f"internal://energy-derived/{entity}",
+            )
+
+            with self._lock:
+                derived_domain[entity] = twin_value
+                self._twin.updated_at = timestamp
+
+            if persist:
+                self._persist_twin_value(
+                    domain="energy_derived",
+                    entity=entity,
+                    value=twin_value,
+                    updated_at=timestamp,
+                )
+
+            if notify:
+                event = {
+                    "type": "twin_update",
+                    "domain": "energy_derived",
+                    "entity": entity,
+                    "data": twin_value.model_dump(),
+                    "updatedAt": timestamp,
+                }
+
+                for listener in listeners:
+                    try:
+                        listener(event)
+                    except Exception:
+                        pass
+
+    @staticmethod
+    def _derived_unit(entity):
+        if entity.endswith("_w"):
+            return "W"
+
+        if entity.endswith("_pct"):
+            return "%"
+
+        return None
+
+    def snapshot(self):
         with self._lock:
             return self._twin.model_copy(deep=True)
 
-    def domain(self, domain_name: str) -> dict[str, TwinValue] | None:
+    def domain(self, name):
         with self._lock:
-            domain = self._twin.domains.get(domain_name)
-            return deepcopy(domain) if domain is not None else None
+            value = self._twin.domains.get(name)
 
-    def reset(self) -> None:
-        with self._lock:
-            self._twin = DigitalTwin()
-        self._event_store.clear_twin_state()
+            return (
+                deepcopy(value)
+                if value is not None
+                else None
+            )
 
     @staticmethod
-    def _parse_payload(payload_text: str) -> dict[str, Any]:
-        stripped = payload_text.strip()
+    def _parse_payload(payload_text):
+        text = payload_text.strip()
 
-        if stripped.startswith("{"):
+        if text.startswith("{"):
             try:
-                obj = json.loads(stripped)
+                obj = json.loads(text)
+
                 if "value" in obj:
                     return obj
             except json.JSONDecodeError:
                 pass
 
         try:
-            number = float(stripped)
-            return {"value": number}
+            return {"value": float(text)}
         except ValueError:
             return {"value": payload_text}
-
-    @staticmethod
-    def _latest_timestamp(
-        domains: dict[str, dict[str, TwinValue]],
-    ) -> str | None:
-        timestamps = [
-            value.timestamp
-            for entities in domains.values()
-            for value in entities.values()
-            if value.timestamp
-        ]
-        return max(timestamps) if timestamps else None
