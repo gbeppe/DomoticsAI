@@ -1,24 +1,33 @@
 import logging
 import threading
 import paho.mqtt.client as mqtt
+from .config import Settings
 
 logger = logging.getLogger(__name__)
 
+ALLOWED_COMMAND_PREFIXES = (
+    "domoticsai/v1/cmd/lights/",
+    "domoticsai/v1/cmd/scenes/",
+)
+
 class MqttService:
-    def __init__(self, settings, on_message):
+    def __init__(self, settings: Settings, on_message):
         self._settings = settings
-        self._handler = on_message
+        self._on_message_handler = on_message
         self._connected = threading.Event()
+
         self._client = mqtt.Client(
             callback_api_version=mqtt.CallbackAPIVersion.VERSION2,
             client_id="domoticsai-core-engine",
             protocol=mqtt.MQTTv311,
         )
+
         if settings.mqtt_username:
             self._client.username_pw_set(
                 settings.mqtt_username,
                 settings.mqtt_password,
             )
+
         self._client.on_connect = self._on_connect
         self._client.on_disconnect = self._on_disconnect
         self._client.on_message = self._on_message
@@ -40,9 +49,27 @@ class MqttService:
         self._client.loop_stop()
         self._connected.clear()
 
+    def publish_command(self, topic, payload, *, qos=1, retain=False):
+        if not topic.startswith(ALLOWED_COMMAND_PREFIXES):
+            raise ValueError(f"Command topic is not allowed: {topic}")
+        if retain:
+            raise ValueError("Command messages must never be retained")
+        if not self.connected:
+            raise RuntimeError("MQTT broker is not connected")
+
+        result = self._client.publish(
+            topic,
+            payload,
+            qos=qos,
+            retain=False,
+        )
+        if result.rc != mqtt.MQTT_ERR_SUCCESS:
+            raise RuntimeError(
+                f"MQTT publish failed with rc={result.rc}"
+            )
+
     def _on_connect(self, client, userdata, flags, reason_code, properties):
         if reason_code.is_failure:
-            logger.error("MQTT rejected: %s", reason_code)
             self._connected.clear()
             return
         self._connected.set()
@@ -53,4 +80,4 @@ class MqttService:
 
     def _on_message(self, client, userdata, message):
         payload = message.payload.decode("utf-8", errors="replace")
-        self._handler(message.topic, payload)
+        self._on_message_handler(message.topic, payload)

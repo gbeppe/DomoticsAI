@@ -1298,5 +1298,64 @@
     "x": 780,
     "y": 220,
     "wires": []
+  },
+  {
+    "id": "6139205f49eb47cd",
+    "type": "mqtt in",
+    "z": "a1827b3a2f1448a5",
+    "name": "Simulated Lights Commands",
+    "topic": "domoticsai/v1/cmd/lights/+/+",
+    "qos": "1",
+    "datatype": "auto-detect",
+    "broker": "73fb6eba0e0c4fb0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 190,
+    "y": 320,
+    "wires": [
+      [
+        "0da4c80357044d79"
+      ]
+    ]
+  },
+  {
+    "id": "0da4c80357044d79",
+    "type": "function",
+    "z": "a1827b3a2f1448a5",
+    "name": "Validate and Simulate Light Command",
+    "func": "let command;\n\nif (\n    msg.payload !== null &&\n    typeof msg.payload === \"object\"\n) {\n    command = msg.payload;\n} else {\n    try {\n        command = JSON.parse(String(msg.payload));\n    } catch (error) {\n        node.warn(\n            `Invalid command JSON: ${msg.payload}`\n        );\n        return null;\n    }\n}\n\nconst match = msg.topic.match(\n    /^domoticsai\\/v1\\/cmd\\/lights\\/([^/]+)\\/([^/]+)$/\n);\n\nif (!match) {\n    node.warn(\n        `Invalid lights command topic: ${msg.topic}`\n    );\n    return null;\n}\n\nconst area = match[1];\nconst deviceId = match[2];\n\nif (command.mode !== \"simulation\") {\n    node.warn(\n        `Rejected non-simulation command for ${area}/${deviceId}`\n    );\n    return null;\n}\n\nif (!command.request_id) {\n    node.warn(\n        `Missing request_id for ${area}/${deviceId}`\n    );\n    return null;\n}\n\nif (![\"ON\", \"OFF\"].includes(command.desired_state)) {\n    node.warn(\n        `Invalid desired_state for ${area}/${deviceId}`\n    );\n    return null;\n}\n\nmsg.topic =\n    `domoticsai/v1/ack/lights/${area}/${deviceId}/${command.request_id}`;\n\nmsg.payload = JSON.stringify({\n    requestId: command.request_id,\n    status: \"simulated\",\n    area: area,\n    deviceId: deviceId,\n    desiredState: command.desired_state,\n    message: \"Validated, not sent to production\",\n    ts: new Date().toISOString()\n});\n\nmsg.qos = 1;\nmsg.retain = false;\n\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 510,
+    "y": 320,
+    "wires": [
+      [
+        "38b1159e783c4545"
+      ]
+    ]
+  },
+  {
+    "id": "38b1159e783c4545",
+    "type": "mqtt out",
+    "z": "a1827b3a2f1448a5",
+    "name": "Publish Simulated Light Ack",
+    "topic": "",
+    "qos": "",
+    "retain": "",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "73fb6eba0e0c4fb0",
+    "x": 830,
+    "y": 320,
+    "wires": []
   }
 ]

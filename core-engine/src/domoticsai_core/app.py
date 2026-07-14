@@ -15,7 +15,8 @@ from .digital_twin import DigitalTwinStore
 from .event_store import EventStore
 from .mqtt_service import MqttService
 from .websocket_hub import WebSocketHub
-
+from .command_models import LightCommandRequest
+from .lights_commands import LightsCommandService
 
 logging.basicConfig(level=logging.INFO)
 
@@ -27,6 +28,10 @@ hub = WebSocketHub()
 mqtt_service = MqttService(
     settings,
     twin_store.update_from_mqtt,
+)
+lights_command_service = LightsCommandService(
+    mqtt_service,
+    simulation_mode=True,
 )
 
 twin_store.add_listener(hub.publish_from_thread)
@@ -117,6 +122,19 @@ def get_lights_view():
             or {}
         ),
     }
+
+
+@app.post("/api/v1/commands/lights/{area}/{device_id}")
+def command_light(
+    area: str,
+    device_id: str,
+    request: LightCommandRequest,
+):
+    return lights_command_service.submit(
+        area=area,
+        device_id=device_id,
+        request=request,
+    )
 
 
 @app.get("/api/v1/events")
