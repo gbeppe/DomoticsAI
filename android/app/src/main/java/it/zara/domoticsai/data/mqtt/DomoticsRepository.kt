@@ -5,18 +5,22 @@ import it.zara.domoticsai.domain.model.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import org.json.JSONObject
+import kotlin.coroutines.resume
 
 class DomoticsRepository(
     private val mqttClientService: MqttClientService,
     private val settingsRepository: SettingsRepository
 ) {
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    private val scope = CoroutineScope(
+        SupervisorJob() + Dispatchers.IO
+    )
 
     private val _homeState = MutableStateFlow(HomeState())
     val homeState = _homeState.asStateFlow()
     val connectionState = mqttClientService.connectionState
 
-    private val _logs = MutableStateFlow<List<LogEntry>>(emptyList())
+    private val _logs =
+        MutableStateFlow<List<LogEntry>>(emptyList())
     val logs = _logs.asStateFlow()
 
     init {
@@ -25,6 +29,7 @@ class DomoticsRepository(
                 consumeMessage(topic, payload)
             }
         }
+
         scope.launch {
             mqttClientService.logs.collect { entry ->
                 _logs.update { (listOf(entry) + it).take(500) }
@@ -32,15 +37,42 @@ class DomoticsRepository(
         }
     }
 
-    fun connect(settings: ConnectionSettings, credentials: Map<String, Pair<String, String>> = emptyMap()) {
+    fun connect(
+        settings: ConnectionSettings,
+        credentials: Map<String, Pair<String, String>> = emptyMap()
+    ) {
         scope.launch {
             when (settings.mode) {
-                ConnectionMode.LOCAL_ONLY -> connectEndpoint(settings.local, false, credentials["local"])
-                ConnectionMode.REMOTE_ONLY -> connectEndpoint(settings.remote, true, credentials["remote"])
+                ConnectionMode.LOCAL_ONLY ->
+                    connectEndpoint(
+                        settings.local,
+                        false,
+                        credentials["local"]
+                    )
+
+                ConnectionMode.REMOTE_ONLY ->
+                    connectEndpoint(
+                        settings.remote,
+                        true,
+                        credentials["remote"]
+                    )
+
                 ConnectionMode.AUTO -> {
-                    val localOk = connectEndpointAwait(settings.local, false, credentials["local"])
-                    if (!localOk && settings.remote.host.isNotBlank()) {
-                        connectEndpoint(settings.remote, true, credentials["remote"])
+                    val localOk = connectEndpointAwait(
+                        settings.local,
+                        false,
+                        credentials["local"]
+                    )
+
+                    if (
+                        !localOk &&
+                        settings.remote.host.isNotBlank()
+                    ) {
+                        connectEndpoint(
+                            settings.remote,
+                            true,
+                            credentials["remote"]
+                        )
                     }
                 }
             }
@@ -55,6 +87,7 @@ class DomoticsRepository(
         credentials: Pair<String, String>?
     ) {
         if (endpoint.host.isBlank()) return
+
         mqttClientService.connect(
             endpoint.copy(
                 username = credentials?.first.orEmpty(),
@@ -70,9 +103,10 @@ class DomoticsRepository(
         credentials: Pair<String, String>?
     ): Boolean = suspendCancellableCoroutine { continuation ->
         if (endpoint.host.isBlank()) {
-            continuation.resume(false) {}
+            continuation.resume(false)
             return@suspendCancellableCoroutine
         }
+
         mqttClientService.connect(
             endpoint.copy(
                 username = credentials?.first.orEmpty(),
@@ -80,33 +114,96 @@ class DomoticsRepository(
             ),
             remote
         ) { ok ->
-            if (continuation.isActive) continuation.resume(ok) {}
+            if (continuation.isActive) {
+                continuation.resume(ok)
+            }
         }
     }
 
-    private fun consumeMessage(topic: String, payload: String) {
+    private fun consumeMessage(
+        topic: String,
+        payload: String
+    ) {
         val value = parseValue(payload) ?: return
+
         _homeState.update { old ->
             val updated = when (topic) {
                 "domoticsai/v1/state/energy/solar_power_w" ->
-                    old.copy(energy = old.energy.copy(solarPowerW = value))
+                    old.copy(
+                        energy = old.energy.copy(
+                            solarPowerW = value
+                        )
+                    )
+
                 "domoticsai/v1/state/energy/home_load_w" ->
-                    old.copy(energy = old.energy.copy(homeLoadW = value))
+                    old.copy(
+                        energy = old.energy.copy(
+                            homeLoadW = value
+                        )
+                    )
+
+                "domoticsai/v1/state/energy/grid_power_w" ->
+                    old.copy(
+                        energy = old.energy.copy(
+                            gridPowerW = value
+                        )
+                    )
+
+                "domoticsai/v1/state/energy/battery_power_w" ->
+                    old.copy(
+                        energy = old.energy.copy(
+                            batteryPowerW = value
+                        )
+                    )
+
                 "domoticsai/v1/state/energy/powerwall_soc_pct" ->
-                    old.copy(energy = old.energy.copy(powerwallSocPct = value))
+                    old.copy(
+                        energy = old.energy.copy(
+                            powerwallSocPct = value
+                        )
+                    )
+
                 "domoticsai/v1/state/climate/living_temperature_c" ->
-                    old.copy(climate = old.climate.copy(livingTemperatureC = value))
+                    old.copy(
+                        climate = old.climate.copy(
+                            livingTemperatureC = value
+                        )
+                    )
+
                 "domoticsai/v1/state/climate/living_humidex" ->
-                    old.copy(climate = old.climate.copy(livingHumidex = value))
+                    old.copy(
+                        climate = old.climate.copy(
+                            livingHumidex = value
+                        )
+                    )
+
                 "domoticsai/v1/state/climate/bedroom_humidex" ->
-                    old.copy(climate = old.climate.copy(bedroomHumidex = value))
+                    old.copy(
+                        climate = old.climate.copy(
+                            bedroomHumidex = value
+                        )
+                    )
+
                 "domoticsai/v1/state/climate/ac_power_w" ->
-                    old.copy(climate = old.climate.copy(acPowerW = value))
+                    old.copy(
+                        climate = old.climate.copy(
+                            acPowerW = value
+                        )
+                    )
+
                 "domoticsai/v1/state/vmc/speed" ->
-                    old.copy(vmc = old.vmc.copy(speed = value.toInt()))
+                    old.copy(
+                        vmc = old.vmc.copy(
+                            speed = value.toInt()
+                        )
+                    )
+
                 else -> old
             }
-            updated.copy(lastUpdateEpochMs = System.currentTimeMillis())
+
+            updated.copy(
+                lastUpdateEpochMs = System.currentTimeMillis()
+            )
         }
     }
 

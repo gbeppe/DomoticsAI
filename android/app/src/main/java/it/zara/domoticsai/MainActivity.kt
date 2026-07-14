@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import it.zara.domoticsai.domain.model.ConnectionSettings
 import it.zara.domoticsai.ui.diagnostics.*
+import it.zara.domoticsai.ui.energy.*
 import it.zara.domoticsai.ui.home.*
 import it.zara.domoticsai.ui.logs.LogsScreen
 import it.zara.domoticsai.ui.settings.SettingsScreen
@@ -22,69 +24,117 @@ import it.zara.domoticsai.ui.theme.DomoticsAiTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(
+        savedInstanceState: Bundle?
+    ) {
         super.onCreate(savedInstanceState)
 
-        val container = (application as DomoticsAiApplication).container
+        val container =
+            (application as DomoticsAiApplication)
+                .container
 
         setContent {
             DomoticsAiTheme {
-                val settings by container.settingsRepository.settings.collectAsState(
-                    initial = ConnectionSettings()
-                )
-                val logs by container.domoticsRepository.logs.collectAsState()
+                val settings by
+                    container.settingsRepository
+                        .settings
+                        .collectAsState(
+                            initial = ConnectionSettings()
+                        )
+
+                val logs by
+                    container.domoticsRepository
+                        .logs
+                        .collectAsState()
+
                 val scope = rememberCoroutineScope()
+
                 var destination by remember {
                     mutableStateOf(Destination.HOME)
                 }
 
-                val homeViewModel: HomeViewModel = viewModel(
-                    factory = SimpleViewModelFactory {
-                        HomeViewModel(
-                            repository = container.domoticsRepository,
-                            credentialStore = container.credentialStore,
-                            coreEngineRepository =
-                                container.coreEngineRepository
-                        )
-                    }
-                )
+                val homeViewModel: HomeViewModel =
+                    viewModel(
+                        factory =
+                            SimpleViewModelFactory {
+                                HomeViewModel(
+                                    repository =
+                                        container.domoticsRepository,
+                                    credentialStore =
+                                        container.credentialStore,
+                                    coreEngineRepository =
+                                        container.coreEngineRepository
+                                )
+                            }
+                    )
 
-                val diagnosticsViewModel: DiagnosticsViewModel = viewModel(
-                    factory = SimpleViewModelFactory {
-                        DiagnosticsViewModel(
-                            repository = container.coreEngineRepository
-                        )
-                    }
-                )
+                val energyViewModel: EnergyViewModel =
+                    viewModel(
+                        factory =
+                            SimpleViewModelFactory {
+                                EnergyViewModel(
+                                    coreRepository =
+                                        container.coreEngineRepository,
+                                    domoticsRepository =
+                                        container.domoticsRepository
+                                )
+                            }
+                    )
+
+                val diagnosticsViewModel:
+                    DiagnosticsViewModel =
+                    viewModel(
+                        factory =
+                            SimpleViewModelFactory {
+                                DiagnosticsViewModel(
+                                    repository =
+                                        container.coreEngineRepository
+                                )
+                            }
+                    )
+
+                val energyState by
+                    energyViewModel.state
+                        .collectAsState()
 
                 val diagnosticsState by
-                    diagnosticsViewModel.state.collectAsState()
+                    diagnosticsViewModel.state
+                        .collectAsState()
 
                 Scaffold(
                     bottomBar = {
                         NavigationBar {
-                            Destination.entries.forEach { item ->
-                                NavigationBarItem(
-                                    selected = destination == item,
-                                    onClick = { destination = item },
-                                    icon = {
-                                        Icon(
-                                            when (item) {
-                                                Destination.HOME ->
-                                                    Icons.Default.Home
-                                                Destination.LOGS ->
-                                                    Icons.Default.List
-                                                Destination.CORE ->
-                                                    Icons.Default.Storage
-                                                Destination.SETTINGS ->
-                                                    Icons.Default.Settings
-                                            },
-                                            contentDescription = item.label
-                                        )
-                                    },
-                                    label = { Text(item.label) }
-                                )
-                            }
+                            Destination.entries
+                                .forEach { item ->
+                                    NavigationBarItem(
+                                        selected =
+                                            destination == item,
+                                        onClick = {
+                                            destination = item
+                                        },
+                                        icon = {
+                                            Icon(
+                                                when (item) {
+                                                    Destination.HOME ->
+                                                        Icons.Default.Home
+                                                    Destination.ENERGY ->
+                                                        Icons.Default.Bolt
+                                                    Destination.LOGS ->
+                                                        Icons.Default.List
+                                                    Destination.CORE ->
+                                                        Icons.Default.Storage
+                                                    Destination.SETTINGS ->
+                                                        Icons.Default.Settings
+                                                },
+                                                contentDescription =
+                                                    item.label
+                                            )
+                                        },
+                                        label = {
+                                            Text(item.label)
+                                        }
+                                    )
+                                }
                         }
                     }
                 ) { outerPadding ->
@@ -94,18 +144,23 @@ class MainActivity : ComponentActivity() {
                             .padding(outerPadding)
                     ) {
                         when (destination) {
-                            Destination.HOME -> {
+                            Destination.HOME ->
                                 HomeScreen(
                                     homeViewModel,
                                     settings
                                 )
-                            }
 
-                            Destination.LOGS -> {
+                            Destination.ENERGY ->
+                                EnergyScreen(
+                                    state = energyState,
+                                    onRefresh =
+                                        energyViewModel::refresh
+                                )
+
+                            Destination.LOGS ->
                                 LogsScreen(logs)
-                            }
 
-                            Destination.CORE -> {
+                            Destination.CORE ->
                                 DiagnosticsScreen(
                                     state = diagnosticsState,
                                     baseUrl =
@@ -116,24 +171,24 @@ class MainActivity : ComponentActivity() {
                                         )
                                     }
                                 )
-                            }
 
-                            Destination.SETTINGS -> {
+                            Destination.SETTINGS ->
                                 SettingsScreen(
                                     initial = settings,
                                     initialCredentials =
                                         container.credentialStore.load()
-                                ) { newSettings, credentials ->
-                                    container.credentialStore.save(
-                                        credentials
-                                    )
+                                ) {
+                                        newSettings,
+                                        credentials ->
+
+                                    container.credentialStore
+                                        .save(credentials)
+
                                     scope.launch {
-                                        container.settingsRepository.save(
-                                            newSettings
-                                        )
+                                        container.settingsRepository
+                                            .save(newSettings)
                                     }
                                 }
-                            }
                         }
                     }
                 }
@@ -142,8 +197,11 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private enum class Destination(val label: String) {
+private enum class Destination(
+    val label: String
+) {
     HOME("Home"),
+    ENERGY("Energia"),
     LOGS("Log"),
     CORE("Core"),
     SETTINGS("Impostazioni")

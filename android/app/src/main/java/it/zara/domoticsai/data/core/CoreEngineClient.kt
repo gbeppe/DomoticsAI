@@ -6,31 +6,65 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class CoreEngineClient {
+
     fun fetchHealth(baseUrl: String): CoreHealth {
-        val obj = JSONObject(request("${baseUrl.trimEnd('/')}/health"))
+        val json = requestJson("${baseUrl.trimEnd('/')}/health")
+        val obj = JSONObject(json)
+
         return CoreHealth(
             status = obj.optString("status", "unknown"),
             mqttConnected = obj.optBoolean("mqttConnected", false),
             mqttBroker = obj.optString("mqttBroker", ""),
             mqttTopic = obj.optString("mqttTopic", ""),
-            digitalTwinUpdatedAt = obj.optString("digitalTwinUpdatedAt", "")
+            digitalTwinUpdatedAt = obj.optString(
+                "digitalTwinUpdatedAt",
+                ""
+            )
         )
     }
 
     fun fetchTwin(baseUrl: String): String =
-        JSONObject(request("${baseUrl.trimEnd('/')}/api/v1/twin")).toString(2)
+        JSONObject(
+            requestJson(
+                "${baseUrl.trimEnd('/')}/api/v1/twin"
+            )
+        ).toString(2)
 
-    private fun request(url: String): String {
-        val connection = URL(url).openConnection() as HttpURLConnection
+    fun fetchEnergy(baseUrl: String): String =
+        requestJson(
+            "${baseUrl.trimEnd('/')}/api/v1/energy"
+        )
+
+    private fun requestJson(url: String): String {
+        val connection =
+            URL(url).openConnection() as HttpURLConnection
+
         return try {
             connection.requestMethod = "GET"
-            connection.connectTimeout = 3000
-            connection.readTimeout = 5000
-            connection.setRequestProperty("Accept", "application/json")
+            connection.connectTimeout = 3_000
+            connection.readTimeout = 5_000
+            connection.setRequestProperty(
+                "Accept",
+                "application/json"
+            )
+
             val code = connection.responseCode
-            val stream = if (code in 200..299) connection.inputStream else connection.errorStream
-            val body = stream.bufferedReader().use { it.readText() }
-            if (code !in 200..299) error("HTTP $code: $body")
+            val stream =
+                if (code in 200..299) {
+                    connection.inputStream
+                } else {
+                    connection.errorStream
+                }
+
+            val body =
+                stream.bufferedReader().use {
+                    it.readText()
+                }
+
+            if (code !in 200..299) {
+                error("HTTP $code: $body")
+            }
+
             body
         } finally {
             connection.disconnect()
