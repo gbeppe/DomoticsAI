@@ -28,8 +28,13 @@ class CommandStore:
         self._initialize()
 
     def _connect(self):
-        connection = sqlite3.connect(self._path)
+        connection = sqlite3.connect(
+            self._path,
+            check_same_thread=False,
+        )
+
         connection.row_factory = sqlite3.Row
+
         return connection
 
     def _initialize(self):
