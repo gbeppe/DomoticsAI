@@ -12,6 +12,9 @@ from .lights_derived import calculate_lights_derived
 from .knowledge.knowledge_engine import (
     HouseKnowledgeEngine,
 )
+from .knowledge.scene_state import (
+    SceneStateTracker,
+)
 from .models import DigitalTwin, TwinValue
 from .topic_mapper import map_state_topic
 
@@ -27,6 +30,7 @@ class DigitalTwinStore:
         self._twin = DigitalTwin()
         self._listeners = []
         self._knowledge_engine = HouseKnowledgeEngine()
+        self._scene_state_tracker = SceneStateTracker()
         self._restored_entities = 0
 
         self._restore_from_database()
@@ -99,6 +103,19 @@ class DigitalTwinStore:
             kwargs["updated_at"] = updated_at
 
         method(**kwargs)
+
+    def handle_scene_command_event(
+        self,
+        event: dict,
+    ) -> None:
+        self._scene_state_tracker.handle_command_event(
+            event
+        )
+
+        self._recalculate_knowledge(
+            notify=True,
+            persist=True,
+        )
 
     def add_listener(self, listener):
         with self._lock:
@@ -200,7 +217,10 @@ class DigitalTwinStore:
             }
 
         facts = self._knowledge_engine.evaluate(
-            source_domains
+            source_domains,
+            scene_state=(
+                self._scene_state_tracker.snapshot()
+            ),
         )
 
         if not facts:
