@@ -9,6 +9,9 @@ from .energy_derived import (
     read_energy_raw,
 )
 from .lights_derived import calculate_lights_derived
+from .knowledge.knowledge_engine import (
+    HouseKnowledgeEngine,
+)
 from .models import DigitalTwin, TwinValue
 from .topic_mapper import map_state_topic
 
@@ -23,6 +26,7 @@ class DigitalTwinStore:
         self._lock = threading.RLock()
         self._twin = DigitalTwin()
         self._listeners = []
+        self._knowledge_engine = HouseKnowledgeEngine()
         self._restored_entities = 0
 
         self._restore_from_database()
@@ -31,6 +35,10 @@ class DigitalTwinStore:
             persist=True,
         )
         self._recalculate_lights_derived(
+            notify=False,
+            persist=True,
+        )
+        self._recalculate_knowledge(
             notify=False,
             persist=True,
         )
@@ -152,6 +160,15 @@ class DigitalTwinStore:
                 persist=True,
             )
 
+        if address.domain in {
+            "energy",
+            "lights",
+        }:
+            self._recalculate_knowledge(
+                notify=True,
+                persist=True,
+            )
+
         event = {
             "type": "twin_update",
             "domain": address.domain,
@@ -167,6 +184,34 @@ class DigitalTwinStore:
                 pass
 
         return True
+
+    def _recalculate_knowledge(
+        self,
+        *,
+        notify: bool,
+        persist: bool,
+    ):
+        with self._lock:
+            source_domains = {
+                name: dict(values)
+                for name, values
+                in self._twin.domains.items()
+                if name != "knowledge"
+            }
+
+        facts = self._knowledge_engine.evaluate(
+            source_domains
+        )
+
+        if not facts:
+            return
+
+        self._store_derived_domain(
+            domain_name="knowledge",
+            values=facts,
+            notify=notify,
+            persist=persist,
+        )
 
     def _recalculate_energy_derived(
         self,

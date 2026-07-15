@@ -192,6 +192,18 @@ def get_domain(domain_name: str):
     }
 
 
+@app.get("/api/v1/knowledge")
+def get_knowledge():
+    knowledge = twin_store.domain(
+        "knowledge"
+    )
+
+    return {
+        "domain": "knowledge",
+        "facts": knowledge or {},
+    }
+
+
 @app.get("/api/v1/energy")
 def get_energy_view():
     return {
