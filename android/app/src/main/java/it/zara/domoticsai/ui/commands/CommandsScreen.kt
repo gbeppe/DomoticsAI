@@ -37,7 +37,20 @@ fun CommandsScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             item {
-                AssistChip(onClick = {}, label = { Text("Registro operativo") })
+                AssistChip(
+                    onClick = {},
+                    label = {
+                        Text(
+                            if (
+                                state.connectedToStream
+                            ) {
+                                "Aggiornamenti realtime attivi"
+                            } else {
+                                "Stream in riconnessione"
+                            }
+                        )
+                    }
+                )
             }
 
             if (state.loading) {

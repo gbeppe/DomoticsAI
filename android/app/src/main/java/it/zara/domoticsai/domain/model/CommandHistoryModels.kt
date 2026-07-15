@@ -15,6 +15,7 @@ data class CommandHistoryItem(
 
 data class CommandsScreenState(
     val loading: Boolean = false,
+    val connectedToStream: Boolean = false,
     val items: List<CommandHistoryItem> = emptyList(),
     val error: String? = null
 )
