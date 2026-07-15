@@ -30,6 +30,9 @@ from .knowledge.context_api import (
 from .decisions.decision_service import (
     HouseDecisionService,
 )
+from .home_snapshot import (
+    HouseHomeSnapshotService,
+)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -53,6 +56,11 @@ command_store = CommandStore(
     database
 )
 decision_service = HouseDecisionService()
+home_snapshot_service = (
+    HouseHomeSnapshotService(
+        decision_service
+    )
+)
 command_event_stream = CommandEventStream()
 command_manager = None
 
@@ -200,6 +208,20 @@ def get_domain(domain_name: str):
         "domain": domain_name,
         "entities": domain,
     }
+
+
+@app.get("/api/v1/home")
+def get_home_snapshot():
+    knowledge = (
+        twin_store.domain(
+            "knowledge"
+        )
+        or {}
+    )
+
+    return home_snapshot_service.build(
+        knowledge
+    )
 
 
 @app.get("/api/v1/decisions")
