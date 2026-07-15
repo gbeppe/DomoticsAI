@@ -116,6 +116,9 @@ command_manager = CommandManager(
 command_manager.add_listener(
     command_event_stream.publish_from_thread
 )
+command_manager.add_listener(
+    twin_store.handle_scene_command_event
+)
 lights_command_service = LightsCommandService(
     mqtt_service,
     simulation_mode=True,
@@ -189,6 +192,32 @@ def get_domain(domain_name: str):
     return {
         "domain": domain_name,
         "entities": domain,
+    }
+
+
+@app.get("/api/v1/context")
+def get_context():
+    knowledge = (
+        twin_store.domain(
+            "knowledge"
+        )
+        or {}
+    )
+
+    contexts = {
+        name.removeprefix(
+            "context."
+        ): value
+        for name, value
+        in knowledge.items()
+        if name.startswith(
+            "context."
+        )
+    }
+
+    return {
+        "domain": "context",
+        "contexts": contexts,
     }
 
 
