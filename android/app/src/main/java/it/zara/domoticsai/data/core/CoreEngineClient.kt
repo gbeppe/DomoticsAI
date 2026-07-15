@@ -8,6 +8,8 @@ import it.zara.domoticsai.domain.model.HouseDecisionKind
 import it.zara.domoticsai.domain.model.HouseDecisionsResult
 import it.zara.domoticsai.domain.model.HouseContextItem
 import it.zara.domoticsai.domain.model.HouseContextsResult
+import it.zara.domoticsai.domain.model.HomeIntelligenceSnapshot
+import it.zara.domoticsai.domain.model.HomeIntelligenceSummary
 import it.zara.domoticsai.domain.model.LightDevice
 import it.zara.domoticsai.domain.model.LightState
 import it.zara.domoticsai.domain.model.UiCommandState
@@ -161,6 +163,182 @@ class CoreEngineClient {
         }
     }
 
+    private fun parseHouseContext(
+        item: JSONObject
+    ): HouseContextItem {
+        val dataObject =
+            item.optJSONObject("data")
+                ?: JSONObject()
+
+        return HouseContextItem(
+            name =
+                item.optString(
+                    "name",
+                    ""
+                ),
+            priority =
+                item.optInt(
+                    "priority",
+                    0
+                ),
+            category =
+                item.optString(
+                    "category",
+                    "house"
+                ),
+            confidence =
+                item.optDouble(
+                    "confidence",
+                    1.0
+                ),
+            reasons =
+                item.optJSONArray(
+                    "reason"
+                ).toStringList(),
+            observedAt =
+                item.optString(
+                    "observedAt",
+                    ""
+                ).takeIf {
+                    it.isNotBlank()
+                        && !it.equals(
+                            "null",
+                            ignoreCase = true
+                        )
+                },
+            data =
+                dataObject.toStringMap()
+        )
+    }
+
+    fun fetchHomeIntelligence(
+        baseUrl: String
+    ): HomeIntelligenceSnapshot {
+        val root = JSONObject(
+            requestJson(
+                "${baseUrl.trimEnd('/')}/api/v1/home"
+            )
+        )
+
+        val contextsArray =
+            root.optJSONArray("contexts")
+
+        val contexts =
+            if (contextsArray == null) {
+                emptyList()
+            } else {
+                buildList {
+                    for (
+                        index in 0 until
+                            contextsArray.length()
+                    ) {
+                        val item =
+                            contextsArray
+                                .optJSONObject(index)
+                                ?: continue
+
+                        add(
+                            parseHouseContext(
+                                item
+                            )
+                        )
+                    }
+                }.sortedWith(
+                    compareByDescending<
+                        HouseContextItem
+                    > {
+                        it.priority
+                    }.thenBy {
+                        it.name
+                    }
+                )
+            }
+
+        val decisionsArray =
+            root.optJSONArray("decisions")
+
+        val decisions =
+            if (decisionsArray == null) {
+                emptyList()
+            } else {
+                buildList {
+                    for (
+                        index in 0 until
+                            decisionsArray.length()
+                    ) {
+                        val item =
+                            decisionsArray
+                                .optJSONObject(index)
+                                ?: continue
+
+                        add(
+                            parseHouseDecision(
+                                item
+                            )
+                        )
+                    }
+                }.sortedWith(
+                    compareByDescending<
+                        HouseDecisionItem
+                    > {
+                        it.priority
+                    }.thenBy {
+                        it.action
+                    }
+                )
+            }
+
+        val summaryObject =
+            root.optJSONObject("summary")
+                ?: JSONObject()
+
+        return HomeIntelligenceSnapshot(
+            generatedAt =
+                root.optNullableString(
+                    "generatedAt"
+                ),
+            knowledgeUpdatedAt =
+                root.optNullableString(
+                    "knowledgeUpdatedAt"
+                ),
+            contexts = contexts,
+            decisions = decisions,
+            summary =
+                HomeIntelligenceSummary(
+                    activeContexts =
+                        summaryObject.optInt(
+                            "activeContexts",
+                            contexts.size
+                        ),
+                    activeDecisions =
+                        summaryObject.optInt(
+                            "activeDecisions",
+                            decisions.size
+                        ),
+                    warnings =
+                        summaryObject.optInt(
+                            "warnings",
+                            0
+                        ),
+                    recommendations =
+                        summaryObject.optInt(
+                            "recommendations",
+                            0
+                        ),
+                    information =
+                        summaryObject.optInt(
+                            "information",
+                            0
+                        )
+                ),
+            executionEnabled =
+                root.optBoolean(
+                    "executionEnabled",
+                    false
+                )
+        )
+    }
+
     fun fetchActiveContexts(
         baseUrl: String
     ): HouseContextsResult {
@@ -183,53 +361,12 @@ class CoreEngineClient {
                 val item =
                     array.optJSONObject(index)
                         ?: continue
-
-                val dataObject =
-                    item.optJSONObject("data")
-                        ?: JSONObject()
-
                 add(
-                    HouseContextItem(
-                        name =
-                            item.optString(
-                                "name",
-                                ""
-                            ),
-                        priority =
-                            item.optInt(
-                                "priority",
-                                0
-                            ),
-                        category =
-                            item.optString(
-                                "category",
-                                "house"
-                            ),
-                        confidence =
-                            item.optDouble(
-                                "confidence",
-                                1.0
-                            ),
-                        reasons =
-                            item.optJSONArray(
-                                "reason"
-                            ).toStringList(),
-                        observedAt =
-                            item.optString(
-                                "observedAt",
-                                ""
-                            ).takeIf {
-                                it.isNotBlank()
-                                && !it.equals(
-                                    "null",
-                                    ignoreCase = true
-                                )
-                            },
-                        data =
-                            dataObject.toStringMap()
+                    parseHouseContext(
+                        item
                     )
                 )
-            }
+        }
         }.sortedWith(
             compareByDescending<
                 HouseContextItem
@@ -526,3 +663,25 @@ private fun JSONObject.toStringMap(): Map<String, String> =
             }
         }
     }
+
+private fun JSONObject.optNullableString(
+    name: String
+): String? {
+    if (
+        !has(name)
+        || isNull(name)
+    ) {
+        return null
+    }
+
+    return optString(
+        name,
+        ""
+    ).takeIf {
+        it.isNotBlank()
+            && !it.equals(
+                "null",
+                ignoreCase = true
+            )
+    }
+}
