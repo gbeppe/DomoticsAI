@@ -1,6 +1,6 @@
 # DomoticsAI — Project Manifest v2
 
-Generato automaticamente: `2026-07-15T23:16:04.085594+00:00`
+Generato automaticamente: `2026-07-15T23:48:51.430640+00:00`
 
 > Il Manifest descrive l’architettura e i principi del progetto. L’inventario completo è in `PROJECT_INDEX.md`.
 
@@ -13,13 +13,13 @@ Il sistema deve continuare a funzionare senza servizi cloud obbligatori, licenze
 ## Repository
 
 - Branch: `develop`
-- Commit: `07da513`
+- Commit: `d2ba036`
 - Working tree pulita: `no`
-- File modificati: `0`
+- File modificati: `3`
 - File aggiunti: `0`
-- File eliminati: `1`
+- File eliminati: `0`
 - File rinominati: `0`
-- File non tracciati: `0`
+- File non tracciati: `3`
 
 ## Principi e vincoli
 
@@ -152,10 +152,10 @@ L’inventario tecnico completo è disponibile in [`PROJECT_INDEX.md`](PROJECT_I
 
 ## Qualità e test
 
-- Test rilevati: `23` file.
+- Test rilevati: `24` file.
 - Endpoint FastAPI rilevati: `16`.
 - Topic MQTT rilevati nel codice e nella documentazione: `104`.
-- File sorgente e documentali indicizzati: `233`.
+- File sorgente e documentali indicizzati: `237`.
 
 ## Documenti di riferimento
 

@@ -14,6 +14,10 @@ INDEX_OUTPUT = (
 )
 
 
+DEPENDENCY_OUTPUT = (
+    ROOT / "docs" / "DEPENDENCY_INVENTORY.md"
+)
+
 EXCLUDED_PARTS = {
     ".git",
     ".gradle",

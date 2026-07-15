@@ -1,6 +1,6 @@
 # DomoticsAI — Project Index
 
-Generato automaticamente: `2026-07-15T23:16:04.085684+00:00`
+Generato automaticamente: `2026-07-15T23:48:51.430910+00:00`
 
 > Indice tecnico completo del repository. Per la visione architetturale consultare `PROJECT_MANIFEST.md`.
 
@@ -11,15 +11,15 @@ Generato automaticamente: `2026-07-15T23:16:04.085684+00:00`
 | `json` | `13` |
 | `kt` | `42` |
 | `kts` | `3` |
-| `md` | `88` |
-| `py` | `82` |
+| `md` | `89` |
+| `py` | `85` |
 | `sh` | `4` |
 | `toml` | `1` |
 
-- Totale file indicizzati: `233`
+- Totale file indicizzati: `237`
 - Endpoint: `16`
 - Topic MQTT: `104`
-- File di test: `23`
+- File di test: `24`
 
 ## Endpoint FastAPI
 
@@ -286,6 +286,10 @@ Generato automaticamente: `2026-07-15T23:16:04.085684+00:00`
 
 - Funzioni: `test_twin_is_restored_after_restart`, `test_latest_value_replaces_previous_value`
 
+### `core-engine/tests/test_project_dependencies.py`
+
+- Funzioni: `test_collects_python_dependencies`, `test_collects_gradle_dependencies`, `test_collects_npm_dependencies`
+
 ### `core-engine/tests/test_scene_commands.py`
 
 - Classi: `FakePublisher`
@@ -323,9 +327,18 @@ Generato automaticamente: `2026-07-15T23:16:04.085684+00:00`
 
 - Funzioni: `is_allowed`, `project_files`, `relative_path`, `indexed_files`, `run_git`, `git_summary`, `python_symbols`, `kotlin_symbols`, `fastapi_routes`, `mqtt_topics`, `dependency_files`, `test_files`, `documentation_files`, `source_statistics`, `collect_project`
 
+### `scripts/project_manifest/dependencies.py`
+
+- Classi: `DependencyRecord`
+- Funzioni: `_relative`, `_split_python_requirement`, `collect_python_dependencies`, `_gradle_coordinate`, `collect_gradle_dependencies`, `_npm_section_scope`, `collect_npm_dependencies`, `collect_all_dependencies`
+
 ### `scripts/project_manifest/main.py`
 
 - Funzioni: `main`
+
+### `scripts/project_manifest/render_dependencies.py`
+
+- Funzioni: `utc_now_iso`, `_escape`, `render_dependency_inventory`
 
 ### `scripts/project_manifest/render_index.py`
 
@@ -674,6 +687,7 @@ Generato automaticamente: `2026-07-15T23:16:04.085684+00:00`
 - `core-engine/tests/test_lights_derived.py`
 - `core-engine/tests/test_lights_integration.py`
 - `core-engine/tests/test_persistent_twin.py`
+- `core-engine/tests/test_project_dependencies.py`
 - `core-engine/tests/test_scene_commands.py`
 - `core-engine/tests/test_sqlite_database.py`
 - `core-engine/tests/test_topic_mapper.py`
@@ -860,6 +874,7 @@ core-engine/tests/test_lights_commands.py
 core-engine/tests/test_lights_derived.py
 core-engine/tests/test_lights_integration.py
 core-engine/tests/test_persistent_twin.py
+core-engine/tests/test_project_dependencies.py
 core-engine/tests/test_scene_commands.py
 core-engine/tests/test_sqlite_database.py
 core-engine/tests/test_topic_mapper.py
@@ -917,6 +932,7 @@ docs/NodeRED/DASHBOARD_ANDROID_APP_REVERSE_ENGINEERING.md
 docs/NodeRED/FLOW_ANALYSIS.md
 docs/NodeRED/PHASE1_INITIAL_FINDINGS.md
 docs/NodeRED/VARIABLES.md
+docs/PROJECT_INDEX.md
 docs/PROJECT_MANIFEST.md
 docs/Roadmap/ROADMAP_V0_1.md
 docs/TinyCam/TINYCAM.md
@@ -951,7 +967,9 @@ scripts/integrate_command_manager_v010.py
 scripts/project_manifest/__init__.py
 scripts/project_manifest/collectors.py
 scripts/project_manifest/config.py
+scripts/project_manifest/dependencies.py
 scripts/project_manifest/main.py
+scripts/project_manifest/render_dependencies.py
 scripts/project_manifest/render_index.py
 scripts/project_manifest/render_manifest.py
 scripts/run-android.sh
