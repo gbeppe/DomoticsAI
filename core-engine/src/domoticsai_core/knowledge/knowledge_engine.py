@@ -5,12 +5,20 @@ from .facts import KnowledgeFact
 from .reasoners.energy_reasoner import (
     EnergyReasoner,
 )
+from .reasoners.lights_reasoner import (
+    LightsReasoner,
+)
+from .reasoners.pool_reasoner import (
+    PoolReasoner,
+)
 
 
 class HouseKnowledgeEngine:
     def __init__(self) -> None:
         self._reasoners = [
             EnergyReasoner(),
+            LightsReasoner(),
+            PoolReasoner(),
         ]
 
     def evaluate(
