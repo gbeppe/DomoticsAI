@@ -6,6 +6,8 @@ import it.zara.domoticsai.domain.model.CoreHealth
 import it.zara.domoticsai.domain.model.HouseDecisionItem
 import it.zara.domoticsai.domain.model.HouseDecisionKind
 import it.zara.domoticsai.domain.model.HouseDecisionsResult
+import it.zara.domoticsai.domain.model.HouseContextItem
+import it.zara.domoticsai.domain.model.HouseContextsResult
 import it.zara.domoticsai.domain.model.LightDevice
 import it.zara.domoticsai.domain.model.LightState
 import it.zara.domoticsai.domain.model.UiCommandState
@@ -157,6 +159,90 @@ class CoreEngineClient {
                 add(CommandJson.parseHistoryItem(item))
             }
         }
+    }
+
+    fun fetchActiveContexts(
+        baseUrl: String
+    ): HouseContextsResult {
+        val root = JSONObject(
+            requestJson(
+                "${baseUrl.trimEnd('/')}/api/v1/context/active"
+            )
+        )
+
+        val array =
+            root.optJSONArray("contexts")
+                ?: return HouseContextsResult(
+                    contexts = emptyList()
+                )
+
+        val contexts = buildList {
+            for (
+                index in 0 until array.length()
+            ) {
+                val item =
+                    array.optJSONObject(index)
+                        ?: continue
+
+                val dataObject =
+                    item.optJSONObject("data")
+                        ?: JSONObject()
+
+                add(
+                    HouseContextItem(
+                        name =
+                            item.optString(
+                                "name",
+                                ""
+                            ),
+                        priority =
+                            item.optInt(
+                                "priority",
+                                0
+                            ),
+                        category =
+                            item.optString(
+                                "category",
+                                "house"
+                            ),
+                        confidence =
+                            item.optDouble(
+                                "confidence",
+                                1.0
+                            ),
+                        reasons =
+                            item.optJSONArray(
+                                "reason"
+                            ).toStringList(),
+                        observedAt =
+                            item.optString(
+                                "observedAt",
+                                ""
+                            ).takeIf {
+                                it.isNotBlank()
+                                && !it.equals(
+                                    "null",
+                                    ignoreCase = true
+                                )
+                            },
+                        data =
+                            dataObject.toStringMap()
+                    )
+                )
+            }
+        }.sortedWith(
+            compareByDescending<
+                HouseContextItem
+            > {
+                it.priority
+            }.thenBy {
+                it.name
+            }
+        )
+
+        return HouseContextsResult(
+            contexts = contexts
+        )
     }
 
     fun fetchDecisions(
@@ -420,3 +506,23 @@ private fun org.json.JSONArray?.toStringList(): List<String> {
         }
     }
 }
+
+private fun JSONObject.toStringMap(): Map<String, String> =
+    buildMap {
+        val names = keys()
+
+        while (names.hasNext()) {
+            val name = names.next()
+            val value = opt(name)
+
+            if (
+                value != null
+                && value != JSONObject.NULL
+            ) {
+                put(
+                    name,
+                    value.toString()
+                )
+            }
+        }
+    }
