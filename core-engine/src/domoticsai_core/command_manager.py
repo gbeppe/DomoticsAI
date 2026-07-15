@@ -6,6 +6,9 @@ from .command_manager_models import (
     CreateCommandRequest, TERMINAL_STATES, utc_now_iso,
 )
 from .lights_derived import ACTIVE_DEVICES
+from .knowledge.scenes_registry import (
+    is_known_scene,
+)
 
 class CommandManager:
     def __init__(self, store, publisher, *, simulation_mode=True, timeout_scan_seconds=1.0):
@@ -13,6 +16,7 @@ class CommandManager:
         self._publisher = publisher
         self._simulation_mode = simulation_mode
         self._timeout_scan_seconds = timeout_scan_seconds
+        self._listeners = []
         self._stop = threading.Event()
         self._thread = threading.Thread(
             target=self._timeout_loop,
@@ -20,6 +24,9 @@ class CommandManager:
             daemon=True,
         )
         self._thread.start()
+
+    def add_listener(self, listener):
+        self._listeners.append(listener)
 
     def stop(self):
         self._stop.set()
@@ -114,41 +121,143 @@ class CommandManager:
         return False
 
     def _validate(self, command):
-        if command.domain != 'lights':
-            return f'Unsupported domain: {command.domain}'
-        if command.action != 'set_state':
-            return f'Unsupported lights action: {command.action}'
-        if command.target not in ACTIVE_DEVICES:
-            return f'Unknown or inactive target: {command.target}'
-        desired = str(command.parameters.get('state', '')).upper()
-        if desired not in {'ON', 'OFF'}:
-            return 'parameters.state must be ON or OFF'
-        command.parameters['state'] = desired
-        return None
+        if command.domain == 'lights':
+            if command.action != 'set_state':
+                return (
+                    'Unsupported lights action: '
+                    f'{command.action}'
+                )
+
+            if command.target not in ACTIVE_DEVICES:
+                return (
+                    'Unknown or inactive target: '
+                    f'{command.target}'
+                )
+
+            desired = str(
+                command.parameters.get(
+                    'state',
+                    '',
+                )
+            ).upper()
+
+            if desired not in {'ON', 'OFF'}:
+                return (
+                    'parameters.state must be '
+                    'ON or OFF'
+                )
+
+            command.parameters['state'] = desired
+            return None
+
+        if command.domain == 'scenes':
+            if command.action != 'activate':
+                return (
+                    'Unsupported scenes action: '
+                    f'{command.action}'
+                )
+
+            if not is_known_scene(
+                command.target
+            ):
+                return (
+                    'Unknown scene: '
+                    f'{command.target}'
+                )
+
+            return None
+
+        return (
+            'Unsupported domain: '
+            f'{command.domain}'
+        )
 
     @staticmethod
     def _build_topics(command):
-        area, device_id = command.target.split('/', 1)
-        return (
-            f'domoticsai/v1/cmd/lights/{area}/{device_id}',
-            f'domoticsai/v1/ack/lights/{area}/{device_id}/{command.command_id}',
+        if command.domain == 'lights':
+            area, device_id = (
+                command.target.split(
+                    '/',
+                    1,
+                )
+            )
+
+            return (
+                (
+                    'domoticsai/v1/cmd/'
+                    f'lights/{area}/{device_id}'
+                ),
+                (
+                    'domoticsai/v1/ack/'
+                    f'lights/{area}/{device_id}/'
+                    f'{command.command_id}'
+                ),
+            )
+
+        if command.domain == 'scenes':
+            scene_id = command.target
+
+            return (
+                (
+                    'domoticsai/v1/cmd/'
+                    f'scenes/{scene_id}'
+                ),
+                (
+                    'domoticsai/v1/ack/'
+                    f'scenes/{scene_id}/'
+                    f'{command.command_id}'
+                ),
+            )
+
+        raise ValueError(
+            f'Unsupported domain: {command.domain}'
         )
 
     @staticmethod
     def _payload(command):
-        area, device_id = command.target.split('/', 1)
-        return json.dumps({
+        payload = {
             'request_id': command.command_id,
             'domain': command.domain,
             'action': command.action,
-            'area': area,
-            'device_id': device_id,
-            'desired_state': command.parameters['state'],
             'created_at': command.created_at,
             'expires_at': command.expires_at,
             'source': command.source.value,
             'mode': command.mode,
-        }, ensure_ascii=False)
+        }
+
+        if command.domain == 'lights':
+            area, device_id = (
+                command.target.split(
+                    '/',
+                    1,
+                )
+            )
+
+            payload.update({
+                'area': area,
+                'device_id': device_id,
+                'desired_state': (
+                    command.parameters[
+                        'state'
+                    ]
+                ),
+            })
+
+        elif command.domain == 'scenes':
+            payload.update({
+                'scene_id': command.target,
+            })
+
+        else:
+            raise ValueError(
+                'Unsupported domain: '
+                f'{command.domain}'
+            )
+
+        return json.dumps(
+            payload,
+            ensure_ascii=False,
+        )
 
     def _transition(self, command, state, message, details=None):
         command.state = state
@@ -160,6 +269,23 @@ class CommandManager:
             message=message,
             details=details or {},
         ))
+
+        event_payload = {
+            "commandId": command.command_id,
+            "domain": command.domain,
+            "action": command.action,
+            "target": command.target,
+            "state": state.value,
+            "updatedAt": command.updated_at,
+            "message": message,
+            "details": details or {},
+        }
+
+        for listener in list(self._listeners):
+            try:
+                listener(event_payload)
+            except Exception:
+                pass
 
     def _timeout_loop(self):
         while not self._stop.wait(self._timeout_scan_seconds):

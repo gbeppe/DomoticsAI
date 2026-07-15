@@ -1,1361 +1,1420 @@
 [
-  {
-    "id": "73061f446631431f",
-    "type": "tab",
-    "label": "00 Core",
-    "disabled": false,
-    "info": ""
-  },
-  {
-    "id": "68905cad6604439b",
-    "type": "tab",
-    "label": "01 Availability",
-    "disabled": false,
-    "info": ""
-  },
-  {
-    "id": "42e8d1c3858f48ca",
-    "type": "tab",
-    "label": "02 Energy",
-    "disabled": false,
-    "info": ""
-  },
-  {
-    "id": "8a04d658c3d541c4",
-    "type": "tab",
-    "label": "03 Climate",
-    "disabled": false,
-    "info": ""
-  },
-  {
-    "id": "a328dcfad02d4f3b",
-    "type": "tab",
-    "label": "04 VMC",
-    "disabled": false,
-    "info": ""
-  },
-  {
-    "id": "f158c2bc8797404f",
-    "type": "tab",
-    "label": "05 Logs",
-    "disabled": false,
-    "info": ""
-  },
-  {
-    "id": "61ac04268ec146e9",
-    "type": "tab",
-    "label": "06 Simulator",
-    "disabled": false,
-    "info": ""
-  },
-  {
-    "id": "73fb6eba0e0c4fb0",
-    "type": "mqtt-broker",
-    "name": "DomoticsAI Test Broker",
-    "broker": "127.0.0.1",
-    "port": "1883",
-    "clientid": "domoticsai-gateway-test",
-    "autoConnect": true,
-    "usetls": false,
-    "protocolVersion": "4",
-    "keepalive": "60",
-    "cleansession": true,
-    "autoUnsubscribe": true,
-    "birthTopic": "domoticsai/v1/availability/gateway",
-    "birthQos": "1",
-    "birthPayload": "{\"status\":\"online\"}",
-    "birthMsg": {},
-    "closeTopic": "domoticsai/v1/availability/gateway",
-    "closeQos": "1",
-    "closePayload": "{\"status\":\"offline\"}",
-    "closeMsg": {},
-    "willTopic": "domoticsai/v1/availability/gateway",
-    "willQos": "1",
-    "willPayload": "{\"status\":\"offline\"}",
-    "willMsg": {},
-    "userProps": "",
-    "sessionExpiry": ""
-  },
-  {
-    "id": "27cc6314b4e24703",
-    "type": "mqtt-broker",
-    "name": "Production MQTT 192.168.1.20 READ ONLY",
-    "broker": "192.168.1.20",
-    "port": "1883",
-    "clientid": "domoticsai-ro-20",
-    "autoConnect": true,
-    "usetls": false,
-    "protocolVersion": "4",
-    "keepalive": "60",
-    "cleansession": true,
-    "autoUnsubscribe": true,
-    "birthTopic": "",
-    "birthQos": "0",
-    "birthPayload": "",
-    "birthMsg": {},
-    "closeTopic": "",
-    "closePayload": "",
-    "closeMsg": {},
-    "willTopic": "",
-    "willQos": "0",
-    "willPayload": "",
-    "willMsg": {},
-    "userProps": "",
-    "sessionExpiry": ""
-  },
-  {
-    "id": "ab27576e65654d9a",
-    "type": "mqtt-broker",
-    "name": "EmonCMS MQTT 192.168.1.15 READ ONLY",
-    "broker": "192.168.1.15",
-    "port": "1883",
-    "clientid": "domoticsai-ro-15",
-    "autoConnect": true,
-    "usetls": false,
-    "protocolVersion": "4",
-    "keepalive": "60",
-    "cleansession": true,
-    "autoUnsubscribe": true,
-    "birthTopic": "",
-    "birthQos": "0",
-    "birthPayload": "",
-    "birthMsg": {},
-    "closeTopic": "",
-    "closePayload": "",
-    "closeMsg": {},
-    "willTopic": "",
-    "willQos": "0",
-    "willPayload": "",
-    "willMsg": {},
-    "userProps": "",
-    "sessionExpiry": ""
-  },
-  {
-    "id": "00854f083e0e430d",
-    "type": "inject",
-    "z": "73061f446631431f",
-    "name": "Initialize Gateway",
-    "props": [
-      {
-        "p": "payload"
-      },
-      {
-        "p": "topic",
-        "vt": "str"
-      }
-    ],
-    "repeat": "",
-    "crontab": "",
-    "once": true,
-    "onceDelay": "1",
-    "topic": "system/init",
-    "payload": "",
-    "payloadType": "date",
-    "x": 180,
-    "y": 100,
-    "wires": [
-      [
-        "6d4aae9ab5534d12"
-      ]
-    ]
-  },
-  {
-    "id": "6d4aae9ab5534d12",
-    "type": "function",
-    "z": "73061f446631431f",
-    "name": "Core Configuration",
-    "func": "const config = {\n    baseTopic: \"domoticsai/v1\",\n    version: \"0.1.0\",\n    mode: \"LIVE_READ_ONLY\",\n    allowLegacyCommands: false,\n    startedAt: new Date().toISOString()\n};\nglobal.set(\"domoticsai_config\", config);\nmsg.topic = `${config.baseTopic}/log/gateway`;\nmsg.payload = {\n    ts: new Date().toISOString(),\n    level: \"INFO\",\n    component: \"core\",\n    event: \"GATEWAY_INITIALIZED\",\n    details: config\n};\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 450,
-    "y": 100,
-    "wires": [
-      [
-        "df02c4caa0c445c0"
-      ]
-    ]
-  },
-  {
-    "id": "d110d92c9a3e4f05",
-    "type": "catch",
-    "z": "73061f446631431f",
-    "name": "Catch All Errors",
-    "scope": null,
-    "uncaught": false,
-    "x": 170,
-    "y": 180,
-    "wires": [
-      [
-        "c5e081cb5a424599"
-      ]
-    ]
-  },
-  {
-    "id": "c5e081cb5a424599",
-    "type": "function",
-    "z": "73061f446631431f",
-    "name": "Format Error Log",
-    "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nmsg.topic = `${config.baseTopic}/log/gateway`;\nmsg.payload = {\n    ts: new Date().toISOString(),\n    level: \"ERROR\",\n    component: msg.error?.source?.name || \"unknown\",\n    event: \"NODE_RED_ERROR\",\n    message: msg.error?.message || \"Unknown error\"\n};\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 430,
-    "y": 180,
-    "wires": [
-      [
-        "df02c4caa0c445c0"
-      ]
-    ]
-  },
-  {
-    "id": "14dcdae0b12f4a02",
-    "type": "status",
-    "z": "73061f446631431f",
-    "name": "Node Status Events",
-    "scope": null,
-    "x": 180,
-    "y": 260,
-    "wires": [
-      [
-        "657bf2d5c9124773"
-      ]
-    ]
-  },
-  {
-    "id": "657bf2d5c9124773",
-    "type": "function",
-    "z": "73061f446631431f",
-    "name": "Format Status Log",
-    "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nmsg.topic = `${config.baseTopic}/log/gateway`;\nmsg.payload = {\n    ts: new Date().toISOString(),\n    level: \"INFO\",\n    component: msg.status?.source?.name || \"node-red\",\n    event: \"NODE_STATUS\",\n    status: msg.status?.text || \"\",\n    fill: msg.status?.fill || \"\",\n    shape: msg.status?.shape || \"\"\n};\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 430,
-    "y": 260,
-    "wires": [
-      [
-        "df02c4caa0c445c0"
-      ]
-    ]
-  },
-  {
-    "id": "df02c4caa0c445c0",
-    "type": "link out",
-    "z": "73061f446631431f",
-    "name": "Log Bus Out",
-    "mode": "link",
-    "links": [
-      "ff2a4217fb1d4820"
-    ],
-    "x": 695,
-    "y": 180,
-    "wires": []
-  },
-  {
-    "id": "e8b353ca8a4c47d9",
-    "type": "inject",
-    "z": "68905cad6604439b",
-    "name": "Gateway Heartbeat 30s",
-    "props": [
-      {
-        "p": "payload"
-      },
-      {
-        "p": "topic",
-        "vt": "str"
-      }
-    ],
-    "repeat": "30",
-    "crontab": "",
-    "once": true,
-    "onceDelay": "2",
-    "topic": "",
-    "payload": "",
-    "payloadType": "date",
-    "x": 190,
-    "y": 120,
-    "wires": [
-      [
-        "499358f9c4a0466e"
-      ]
-    ]
-  },
-  {
-    "id": "499358f9c4a0466e",
-    "type": "function",
-    "z": "68905cad6604439b",
-    "name": "Build Availability",
-    "func": "const config = global.get(\"domoticsai_config\") || {\n    baseTopic:\"domoticsai/v1\",\n    version:\"0.1.0\",\n    mode:\"SIMULATION\"\n};\nmsg.topic = `${config.baseTopic}/availability/gateway`;\nmsg.payload = JSON.stringify({\n    status:\"online\",\n    ts:new Date().toISOString(),\n    version:config.version,\n    mode:config.mode\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 450,
-    "y": 120,
-    "wires": [
-      [
-        "981716fd523849a0"
-      ]
-    ]
-  },
-  {
-    "id": "981716fd523849a0",
-    "type": "mqtt out",
-    "z": "68905cad6604439b",
-    "name": "Publish Availability",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 730,
-    "y": 120,
-    "wires": []
-  },
-  {
-    "id": "3c51b2be1d1746a9",
-    "type": "status",
-    "z": "68905cad6604439b",
-    "name": "Status Production 20",
-    "scope": [],
-    "x": 190,
-    "y": 220,
-    "wires": [
-      [
-        "6954c0c228bf4882"
-      ]
-    ]
-  },
-  {
-    "id": "6954c0c228bf4882",
-    "type": "function",
-    "z": "68905cad6604439b",
-    "name": "Format Production 20 Availability",
-    "func": "const base = (global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"}).baseTopic;\nconst text = msg.status?.text || \"\";\nconst online = /connected/i.test(text) && !/disconnected/i.test(text);\nmsg.topic = `${base}/availability/production_mqtt_20`;\nmsg.payload = JSON.stringify({\n    status: online ? \"online\" : \"offline\",\n    detail: text,\n    ts: new Date().toISOString(),\n    readOnly: true\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 500,
-    "y": 220,
-    "wires": [
-      [
-        "0a4d4d9c77eb4d00"
-      ]
-    ]
-  },
-  {
-    "id": "0a4d4d9c77eb4d00",
-    "type": "mqtt out",
-    "z": "68905cad6604439b",
-    "name": "Publish Production 20 Availability",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 800,
-    "y": 220,
-    "wires": []
-  },
-  {
-    "id": "638ecca2b29b40f6",
-    "type": "status",
-    "z": "68905cad6604439b",
-    "name": "Status Production 15",
-    "scope": [
-      "d762e79a82974c38",
-      "7680e804148249bc",
-      "96a8dcd3047b42f2",
-      "571e0d99226f457a",
-      "a9e8a0550e174c77",
-      "17075795f84e4605",
-      "359bfa9a24054c1f",
-      "f34a00506ac34b10"
-    ],
-    "x": 190,
-    "y": 300,
-    "wires": [
-      [
-        "f9605663e3564b3f"
-      ]
-    ]
-  },
-  {
-    "id": "f9605663e3564b3f",
-    "type": "function",
-    "z": "68905cad6604439b",
-    "name": "Format Production 15 Availability",
-    "func": "const base = (global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"}).baseTopic;\nconst text = msg.status?.text || \"\";\nconst online = /connected/i.test(text) && !/disconnected/i.test(text);\nmsg.topic = `${base}/availability/production_mqtt_15`;\nmsg.payload = JSON.stringify({\n    status: online ? \"online\" : \"offline\",\n    detail: text,\n    ts: new Date().toISOString(),\n    readOnly: true\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 500,
-    "y": 300,
-    "wires": [
-      [
-        "5dc830ceba0a4046"
-      ]
-    ]
-  },
-  {
-    "id": "5dc830ceba0a4046",
-    "type": "mqtt out",
-    "z": "68905cad6604439b",
-    "name": "Publish Production 15 Availability",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 800,
-    "y": 300,
-    "wires": []
-  },
-  {
-    "id": "d762e79a82974c38",
-    "type": "mqtt in",
-    "z": "42e8d1c3858f48ca",
-    "name": "Legacy Solar Power",
-    "topic": "TeslaPowerwall/solar_instant_power",
-    "qos": "1",
-    "datatype": "auto-detect",
-    "broker": "ab27576e65654d9a",
-    "nl": false,
-    "rap": true,
-    "rh": 0,
-    "inputs": 0,
-    "x": 190,
-    "y": 100,
-    "wires": [
-      [
-        "fccb96f11d244871"
-      ]
-    ]
-  },
-  {
-    "id": "fccb96f11d244871",
-    "type": "function",
-    "z": "42e8d1c3858f48ca",
-    "name": "Normalize Solar Power",
-    "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number(msg.payload); if (!Number.isFinite(value)) return null; const unit = \"W\";\nflow.set(\"energy_solar_power_w\", value);\nmsg.topic = `${config.baseTopic}/state/energy/solar_power_w`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 470,
-    "y": 100,
-    "wires": [
-      [
-        "60780e1f62304e93"
-      ]
-    ]
-  },
-  {
-    "id": "60780e1f62304e93",
-    "type": "mqtt out",
-    "z": "42e8d1c3858f48ca",
-    "name": "Publish Solar Power",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 740,
-    "y": 100,
-    "wires": []
-  },
-  {
-    "id": "7680e804148249bc",
-    "type": "mqtt in",
-    "z": "42e8d1c3858f48ca",
-    "name": "Legacy Home Load",
-    "topic": "TeslaPowerwall/load_instant_power",
-    "qos": "1",
-    "datatype": "auto-detect",
-    "broker": "ab27576e65654d9a",
-    "nl": false,
-    "rap": true,
-    "rh": 0,
-    "inputs": 0,
-    "x": 190,
-    "y": 180,
-    "wires": [
-      [
-        "37c5a465c5cf4dbc"
-      ]
-    ]
-  },
-  {
-    "id": "37c5a465c5cf4dbc",
-    "type": "function",
-    "z": "42e8d1c3858f48ca",
-    "name": "Normalize Home Load",
-    "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number(msg.payload); if (!Number.isFinite(value)) return null; const unit = \"W\";\nflow.set(\"energy_home_load_w\", value);\nmsg.topic = `${config.baseTopic}/state/energy/home_load_w`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 470,
-    "y": 180,
-    "wires": [
-      [
-        "dc3056877d13414e"
-      ]
-    ]
-  },
-  {
-    "id": "dc3056877d13414e",
-    "type": "mqtt out",
-    "z": "42e8d1c3858f48ca",
-    "name": "Publish Home Load",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 740,
-    "y": 180,
-    "wires": []
-  },
-  {
-    "id": "96a8dcd3047b42f2",
-    "type": "mqtt in",
-    "z": "42e8d1c3858f48ca",
-    "name": "Legacy Powerwall SOC",
-    "topic": "TeslaPowerwall/SOE",
-    "qos": "1",
-    "datatype": "auto-detect",
-    "broker": "ab27576e65654d9a",
-    "nl": false,
-    "rap": true,
-    "rh": 0,
-    "inputs": 0,
-    "x": 190,
-    "y": 260,
-    "wires": [
-      [
-        "5f0cf019ca914e37"
-      ]
-    ]
-  },
-  {
-    "id": "5f0cf019ca914e37",
-    "type": "function",
-    "z": "42e8d1c3858f48ca",
-    "name": "Normalize Powerwall SOC",
-    "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number(msg.payload); if (!Number.isFinite(value)) return null; const unit = \"%\";\nmsg.topic = `${config.baseTopic}/state/energy/powerwall_soc_pct`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 470,
-    "y": 260,
-    "wires": [
-      [
-        "12139c6906e249c6"
-      ]
-    ]
-  },
-  {
-    "id": "12139c6906e249c6",
-    "type": "mqtt out",
-    "z": "42e8d1c3858f48ca",
-    "name": "Publish Powerwall SOC",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 740,
-    "y": 260,
-    "wires": []
-  },
-  {
-    "id": "571e0d99226f457a",
-    "type": "mqtt in",
-    "z": "8a04d658c3d541c4",
-    "name": "Legacy Living Temperature",
-    "topic": "emon/emonth5/temperature_calibrated",
-    "qos": "1",
-    "datatype": "auto-detect",
-    "broker": "ab27576e65654d9a",
-    "nl": false,
-    "rap": true,
-    "rh": 0,
-    "inputs": 0,
-    "x": 190,
-    "y": 100,
-    "wires": [
-      [
-        "f8e867b771db454c"
-      ]
-    ]
-  },
-  {
-    "id": "f8e867b771db454c",
-    "type": "function",
-    "z": "8a04d658c3d541c4",
-    "name": "Normalize Living Temperature",
-    "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number(msg.payload); if (!Number.isFinite(value)) return null; const unit = \"°C\";\nmsg.topic = `${config.baseTopic}/state/climate/living_temperature_c`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 470,
-    "y": 100,
-    "wires": [
-      [
-        "2c105eceb1264cd1"
-      ]
-    ]
-  },
-  {
-    "id": "2c105eceb1264cd1",
-    "type": "mqtt out",
-    "z": "8a04d658c3d541c4",
-    "name": "Publish Living Temperature",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 740,
-    "y": 100,
-    "wires": []
-  },
-  {
-    "id": "a9e8a0550e174c77",
-    "type": "mqtt in",
-    "z": "8a04d658c3d541c4",
-    "name": "Legacy Living Humidex",
-    "topic": "zara/domotics/LivingHumidex",
-    "qos": "1",
-    "datatype": "auto-detect",
-    "broker": "ab27576e65654d9a",
-    "nl": false,
-    "rap": true,
-    "rh": 0,
-    "inputs": 0,
-    "x": 190,
-    "y": 180,
-    "wires": [
-      [
-        "eacc73cb39ac4325"
-      ]
-    ]
-  },
-  {
-    "id": "eacc73cb39ac4325",
-    "type": "function",
-    "z": "8a04d658c3d541c4",
-    "name": "Normalize Living Humidex",
-    "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number(msg.payload); if (!Number.isFinite(value)) return null; const unit = \"\";\nmsg.topic = `${config.baseTopic}/state/climate/living_humidex`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 470,
-    "y": 180,
-    "wires": [
-      [
-        "c98e386c16bd4687"
-      ]
-    ]
-  },
-  {
-    "id": "c98e386c16bd4687",
-    "type": "mqtt out",
-    "z": "8a04d658c3d541c4",
-    "name": "Publish Living Humidex",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 740,
-    "y": 180,
-    "wires": []
-  },
-  {
-    "id": "17075795f84e4605",
-    "type": "mqtt in",
-    "z": "8a04d658c3d541c4",
-    "name": "Legacy Bedroom Humidex",
-    "topic": "zara/domotics/BedroomHumidex",
-    "qos": "1",
-    "datatype": "auto-detect",
-    "broker": "ab27576e65654d9a",
-    "nl": false,
-    "rap": true,
-    "rh": 0,
-    "inputs": 0,
-    "x": 190,
-    "y": 260,
-    "wires": [
-      [
-        "a5d31ac8814b4dbb"
-      ]
-    ]
-  },
-  {
-    "id": "a5d31ac8814b4dbb",
-    "type": "function",
-    "z": "8a04d658c3d541c4",
-    "name": "Normalize Bedroom Humidex",
-    "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number(msg.payload); if (!Number.isFinite(value)) return null; const unit = \"\";\nmsg.topic = `${config.baseTopic}/state/climate/bedroom_humidex`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 470,
-    "y": 260,
-    "wires": [
-      [
-        "2d21a1d7136f4848"
-      ]
-    ]
-  },
-  {
-    "id": "2d21a1d7136f4848",
-    "type": "mqtt out",
-    "z": "8a04d658c3d541c4",
-    "name": "Publish Bedroom Humidex",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 740,
-    "y": 260,
-    "wires": []
-  },
-  {
-    "id": "359bfa9a24054c1f",
-    "type": "mqtt in",
-    "z": "8a04d658c3d541c4",
-    "name": "Legacy AC Power",
-    "topic": "emon/AC/emeter_power",
-    "qos": "1",
-    "datatype": "auto-detect",
-    "broker": "ab27576e65654d9a",
-    "nl": false,
-    "rap": true,
-    "rh": 0,
-    "inputs": 0,
-    "x": 190,
-    "y": 340,
-    "wires": [
-      [
-        "cfb363586d454ce1"
-      ]
-    ]
-  },
-  {
-    "id": "cfb363586d454ce1",
-    "type": "function",
-    "z": "8a04d658c3d541c4",
-    "name": "Normalize AC Power",
-    "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Math.abs(Number(msg.payload)); if (!Number.isFinite(value)) return null; const unit = \"W\";\nmsg.topic = `${config.baseTopic}/state/climate/ac_power_w`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 470,
-    "y": 340,
-    "wires": [
-      [
-        "168406153bd6490c"
-      ]
-    ]
-  },
-  {
-    "id": "168406153bd6490c",
-    "type": "mqtt out",
-    "z": "8a04d658c3d541c4",
-    "name": "Publish AC Power",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 740,
-    "y": 340,
-    "wires": []
-  },
-  {
-    "id": "1b8a0b02be8d4ec5",
-    "type": "mqtt in",
-    "z": "8a04d658c3d541c4",
-    "name": "Climate Enable Command",
-    "topic": "domoticsai/v1/cmd/climate/enabled",
-    "qos": "1",
-    "datatype": "auto-detect",
-    "broker": "73fb6eba0e0c4fb0",
-    "nl": false,
-    "rap": true,
-    "rh": 0,
-    "inputs": 0,
-    "x": 190,
-    "y": 460,
-    "wires": [
-      [
-        "a3ff151949884be5"
-      ]
-    ]
-  },
-  {
-    "id": "a3ff151949884be5",
-    "type": "function",
-    "z": "8a04d658c3d541c4",
-    "name": "Validate Climate Command (Simulation Only)",
-    "func": "const config = global.get(\"domoticsai_config\") || {\n    baseTopic:\"domoticsai/v1\",\n    mode:\"SIMULATION\",\n    allowLegacyCommands:false\n};\nconst p = typeof msg.payload === \"string\" ? JSON.parse(msg.payload) : msg.payload;\nif (!p || typeof p.commandId !== \"string\" || typeof p.value !== \"boolean\") {\n    msg.topic = `${config.baseTopic}/ack/${p?.commandId || \"unknown\"}`;\n    msg.payload = JSON.stringify({\n        commandId:p?.commandId || null,\n        status:\"rejected\",\n        error:\"INVALID_PAYLOAD\",\n        ts:new Date().toISOString()\n    });\n    return [msg, null];\n}\nif (config.mode !== \"SIMULATION\" || config.allowLegacyCommands !== false) {\n    msg.topic = `${config.baseTopic}/ack/${p.commandId}`;\n    msg.payload = JSON.stringify({\n        commandId:p.commandId,\n        status:\"rejected\",\n        error:\"SAFETY_GUARD\",\n        ts:new Date().toISOString()\n    });\n    return [msg, null];\n}\nconst ack = {\n    topic:`${config.baseTopic}/ack/${p.commandId}`,\n    payload:JSON.stringify({\n        commandId:p.commandId,\n        status:\"confirmed\",\n        simulated:true,\n        ts:new Date().toISOString()\n    }),\n    qos:1,\n    retain:false\n};\nconst log = {\n    topic:`${config.baseTopic}/log/command`,\n    payload:{\n        ts:new Date().toISOString(),\n        level:\"INFO\",\n        component:\"climate\",\n        event:\"SIMULATED_COMMAND\",\n        commandId:p.commandId,\n        requestedValue:p.value\n    }\n};\nreturn [ack, log];",
-    "outputs": 2,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 500,
-    "y": 460,
-    "wires": [
-      [
-        "3eececdbb0664c9a"
-      ],
-      []
-    ]
-  },
-  {
-    "id": "3eececdbb0664c9a",
-    "type": "mqtt out",
-    "z": "8a04d658c3d541c4",
-    "name": "Publish Command Ack",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 790,
-    "y": 440,
-    "wires": []
-  },
-  {
-    "id": "f34a00506ac34b10",
-    "type": "mqtt in",
-    "z": "a328dcfad02d4f3b",
-    "name": "Legacy VMC Speed",
-    "topic": "/esp8266/brink/fanspeed",
-    "qos": "1",
-    "datatype": "auto-detect",
-    "broker": "ab27576e65654d9a",
-    "nl": false,
-    "rap": true,
-    "rh": 0,
-    "inputs": 0,
-    "x": 190,
-    "y": 100,
-    "wires": [
-      [
-        "f7378a9b9c3948d4"
-      ]
-    ]
-  },
-  {
-    "id": "f7378a9b9c3948d4",
-    "type": "function",
-    "z": "a328dcfad02d4f3b",
-    "name": "Normalize VMC Speed",
-    "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number.parseInt(msg.payload); if (!Number.isInteger(value)) return null; const unit = \"level\";\nmsg.topic = `${config.baseTopic}/state/vmc/speed`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 470,
-    "y": 100,
-    "wires": [
-      [
-        "736618c5a5974b3c"
-      ]
-    ]
-  },
-  {
-    "id": "736618c5a5974b3c",
-    "type": "mqtt out",
-    "z": "a328dcfad02d4f3b",
-    "name": "Publish VMC Speed",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 740,
-    "y": 100,
-    "wires": []
-  },
-  {
-    "id": "ff2a4217fb1d4820",
-    "type": "link in",
-    "z": "f158c2bc8797404f",
-    "name": "Log Bus In",
-    "links": [
-      "df02c4caa0c445c0"
-    ],
-    "x": 155,
-    "y": 120,
-    "wires": [
-      [
-        "6275c0353e66424c",
-        "fd9ac4c6008b4a49"
-      ]
-    ]
-  },
-  {
-    "id": "6275c0353e66424c",
-    "type": "debug",
-    "z": "f158c2bc8797404f",
-    "name": "Gateway Log",
-    "active": true,
-    "tosidebar": true,
-    "console": false,
-    "tostatus": false,
-    "complete": "true",
-    "targetType": "full",
-    "statusVal": "",
-    "statusType": "auto",
-    "x": 410,
-    "y": 100,
-    "wires": []
-  },
-  {
-    "id": "fd9ac4c6008b4a49",
-    "type": "mqtt out",
-    "z": "f158c2bc8797404f",
-    "name": "Publish Gateway Log",
-    "topic": "",
-    "qos": "1",
-    "retain": "false",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 440,
-    "y": 160,
-    "wires": []
-  },
-  {
-    "id": "617f98cf0bd243a4",
-    "type": "inject",
-    "z": "61ac04268ec146e9",
-    "name": "Simulate Summer Day",
-    "props": [
-      {
-        "p": "payload"
-      },
-      {
-        "p": "topic",
-        "vt": "str"
-      }
-    ],
-    "repeat": "",
-    "crontab": "",
-    "once": false,
-    "onceDelay": "3",
-    "topic": "simulator/summer-day",
-    "payload": "",
-    "payloadType": "date",
-    "x": 200,
-    "y": 120,
-    "wires": [
-      [
-        "78ec6c0335464cce"
-      ]
-    ]
-  },
-  {
-    "id": "78ec6c0335464cce",
-    "type": "function",
-    "z": "61ac04268ec146e9",
-    "name": "Generate Simulated State",
-    "func": "const config = global.get(\"domoticsai_config\") || {\n    baseTopic:\"domoticsai/v1\",\n    mode:\"SIMULATION\"\n};\nif (config.mode !== \"SIMULATION\") return null;\n\nconst now = Date.now();\nconst wave = Math.sin(now / 60000);\nconst ts = new Date().toISOString();\n\nreturn [\n    {\n        topic:`${config.baseTopic}/state/energy/solar_power_w`,\n        payload:JSON.stringify({value:Math.round(2600 + wave*600),unit:\"W\",ts,quality:\"simulated\"}),\n        qos:1,retain:true\n    },\n    {\n        topic:`${config.baseTopic}/state/energy/home_load_w`,\n        payload:JSON.stringify({value:Math.round(1200 + wave*180),unit:\"W\",ts,quality:\"simulated\"}),\n        qos:1,retain:true\n    },\n    {\n        topic:`${config.baseTopic}/state/energy/powerwall_soc_pct`,\n        payload:JSON.stringify({value:84.2,unit:\"%\",ts,quality:\"simulated\"}),\n        qos:1,retain:true\n    },\n    {\n        topic:`${config.baseTopic}/state/climate/living_temperature_c`,\n        payload:JSON.stringify({value:Number((24.3 + wave*0.3).toFixed(1)),unit:\"°C\",ts,quality:\"simulated\"}),\n        qos:1,retain:true\n    },\n    {\n        topic:`${config.baseTopic}/state/climate/living_humidex`,\n        payload:JSON.stringify({value:Number((29.8 + wave*0.4).toFixed(1)),unit:\"\",ts,quality:\"simulated\"}),\n        qos:1,retain:true\n    },\n    {\n        topic:`${config.baseTopic}/state/vmc/speed`,\n        payload:JSON.stringify({value:2,unit:\"level\",ts,quality:\"simulated\"}),\n        qos:1,retain:true\n    }\n];",
-    "outputs": 6,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 470,
-    "y": 120,
-    "wires": [
-      [
-        "6bfacd3038e74d45"
-      ],
-      [
-        "6bfacd3038e74d45"
-      ],
-      [
-        "6bfacd3038e74d45"
-      ],
-      [
-        "6bfacd3038e74d45"
-      ],
-      [
-        "6bfacd3038e74d45"
-      ],
-      [
-        "6bfacd3038e74d45"
-      ]
-    ]
-  },
-  {
-    "id": "6bfacd3038e74d45",
-    "type": "mqtt out",
-    "z": "61ac04268ec146e9",
-    "name": "Publish Simulated State",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 760,
-    "y": 120,
-    "wires": []
-  },
-  {
-    "id": "29fb96ec9f8c454a",
-    "type": "mqtt in",
-    "z": "42e8d1c3858f48ca",
-    "name": "Legacy Grid Power",
-    "topic": "TeslaPowerwall/site_instant_power",
-    "qos": "1",
-    "datatype": "auto-detect",
-    "broker": "ab27576e65654d9a",
-    "nl": false,
-    "rap": true,
-    "rh": 0,
-    "inputs": 0,
-    "x": 180,
-    "y": 340,
-    "wires": [
-      [
-        "40a31ff4fff246d4"
-      ]
-    ]
-  },
-  {
-    "id": "40a31ff4fff246d4",
-    "type": "function",
-    "z": "42e8d1c3858f48ca",
-    "name": "Normalize Grid and Battery Power",
-    "func": "const config = global.get(\"domoticsai_config\") || {\n    baseTopic: \"domoticsai/v1\"\n};\n\nconst gridPowerW = Number(msg.payload);\n\nif (!Number.isFinite(gridPowerW)) {\n    return null;\n}\n\nconst timestamp = new Date().toISOString();\n\nconst gridMessage = {\n    topic: `${config.baseTopic}/state/energy/grid_power_w`,\n    payload: JSON.stringify({\n        value: Math.abs(gridPowerW) < 20 ? 0 : gridPowerW,\n        unit: \"W\",\n        ts: timestamp,\n        quality: \"good\",\n        source: \"legacy\",\n        semantics: \"positive_import_negative_export\"\n    }),\n    qos: 1,\n    retain: true\n};\n\nconst solarPowerW = Number(\n    flow.get(\"energy_solar_power_w\")\n);\nconst homeLoadW = Number(\n    flow.get(\"energy_home_load_w\")\n);\n\nlet batteryMessage = null;\n\nif (\n    Number.isFinite(solarPowerW) &&\n    Number.isFinite(homeLoadW)\n) {\n    const batteryPowerW =\n        homeLoadW - solarPowerW - gridPowerW;\n\n    batteryMessage = {\n        topic: `${config.baseTopic}/state/energy/battery_power_w`,\n        payload: JSON.stringify({\n            value: Math.abs(batteryPowerW) < 20\n                ? 0\n                : batteryPowerW,\n            unit: \"W\",\n            ts: timestamp,\n            quality: \"calculated\",\n            source: \"gateway\",\n            semantics: \"positive_discharge_negative_charge\"\n        }),\n        qos: 1,\n        retain: true\n    };\n}\n\nreturn [gridMessage, batteryMessage];",
-    "outputs": 2,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 500,
-    "y": 340,
-    "wires": [
-      [
-        "efa088edd5e74c7e"
-      ],
-      [
-        "efa088edd5e74c7e"
-      ]
-    ]
-  },
-  {
-    "id": "efa088edd5e74c7e",
-    "type": "mqtt out",
-    "z": "42e8d1c3858f48ca",
-    "name": "Publish Grid and Battery Power",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 820,
-    "y": 340,
-    "wires": []
-  },
-  {
-    "id": "a1827b3a2f1448a5",
-    "type": "tab",
-    "label": "03 Lights",
-    "disabled": false,
-    "info": "Read-only lights adapter",
-    "env": []
-  },
-  {
-    "id": "3851db0ee91e460c",
-    "type": "mqtt in",
-    "z": "a1827b3a2f1448a5",
-    "name": "Production Lights State",
-    "topic": "zara/android/domotica/light/+/state",
-    "qos": "1",
-    "datatype": "auto-detect",
-    "broker": "27cc6314b4e24703",
-    "nl": false,
-    "rap": true,
-    "rh": 0,
-    "inputs": 0,
-    "x": 180,
-    "y": 120,
-    "wires": [
-      [
-        "32a057c755334d28"
-      ]
-    ]
-  },
-  {
-    "id": "32a057c755334d28",
-    "type": "function",
-    "z": "a1827b3a2f1448a5",
-    "name": "Normalize Active Lights",
-    "func": "const devices = {\"tavolinoLettura\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Tavolino lettura\"}, \"libreria\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Libreria\"}, \"sala\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Sala\"}, \"televisione\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Televisione\"}, \"lavanderia\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Lavanderia\"}, \"ingressoServizio\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Ingresso servizio\"}, \"portico\": {\"area\": \"external\", \"type\": \"light\", \"label\": \"Portico\"}, \"luciPiscina\": {\"area\": \"pool\", \"type\": \"light\", \"label\": \"Luci piscina\"}, \"luciPedanaPiscina\": {\"area\": \"pool\", \"type\": \"light\", \"label\": \"Luci pedana piscina\"}, \"skimmerPiscina\": {\"area\": \"pool\", \"type\": \"relay\", \"label\": \"Skimmer piscina\"}, \"pompaPiscina\": {\"area\": \"pool\", \"type\": \"relay\", \"label\": \"Pompa piscina\"}};\nconst match = msg.topic.match(/^zara\\/android\\/domotica\\/light\\/([^/]+)\\/state$/);\nif (!match) return null;\n\nconst deviceId = match[1];\nconst metadata = devices[deviceId];\nif (!metadata) {\n    node.warn(`Ignored inactive or unknown light device: ${deviceId}`);\n    return null;\n}\n\nconst raw = String(msg.payload).trim().toUpperCase();\nlet state = null;\nif ([\"ON\", \"1\", \"TRUE\"].includes(raw)) state = \"ON\";\nelse if ([\"OFF\", \"0\", \"FALSE\"].includes(raw)) state = \"OFF\";\nelse return null;\n\nconst sourceTopic = msg.topic;\nmsg.topic = `domoticsai/v1/state/lights/${metadata.area}/${deviceId}`;\nmsg.payload = JSON.stringify({\n    value: state,\n    state: state,\n    area: metadata.area,\n    deviceType: metadata.type,\n    label: metadata.label,\n    quality: \"good\",\n    source: \"legacy\",\n    ts: new Date().toISOString(),\n    sourceTopic: sourceTopic\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 470,
-    "y": 120,
-    "wires": [
-      [
-        "83d890bd138c418f"
-      ]
-    ]
-  },
-  {
-    "id": "83d890bd138c418f",
-    "type": "mqtt out",
-    "z": "a1827b3a2f1448a5",
-    "name": "Publish Normalized Lights",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 780,
-    "y": 120,
-    "wires": []
-  },
-  {
-    "id": "16d5f92906cf4caa",
-    "type": "inject",
-    "z": "a1827b3a2f1448a5",
-    "name": "Publish Lights Registry",
-    "props": [
-      {
-        "p": "payload"
-      }
-    ],
-    "repeat": "",
-    "crontab": "",
-    "once": true,
-    "onceDelay": 1,
-    "topic": "",
-    "payload": "",
-    "payloadType": "date",
-    "x": 190,
-    "y": 220,
-    "wires": [
-      [
-        "fc04005da1804cbe"
-      ]
-    ]
-  },
-  {
-    "id": "fc04005da1804cbe",
-    "type": "function",
-    "z": "a1827b3a2f1448a5",
-    "name": "Build Lights Registry",
-    "func": "msg.topic = \"domoticsai/v1/meta/lights/registry\";\nmsg.payload = \"{\\\"version\\\": \\\"1.0\\\", \\\"baseTopic\\\": \\\"zara/android/domotica\\\", \\\"devices\\\": [{\\\"id\\\": \\\"tavolinoLettura\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Tavolino lettura\\\"}, {\\\"id\\\": \\\"libreria\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Libreria\\\"}, {\\\"id\\\": \\\"sala\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Sala\\\"}, {\\\"id\\\": \\\"televisione\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Televisione\\\"}, {\\\"id\\\": \\\"lavanderia\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Lavanderia\\\"}, {\\\"id\\\": \\\"ingressoServizio\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Ingresso servizio\\\"}, {\\\"id\\\": \\\"portico\\\", \\\"area\\\": \\\"external\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Portico\\\"}, {\\\"id\\\": \\\"luciPiscina\\\", \\\"area\\\": \\\"pool\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Luci piscina\\\"}, {\\\"id\\\": \\\"luciPedanaPiscina\\\", \\\"area\\\": \\\"pool\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Luci pedana piscina\\\"}, {\\\"id\\\": \\\"skimmerPiscina\\\", \\\"area\\\": \\\"pool\\\", \\\"type\\\": \\\"relay\\\", \\\"label\\\": \\\"Skimmer piscina\\\"}, {\\\"id\\\": \\\"pompaPiscina\\\", \\\"area\\\": \\\"pool\\\", \\\"type\\\": \\\"relay\\\", \\\"label\\\": \\\"Pompa piscina\\\"}], \\\"scenes\\\": [\\\"ALL_ON\\\", \\\"ALL_OFF\\\", \\\"TV_MODE\\\", \\\"SLEEP_MODE\\\"]}\";\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 470,
-    "y": 220,
-    "wires": [
-      [
-        "7046062d94904681"
-      ]
-    ]
-  },
-  {
-    "id": "7046062d94904681",
-    "type": "mqtt out",
-    "z": "a1827b3a2f1448a5",
-    "name": "Publish Lights Registry",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 780,
-    "y": 220,
-    "wires": []
-  },
-  {
-    "id": "6139205f49eb47cd",
-    "type": "mqtt in",
-    "z": "a1827b3a2f1448a5",
-    "name": "Simulated Lights Commands",
-    "topic": "domoticsai/v1/cmd/lights/+/+",
-    "qos": "1",
-    "datatype": "auto-detect",
-    "broker": "73fb6eba0e0c4fb0",
-    "nl": false,
-    "rap": true,
-    "rh": 0,
-    "inputs": 0,
-    "x": 190,
-    "y": 320,
-    "wires": [
-      [
-        "0da4c80357044d79"
-      ]
-    ]
-  },
-  {
-    "id": "0da4c80357044d79",
-    "type": "function",
-    "z": "a1827b3a2f1448a5",
-    "name": "Validate and Simulate Light Command",
-    "func": "let command;\n\nif (\n    msg.payload !== null &&\n    typeof msg.payload === \"object\"\n) {\n    command = msg.payload;\n} else {\n    try {\n        command = JSON.parse(String(msg.payload));\n    } catch (error) {\n        node.warn(\n            `Invalid command JSON: ${msg.payload}`\n        );\n        return null;\n    }\n}\n\nconst match = msg.topic.match(\n    /^domoticsai\\/v1\\/cmd\\/lights\\/([^/]+)\\/([^/]+)$/\n);\n\nif (!match) {\n    node.warn(\n        `Invalid lights command topic: ${msg.topic}`\n    );\n    return null;\n}\n\nconst area = match[1];\nconst deviceId = match[2];\n\nif (command.mode !== \"simulation\") {\n    node.warn(\n        `Rejected non-simulation command for ${area}/${deviceId}`\n    );\n    return null;\n}\n\nif (!command.request_id) {\n    node.warn(\n        `Missing request_id for ${area}/${deviceId}`\n    );\n    return null;\n}\n\nif (![\"ON\", \"OFF\"].includes(command.desired_state)) {\n    node.warn(\n        `Invalid desired_state for ${area}/${deviceId}`\n    );\n    return null;\n}\n\nmsg.topic =\n    `domoticsai/v1/ack/lights/${area}/${deviceId}/${command.request_id}`;\n\nmsg.payload = JSON.stringify({\n    requestId: command.request_id,\n    status: \"simulated\",\n    area: area,\n    deviceId: deviceId,\n    desiredState: command.desired_state,\n    message: \"Validated, not sent to production\",\n    ts: new Date().toISOString()\n});\n\nmsg.qos = 1;\nmsg.retain = false;\n\nreturn msg;",
-    "outputs": 1,
-    "timeout": 0,
-    "noerr": 0,
-    "initialize": "",
-    "finalize": "",
-    "libs": [],
-    "x": 510,
-    "y": 320,
-    "wires": [
-      [
-        "38b1159e783c4545"
-      ]
-    ]
-  },
-  {
-    "id": "38b1159e783c4545",
-    "type": "mqtt out",
-    "z": "a1827b3a2f1448a5",
-    "name": "Publish Simulated Light Ack",
-    "topic": "",
-    "qos": "",
-    "retain": "",
-    "respTopic": "",
-    "contentType": "",
-    "userProps": "",
-    "correl": "",
-    "expiry": "",
-    "broker": "73fb6eba0e0c4fb0",
-    "x": 830,
-    "y": 320,
-    "wires": []
-  }
+    {
+        "id": "73061f446631431f",
+        "type": "tab",
+        "label": "00 Core",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "68905cad6604439b",
+        "type": "tab",
+        "label": "01 Availability",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "42e8d1c3858f48ca",
+        "type": "tab",
+        "label": "02 Energy",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "8a04d658c3d541c4",
+        "type": "tab",
+        "label": "03 Climate",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "a328dcfad02d4f3b",
+        "type": "tab",
+        "label": "04 VMC",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "f158c2bc8797404f",
+        "type": "tab",
+        "label": "05 Logs",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "61ac04268ec146e9",
+        "type": "tab",
+        "label": "06 Simulator",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "73fb6eba0e0c4fb0",
+        "type": "mqtt-broker",
+        "name": "DomoticsAI Test Broker",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "domoticsai-gateway-test",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "domoticsai/v1/availability/gateway",
+        "birthQos": "1",
+        "birthPayload": "{\"status\":\"online\"}",
+        "birthMsg": {},
+        "closeTopic": "domoticsai/v1/availability/gateway",
+        "closeQos": "1",
+        "closePayload": "{\"status\":\"offline\"}",
+        "closeMsg": {},
+        "willTopic": "domoticsai/v1/availability/gateway",
+        "willQos": "1",
+        "willPayload": "{\"status\":\"offline\"}",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "27cc6314b4e24703",
+        "type": "mqtt-broker",
+        "name": "Production MQTT 192.168.1.20 READ ONLY",
+        "broker": "192.168.1.20",
+        "port": "1883",
+        "clientid": "domoticsai-ro-20",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "ab27576e65654d9a",
+        "type": "mqtt-broker",
+        "name": "EmonCMS MQTT 192.168.1.15 READ ONLY",
+        "broker": "192.168.1.15",
+        "port": "1883",
+        "clientid": "domoticsai-ro-15",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "00854f083e0e430d",
+        "type": "inject",
+        "z": "73061f446631431f",
+        "name": "Initialize Gateway",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "system/init",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 100,
+        "wires": [
+            [
+                "6d4aae9ab5534d12"
+            ]
+        ]
+    },
+    {
+        "id": "6d4aae9ab5534d12",
+        "type": "function",
+        "z": "73061f446631431f",
+        "name": "Core Configuration",
+        "func": "const config = {\n    baseTopic: \"domoticsai/v1\",\n    version: \"0.1.0\",\n    mode: \"LIVE_READ_ONLY\",\n    allowLegacyCommands: false,\n    startedAt: new Date().toISOString()\n};\nglobal.set(\"domoticsai_config\", config);\nmsg.topic = `${config.baseTopic}/log/gateway`;\nmsg.payload = {\n    ts: new Date().toISOString(),\n    level: \"INFO\",\n    component: \"core\",\n    event: \"GATEWAY_INITIALIZED\",\n    details: config\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 100,
+        "wires": [
+            [
+                "df02c4caa0c445c0"
+            ]
+        ]
+    },
+    {
+        "id": "d110d92c9a3e4f05",
+        "type": "catch",
+        "z": "73061f446631431f",
+        "name": "Catch All Errors",
+        "scope": null,
+        "uncaught": false,
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "c5e081cb5a424599"
+            ]
+        ]
+    },
+    {
+        "id": "c5e081cb5a424599",
+        "type": "function",
+        "z": "73061f446631431f",
+        "name": "Format Error Log",
+        "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nmsg.topic = `${config.baseTopic}/log/gateway`;\nmsg.payload = {\n    ts: new Date().toISOString(),\n    level: \"ERROR\",\n    component: msg.error?.source?.name || \"unknown\",\n    event: \"NODE_RED_ERROR\",\n    message: msg.error?.message || \"Unknown error\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 180,
+        "wires": [
+            [
+                "df02c4caa0c445c0"
+            ]
+        ]
+    },
+    {
+        "id": "14dcdae0b12f4a02",
+        "type": "status",
+        "z": "73061f446631431f",
+        "name": "Node Status Events",
+        "scope": null,
+        "x": 180,
+        "y": 260,
+        "wires": [
+            [
+                "657bf2d5c9124773"
+            ]
+        ]
+    },
+    {
+        "id": "657bf2d5c9124773",
+        "type": "function",
+        "z": "73061f446631431f",
+        "name": "Format Status Log",
+        "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nmsg.topic = `${config.baseTopic}/log/gateway`;\nmsg.payload = {\n    ts: new Date().toISOString(),\n    level: \"INFO\",\n    component: msg.status?.source?.name || \"node-red\",\n    event: \"NODE_STATUS\",\n    status: msg.status?.text || \"\",\n    fill: msg.status?.fill || \"\",\n    shape: msg.status?.shape || \"\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 260,
+        "wires": [
+            [
+                "df02c4caa0c445c0"
+            ]
+        ]
+    },
+    {
+        "id": "df02c4caa0c445c0",
+        "type": "link out",
+        "z": "73061f446631431f",
+        "name": "Log Bus Out",
+        "mode": "link",
+        "links": [
+            "ff2a4217fb1d4820"
+        ],
+        "x": 695,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e8b353ca8a4c47d9",
+        "type": "inject",
+        "z": "68905cad6604439b",
+        "name": "Gateway Heartbeat 30s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "30",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 120,
+        "wires": [
+            [
+                "499358f9c4a0466e"
+            ]
+        ]
+    },
+    {
+        "id": "499358f9c4a0466e",
+        "type": "function",
+        "z": "68905cad6604439b",
+        "name": "Build Availability",
+        "func": "const config = global.get(\"domoticsai_config\") || {\n    baseTopic:\"domoticsai/v1\",\n    version:\"0.1.0\",\n    mode:\"SIMULATION\"\n};\nmsg.topic = `${config.baseTopic}/availability/gateway`;\nmsg.payload = JSON.stringify({\n    status:\"online\",\n    ts:new Date().toISOString(),\n    version:config.version,\n    mode:config.mode\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 120,
+        "wires": [
+            [
+                "981716fd523849a0"
+            ]
+        ]
+    },
+    {
+        "id": "981716fd523849a0",
+        "type": "mqtt out",
+        "z": "68905cad6604439b",
+        "name": "Publish Availability",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 730,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "3c51b2be1d1746a9",
+        "type": "status",
+        "z": "68905cad6604439b",
+        "name": "Status Production 20",
+        "scope": [],
+        "x": 190,
+        "y": 220,
+        "wires": [
+            [
+                "6954c0c228bf4882"
+            ]
+        ]
+    },
+    {
+        "id": "6954c0c228bf4882",
+        "type": "function",
+        "z": "68905cad6604439b",
+        "name": "Format Production 20 Availability",
+        "func": "const base = (global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"}).baseTopic;\nconst text = msg.status?.text || \"\";\nconst online = /connected/i.test(text) && !/disconnected/i.test(text);\nmsg.topic = `${base}/availability/production_mqtt_20`;\nmsg.payload = JSON.stringify({\n    status: online ? \"online\" : \"offline\",\n    detail: text,\n    ts: new Date().toISOString(),\n    readOnly: true\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 220,
+        "wires": [
+            [
+                "0a4d4d9c77eb4d00"
+            ]
+        ]
+    },
+    {
+        "id": "0a4d4d9c77eb4d00",
+        "type": "mqtt out",
+        "z": "68905cad6604439b",
+        "name": "Publish Production 20 Availability",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 800,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "638ecca2b29b40f6",
+        "type": "status",
+        "z": "68905cad6604439b",
+        "name": "Status Production 15",
+        "scope": [
+            "d762e79a82974c38",
+            "7680e804148249bc",
+            "96a8dcd3047b42f2",
+            "571e0d99226f457a",
+            "a9e8a0550e174c77",
+            "17075795f84e4605",
+            "359bfa9a24054c1f",
+            "f34a00506ac34b10"
+        ],
+        "x": 190,
+        "y": 300,
+        "wires": [
+            [
+                "f9605663e3564b3f"
+            ]
+        ]
+    },
+    {
+        "id": "f9605663e3564b3f",
+        "type": "function",
+        "z": "68905cad6604439b",
+        "name": "Format Production 15 Availability",
+        "func": "const base = (global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"}).baseTopic;\nconst text = msg.status?.text || \"\";\nconst online = /connected/i.test(text) && !/disconnected/i.test(text);\nmsg.topic = `${base}/availability/production_mqtt_15`;\nmsg.payload = JSON.stringify({\n    status: online ? \"online\" : \"offline\",\n    detail: text,\n    ts: new Date().toISOString(),\n    readOnly: true\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 300,
+        "wires": [
+            [
+                "5dc830ceba0a4046"
+            ]
+        ]
+    },
+    {
+        "id": "5dc830ceba0a4046",
+        "type": "mqtt out",
+        "z": "68905cad6604439b",
+        "name": "Publish Production 15 Availability",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 800,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "d762e79a82974c38",
+        "type": "mqtt in",
+        "z": "42e8d1c3858f48ca",
+        "name": "Legacy Solar Power",
+        "topic": "TeslaPowerwall/solar_instant_power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "ab27576e65654d9a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 100,
+        "wires": [
+            [
+                "fccb96f11d244871"
+            ]
+        ]
+    },
+    {
+        "id": "fccb96f11d244871",
+        "type": "function",
+        "z": "42e8d1c3858f48ca",
+        "name": "Normalize Solar Power",
+        "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number(msg.payload); if (!Number.isFinite(value)) return null; const unit = \"W\";\nflow.set(\"energy_solar_power_w\", value);\nmsg.topic = `${config.baseTopic}/state/energy/solar_power_w`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 100,
+        "wires": [
+            [
+                "60780e1f62304e93"
+            ]
+        ]
+    },
+    {
+        "id": "60780e1f62304e93",
+        "type": "mqtt out",
+        "z": "42e8d1c3858f48ca",
+        "name": "Publish Solar Power",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 740,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "7680e804148249bc",
+        "type": "mqtt in",
+        "z": "42e8d1c3858f48ca",
+        "name": "Legacy Home Load",
+        "topic": "TeslaPowerwall/load_instant_power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "ab27576e65654d9a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 180,
+        "wires": [
+            [
+                "37c5a465c5cf4dbc"
+            ]
+        ]
+    },
+    {
+        "id": "37c5a465c5cf4dbc",
+        "type": "function",
+        "z": "42e8d1c3858f48ca",
+        "name": "Normalize Home Load",
+        "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number(msg.payload); if (!Number.isFinite(value)) return null; const unit = \"W\";\nflow.set(\"energy_home_load_w\", value);\nmsg.topic = `${config.baseTopic}/state/energy/home_load_w`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 180,
+        "wires": [
+            [
+                "dc3056877d13414e"
+            ]
+        ]
+    },
+    {
+        "id": "dc3056877d13414e",
+        "type": "mqtt out",
+        "z": "42e8d1c3858f48ca",
+        "name": "Publish Home Load",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 740,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "96a8dcd3047b42f2",
+        "type": "mqtt in",
+        "z": "42e8d1c3858f48ca",
+        "name": "Legacy Powerwall SOC",
+        "topic": "TeslaPowerwall/SOE",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "ab27576e65654d9a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 260,
+        "wires": [
+            [
+                "5f0cf019ca914e37"
+            ]
+        ]
+    },
+    {
+        "id": "5f0cf019ca914e37",
+        "type": "function",
+        "z": "42e8d1c3858f48ca",
+        "name": "Normalize Powerwall SOC",
+        "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number(msg.payload); if (!Number.isFinite(value)) return null; const unit = \"%\";\nmsg.topic = `${config.baseTopic}/state/energy/powerwall_soc_pct`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 260,
+        "wires": [
+            [
+                "12139c6906e249c6"
+            ]
+        ]
+    },
+    {
+        "id": "12139c6906e249c6",
+        "type": "mqtt out",
+        "z": "42e8d1c3858f48ca",
+        "name": "Publish Powerwall SOC",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 740,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "571e0d99226f457a",
+        "type": "mqtt in",
+        "z": "8a04d658c3d541c4",
+        "name": "Legacy Living Temperature",
+        "topic": "emon/emonth5/temperature_calibrated",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "ab27576e65654d9a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 100,
+        "wires": [
+            [
+                "f8e867b771db454c"
+            ]
+        ]
+    },
+    {
+        "id": "f8e867b771db454c",
+        "type": "function",
+        "z": "8a04d658c3d541c4",
+        "name": "Normalize Living Temperature",
+        "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number(msg.payload); if (!Number.isFinite(value)) return null; const unit = \"°C\";\nmsg.topic = `${config.baseTopic}/state/climate/living_temperature_c`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 100,
+        "wires": [
+            [
+                "2c105eceb1264cd1"
+            ]
+        ]
+    },
+    {
+        "id": "2c105eceb1264cd1",
+        "type": "mqtt out",
+        "z": "8a04d658c3d541c4",
+        "name": "Publish Living Temperature",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 740,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "a9e8a0550e174c77",
+        "type": "mqtt in",
+        "z": "8a04d658c3d541c4",
+        "name": "Legacy Living Humidex",
+        "topic": "zara/domotics/LivingHumidex",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "ab27576e65654d9a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 180,
+        "wires": [
+            [
+                "eacc73cb39ac4325"
+            ]
+        ]
+    },
+    {
+        "id": "eacc73cb39ac4325",
+        "type": "function",
+        "z": "8a04d658c3d541c4",
+        "name": "Normalize Living Humidex",
+        "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number(msg.payload); if (!Number.isFinite(value)) return null; const unit = \"\";\nmsg.topic = `${config.baseTopic}/state/climate/living_humidex`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 180,
+        "wires": [
+            [
+                "c98e386c16bd4687"
+            ]
+        ]
+    },
+    {
+        "id": "c98e386c16bd4687",
+        "type": "mqtt out",
+        "z": "8a04d658c3d541c4",
+        "name": "Publish Living Humidex",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 740,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "17075795f84e4605",
+        "type": "mqtt in",
+        "z": "8a04d658c3d541c4",
+        "name": "Legacy Bedroom Humidex",
+        "topic": "zara/domotics/BedroomHumidex",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "ab27576e65654d9a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 260,
+        "wires": [
+            [
+                "a5d31ac8814b4dbb"
+            ]
+        ]
+    },
+    {
+        "id": "a5d31ac8814b4dbb",
+        "type": "function",
+        "z": "8a04d658c3d541c4",
+        "name": "Normalize Bedroom Humidex",
+        "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number(msg.payload); if (!Number.isFinite(value)) return null; const unit = \"\";\nmsg.topic = `${config.baseTopic}/state/climate/bedroom_humidex`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 260,
+        "wires": [
+            [
+                "2d21a1d7136f4848"
+            ]
+        ]
+    },
+    {
+        "id": "2d21a1d7136f4848",
+        "type": "mqtt out",
+        "z": "8a04d658c3d541c4",
+        "name": "Publish Bedroom Humidex",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 740,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "359bfa9a24054c1f",
+        "type": "mqtt in",
+        "z": "8a04d658c3d541c4",
+        "name": "Legacy AC Power",
+        "topic": "emon/AC/emeter_power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "ab27576e65654d9a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 340,
+        "wires": [
+            [
+                "cfb363586d454ce1"
+            ]
+        ]
+    },
+    {
+        "id": "cfb363586d454ce1",
+        "type": "function",
+        "z": "8a04d658c3d541c4",
+        "name": "Normalize AC Power",
+        "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Math.abs(Number(msg.payload)); if (!Number.isFinite(value)) return null; const unit = \"W\";\nmsg.topic = `${config.baseTopic}/state/climate/ac_power_w`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 340,
+        "wires": [
+            [
+                "168406153bd6490c"
+            ]
+        ]
+    },
+    {
+        "id": "168406153bd6490c",
+        "type": "mqtt out",
+        "z": "8a04d658c3d541c4",
+        "name": "Publish AC Power",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 740,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "1b8a0b02be8d4ec5",
+        "type": "mqtt in",
+        "z": "8a04d658c3d541c4",
+        "name": "Climate Enable Command",
+        "topic": "domoticsai/v1/cmd/climate/enabled",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "73fb6eba0e0c4fb0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 460,
+        "wires": [
+            [
+                "a3ff151949884be5"
+            ]
+        ]
+    },
+    {
+        "id": "a3ff151949884be5",
+        "type": "function",
+        "z": "8a04d658c3d541c4",
+        "name": "Validate Climate Command (Simulation Only)",
+        "func": "const config = global.get(\"domoticsai_config\") || {\n    baseTopic:\"domoticsai/v1\",\n    mode:\"SIMULATION\",\n    allowLegacyCommands:false\n};\nconst p = typeof msg.payload === \"string\" ? JSON.parse(msg.payload) : msg.payload;\nif (!p || typeof p.commandId !== \"string\" || typeof p.value !== \"boolean\") {\n    msg.topic = `${config.baseTopic}/ack/${p?.commandId || \"unknown\"}`;\n    msg.payload = JSON.stringify({\n        commandId:p?.commandId || null,\n        status:\"rejected\",\n        error:\"INVALID_PAYLOAD\",\n        ts:new Date().toISOString()\n    });\n    return [msg, null];\n}\nif (config.mode !== \"SIMULATION\" || config.allowLegacyCommands !== false) {\n    msg.topic = `${config.baseTopic}/ack/${p.commandId}`;\n    msg.payload = JSON.stringify({\n        commandId:p.commandId,\n        status:\"rejected\",\n        error:\"SAFETY_GUARD\",\n        ts:new Date().toISOString()\n    });\n    return [msg, null];\n}\nconst ack = {\n    topic:`${config.baseTopic}/ack/${p.commandId}`,\n    payload:JSON.stringify({\n        commandId:p.commandId,\n        status:\"confirmed\",\n        simulated:true,\n        ts:new Date().toISOString()\n    }),\n    qos:1,\n    retain:false\n};\nconst log = {\n    topic:`${config.baseTopic}/log/command`,\n    payload:{\n        ts:new Date().toISOString(),\n        level:\"INFO\",\n        component:\"climate\",\n        event:\"SIMULATED_COMMAND\",\n        commandId:p.commandId,\n        requestedValue:p.value\n    }\n};\nreturn [ack, log];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 460,
+        "wires": [
+            [
+                "3eececdbb0664c9a"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "3eececdbb0664c9a",
+        "type": "mqtt out",
+        "z": "8a04d658c3d541c4",
+        "name": "Publish Command Ack",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 790,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f34a00506ac34b10",
+        "type": "mqtt in",
+        "z": "a328dcfad02d4f3b",
+        "name": "Legacy VMC Speed",
+        "topic": "/esp8266/brink/fanspeed",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "ab27576e65654d9a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 100,
+        "wires": [
+            [
+                "f7378a9b9c3948d4"
+            ]
+        ]
+    },
+    {
+        "id": "f7378a9b9c3948d4",
+        "type": "function",
+        "z": "a328dcfad02d4f3b",
+        "name": "Normalize VMC Speed",
+        "func": "const config = global.get(\"domoticsai_config\") || {baseTopic:\"domoticsai/v1\"};\nconst value = Number.parseInt(msg.payload); if (!Number.isInteger(value)) return null; const unit = \"level\";\nmsg.topic = `${config.baseTopic}/state/vmc/speed`;\nmsg.payload = JSON.stringify({\n    value,\n    unit,\n    ts:new Date().toISOString(),\n    quality:\"good\",\n    source:\"legacy\"\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 100,
+        "wires": [
+            [
+                "736618c5a5974b3c"
+            ]
+        ]
+    },
+    {
+        "id": "736618c5a5974b3c",
+        "type": "mqtt out",
+        "z": "a328dcfad02d4f3b",
+        "name": "Publish VMC Speed",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 740,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "ff2a4217fb1d4820",
+        "type": "link in",
+        "z": "f158c2bc8797404f",
+        "name": "Log Bus In",
+        "links": [
+            "df02c4caa0c445c0"
+        ],
+        "x": 155,
+        "y": 120,
+        "wires": [
+            [
+                "6275c0353e66424c",
+                "fd9ac4c6008b4a49"
+            ]
+        ]
+    },
+    {
+        "id": "6275c0353e66424c",
+        "type": "debug",
+        "z": "f158c2bc8797404f",
+        "name": "Gateway Log",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "fd9ac4c6008b4a49",
+        "type": "mqtt out",
+        "z": "f158c2bc8797404f",
+        "name": "Publish Gateway Log",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 440,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "617f98cf0bd243a4",
+        "type": "inject",
+        "z": "61ac04268ec146e9",
+        "name": "Simulate Summer Day",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "3",
+        "topic": "simulator/summer-day",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "78ec6c0335464cce"
+            ]
+        ]
+    },
+    {
+        "id": "78ec6c0335464cce",
+        "type": "function",
+        "z": "61ac04268ec146e9",
+        "name": "Generate Simulated State",
+        "func": "const config = global.get(\"domoticsai_config\") || {\n    baseTopic:\"domoticsai/v1\",\n    mode:\"SIMULATION\"\n};\nif (config.mode !== \"SIMULATION\") return null;\n\nconst now = Date.now();\nconst wave = Math.sin(now / 60000);\nconst ts = new Date().toISOString();\n\nreturn [\n    {\n        topic:`${config.baseTopic}/state/energy/solar_power_w`,\n        payload:JSON.stringify({value:Math.round(2600 + wave*600),unit:\"W\",ts,quality:\"simulated\"}),\n        qos:1,retain:true\n    },\n    {\n        topic:`${config.baseTopic}/state/energy/home_load_w`,\n        payload:JSON.stringify({value:Math.round(1200 + wave*180),unit:\"W\",ts,quality:\"simulated\"}),\n        qos:1,retain:true\n    },\n    {\n        topic:`${config.baseTopic}/state/energy/powerwall_soc_pct`,\n        payload:JSON.stringify({value:84.2,unit:\"%\",ts,quality:\"simulated\"}),\n        qos:1,retain:true\n    },\n    {\n        topic:`${config.baseTopic}/state/climate/living_temperature_c`,\n        payload:JSON.stringify({value:Number((24.3 + wave*0.3).toFixed(1)),unit:\"°C\",ts,quality:\"simulated\"}),\n        qos:1,retain:true\n    },\n    {\n        topic:`${config.baseTopic}/state/climate/living_humidex`,\n        payload:JSON.stringify({value:Number((29.8 + wave*0.4).toFixed(1)),unit:\"\",ts,quality:\"simulated\"}),\n        qos:1,retain:true\n    },\n    {\n        topic:`${config.baseTopic}/state/vmc/speed`,\n        payload:JSON.stringify({value:2,unit:\"level\",ts,quality:\"simulated\"}),\n        qos:1,retain:true\n    }\n];",
+        "outputs": 6,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "6bfacd3038e74d45"
+            ],
+            [
+                "6bfacd3038e74d45"
+            ],
+            [
+                "6bfacd3038e74d45"
+            ],
+            [
+                "6bfacd3038e74d45"
+            ],
+            [
+                "6bfacd3038e74d45"
+            ],
+            [
+                "6bfacd3038e74d45"
+            ]
+        ]
+    },
+    {
+        "id": "6bfacd3038e74d45",
+        "type": "mqtt out",
+        "z": "61ac04268ec146e9",
+        "name": "Publish Simulated State",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 760,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "29fb96ec9f8c454a",
+        "type": "mqtt in",
+        "z": "42e8d1c3858f48ca",
+        "name": "Legacy Grid Power",
+        "topic": "TeslaPowerwall/site_instant_power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "ab27576e65654d9a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 340,
+        "wires": [
+            [
+                "40a31ff4fff246d4"
+            ]
+        ]
+    },
+    {
+        "id": "40a31ff4fff246d4",
+        "type": "function",
+        "z": "42e8d1c3858f48ca",
+        "name": "Normalize Grid and Battery Power",
+        "func": "const config = global.get(\"domoticsai_config\") || {\n    baseTopic: \"domoticsai/v1\"\n};\n\nconst gridPowerW = Number(msg.payload);\n\nif (!Number.isFinite(gridPowerW)) {\n    return null;\n}\n\nconst timestamp = new Date().toISOString();\n\nconst gridMessage = {\n    topic: `${config.baseTopic}/state/energy/grid_power_w`,\n    payload: JSON.stringify({\n        value: Math.abs(gridPowerW) < 20 ? 0 : gridPowerW,\n        unit: \"W\",\n        ts: timestamp,\n        quality: \"good\",\n        source: \"legacy\",\n        semantics: \"positive_import_negative_export\"\n    }),\n    qos: 1,\n    retain: true\n};\n\nconst solarPowerW = Number(\n    flow.get(\"energy_solar_power_w\")\n);\nconst homeLoadW = Number(\n    flow.get(\"energy_home_load_w\")\n);\n\nlet batteryMessage = null;\n\nif (\n    Number.isFinite(solarPowerW) &&\n    Number.isFinite(homeLoadW)\n) {\n    const batteryPowerW =\n        homeLoadW - solarPowerW - gridPowerW;\n\n    batteryMessage = {\n        topic: `${config.baseTopic}/state/energy/battery_power_w`,\n        payload: JSON.stringify({\n            value: Math.abs(batteryPowerW) < 20\n                ? 0\n                : batteryPowerW,\n            unit: \"W\",\n            ts: timestamp,\n            quality: \"calculated\",\n            source: \"gateway\",\n            semantics: \"positive_discharge_negative_charge\"\n        }),\n        qos: 1,\n        retain: true\n    };\n}\n\nreturn [gridMessage, batteryMessage];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 340,
+        "wires": [
+            [
+                "efa088edd5e74c7e"
+            ],
+            [
+                "efa088edd5e74c7e"
+            ]
+        ]
+    },
+    {
+        "id": "efa088edd5e74c7e",
+        "type": "mqtt out",
+        "z": "42e8d1c3858f48ca",
+        "name": "Publish Grid and Battery Power",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 820,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "a1827b3a2f1448a5",
+        "type": "tab",
+        "label": "03 Lights",
+        "disabled": false,
+        "info": "Read-only lights adapter",
+        "env": []
+    },
+    {
+        "id": "3851db0ee91e460c",
+        "type": "mqtt in",
+        "z": "a1827b3a2f1448a5",
+        "name": "Production Lights State",
+        "topic": "zara/android/domotica/light/+/state",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "27cc6314b4e24703",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 120,
+        "wires": [
+            [
+                "32a057c755334d28"
+            ]
+        ]
+    },
+    {
+        "id": "32a057c755334d28",
+        "type": "function",
+        "z": "a1827b3a2f1448a5",
+        "name": "Normalize Active Lights",
+        "func": "const devices = {\"tavolinoLettura\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Tavolino lettura\"}, \"libreria\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Libreria\"}, \"sala\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Sala\"}, \"televisione\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Televisione\"}, \"lavanderia\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Lavanderia\"}, \"ingressoServizio\": {\"area\": \"internal\", \"type\": \"light\", \"label\": \"Ingresso servizio\"}, \"portico\": {\"area\": \"external\", \"type\": \"light\", \"label\": \"Portico\"}, \"luciPiscina\": {\"area\": \"pool\", \"type\": \"light\", \"label\": \"Luci piscina\"}, \"luciPedanaPiscina\": {\"area\": \"pool\", \"type\": \"light\", \"label\": \"Luci pedana piscina\"}, \"skimmerPiscina\": {\"area\": \"pool\", \"type\": \"relay\", \"label\": \"Skimmer piscina\"}, \"pompaPiscina\": {\"area\": \"pool\", \"type\": \"relay\", \"label\": \"Pompa piscina\"}};\nconst match = msg.topic.match(/^zara\\/android\\/domotica\\/light\\/([^/]+)\\/state$/);\nif (!match) return null;\n\nconst deviceId = match[1];\nconst metadata = devices[deviceId];\nif (!metadata) {\n    node.warn(`Ignored inactive or unknown light device: ${deviceId}`);\n    return null;\n}\n\nconst raw = String(msg.payload).trim().toUpperCase();\nlet state = null;\nif ([\"ON\", \"1\", \"TRUE\"].includes(raw)) state = \"ON\";\nelse if ([\"OFF\", \"0\", \"FALSE\"].includes(raw)) state = \"OFF\";\nelse return null;\n\nconst sourceTopic = msg.topic;\nmsg.topic = `domoticsai/v1/state/lights/${metadata.area}/${deviceId}`;\nmsg.payload = JSON.stringify({\n    value: state,\n    state: state,\n    area: metadata.area,\n    deviceType: metadata.type,\n    label: metadata.label,\n    quality: \"good\",\n    source: \"legacy\",\n    ts: new Date().toISOString(),\n    sourceTopic: sourceTopic\n});\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "83d890bd138c418f"
+            ]
+        ]
+    },
+    {
+        "id": "83d890bd138c418f",
+        "type": "mqtt out",
+        "z": "a1827b3a2f1448a5",
+        "name": "Publish Normalized Lights",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 780,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "16d5f92906cf4caa",
+        "type": "inject",
+        "z": "a1827b3a2f1448a5",
+        "name": "Publish Lights Registry",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 220,
+        "wires": [
+            [
+                "fc04005da1804cbe"
+            ]
+        ]
+    },
+    {
+        "id": "fc04005da1804cbe",
+        "type": "function",
+        "z": "a1827b3a2f1448a5",
+        "name": "Build Lights Registry",
+        "func": "msg.topic = \"domoticsai/v1/meta/lights/registry\";\nmsg.payload = \"{\\\"version\\\": \\\"1.0\\\", \\\"baseTopic\\\": \\\"zara/android/domotica\\\", \\\"devices\\\": [{\\\"id\\\": \\\"tavolinoLettura\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Tavolino lettura\\\"}, {\\\"id\\\": \\\"libreria\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Libreria\\\"}, {\\\"id\\\": \\\"sala\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Sala\\\"}, {\\\"id\\\": \\\"televisione\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Televisione\\\"}, {\\\"id\\\": \\\"lavanderia\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Lavanderia\\\"}, {\\\"id\\\": \\\"ingressoServizio\\\", \\\"area\\\": \\\"internal\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Ingresso servizio\\\"}, {\\\"id\\\": \\\"portico\\\", \\\"area\\\": \\\"external\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Portico\\\"}, {\\\"id\\\": \\\"luciPiscina\\\", \\\"area\\\": \\\"pool\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Luci piscina\\\"}, {\\\"id\\\": \\\"luciPedanaPiscina\\\", \\\"area\\\": \\\"pool\\\", \\\"type\\\": \\\"light\\\", \\\"label\\\": \\\"Luci pedana piscina\\\"}, {\\\"id\\\": \\\"skimmerPiscina\\\", \\\"area\\\": \\\"pool\\\", \\\"type\\\": \\\"relay\\\", \\\"label\\\": \\\"Skimmer piscina\\\"}, {\\\"id\\\": \\\"pompaPiscina\\\", \\\"area\\\": \\\"pool\\\", \\\"type\\\": \\\"relay\\\", \\\"label\\\": \\\"Pompa piscina\\\"}], \\\"scenes\\\": [\\\"ALL_ON\\\", \\\"ALL_OFF\\\", \\\"TV_MODE\\\", \\\"SLEEP_MODE\\\"]}\";\nmsg.qos = 1;\nmsg.retain = true;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 220,
+        "wires": [
+            [
+                "7046062d94904681"
+            ]
+        ]
+    },
+    {
+        "id": "7046062d94904681",
+        "type": "mqtt out",
+        "z": "a1827b3a2f1448a5",
+        "name": "Publish Lights Registry",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 780,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "6139205f49eb47cd",
+        "type": "mqtt in",
+        "z": "a1827b3a2f1448a5",
+        "name": "Simulated Lights Commands",
+        "topic": "domoticsai/v1/cmd/lights/+/+",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "73fb6eba0e0c4fb0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 320,
+        "wires": [
+            [
+                "0da4c80357044d79"
+            ]
+        ]
+    },
+    {
+        "id": "0da4c80357044d79",
+        "type": "function",
+        "z": "a1827b3a2f1448a5",
+        "name": "Validate and Simulate Light Command",
+        "func": "let command;\n\nif (\n    msg.payload !== null &&\n    typeof msg.payload === \"object\"\n) {\n    command = msg.payload;\n} else {\n    try {\n        command = JSON.parse(String(msg.payload));\n    } catch (error) {\n        node.warn(\n            `Invalid command JSON: ${msg.payload}`\n        );\n        return null;\n    }\n}\n\nconst match = msg.topic.match(\n    /^domoticsai\\/v1\\/cmd\\/lights\\/([^/]+)\\/([^/]+)$/\n);\n\nif (!match) {\n    node.warn(\n        `Invalid lights command topic: ${msg.topic}`\n    );\n    return null;\n}\n\nconst area = match[1];\nconst deviceId = match[2];\n\nif (command.mode !== \"simulation\") {\n    node.warn(\n        `Rejected non-simulation command for ${area}/${deviceId}`\n    );\n    return null;\n}\n\nif (!command.request_id) {\n    node.warn(\n        `Missing request_id for ${area}/${deviceId}`\n    );\n    return null;\n}\n\nif (![\"ON\", \"OFF\"].includes(command.desired_state)) {\n    node.warn(\n        `Invalid desired_state for ${area}/${deviceId}`\n    );\n    return null;\n}\n\nmsg.topic =\n    `domoticsai/v1/ack/lights/${area}/${deviceId}/${command.request_id}`;\n\nmsg.payload = JSON.stringify({\n    requestId: command.request_id,\n    status: \"simulated\",\n    area: area,\n    deviceId: deviceId,\n    desiredState: command.desired_state,\n    message: \"Validated, not sent to production\",\n    ts: new Date().toISOString()\n});\n\nmsg.qos = 1;\nmsg.retain = false;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 320,
+        "wires": [
+            [
+                "38b1159e783c4545"
+            ]
+        ]
+    },
+    {
+        "id": "38b1159e783c4545",
+        "type": "mqtt out",
+        "z": "a1827b3a2f1448a5",
+        "name": "Publish Simulated Light Ack",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 830,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "bf901b49da2743fb",
+        "type": "mqtt in",
+        "z": "73061f446631431f",
+        "name": "DomoticsAI Scenes Command In",
+        "topic": "domoticsai/v1/cmd/scenes/+",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "73fb6eba0e0c4fb0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 760,
+        "wires": [
+            [
+                "2b41728ff3e74968"
+            ]
+        ]
+    },
+    {
+        "id": "2b41728ff3e74968",
+        "type": "function",
+        "z": "73061f446631431f",
+        "name": "DomoticsAI Scenes Command Simulator",
+        "func": "const parts = msg.topic.split(\"/\");\nconst sceneId = parts[parts.length - 1];\n\nlet data = msg.payload;\n\nif (typeof data === \"string\") {\n    try {\n        data = JSON.parse(data);\n    } catch (error) {\n        data = {};\n    }\n}\n\nconst requestId =\n    data.request_id || data.requestId;\n\nif (!requestId) {\n    node.warn(\n        \"Scene command without request_id\"\n    );\n    return null;\n}\n\nmsg.topic =\n    \"domoticsai/v1/ack/scenes/\" +\n    sceneId + \"/\" + requestId;\n\nmsg.payload = JSON.stringify({\n    requestId: requestId,\n    status: \"simulated\",\n    message:\n        \"Scene command simulated\",\n    sceneId: sceneId\n});\n\nmsg.qos = 1;\nmsg.retain = false;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 760,
+        "wires": [
+            [
+                "1f134fd16b454a2b"
+            ]
+        ]
+    },
+    {
+        "id": "1f134fd16b454a2b",
+        "type": "mqtt out",
+        "z": "73061f446631431f",
+        "name": "DomoticsAI Scenes ACK Out",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 860,
+        "y": 760,
+        "wires": []
+    }
 ]
