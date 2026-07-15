@@ -1,29 +1,29 @@
 # DomoticsAI — Project Manifest
 
-Generato automaticamente: `2026-07-15T21:23:47.648542+00:00`
+Generato automaticamente: `2026-07-15T22:09:43.489827+00:00`
 
 > Non modificare manualmente questo file. Rigenerarlo con `python3 scripts/generate-project-manifest.py`.
 
 ## Repository
 
 - Branch: `develop`
-- Commit: `acbd48a`
-- Stato: `M android/app/src/main/java/it/zara/domoticsai/MainActivity.kt
- M android/app/src/main/java/it/zara/domoticsai/domain/model/CommandHistoryModels.kt
+- Commit: `7034051`
+- Stato: `M android/app/src/main/java/it/zara/domoticsai/domain/model/CommandHistoryModels.kt
+ M android/app/src/main/java/it/zara/domoticsai/domain/model/HomeIntelligenceModels.kt
  M android/app/src/main/java/it/zara/domoticsai/ui/commands/CommandsScreen.kt
+ D android/app/src/main/java/it/zara/domoticsai/ui/context/HouseContextsViewModel.kt
+ D android/app/src/main/java/it/zara/domoticsai/ui/decisions/DecisionsViewModel.kt
  M android/app/src/main/java/it/zara/domoticsai/ui/home/HomeScreen.kt
- M core-engine/src/domoticsai_core/app.py
  M core-engine/src/domoticsai_core/command_store.py
  M core-engine/src/domoticsai_core/digital_twin.py
 ?? android/app/src/main/java/it/zara/domoticsai/ui/decisions/DecisionsCard.kt
+?? android/app/src/main/java/it/zara/domoticsai/ui/intelligence/HomeIntelligenceStatus.kt
 ?? core-engine/src/domoticsai_core/command_event_stream.py
-?? core-engine/src/domoticsai_core/home_snapshot.py
 ?? core-engine/src/domoticsai_core/knowledge/reasoners/lights_reasoner.py
 ?? core-engine/src/domoticsai_core/knowledge/reasoners/scene_reasoner.py
 ?? core-engine/src/domoticsai_core/knowledge/scene_state.py
 ?? core-engine/src/domoticsai_core/knowledge/scenes_registry.py
 ?? core-engine/src/domoticsai_core/sqlite_database.py
-?? core-engine/tests/test_home_snapshot.py
 ?? core-engine/tests/test_knowledge_lights.py
 ?? core-engine/tests/test_knowledge_scenes.py
 ?? scripts/install_android_commands_screen_v060.py`
@@ -70,6 +70,7 @@ android/app/src/main/java/it/zara/domoticsai/data/settings/SettingsRepository.kt
 android/app/src/main/java/it/zara/domoticsai/domain/model/CommandHistoryModels.kt
 android/app/src/main/java/it/zara/domoticsai/domain/model/CoreModels.kt
 android/app/src/main/java/it/zara/domoticsai/domain/model/EnergyModels.kt
+android/app/src/main/java/it/zara/domoticsai/domain/model/HomeIntelligenceModels.kt
 android/app/src/main/java/it/zara/domoticsai/domain/model/HouseContextModels.kt
 android/app/src/main/java/it/zara/domoticsai/domain/model/HouseDecisionModels.kt
 android/app/src/main/java/it/zara/domoticsai/domain/model/LightsCommandModels.kt
@@ -78,16 +79,16 @@ android/app/src/main/java/it/zara/domoticsai/domain/model/Models.kt
 android/app/src/main/java/it/zara/domoticsai/ui/commands/CommandsScreen.kt
 android/app/src/main/java/it/zara/domoticsai/ui/commands/CommandsViewModel.kt
 android/app/src/main/java/it/zara/domoticsai/ui/components/DashboardCards.kt
-android/app/src/main/java/it/zara/domoticsai/ui/context/HouseContextsViewModel.kt
 android/app/src/main/java/it/zara/domoticsai/ui/context/HouseStatusCard.kt
 android/app/src/main/java/it/zara/domoticsai/ui/decisions/DecisionsCard.kt
-android/app/src/main/java/it/zara/domoticsai/ui/decisions/DecisionsViewModel.kt
 android/app/src/main/java/it/zara/domoticsai/ui/diagnostics/DiagnosticsScreen.kt
 android/app/src/main/java/it/zara/domoticsai/ui/diagnostics/DiagnosticsViewModel.kt
 android/app/src/main/java/it/zara/domoticsai/ui/energy/EnergyScreen.kt
 android/app/src/main/java/it/zara/domoticsai/ui/energy/EnergyViewModel.kt
 android/app/src/main/java/it/zara/domoticsai/ui/home/HomeScreen.kt
 android/app/src/main/java/it/zara/domoticsai/ui/home/HomeViewModel.kt
+android/app/src/main/java/it/zara/domoticsai/ui/intelligence/HomeIntelligenceStatus.kt
+android/app/src/main/java/it/zara/domoticsai/ui/intelligence/HomeIntelligenceViewModel.kt
 android/app/src/main/java/it/zara/domoticsai/ui/lights/LightsScreen.kt
 android/app/src/main/java/it/zara/domoticsai/ui/lights/LightsViewModel.kt
 android/app/src/main/java/it/zara/domoticsai/ui/logs/LogsScreen.kt
@@ -607,7 +608,7 @@ scripts/verify_lights_gateway.py
 ### `android/app/src/main/java/it/zara/domoticsai/data/core/CoreEngineClient.kt`
 
 - Classes: `CoreEngineClient`
-- Functions: `createLightCommand`, `fetchActiveContexts`, `fetchCommand`, `fetchCommands`, `fetchDecisions`, `fetchEnergy`, `fetchHealth`, `fetchLights`, `fetchTwin`, `parseCommandState`, `parseDecisionKind`, `parseHouseDecision`, `requestJson`
+- Functions: `createLightCommand`, `fetchActiveContexts`, `fetchCommand`, `fetchCommands`, `fetchDecisions`, `fetchEnergy`, `fetchHealth`, `fetchHomeIntelligence`, `fetchLights`, `fetchTwin`, `parseCommandState`, `parseDecisionKind`, `parseHouseContext`, `parseHouseDecision`, `requestJson`
 
 ### `android/app/src/main/java/it/zara/domoticsai/data/core/CoreEngineRepository.kt`
 
@@ -662,6 +663,11 @@ scripts/verify_lights_gateway.py
 
 - Classes: `EnergyDashboardState`, `EnergyDataSource`, `EnergyDerivedState`
 
+### `android/app/src/main/java/it/zara/domoticsai/domain/model/HomeIntelligenceModels.kt`
+
+- Classes: `HomeIntelligenceFreshness`, `HomeIntelligenceSnapshot`, `HomeIntelligenceSummary`, `HomeIntelligenceUiState`
+- Functions: `freshness`
+
 ### `android/app/src/main/java/it/zara/domoticsai/domain/model/HouseContextModels.kt`
 
 - Classes: `HouseContextItem`, `HouseContextsResult`, `HouseContextsUiState`
@@ -695,11 +701,6 @@ scripts/verify_lights_gateway.py
 
 - Functions: `BatteryCard`, `DialCard`, `MetricCard`
 
-### `android/app/src/main/java/it/zara/domoticsai/ui/context/HouseContextsViewModel.kt`
-
-- Classes: `HouseContextsViewModel`
-- Functions: `refresh`, `startPeriodicRefresh`, `userMessage`
-
 ### `android/app/src/main/java/it/zara/domoticsai/ui/context/HouseStatusCard.kt`
 
 - Functions: `HouseContextRow`, `HouseStatusCard`, `contextContainerColor`, `contextDescription`, `contextTitle`
@@ -707,11 +708,6 @@ scripts/verify_lights_gateway.py
 ### `android/app/src/main/java/it/zara/domoticsai/ui/decisions/DecisionsCard.kt`
 
 - Functions: `DecisionItem`, `DecisionsCard`, `kindLabel`
-
-### `android/app/src/main/java/it/zara/domoticsai/ui/decisions/DecisionsViewModel.kt`
-
-- Classes: `DecisionsViewModel`
-- Functions: `refresh`, `startPeriodicRefresh`, `userMessage`
 
 ### `android/app/src/main/java/it/zara/domoticsai/ui/diagnostics/DiagnosticsScreen.kt`
 
@@ -739,6 +735,15 @@ scripts/verify_lights_gateway.py
 
 - Classes: `HomeViewModel`
 - Functions: `connect`, `disconnect`, `refreshCore`
+
+### `android/app/src/main/java/it/zara/domoticsai/ui/intelligence/HomeIntelligenceStatus.kt`
+
+- Functions: `HomeIntelligenceStatus`
+
+### `android/app/src/main/java/it/zara/domoticsai/ui/intelligence/HomeIntelligenceViewModel.kt`
+
+- Classes: `HomeIntelligenceViewModel`
+- Functions: `refresh`, `startPeriodicRefresh`, `userMessage`
 
 ### `android/app/src/main/java/it/zara/domoticsai/ui/lights/LightsScreen.kt`
 

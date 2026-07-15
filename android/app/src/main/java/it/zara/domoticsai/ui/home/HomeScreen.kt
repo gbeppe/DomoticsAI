@@ -19,6 +19,7 @@ import it.zara.domoticsai.domain.model.HouseContextsUiState
 import it.zara.domoticsai.ui.components.*
 import it.zara.domoticsai.ui.decisions.DecisionsCard
 import it.zara.domoticsai.ui.context.HouseStatusCard
+import it.zara.domoticsai.ui.intelligence.HomeIntelligenceStatus
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,8 +39,7 @@ fun HomeScreen(
                 intelligenceState.loading,
             items =
                 intelligenceState.contexts,
-            error =
-                intelligenceState.error,
+            error = null,
             lastSuccessfulUpdateEpochMs =
                 intelligenceState
                     .lastSuccessfulUpdateEpochMs
@@ -53,8 +53,7 @@ fun HomeScreen(
                 intelligenceState.decisions,
             executionEnabled =
                 intelligenceState.executionEnabled,
-            error =
-                intelligenceState.error
+            error = null
         )
 
     LaunchedEffect(settings, connection) {
@@ -119,6 +118,22 @@ fun HomeScreen(
                         )
                     }
                 )
+            }
+
+            item(
+                span = {
+                    GridItemSpan(maxLineSpan)
+                }
+            ) {
+                Column(
+                    verticalArrangement =
+                        Arrangement.spacedBy(6.dp)
+                ) {
+                    HomeIntelligenceStatus(
+                        state =
+                            intelligenceState
+                    )
+                }
             }
 
             item(

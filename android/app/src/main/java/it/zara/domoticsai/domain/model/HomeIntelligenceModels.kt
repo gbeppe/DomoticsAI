@@ -17,6 +17,12 @@ data class HomeIntelligenceSnapshot(
     val executionEnabled: Boolean
 )
 
+enum class HomeIntelligenceFreshness {
+    CURRENT,
+    STALE,
+    UNAVAILABLE
+}
+
 data class HomeIntelligenceUiState(
     val loading: Boolean = false,
     val contexts: List<HouseContextItem> = emptyList(),
@@ -28,4 +34,29 @@ data class HomeIntelligenceUiState(
     val knowledgeUpdatedAt: String? = null,
     val lastSuccessfulUpdateEpochMs: Long? = null,
     val error: String? = null
-)
+) {
+    fun freshness(
+        nowEpochMs: Long =
+            System.currentTimeMillis()
+    ): HomeIntelligenceFreshness {
+        val lastUpdate =
+            lastSuccessfulUpdateEpochMs
+                ?: return HomeIntelligenceFreshness.UNAVAILABLE
+
+        val ageMs =
+            nowEpochMs - lastUpdate
+
+        return if (
+            ageMs <= STALE_AFTER_MS
+        ) {
+            HomeIntelligenceFreshness.CURRENT
+        } else {
+            HomeIntelligenceFreshness.STALE
+        }
+    }
+
+    companion object {
+        private const val STALE_AFTER_MS =
+            30_000L
+    }
+}
