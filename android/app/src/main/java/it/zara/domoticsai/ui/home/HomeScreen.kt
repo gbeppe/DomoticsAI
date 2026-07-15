@@ -13,17 +13,49 @@ import androidx.compose.ui.unit.dp
 import it.zara.domoticsai.domain.model.ConnectionSettings
 import it.zara.domoticsai.domain.model.ConnectionState
 import it.zara.domoticsai.domain.model.HomeDataSource
+import it.zara.domoticsai.domain.model.HomeIntelligenceUiState
+import it.zara.domoticsai.domain.model.HouseDecisionsUiState
+import it.zara.domoticsai.domain.model.HouseContextsUiState
 import it.zara.domoticsai.ui.components.*
+import it.zara.domoticsai.ui.decisions.DecisionsCard
+import it.zara.domoticsai.ui.context.HouseStatusCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel,
-    settings: ConnectionSettings
+    settings: ConnectionSettings,
+    intelligenceState: HomeIntelligenceUiState,
+    onIntelligenceRefresh: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val connection by viewModel.connectionState.collectAsState()
     val state = uiState.homeState
+
+    val houseContextsState =
+        HouseContextsUiState(
+            loading =
+                intelligenceState.loading,
+            items =
+                intelligenceState.contexts,
+            error =
+                intelligenceState.error,
+            lastSuccessfulUpdateEpochMs =
+                intelligenceState
+                    .lastSuccessfulUpdateEpochMs
+        )
+
+    val decisionsState =
+        HouseDecisionsUiState(
+            loading =
+                intelligenceState.loading,
+            items =
+                intelligenceState.decisions,
+            executionEnabled =
+                intelligenceState.executionEnabled,
+            error =
+                intelligenceState.error
+        )
 
     LaunchedEffect(settings, connection) {
         if (
@@ -86,6 +118,30 @@ fun HomeScreen(
                             }
                         )
                     }
+                )
+            }
+
+            item(
+                span = {
+                    GridItemSpan(maxLineSpan)
+                }
+            ) {
+                HouseStatusCard(
+                    state = houseContextsState,
+                    onRefresh =
+                        onIntelligenceRefresh
+                )
+            }
+
+            item(
+                span = {
+                    GridItemSpan(maxLineSpan)
+                }
+            ) {
+                DecisionsCard(
+                    state = decisionsState,
+                    onRefresh =
+                        onIntelligenceRefresh
                 )
             }
 

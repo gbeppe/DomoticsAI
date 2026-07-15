@@ -1,5 +1,9 @@
 package it.zara.domoticsai
 
+
+
+
+import it.zara.domoticsai.ui.intelligence.HomeIntelligenceViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -101,6 +105,14 @@ class MainActivity : ComponentActivity() {
                                 CommandsViewModel()
                             }
                     )
+                val homeIntelligenceViewModel:
+                    HomeIntelligenceViewModel =
+                    viewModel(
+                        factory =
+                            SimpleViewModelFactory {
+                                HomeIntelligenceViewModel()
+                            }
+                    )
 
                 val diagnosticsViewModel:
                     DiagnosticsViewModel =
@@ -125,6 +137,9 @@ class MainActivity : ComponentActivity() {
 
                 val commandsState by
                     commandsViewModel.state.collectAsState()
+                val homeIntelligenceState by
+                    homeIntelligenceViewModel.state
+                        .collectAsState()
 
                 val diagnosticsState by
                     diagnosticsViewModel.state.collectAsState()
@@ -171,8 +186,14 @@ class MainActivity : ComponentActivity() {
                         when (destination) {
                             Destination.HOME ->
                                 HomeScreen(
-                                    homeViewModel,
-                                    settings
+                                    viewModel =
+                                        homeViewModel,
+                                    settings =
+                                        settings,
+                                    intelligenceState =
+                                        homeIntelligenceState,
+                                    onIntelligenceRefresh =
+                                        homeIntelligenceViewModel::refresh
                                 )
 
                             Destination.ENERGY ->
