@@ -2,12 +2,17 @@ from pathlib import Path
 
 from domoticsai_core.digital_twin import DigitalTwinStore
 from domoticsai_core.event_store import EventStore
+from domoticsai_core.sqlite_database import SQLiteDatabase
 
 
 def test_twin_is_restored_after_restart(tmp_path: Path):
     db_path = tmp_path / "core-engine.db"
 
-    first_store = EventStore(str(db_path))
+    first_store = EventStore(
+        SQLiteDatabase(
+            str(db_path)
+        )
+    )
     first_twin = DigitalTwinStore(first_store)
 
     accepted = first_twin.update_from_mqtt(
@@ -23,7 +28,11 @@ def test_twin_is_restored_after_restart(tmp_path: Path):
         == 2450
     )
 
-    second_store = EventStore(str(db_path))
+    second_store = EventStore(
+        SQLiteDatabase(
+            str(db_path)
+        )
+    )
     restored_twin = DigitalTwinStore(second_store)
     restored = restored_twin.snapshot()
 
@@ -35,7 +44,11 @@ def test_twin_is_restored_after_restart(tmp_path: Path):
 
 def test_latest_value_replaces_previous_value(tmp_path: Path):
     db_path = tmp_path / "core-engine.db"
-    event_store = EventStore(str(db_path))
+    event_store = EventStore(
+        SQLiteDatabase(
+            str(db_path)
+        )
+    )
     twin = DigitalTwinStore(event_store)
 
     twin.update_from_mqtt(
@@ -47,6 +60,10 @@ def test_latest_value_replaces_previous_value(tmp_path: Path):
         '{"value":525,"unit":"W","quality":"good"}',
     )
 
-    restored = DigitalTwinStore(EventStore(str(db_path))).snapshot()
+    restored = DigitalTwinStore(EventStore(
+        SQLiteDatabase(
+            str(db_path)
+        )
+    )).snapshot()
 
     assert restored.domains["energy"]["home_load_w"].value == 525

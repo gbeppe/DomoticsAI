@@ -3,6 +3,7 @@ from pathlib import Path
 from domoticsai_core.command_manager import CommandManager
 from domoticsai_core.command_manager_models import CommandState, CreateCommandRequest
 from domoticsai_core.command_store import CommandStore
+from domoticsai_core.sqlite_database import SQLiteDatabase
 
 class FakePublisher:
     def __init__(self):
@@ -16,7 +17,11 @@ class FakePublisher:
 def test_command_lifecycle_to_simulated(tmp_path: Path):
     publisher = FakePublisher()
     manager = CommandManager(
-        CommandStore(str(tmp_path / 'commands.db')),
+        CommandStore(
+            SQLiteDatabase(
+                str(tmp_path / 'commands.db')
+            )
+        ),
         publisher,
         simulation_mode=True,
     )
@@ -35,7 +40,11 @@ def test_command_lifecycle_to_simulated(tmp_path: Path):
 
 def test_rejects_inactive_target(tmp_path: Path):
     manager = CommandManager(
-        CommandStore(str(tmp_path / 'commands.db')),
+        CommandStore(
+            SQLiteDatabase(
+                str(tmp_path / 'commands.db')
+            )
+        ),
         FakePublisher(),
     )
     command = manager.create(CreateCommandRequest(

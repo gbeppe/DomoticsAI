@@ -2,6 +2,7 @@ from pathlib import Path
 
 from domoticsai_core.digital_twin import DigitalTwinStore
 from domoticsai_core.event_store import EventStore
+from domoticsai_core.sqlite_database import SQLiteDatabase
 
 
 def test_energy_derived_is_created_and_restored(
@@ -10,7 +11,11 @@ def test_energy_derived_is_created_and_restored(
     db_path = tmp_path / "energy.db"
 
     first = DigitalTwinStore(
-        EventStore(str(db_path))
+        EventStore(
+        SQLiteDatabase(
+            str(db_path)
+        )
+    )
     )
 
     first.update_from_mqtt(
@@ -38,7 +43,11 @@ def test_energy_derived_is_created_and_restored(
     assert derived["balance_error_w"].value == 0
 
     restored = DigitalTwinStore(
-        EventStore(str(db_path))
+        EventStore(
+        SQLiteDatabase(
+            str(db_path)
+        )
+    )
     )
 
     restored_derived = restored.domain(
