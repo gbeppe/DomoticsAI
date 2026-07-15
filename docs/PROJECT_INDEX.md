@@ -1,6 +1,6 @@
 # DomoticsAI — Project Index
 
-Generato automaticamente: `2026-07-15T22:55:53.761024+00:00`
+Generato automaticamente: `2026-07-15T23:16:04.085684+00:00`
 
 > Indice tecnico completo del repository. Per la visione architetturale consultare `PROJECT_MANIFEST.md`.
 
