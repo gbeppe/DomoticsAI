@@ -24,6 +24,9 @@ from .sqlite_database import SQLiteDatabase
 from .command_event_stream import CommandEventStream
 from .command_models import LightCommandRequest
 from .lights_commands import LightsCommandService
+from .knowledge.context_api import (
+    active_contexts_from_domain,
+)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -192,6 +195,28 @@ def get_domain(domain_name: str):
     return {
         "domain": domain_name,
         "entities": domain,
+    }
+
+
+@app.get("/api/v1/context/active")
+def get_active_context():
+    knowledge = (
+        twin_store.domain(
+            "knowledge"
+        )
+        or {}
+    )
+
+    contexts = (
+        active_contexts_from_domain(
+            knowledge
+        )
+    )
+
+    return {
+        "domain": "context",
+        "count": len(contexts),
+        "contexts": contexts,
     }
 
 
