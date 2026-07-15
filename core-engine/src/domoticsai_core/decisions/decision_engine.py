@@ -7,6 +7,9 @@ from .rules.solar_pool import (
 from .rules.grid_pool import (
     GridImportWhilePoolRunningRule,
 )
+from .rules.sleep_lights import (
+    CheckLightsAfterSleepModeRule,
+)
 
 
 class HouseDecisionEngine:
@@ -14,6 +17,7 @@ class HouseDecisionEngine:
         self._rules = [
             StartPoolOnSolarSurplusRule(),
             GridImportWhilePoolRunningRule(),
+            CheckLightsAfterSleepModeRule(),
         ]
 
     def evaluate(
