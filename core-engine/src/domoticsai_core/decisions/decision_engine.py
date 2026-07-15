@@ -4,12 +4,16 @@ from .models import HouseDecision
 from .rules.solar_pool import (
     StartPoolOnSolarSurplusRule,
 )
+from .rules.grid_pool import (
+    GridImportWhilePoolRunningRule,
+)
 
 
 class HouseDecisionEngine:
     def __init__(self) -> None:
         self._rules = [
             StartPoolOnSolarSurplusRule(),
+            GridImportWhilePoolRunningRule(),
         ]
 
     def evaluate(

@@ -1,27 +1,27 @@
 # DomoticsAI — Project Manifest
 
-Generato automaticamente: `2026-07-15T18:02:37.748903+00:00`
+Generato automaticamente: `2026-07-15T18:17:54.162982+00:00`
 
 > Non modificare manualmente questo file. Rigenerarlo con `python3 scripts/generate-project-manifest.py`.
 
 ## Repository
 
 - Branch: `develop`
-- Commit: `6b41d53`
+- Commit: `595d5b8`
 - Stato: `M android/app/src/main/java/it/zara/domoticsai/domain/model/CommandHistoryModels.kt
  M android/app/src/main/java/it/zara/domoticsai/ui/commands/CommandsScreen.kt
- M core-engine/src/domoticsai_core/app.py
  M core-engine/src/domoticsai_core/command_store.py
+ M core-engine/src/domoticsai_core/decisions/decision_engine.py
  M core-engine/src/domoticsai_core/digital_twin.py
  M docs/PROJECT_MANIFEST.md
 ?? core-engine/src/domoticsai_core/command_event_stream.py
-?? core-engine/src/domoticsai_core/decisions/decision_service.py
+?? core-engine/src/domoticsai_core/decisions/rules/grid_pool.py
 ?? core-engine/src/domoticsai_core/knowledge/reasoners/lights_reasoner.py
 ?? core-engine/src/domoticsai_core/knowledge/reasoners/scene_reasoner.py
 ?? core-engine/src/domoticsai_core/knowledge/scene_state.py
 ?? core-engine/src/domoticsai_core/knowledge/scenes_registry.py
 ?? core-engine/src/domoticsai_core/sqlite_database.py
-?? core-engine/tests/test_decision_service.py
+?? core-engine/tests/test_decision_grid_pool.py
 ?? core-engine/tests/test_knowledge_lights.py
 ?? core-engine/tests/test_knowledge_scenes.py
 ?? scripts/install_android_commands_screen_v060.py`
@@ -107,6 +107,7 @@ core-engine/src/domoticsai_core/decisions/decision_service.py
 core-engine/src/domoticsai_core/decisions/models.py
 core-engine/src/domoticsai_core/decisions/rules/__init__.py
 core-engine/src/domoticsai_core/decisions/rules/base.py
+core-engine/src/domoticsai_core/decisions/rules/grid_pool.py
 core-engine/src/domoticsai_core/decisions/rules/solar_pool.py
 core-engine/src/domoticsai_core/digital_twin.py
 core-engine/src/domoticsai_core/energy_derived.py
@@ -134,6 +135,7 @@ core-engine/src/domoticsai_core/websocket_hub.py
 core-engine/tests/test_command_manager.py
 core-engine/tests/test_command_store.py
 core-engine/tests/test_context_api.py
+core-engine/tests/test_decision_grid_pool.py
 core-engine/tests/test_decision_service.py
 core-engine/tests/test_decision_solar_pool.py
 core-engine/tests/test_energy_derived.py
@@ -316,6 +318,11 @@ scripts/verify_lights_gateway.py
 
 - Classi: `DecisionRule`
 
+### `core-engine/src/domoticsai_core/decisions/rules/grid_pool.py`
+
+- Classi: `GridImportWhilePoolRunningRule`
+- Funzioni: `_fact_value`
+
 ### `core-engine/src/domoticsai_core/decisions/rules/solar_pool.py`
 
 - Classi: `StartPoolOnSolarSurplusRule`
@@ -429,6 +436,10 @@ scripts/verify_lights_gateway.py
 ### `core-engine/tests/test_context_api.py`
 
 - Funzioni: `wrapped_context`, `test_extracts_and_orders_active_contexts`, `test_ignores_non_context_facts`, `test_ignores_inactive_contexts`
+
+### `core-engine/tests/test_decision_grid_pool.py`
+
+- Funzioni: `fact`, `test_warns_when_grid_import_and_pool_running`, `test_no_warning_without_grid_import`, `test_no_warning_when_pool_is_off`, `test_grid_pool_decision_id_is_stable`, `test_solar_pool_and_grid_pool_are_independent`
 
 ### `core-engine/tests/test_decision_service.py`
 
@@ -813,6 +824,7 @@ scripts/verify_lights_gateway.py
 - `core-engine/tests/test_command_manager.py`
 - `core-engine/tests/test_command_store.py`
 - `core-engine/tests/test_context_api.py`
+- `core-engine/tests/test_decision_grid_pool.py`
 - `core-engine/tests/test_decision_service.py`
 - `core-engine/tests/test_decision_solar_pool.py`
 - `core-engine/tests/test_energy_derived.py`
