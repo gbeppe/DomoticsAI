@@ -1,29 +1,30 @@
 # DomoticsAI — Project Manifest
 
-Generato automaticamente: `2026-07-15T15:34:06.102180+00:00`
+Generato automaticamente: `2026-07-15T18:02:37.748903+00:00`
 
 > Non modificare manualmente questo file. Rigenerarlo con `python3 scripts/generate-project-manifest.py`.
 
 ## Repository
 
 - Branch: `develop`
-- Commit: `6bb0d4c`
+- Commit: `6b41d53`
 - Stato: `M android/app/src/main/java/it/zara/domoticsai/domain/model/CommandHistoryModels.kt
  M android/app/src/main/java/it/zara/domoticsai/ui/commands/CommandsScreen.kt
+ M core-engine/src/domoticsai_core/app.py
  M core-engine/src/domoticsai_core/command_store.py
  M core-engine/src/domoticsai_core/digital_twin.py
+ M docs/PROJECT_MANIFEST.md
 ?? core-engine/src/domoticsai_core/command_event_stream.py
+?? core-engine/src/domoticsai_core/decisions/decision_service.py
 ?? core-engine/src/domoticsai_core/knowledge/reasoners/lights_reasoner.py
 ?? core-engine/src/domoticsai_core/knowledge/reasoners/scene_reasoner.py
 ?? core-engine/src/domoticsai_core/knowledge/scene_state.py
 ?? core-engine/src/domoticsai_core/knowledge/scenes_registry.py
 ?? core-engine/src/domoticsai_core/sqlite_database.py
+?? core-engine/tests/test_decision_service.py
 ?? core-engine/tests/test_knowledge_lights.py
 ?? core-engine/tests/test_knowledge_scenes.py
-?? docs/PROJECT_MANIFEST.md
-?? scripts/generate-project-manifest.py
-?? scripts/install_android_commands_screen_v060.py
-?? scripts/update-project-manifest.sh`
+?? scripts/install_android_commands_screen_v060.py`
 
 ## Architettura generale
 
@@ -100,11 +101,19 @@ core-engine/src/domoticsai_core/command_manager_models.py
 core-engine/src/domoticsai_core/command_models.py
 core-engine/src/domoticsai_core/command_store.py
 core-engine/src/domoticsai_core/config.py
+core-engine/src/domoticsai_core/decisions/__init__.py
+core-engine/src/domoticsai_core/decisions/decision_engine.py
+core-engine/src/domoticsai_core/decisions/decision_service.py
+core-engine/src/domoticsai_core/decisions/models.py
+core-engine/src/domoticsai_core/decisions/rules/__init__.py
+core-engine/src/domoticsai_core/decisions/rules/base.py
+core-engine/src/domoticsai_core/decisions/rules/solar_pool.py
 core-engine/src/domoticsai_core/digital_twin.py
 core-engine/src/domoticsai_core/energy_derived.py
 core-engine/src/domoticsai_core/event_store.py
 core-engine/src/domoticsai_core/knowledge/__init__.py
 core-engine/src/domoticsai_core/knowledge/context.py
+core-engine/src/domoticsai_core/knowledge/context_api.py
 core-engine/src/domoticsai_core/knowledge/context_engine.py
 core-engine/src/domoticsai_core/knowledge/facts.py
 core-engine/src/domoticsai_core/knowledge/knowledge_engine.py
@@ -124,6 +133,9 @@ core-engine/src/domoticsai_core/topic_mapper.py
 core-engine/src/domoticsai_core/websocket_hub.py
 core-engine/tests/test_command_manager.py
 core-engine/tests/test_command_store.py
+core-engine/tests/test_context_api.py
+core-engine/tests/test_decision_service.py
+core-engine/tests/test_decision_solar_pool.py
 core-engine/tests/test_energy_derived.py
 core-engine/tests/test_energy_integration.py
 core-engine/tests/test_house_context.py
@@ -244,6 +256,8 @@ scripts/verify_lights_gateway.py
 | `GET` | `/api/v1/commands/{command_id}` | `get_command` |
 | `GET` | `/api/v1/commands/{command_id}` | `get_command` |
 | `GET` | `/api/v1/context` | `get_context` |
+| `GET` | `/api/v1/context/active` | `get_active_context` |
+| `GET` | `/api/v1/decisions` | `get_decisions` |
 | `GET` | `/api/v1/energy` | `get_energy_view` |
 | `GET` | `/api/v1/events` | `get_events` |
 | `GET` | `/api/v1/knowledge` | `get_knowledge` |
@@ -256,7 +270,7 @@ scripts/verify_lights_gateway.py
 
 ### `core-engine/src/domoticsai_core/app.py`
 
-- Funzioni: `handle_mqtt_message`, `lifespan`, `health`, `get_twin`, `get_domain`, `get_context`, `get_knowledge`, `get_energy_view`, `get_lights_view`, `command_light`, `create_command`, `list_commands`, `stream_commands`, `get_command`, `get_events`, `ws_twin`
+- Funzioni: `handle_mqtt_message`, `lifespan`, `health`, `get_twin`, `get_domain`, `get_decisions`, `get_active_context`, `get_context`, `get_knowledge`, `get_energy_view`, `get_lights_view`, `command_light`, `create_command`, `list_commands`, `stream_commands`, `get_command`, `get_events`, `ws_twin`
 
 ### `core-engine/src/domoticsai_core/command_event_stream.py`
 
@@ -284,6 +298,29 @@ scripts/verify_lights_gateway.py
 
 - Classi: `Settings`
 
+### `core-engine/src/domoticsai_core/decisions/decision_engine.py`
+
+- Classi: `HouseDecisionEngine`
+
+### `core-engine/src/domoticsai_core/decisions/decision_service.py`
+
+- Classi: `HouseDecisionService`
+- Funzioni: `_as_dict`, `knowledge_facts_from_domain`, `active_context_map_from_domain`
+
+### `core-engine/src/domoticsai_core/decisions/models.py`
+
+- Classi: `DecisionKind`, `DecisionStatus`, `HouseDecision`
+- Funzioni: `utc_now_iso`
+
+### `core-engine/src/domoticsai_core/decisions/rules/base.py`
+
+- Classi: `DecisionRule`
+
+### `core-engine/src/domoticsai_core/decisions/rules/solar_pool.py`
+
+- Classi: `StartPoolOnSolarSurplusRule`
+- Funzioni: `_context_active`
+
 ### `core-engine/src/domoticsai_core/digital_twin.py`
 
 - Classi: `DigitalTwinStore`
@@ -302,6 +339,10 @@ scripts/verify_lights_gateway.py
 
 - Classi: `HouseContext`
 - Funzioni: `utc_now_iso`
+
+### `core-engine/src/domoticsai_core/knowledge/context_api.py`
+
+- Funzioni: `active_contexts_from_domain`
 
 ### `core-engine/src/domoticsai_core/knowledge/context_engine.py`
 
@@ -384,6 +425,18 @@ scripts/verify_lights_gateway.py
 ### `core-engine/tests/test_command_store.py`
 
 - Funzioni: `test_rows_are_accessible_by_column_name`
+
+### `core-engine/tests/test_context_api.py`
+
+- Funzioni: `wrapped_context`, `test_extracts_and_orders_active_contexts`, `test_ignores_non_context_facts`, `test_ignores_inactive_contexts`
+
+### `core-engine/tests/test_decision_service.py`
+
+- Funzioni: `knowledge_fact`, `house_context`, `test_extracts_facts_without_contexts`, `test_extracts_only_active_contexts`, `test_real_knowledge_generates_decision`, `test_pool_running_suppresses_decision`
+
+### `core-engine/tests/test_decision_solar_pool.py`
+
+- Funzioni: `context`, `test_recommends_pool_filtering_on_surplus`, `test_does_not_recommend_when_pool_running`, `test_does_not_recommend_without_surplus`, `test_decision_id_is_stable`
 
 ### `core-engine/tests/test_energy_derived.py`
 
@@ -759,6 +812,9 @@ scripts/verify_lights_gateway.py
 
 - `core-engine/tests/test_command_manager.py`
 - `core-engine/tests/test_command_store.py`
+- `core-engine/tests/test_context_api.py`
+- `core-engine/tests/test_decision_service.py`
+- `core-engine/tests/test_decision_solar_pool.py`
 - `core-engine/tests/test_energy_derived.py`
 - `core-engine/tests/test_energy_integration.py`
 - `core-engine/tests/test_house_context.py`

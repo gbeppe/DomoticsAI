@@ -27,6 +27,9 @@ from .lights_commands import LightsCommandService
 from .knowledge.context_api import (
     active_contexts_from_domain,
 )
+from .decisions.decision_service import (
+    HouseDecisionService,
+)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -49,6 +52,7 @@ hub = WebSocketHub()
 command_store = CommandStore(
     database
 )
+decision_service = HouseDecisionService()
 command_event_stream = CommandEventStream()
 command_manager = None
 
@@ -195,6 +199,34 @@ def get_domain(domain_name: str):
     return {
         "domain": domain_name,
         "entities": domain,
+    }
+
+
+@app.get("/api/v1/decisions")
+def get_decisions():
+    knowledge = (
+        twin_store.domain(
+            "knowledge"
+        )
+        or {}
+    )
+
+    decisions = (
+        decision_service.evaluate(
+            knowledge
+        )
+    )
+
+    return {
+        "domain": "decisions",
+        "count": len(decisions),
+        "decisions": [
+            decision.model_dump(
+                mode="json"
+            )
+            for decision in decisions
+        ],
+        "executionEnabled": False,
     }
 
 
