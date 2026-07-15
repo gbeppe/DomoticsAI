@@ -3,6 +3,9 @@ package it.zara.domoticsai.data.core
 import it.zara.domoticsai.domain.model.CommandReceiptDto
 import it.zara.domoticsai.domain.model.CommandHistoryItem
 import it.zara.domoticsai.domain.model.CoreHealth
+import it.zara.domoticsai.domain.model.HouseDecisionItem
+import it.zara.domoticsai.domain.model.HouseDecisionKind
+import it.zara.domoticsai.domain.model.HouseDecisionsResult
 import it.zara.domoticsai.domain.model.LightDevice
 import it.zara.domoticsai.domain.model.LightState
 import it.zara.domoticsai.domain.model.UiCommandState
@@ -156,6 +159,164 @@ class CoreEngineClient {
         }
     }
 
+    fun fetchDecisions(
+        baseUrl: String
+    ): HouseDecisionsResult {
+        val root = JSONObject(
+            requestJson(
+                "${baseUrl.trimEnd('/')}/api/v1/decisions"
+            )
+        )
+
+        val executionEnabled =
+            root.optBoolean(
+                "executionEnabled",
+                false
+            )
+
+        val array =
+            root.optJSONArray("decisions")
+
+        if (array == null) {
+            return HouseDecisionsResult(
+                decisions = emptyList(),
+                executionEnabled =
+                    executionEnabled
+            )
+        }
+
+        val decisions = buildList {
+            for (
+                index in 0 until array.length()
+            ) {
+                val item =
+                    array.optJSONObject(index)
+                        ?: continue
+
+                add(
+                    parseHouseDecision(
+                        item
+                    )
+                )
+            }
+        }.sortedWith(
+            compareByDescending<
+                HouseDecisionItem
+            > {
+                it.priority
+            }.thenBy {
+                it.action
+            }
+        )
+
+        return HouseDecisionsResult(
+            decisions = decisions,
+            executionEnabled =
+                executionEnabled
+        )
+    }
+
+    private fun parseHouseDecision(
+        item: JSONObject
+    ): HouseDecisionItem {
+        val data =
+            item.optJSONObject("data")
+                ?: JSONObject()
+
+        return HouseDecisionItem(
+            decisionId =
+                item.optString(
+                    "decision_id",
+                    ""
+                ),
+            ruleId =
+                item.optString(
+                    "rule_id",
+                    ""
+                ),
+            kind =
+                parseDecisionKind(
+                    item.optString(
+                        "kind",
+                        ""
+                    )
+                ),
+            action =
+                item.optString(
+                    "action",
+                    ""
+                ),
+            title =
+                item.optString(
+                    "title",
+                    "Suggerimento"
+                ),
+            description =
+                item.optString(
+                    "description",
+                    ""
+                ),
+            priority =
+                item.optInt(
+                    "priority",
+                    0
+                ),
+            confidence =
+                item.optDouble(
+                    "confidence",
+                    1.0
+                ),
+            reasons =
+                item.optJSONArray("reason")
+                    .toStringList(),
+            contextNames =
+                item.optJSONArray(
+                    "context_names"
+                ).toStringList(),
+            executionAllowed =
+                data.optBoolean(
+                    "executionAllowed",
+                    false
+                ),
+            requiresConfirmation =
+                data.optBoolean(
+                    "requiresConfirmation",
+                    true
+                ),
+            suggestedAction =
+                data.optString(
+                    "suggestedAction",
+                    ""
+                ).takeIf {
+                    it.isNotBlank()
+                },
+            createdAt =
+                item.optString(
+                    "created_at",
+                    ""
+                )
+        )
+    }
+
+    private fun parseDecisionKind(
+        value: String
+    ): HouseDecisionKind =
+        when (
+            value.trim().lowercase()
+        ) {
+            "recommendation" ->
+                HouseDecisionKind.RECOMMENDATION
+
+            "warning" ->
+                HouseDecisionKind.WARNING
+
+            "information" ->
+                HouseDecisionKind.INFORMATION
+
+            else ->
+                HouseDecisionKind.UNKNOWN
+        }
+
     private fun parseCommandState(
         value: String
     ): UiCommandState =
@@ -236,6 +397,26 @@ class CoreEngineClient {
             responseBody
         } finally {
             connection.disconnect()
+        }
+    }
+}
+
+private fun org.json.JSONArray?.toStringList(): List<String> {
+    if (this == null) {
+        return emptyList()
+    }
+
+    return buildList {
+        for (index in 0 until length()) {
+            val value =
+                optString(
+                    index,
+                    ""
+                )
+
+            if (value.isNotBlank()) {
+                add(value)
+            }
         }
     }
 }
