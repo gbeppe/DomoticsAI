@@ -339,6 +339,34 @@ def markdown_escape(
     )
 
 
+def pattern_specificity(
+    item: CompiledPattern,
+) -> tuple[int, int]:
+    """
+    Un numero inferiore di placeholder indica
+    un pattern più specifico.
+
+    A parità di placeholder, il pattern più lungo
+    è considerato più specifico.
+    """
+    return (
+        item.pattern.count("{"),
+        -len(item.pattern),
+    )
+
+
+def matches_are_ambiguous(
+    matches: list[CompiledPattern],
+) -> bool:
+    if len(matches) < 2:
+        return False
+
+    return (
+        pattern_specificity(matches[0])
+        == pattern_specificity(matches[1])
+    )
+
+
 def validate_capture(
     *,
     capture_path: Path,
@@ -415,7 +443,9 @@ def validate_capture(
             ] += 1
             continue
 
-        if len(matches) > 1:
+        if matches_are_ambiguous(
+            matches
+        ):
             ambiguous[
                 relative
             ] += 1

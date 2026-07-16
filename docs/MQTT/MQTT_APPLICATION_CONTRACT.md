@@ -1,6 +1,6 @@
 # DomoticsAI — MQTT Application Contract
 
-Generato automaticamente: `2026-07-16T01:14:16.047689+00:00`
+Generato automaticamente: `2026-07-16T01:41:32.180850+00:00`
 
 - Schema: `1`
 - Versione contratto: `1.0.0-draft`
@@ -43,11 +43,15 @@ flowchart LR
 | `controls` | `1` |
 | `energy` | `5` |
 | `environment` | `8` |
+| `external_automation` | `1` |
 | `fireplace` | `3` |
+| `house_mode` | `2` |
+| `lighting_automation` | `2` |
 | `lights` | `3` |
-| `system` | `2` |
+| `pool_automation` | `1` |
+| `system` | `5` |
 | `thermal` | `3` |
-| `ventilation` | `1` |
+| `ventilation` | `3` |
 
 ## Luci
 
@@ -116,6 +120,17 @@ flowchart LR
 | `system/ac_auto/state` | `system` | `system_ac_auto_parameter` | state | broker_to_application | boolean | — | False | True | False |
 | `system/{name}/state` | `system` | `{name}` | state | broker_to_application | scalar | — | False | True | False |
 | `controlli/{name}` | `controls` | `{name}` | configuration | broker_to_application | number | domain-specific | False | True | False |
+| `eco_lights/set` | `lighting_automation` | `eco_lights_configuration` | configuration | bidirectional_pending | boolean_set | — | False | True | False |
+| `eco_lights/state` | `lighting_automation` | `eco_lights_state` | state | broker_to_application | boolean | — | False | True | False |
+| `holiday/set` | `house_mode` | `holiday_configuration` | configuration | bidirectional_pending | boolean_set | — | False | True | False |
+| `holiday/state` | `house_mode` | `holiday_state` | state | broker_to_application | boolean | — | False | True | False |
+| `maxNightSpeed/set` | `ventilation` | `legacy_max_night_speed` | configuration | bidirectional_pending | number | level | False | True | False |
+| `pool_lights_auto/set` | `pool_automation` | `pool_lights_auto_configuration` | configuration | bidirectional_pending | boolean_set | — | False | True | False |
+| `porch_sensor/set` | `external_automation` | `porch_sensor_configuration` | configuration | bidirectional_pending | boolean_set | — | False | True | False |
+| `system/luci_piscina_auto/set` | `system` | `system_pool_lights_auto_configuration` | configuration | bidirectional_pending | boolean_set | — | False | True | False |
+| `system/sensore_portico/set` | `system` | `system_porch_sensor_configuration` | configuration | bidirectional_pending | boolean_set | — | False | True | False |
+| `system/set` | `system` | `system_configuration` | configuration | bidirectional_pending | scalar | — | False | True | False |
+| `vmc/maxNightSpeed/set` | `ventilation` | `vmc_max_night_speed` | configuration | bidirectional_pending | number | level | False | True | False |
 
 ## Note e verifiche pendenti
 
@@ -129,6 +144,17 @@ flowchart LR
 - `system/ac_auto/state` — Parametro distinto da ac_auto/set. distinct_semantics_pending_rename
 - `system/{name}/state` — Da analizzare singolarmente; non assumere equivalenza con topic omonimi fuori da system/.
 - `controlli/{name}` — Parametri di controllo da classificare prima di abilitarne la modifica.
+- `eco_lights/set` — Parametro osservato sul broker. Scrittura non ancora abilitata. pending_analysis
+- `eco_lights/state` — pending_analysis
+- `holiday/set` — Da mantenere distinto da system/holiday/state. pending_analysis
+- `holiday/state` — pending_analysis
+- `maxNightSpeed/set` — Semantica da confrontare con vmc/maxNightSpeed/set e controlli/velocitaMaxVmcNotte. pending_analysis
+- `pool_lights_auto/set` — pending_analysis
+- `porch_sensor/set` — pending_analysis
+- `system/luci_piscina_auto/set` — pending_analysis
+- `system/sensore_portico/set` — pending_analysis
+- `system/set` — Topic generico: non usare finché la funzione non è stata chiarita. unknown_semantics
+- `vmc/maxNightSpeed/set` — pending_analysis
 
 ## Regole di evoluzione
 

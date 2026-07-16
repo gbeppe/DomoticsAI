@@ -270,3 +270,68 @@ def test_specific_pattern_precedes_generic():
         matches[0].pattern
         == "system/ac_auto/state"
     )
+
+
+def test_specific_and_generic_match_is_not_ambiguous(
+    tmp_path: Path,
+):
+    contract_path = (
+        tmp_path / "contract-overlap.json"
+    )
+
+    contract_path.write_text(
+        json.dumps(
+            {
+                "baseTopic": {
+                    "default":
+                        "zara/android/domotica"
+                },
+                "topics": [
+                    {
+                        "pattern":
+                            "system/ac_auto/state",
+                        "domain": "system",
+                        "entity":
+                            "system_ac_auto",
+                        "direction":
+                            "broker_to_application",
+                        "payloadType":
+                            "boolean"
+                    },
+                    {
+                        "pattern":
+                            "system/{name}/state",
+                        "domain": "system",
+                        "entity": "{name}",
+                        "direction":
+                            "broker_to_application",
+                        "payloadType":
+                            "scalar"
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    result = validation.validate_capture(
+        capture_path=capture_file(
+            tmp_path,
+            """
+zara/android/domotica/system/ac_auto/state 1
+""",
+        ),
+        contract_path=contract_path,
+    )
+
+    assert (
+        result["ambiguousTopics"]
+        == {}
+    )
+
+    assert (
+        result["topicToPattern"][
+            "system/ac_auto/state"
+        ]
+        == "system/ac_auto/state"
+    )
