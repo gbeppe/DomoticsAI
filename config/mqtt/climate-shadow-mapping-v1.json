@@ -1,0 +1,86 @@
+{
+  "version": "1.0.0",
+  "mode": "READ_ONLY_SHADOW",
+  "sourceBaseTopic": "zara/android/domotica",
+  "targetBaseTopic": "domoticsai/v1/state",
+  "rules": [
+    {
+      "source": "env/humLiving",
+      "target": "climate/living_humidity_pct",
+      "type": "number",
+      "unit": "%"
+    },
+    {
+      "source": "env/tempBedroom",
+      "target": "climate/bedroom_temperature_c",
+      "type": "number",
+      "unit": "°C"
+    },
+    {
+      "source": "env/humBedroom",
+      "target": "climate/bedroom_humidity_pct",
+      "type": "number",
+      "unit": "%"
+    },
+    {
+      "source": "env/tempOutdoor",
+      "target": "climate/outdoor_temperature_c",
+      "type": "number",
+      "unit": "°C"
+    },
+    {
+      "source": "env/humOutdoor",
+      "target": "climate/outdoor_humidity_pct",
+      "type": "number",
+      "unit": "%"
+    },
+    {
+      "source": "thermostat/living/target/state",
+      "target": "climate/living_target_temperature_c",
+      "type": "number",
+      "unit": "°C"
+    },
+    {
+      "source": "acsPufferTemp",
+      "target": "thermal/dhw_buffer_temperature_c",
+      "type": "number",
+      "unit": "°C"
+    },
+    {
+      "source": "pufferBassoTemp",
+      "target": "thermal/buffer_lower_temperature_c",
+      "type": "number",
+      "unit": "°C"
+    },
+    {
+      "source": "pufferAltoTemp",
+      "target": "thermal/buffer_upper_temperature_c",
+      "type": "number",
+      "unit": "°C"
+    },
+    {
+      "source": "casa/stufa/stat/modalita",
+      "target": "fireplace/mode",
+      "type": "string",
+      "unit": null
+    },
+    {
+      "source": "casa/stufa/stat/acceso",
+      "target": "fireplace/powered",
+      "type": "boolean",
+      "unit": null
+    },
+    {
+      "source": "casa/stufa/stat/potenza",
+      "target": "fireplace/power_level",
+      "type": "number",
+      "unit": "level"
+    },
+    {
+      "source": "casa/clima/stato_completo",
+      "target": "climate/complete_snapshot",
+      "type": "json_object",
+      "unit": null
+    }
+  ]
+}

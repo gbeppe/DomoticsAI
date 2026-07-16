@@ -1416,5 +1416,64 @@
         "x": 860,
         "y": 760,
         "wires": []
+    },
+    {
+        "id": "climateshadowinputv012",
+        "type": "mqtt in",
+        "z": "a1827b3a2f1448a5",
+        "name": "Production Climate Shadow Read Only",
+        "topic": "zara/android/domotica/#",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "27cc6314b4e24703",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 1540,
+        "wires": [
+            [
+                "climateshadowmapv012"
+            ]
+        ]
+    },
+    {
+        "id": "climateshadowmapv012",
+        "type": "function",
+        "z": "a1827b3a2f1448a5",
+        "name": "Map Production Climate Shadow",
+        "func": "const sourceBase = \"zara/android/domotica\";\nconst targetBase = \"domoticsai/v1/state\";\nconst rules = {\"env/humLiving\":{\"target\":\"climate/living_humidity_pct\",\"type\":\"number\",\"unit\":\"%\"},\"env/tempBedroom\":{\"target\":\"climate/bedroom_temperature_c\",\"type\":\"number\",\"unit\":\"°C\"},\"env/humBedroom\":{\"target\":\"climate/bedroom_humidity_pct\",\"type\":\"number\",\"unit\":\"%\"},\"env/tempOutdoor\":{\"target\":\"climate/outdoor_temperature_c\",\"type\":\"number\",\"unit\":\"°C\"},\"env/humOutdoor\":{\"target\":\"climate/outdoor_humidity_pct\",\"type\":\"number\",\"unit\":\"%\"},\"thermostat/living/target/state\":{\"target\":\"climate/living_target_temperature_c\",\"type\":\"number\",\"unit\":\"°C\"},\"acsPufferTemp\":{\"target\":\"thermal/dhw_buffer_temperature_c\",\"type\":\"number\",\"unit\":\"°C\"},\"pufferBassoTemp\":{\"target\":\"thermal/buffer_lower_temperature_c\",\"type\":\"number\",\"unit\":\"°C\"},\"pufferAltoTemp\":{\"target\":\"thermal/buffer_upper_temperature_c\",\"type\":\"number\",\"unit\":\"°C\"},\"casa/stufa/stat/modalita\":{\"target\":\"fireplace/mode\",\"type\":\"string\",\"unit\":null},\"casa/stufa/stat/acceso\":{\"target\":\"fireplace/powered\",\"type\":\"boolean\",\"unit\":null},\"casa/stufa/stat/potenza\":{\"target\":\"fireplace/power_level\",\"type\":\"number\",\"unit\":\"level\"},\"casa/clima/stato_completo\":{\"target\":\"climate/complete_snapshot\",\"type\":\"json_object\",\"unit\":null}};\n\nconst prefix = sourceBase + \"/\";\n\nif (!msg.topic.startsWith(prefix)) {\n    return null;\n}\n\nconst relative = msg.topic.slice(prefix.length);\n\nif (\n    relative.endsWith(\"/set\") ||\n    relative.includes(\"/set/\")\n) {\n    return null;\n}\n\nconst rule = rules[relative];\n\nif (!rule) {\n    return null;\n}\n\nconst rawPayload = msg.payload;\nlet value;\n\nif (rule.type === \"number\") {\n    value = Number(rawPayload);\n\n    if (!Number.isFinite(value)) {\n        node.warn(\n            `Invalid numeric Climate payload: ${msg.topic}`\n        );\n        return null;\n    }\n} else if (rule.type === \"boolean\") {\n    const normalized =\n        String(rawPayload).trim().toUpperCase();\n\n    if ([\"TRUE\", \"ON\", \"1\"].includes(normalized)) {\n        value = true;\n    } else if (\n        [\"FALSE\", \"OFF\", \"0\"].includes(normalized)\n    ) {\n        value = false;\n    } else {\n        node.warn(\n            `Invalid boolean Climate payload: ${msg.topic}`\n        );\n        return null;\n    }\n} else if (rule.type === \"json_object\") {\n    try {\n        value =\n            typeof rawPayload === \"object\"\n                ? rawPayload\n                : JSON.parse(String(rawPayload));\n    } catch (error) {\n        node.warn(\n            `Invalid JSON Climate payload: ${msg.topic}`\n        );\n        return null;\n    }\n\n    if (\n        value === null ||\n        Array.isArray(value) ||\n        typeof value !== \"object\"\n    ) {\n        return null;\n    }\n} else {\n    value = String(rawPayload);\n}\n\nconst sourceTopic = msg.topic;\n\nmsg.topic =\n    `${targetBase}/${rule.target}`;\n\nmsg.payload = JSON.stringify({\n    value: value,\n    unit: rule.unit,\n    quality: \"good\",\n    source: \"production_application_contract\",\n    sourceTopic: sourceTopic,\n    ts: new Date().toISOString(),\n    ingestionMode: \"shadow\"\n});\n\nmsg.qos = 1;\nmsg.retain = true;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 1540,
+        "wires": [
+            [
+                "climateshadowoutputv012"
+            ]
+        ]
+    },
+    {
+        "id": "climateshadowoutputv012",
+        "type": "mqtt out",
+        "z": "a1827b3a2f1448a5",
+        "name": "Publish Climate Shadow",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "73fb6eba0e0c4fb0",
+        "x": 890,
+        "y": 1540,
+        "wires": []
     }
 ]
