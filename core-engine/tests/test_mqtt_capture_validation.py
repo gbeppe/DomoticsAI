@@ -335,3 +335,148 @@ zara/android/domotica/system/ac_auto/state 1
         ]
         == "system/ac_auto/state"
     )
+
+def system_contract(
+    tmp_path: Path,
+) -> Path:
+    path = (
+        tmp_path
+        / "system-contract.json"
+    )
+
+    path.write_text(
+        json.dumps(
+            {
+                "baseTopic": {
+                    "default":
+                        "zara/android/domotica"
+                },
+                "topics": [
+                    {
+                        "pattern":
+                            "system/set",
+                        "domain":
+                            "system",
+                        "entity":
+                            "automatic_climate_management",
+                        "direction":
+                            "application_to_broker",
+                        "payloadType":
+                            "json_object",
+                        "legacyPayloadsTemporarilyAccepted": [
+                            "boolean",
+                            "0_or_1",
+                            "ON_or_OFF",
+                        ],
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    return path
+
+
+def test_system_set_accepts_json_payload(
+    tmp_path: Path,
+):
+    result = validation.validate_capture(
+        capture_path=capture_file(
+            tmp_path,
+            (
+                "zara/android/domotica/system/set "
+                "{\"automaticClimate\":true,"
+                "\"origin\":\"android\"}"
+            ),
+        ),
+        contract_path=system_contract(
+            tmp_path
+        ),
+    )
+
+    assert (
+        result["incompatiblePayloads"]
+        == {}
+    )
+
+    assert (
+        result["legacyCompatiblePayloads"]
+        == {}
+    )
+
+def test_system_set_accepts_legacy_payloads_temporarily(
+    tmp_path: Path,
+):
+    result = validation.validate_capture(
+        capture_path=capture_file(
+            tmp_path,
+            chr(10).join(
+                [
+                    (
+                        "zara/android/domotica/"
+                        "system/set 1"
+                    ),
+                    (
+                        "zara/android/domotica/"
+                        "system/set ON"
+                    ),
+                    (
+                        "zara/android/domotica/"
+                        "system/set true"
+                    ),
+                ]
+            ),
+        ),
+        contract_path=system_contract(
+            tmp_path
+        ),
+    )
+
+    assert (
+        result["incompatiblePayloads"]
+        == {}
+    )
+
+    assert (
+        result["legacyCompatiblePayloads"]
+        == {
+            "system/set": {
+                "1": 1,
+                "ON": 1,
+                "true": 1,
+            }
+        }
+    )
+
+
+def test_system_set_rejects_invalid_payload(
+    tmp_path: Path,
+):
+    result = validation.validate_capture(
+        capture_path=capture_file(
+            tmp_path,
+            (
+                "zara/android/domotica/"
+                "system/set INVALID"
+            ),
+        ),
+        contract_path=system_contract(
+            tmp_path
+        ),
+    )
+
+    assert (
+        result["legacyCompatiblePayloads"]
+        == {}
+    )
+
+    assert (
+        result["incompatiblePayloads"]
+        == {
+            "system/set": {
+                "INVALID": 1,
+            }
+        }
+    )
+

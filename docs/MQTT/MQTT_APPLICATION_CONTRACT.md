@@ -1,6 +1,6 @@
 # DomoticsAI — MQTT Application Contract
 
-Generato automaticamente: `2026-07-16T01:41:32.180850+00:00`
+Generato automaticamente: `2026-07-16T18:50:47.057626+00:00`
 
 - Schema: `1`
 - Versione contratto: `1.0.0-draft`
@@ -49,7 +49,7 @@ flowchart LR
 | `lighting_automation` | `2` |
 | `lights` | `3` |
 | `pool_automation` | `1` |
-| `system` | `5` |
+| `system` | `6` |
 | `thermal` | `3` |
 | `ventilation` | `3` |
 
@@ -118,6 +118,7 @@ flowchart LR
 | `casa/clima/stato_completo` | `climate` | `complete_climate_snapshot` | snapshot | broker_to_application | json_object | — | False | False | True |
 | `ac_auto/set` | `climate_automation` | `legacy_ac_auto_parameter` | configuration | bidirectional_pending | boolean_set | — | False | True | False |
 | `system/ac_auto/state` | `system` | `system_ac_auto_parameter` | state | broker_to_application | boolean | — | False | True | False |
+| `system/state` | `system` | `automatic_climate_management` | state | broker_to_application | json_object | — | False | True | False |
 | `system/{name}/state` | `system` | `{name}` | state | broker_to_application | scalar | — | False | True | False |
 | `controlli/{name}` | `controls` | `{name}` | configuration | broker_to_application | number | domain-specific | False | True | False |
 | `eco_lights/set` | `lighting_automation` | `eco_lights_configuration` | configuration | bidirectional_pending | boolean_set | — | False | True | False |
@@ -129,7 +130,7 @@ flowchart LR
 | `porch_sensor/set` | `external_automation` | `porch_sensor_configuration` | configuration | bidirectional_pending | boolean_set | — | False | True | False |
 | `system/luci_piscina_auto/set` | `system` | `system_pool_lights_auto_configuration` | configuration | bidirectional_pending | boolean_set | — | False | True | False |
 | `system/sensore_portico/set` | `system` | `system_porch_sensor_configuration` | configuration | bidirectional_pending | boolean_set | — | False | True | False |
-| `system/set` | `system` | `system_configuration` | configuration | bidirectional_pending | scalar | — | False | True | False |
+| `system/set` | `system` | `automatic_climate_management` | command | application_to_broker | json_object | — | False | False | False |
 | `vmc/maxNightSpeed/set` | `ventilation` | `vmc_max_night_speed` | configuration | bidirectional_pending | number | level | False | True | False |
 
 ## Note e verifiche pendenti
@@ -142,6 +143,7 @@ flowchart LR
 - `casa/clima/stato_completo` — Informazione elaborata da Node-RED. Non sostituisce i topic atomici.
 - `ac_auto/set` — Parametro distinto da system/ac_auto/state. distinct_semantics_pending_rename
 - `system/ac_auto/state` — Parametro distinto da ac_auto/set. distinct_semantics_pending_rename
+- `system/state` — Stato autorevole della gestione climatica automatica. Retained. Conferma i comandi inviati su system/set. defined_pending_implementation
 - `system/{name}/state` — Da analizzare singolarmente; non assumere equivalenza con topic omonimi fuori da system/.
 - `controlli/{name}` — Parametri di controllo da classificare prima di abilitarne la modifica.
 - `eco_lights/set` — Parametro osservato sul broker. Scrittura non ancora abilitata. pending_analysis
@@ -153,7 +155,7 @@ flowchart LR
 - `porch_sensor/set` — pending_analysis
 - `system/luci_piscina_auto/set` — pending_analysis
 - `system/sensore_portico/set` — pending_analysis
-- `system/set` — Topic generico: non usare finché la funzione non è stata chiarita. unknown_semantics
+- `system/set` — Comando JSON per abilitare o disabilitare la gestione automatica degli impianti climatici. Non retained. Lo stato reale deve essere confermato da system/state. defined_pending_implementation
 - `vmc/maxNightSpeed/set` — pending_analysis
 
 ## Regole di evoluzione

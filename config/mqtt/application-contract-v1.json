@@ -425,6 +425,29 @@
       "notes": "Parametro distinto da ac_auto/set."
     },
     {
+      "pattern": "system/state",
+      "domain": "system",
+      "entity": "automatic_climate_management",
+      "kind": "state",
+      "direction": "broker_to_application",
+      "payloadType": "json_object",
+      "unit": null,
+      "required": false,
+      "retainedExpected": true,
+      "supported": false,
+      "semanticStatus": "defined_pending_implementation",
+      "requiredJsonFields": {
+        "automaticClimate": "boolean"
+      },
+      "optionalJsonFields": {
+        "mode": "string",
+        "updatedAt": "iso8601_string",
+        "source": "string",
+        "requestId": "string"
+      },
+      "notes": "Stato autorevole della gestione climatica automatica. Retained. Conferma i comandi inviati su system/set."
+    },
+    {
       "pattern": "system/{name}/state",
       "domain": "system",
       "entity": "{name}",
@@ -573,16 +596,29 @@
     {
       "pattern": "system/set",
       "domain": "system",
-      "entity": "system_configuration",
-      "kind": "configuration",
-      "direction": "bidirectional_pending",
-      "payloadType": "scalar",
+      "entity": "automatic_climate_management",
+      "kind": "command",
+      "direction": "application_to_broker",
+      "payloadType": "json_object",
       "unit": null,
       "required": false,
-      "retainedExpected": true,
+      "retainedExpected": false,
       "supported": false,
-      "semanticStatus": "unknown_semantics",
-      "notes": "Topic generico: non usare finché la funzione non è stata chiarita."
+      "semanticStatus": "defined_pending_implementation",
+      "requiredJsonFields": {
+        "automaticClimate": "boolean"
+      },
+      "optionalJsonFields": {
+        "origin": "string",
+        "requestId": "string",
+        "requestedAt": "iso8601_string"
+      },
+      "legacyPayloadsTemporarilyAccepted": [
+        "boolean",
+        "0_or_1",
+        "ON_or_OFF"
+      ],
+      "notes": "Comando JSON per abilitare o disabilitare la gestione automatica degli impianti climatici. Non retained. Lo stato reale deve essere confermato da system/state."
     },
     {
       "pattern": "vmc/maxNightSpeed/set",

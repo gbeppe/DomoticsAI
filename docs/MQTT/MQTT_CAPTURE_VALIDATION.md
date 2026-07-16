@@ -1,8 +1,8 @@
 # DomoticsAI — MQTT Capture Validation
 
-Generato automaticamente: `2026-07-16T01:45:46.501174+00:00`
+Generato automaticamente: `2026-07-16T20:44:40.539018+00:00`
 
-- Capture: `/home/giuseppe/AndroidStudioProjects/DomoticsAI/.captures/mqtt-production/android-namespace-20260716-025421.log`
+- Capture: `.captures/mqtt-production/android-namespace-20260716-025421.log`
 - Contratto: `/home/giuseppe/AndroidStudioProjects/DomoticsAI/config/mqtt/application-contract-v1.json`
 - Base topic: `zara/android/domotica`
 
@@ -14,6 +14,8 @@ Generato automaticamente: `2026-07-16T01:45:46.501174+00:00`
 - Topic unici non coperti: `0`
 - Topic fuori namespace: `0`
 - Topic ambigui: `0`
+- Messaggi legacy temporaneamente accettati: `1`
+- Topic con payload legacy temporanei: `1`
 - Topic con payload incompatibili: `0`
 
 ## Topic coperti
@@ -70,7 +72,7 @@ Generato automaticamente: `2026-07-16T01:45:46.501174+00:00`
 | `system/luci_piscina_auto/state` | `system/{name}/state` | `system` | `{name}` | 1 | boolean_or_number: 1 |
 | `system/sensore_portico/set` | `system/sensore_portico/set` | `system` | `system_porch_sensor_configuration` | 1 | boolean_or_number: 1 |
 | `system/sensore_portico/state` | `system/{name}/state` | `system` | `{name}` | 1 | boolean_or_number: 1 |
-| `system/set` | `system/set` | `system` | `system_configuration` | 1 | boolean_or_number: 1 |
+| `system/set` | `system/set` | `system` | `automatic_climate_management` | 1 | boolean_or_number: 1 |
 | `thermostat/living/target/state` | `thermostat/living/target/state` | `climate` | `living_target_temperature` | 32 | number: 32 |
 | `vmc/maxNightSpeed/set` | `vmc/maxNightSpeed/set` | `ventilation` | `vmc_max_night_speed` | 1 | boolean_or_number: 1 |
 | `vmc/speed/state` | `vmc/speed/state` | `ventilation` | `vmc_speed` | 1 | boolean_or_number: 1 |
@@ -81,7 +83,14 @@ Generato automaticamente: `2026-07-16T01:45:46.501174+00:00`
 
 ## Pattern del contratto non osservati
 
-- Tutti i pattern di lettura sono stati osservati.
+- `system/state`
+
+## Payload legacy temporaneamente accettati
+
+### `system/set`
+
+- `1` — `1` occorrenze
+
 
 ## Payload incompatibili
 

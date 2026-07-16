@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from enum import Enum
 import argparse
 import json
 from pathlib import Path
@@ -41,6 +42,12 @@ class CompiledPattern:
     pattern: str
     regex: re.Pattern[str]
     topic_definition: dict[str, Any]
+
+
+class PayloadCompatibility(Enum):
+    COMPATIBLE = "compatible"
+    LEGACY_COMPATIBLE = "legacy-compatible"
+    INCOMPATIBLE = "incompatible"
 
 
 def utc_now_iso() -> str:
@@ -277,53 +284,133 @@ def infer_payload_kind(
     return "string"
 
 
-def payload_is_compatible(
+def legacy_payload_is_compatible(
+    payload: str,
+    accepted_formats: list[str] | None,
+) -> bool:
+    if not accepted_formats:
+        return False
+
+    stripped = payload.strip()
+    upper = stripped.upper()
+
+    for accepted in accepted_formats:
+        if accepted == "boolean":
+            if upper in {
+                "TRUE",
+                "FALSE",
+            }:
+                return True
+
+        elif accepted == "0_or_1":
+            if stripped in {
+                "0",
+                "1",
+            }:
+                return True
+
+        elif accepted == "ON_or_OFF":
+            if upper in {
+                "ON",
+                "OFF",
+            }:
+                return True
+
+    return False
+
+
+def payload_compatibility(
     expected: str,
     payload: str,
-) -> bool:
+    legacy_formats: list[str] | None = None,
+) -> PayloadCompatibility:
     kind = infer_payload_kind(
         payload
     )
+
+    compatible = False
 
     if expected in {
         "string",
         "scalar",
         "scene_name",
     }:
-        return True
+        compatible = True
 
-    if expected == "number":
-        return kind in {
+    elif expected == "number":
+        compatible = kind in {
             "number",
             "boolean_or_number",
         }
 
-    if expected == "boolean":
-        return kind in {
+    elif expected == "boolean":
+        compatible = kind in {
             "boolean",
             "boolean_or_number",
         }
 
-    if expected == "boolean_on_off":
-        return payload.strip().upper() in {
-            "ON",
-            "OFF",
-        }
+    elif expected == "boolean_on_off":
+        compatible = (
+            payload.strip().upper()
+            in {
+                "ON",
+                "OFF",
+            }
+        )
 
-    if expected == "boolean_set":
-        return payload.strip().upper() in {
-            "0",
-            "1",
-            "TRUE",
-            "FALSE",
-        }
+    elif expected == "boolean_set":
+        compatible = (
+            payload.strip().upper()
+            in {
+                "0",
+                "1",
+                "TRUE",
+                "FALSE",
+            }
+        )
 
-    if expected == "json_object":
-        return kind == "json_object"
+    elif expected == "json_object":
+        compatible = (
+            kind == "json_object"
+        )
 
-    # Tipo non ancora modellato:
-    # non lo consideriamo errore.
-    return True
+    else:
+        # Tipo non ancora modellato:
+        # non lo consideriamo errore.
+        compatible = True
+
+    if compatible:
+        return (
+            PayloadCompatibility
+                .COMPATIBLE
+        )
+
+    if legacy_payload_is_compatible(
+        payload,
+        legacy_formats,
+    ):
+        return (
+            PayloadCompatibility
+                .LEGACY_COMPATIBLE
+        )
+
+    return (
+        PayloadCompatibility
+            .INCOMPATIBLE
+    )
+
+
+def payload_is_compatible(
+    expected: str,
+    payload: str,
+) -> bool:
+    return (
+        payload_compatibility(
+            expected,
+            payload,
+        )
+        != PayloadCompatibility.INCOMPATIBLE
+    )
 
 
 def markdown_escape(
@@ -401,6 +488,11 @@ def validate_capture(
         Counter()
     )
     payload_kinds: dict[
+        str,
+        Counter[str],
+    ] = defaultdict(Counter)
+
+    legacy_compatible_payloads: dict[
         str,
         Counter[str],
     ] = defaultdict(Counter)
@@ -485,9 +577,27 @@ def validate_capture(
             )
         )
 
-        if not payload_is_compatible(
+        compatibility = payload_compatibility(
             expected_type,
             message.payload,
+            selected.topic_definition.get(
+                "legacyPayloadsTemporarilyAccepted"
+            ),
+        )
+
+        if (
+            compatibility
+            == PayloadCompatibility.LEGACY_COMPATIBLE
+        ):
+            legacy_compatible_payloads[
+                relative
+            ][
+                message.payload[:120]
+            ] += 1
+
+        elif (
+            compatibility
+            == PayloadCompatibility.INCOMPATIBLE
         ):
             incompatible_payloads[
                 relative
@@ -553,6 +663,11 @@ def validate_capture(
             for topic, counter
             in payload_kinds.items()
         },
+        "legacyCompatiblePayloads": {
+            topic: dict(counter)
+            for topic, counter
+            in legacy_compatible_payloads.items()
+        },
         "incompatiblePayloads": {
             topic: dict(counter)
             for topic, counter
@@ -580,6 +695,10 @@ def render_report(
 
     ambiguous = result[
         "ambiguousTopics"
+    ]
+
+    legacy_compatible = result[
+        "legacyCompatiblePayloads"
     ]
 
     incompatible = result[
@@ -629,6 +748,10 @@ def render_report(
         f"`{len(outside)}`",
         f"- Topic ambigui: "
         f"`{len(ambiguous)}`",
+        f"- Messaggi legacy temporaneamente accettati: "
+        f"`{sum(sum(values.values()) for values in legacy_compatible.values())}`",
+        f"- Topic con payload legacy temporanei: "
+        f"`{len(legacy_compatible)}`",
         f"- Topic con payload incompatibili: "
         f"`{len(incompatible)}`",
         "",
@@ -722,6 +845,37 @@ def render_report(
         lines.append(
             "- Tutti i pattern di lettura "
             "sono stati osservati."
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Payload legacy temporaneamente accettati",
+            "",
+        ]
+    )
+
+    if legacy_compatible:
+        for topic, values in sorted(
+            legacy_compatible.items()
+        ):
+            lines.append(
+                f"### `{topic}`"
+            )
+            lines.append("")
+
+            for payload, count in sorted(
+                values.items()
+            ):
+                lines.append(
+                    f"- `{markdown_escape(payload)}` "
+                    f"— `{count}` occorrenze"
+                )
+
+            lines.append("")
+    else:
+        lines.append(
+            "- Nessun payload legacy osservato."
         )
 
     lines.extend(
@@ -902,6 +1056,15 @@ def main() -> int:
     print(
         "Topic ambigui:",
         len(result["ambiguousTopics"]),
+    )
+    print(
+        "Payload legacy temporanei:",
+        sum(
+            sum(values.values())
+            for values in result[
+                "legacyCompatiblePayloads"
+            ].values()
+        ),
     )
     print(
         "Payload incompatibili:",
