@@ -1,4 +1,5 @@
 package it.zara.domoticsai
+import it.zara.domoticsai.ui.climate.ClimateViewModel
 
 
 
@@ -86,6 +87,19 @@ class MainActivity : ComponentActivity() {
                             }
                     )
 
+                val climateViewModel:
+                    ClimateViewModel =
+                    viewModel(
+                        factory =
+                            SimpleViewModelFactory {
+                                ClimateViewModel(
+                                    coreRepository =
+                                        container
+                                            .coreEngineRepository
+                                )
+                            }
+                    )
+
                 val lightsViewModel: LightsViewModel =
                     viewModel(
                         factory =
@@ -128,6 +142,10 @@ class MainActivity : ComponentActivity() {
 
                 val energyState by
                     energyViewModel.state.collectAsState()
+
+                val climateState by
+                    climateViewModel.state
+                        .collectAsState()
 
                 val lightsState by
                     lightsViewModel.state.collectAsState()
@@ -192,6 +210,10 @@ class MainActivity : ComponentActivity() {
                                         settings,
                                     intelligenceState =
                                         homeIntelligenceState,
+                                    climateState =
+                                        climateState,
+                                    onClimateRefresh =
+                                        climateViewModel::refresh,
                                     onIntelligenceRefresh =
                                         homeIntelligenceViewModel::refresh
                                 )
