@@ -81,6 +81,30 @@
       "target": "climate/complete_snapshot",
       "type": "json_object",
       "unit": null
+    },
+    {
+      "source": "env/tempLiving",
+      "target": "climate_shadow/living_temperature_c",
+      "type": "number",
+      "unit": "°C"
+    },
+    {
+      "source": "env/humidexLiving",
+      "target": "climate_shadow/living_humidex",
+      "type": "number",
+      "unit": null
+    },
+    {
+      "source": "env/humidexBedroom",
+      "target": "climate_shadow/bedroom_humidex",
+      "type": "number",
+      "unit": null
+    },
+    {
+      "source": "vmc/speed/state",
+      "target": "climate_shadow/vmc_speed",
+      "type": "number",
+      "unit": "level"
     }
   ]
 }
