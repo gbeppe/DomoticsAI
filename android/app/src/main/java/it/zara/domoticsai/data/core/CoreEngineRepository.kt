@@ -2,6 +2,7 @@ package it.zara.domoticsai.data.core
 
 import it.zara.domoticsai.domain.model.CoreDiagnosticsState
 import it.zara.domoticsai.domain.model.CoreTwinState
+import it.zara.domoticsai.domain.model.ClimateDashboardState
 import it.zara.domoticsai.domain.model.EnergyDashboardState
 import it.zara.domoticsai.domain.model.LightsDashboardState
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +29,13 @@ class CoreEngineRepository(
     private val _lightsState =
         MutableStateFlow(LightsDashboardState())
     val lightsState = _lightsState.asStateFlow()
+
+    private val _climateState =
+        MutableStateFlow(
+            ClimateDashboardState()
+        )
+    val climateState =
+        _climateState.asStateFlow()
 
     suspend fun refresh(baseUrl: String) {
         _state.value =
@@ -158,4 +166,47 @@ class CoreEngineRepository(
                 )
         }
     }
+
+    suspend fun refreshClimate(
+        baseUrl: String
+    ) {
+        val current =
+            _climateState.value
+
+        _climateState.value =
+            current.copy(
+                loading =
+                    !current.hasAnyValue(),
+                error = null
+            )
+
+        runCatching {
+            withContext(
+                Dispatchers.IO
+            ) {
+                ClimateParser.parse(
+                    client.fetchClimate(
+                        baseUrl
+                    )
+                )
+            }
+        }.onSuccess { parsed ->
+            _climateState.value =
+                parsed.copy(
+                    loading = false,
+                    error = null
+                )
+        }.onFailure { error ->
+            _climateState.value =
+                current.copy(
+                    loading = false,
+                    error =
+                        error.message
+                            ?: error
+                                .javaClass
+                                .simpleName
+                )
+        }
+    }
+
 }

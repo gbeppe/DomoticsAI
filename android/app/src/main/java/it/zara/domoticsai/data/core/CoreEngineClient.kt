@@ -52,6 +52,11 @@ class CoreEngineClient {
             "${baseUrl.trimEnd('/')}/api/v1/lights"
         )
 
+    fun fetchClimate(baseUrl: String): String =
+        requestJson(
+            "${baseUrl.trimEnd('/')}/api/v1/climate"
+        )
+
     fun createLightCommand(
         baseUrl: String,
         device: LightDevice,
