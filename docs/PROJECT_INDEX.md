@@ -4,6 +4,11 @@ Generato automaticamente: `2026-07-15T23:48:51.430910+00:00`
 
 > Indice tecnico completo del repository. Per la visione architetturale consultare `PROJECT_MANIFEST.md`.
 
+
+## Roadmap del progetto
+
+- [`PROJECT_ROADMAP.md`](PROJECT_ROADMAP.md) — fasi, Sprint, milestone, criteri di chiusura e prossimi passi.
+
 ## Statistiche
 
 | Estensione | File |
