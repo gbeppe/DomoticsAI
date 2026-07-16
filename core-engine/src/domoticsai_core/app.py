@@ -20,6 +20,9 @@ from .websocket_hub import WebSocketHub
 from .command_manager import CommandManager
 from .command_manager_models import CreateCommandRequest
 from .command_store import CommandStore
+from .climate_snapshot import (
+    build_climate_snapshot,
+)
 from .sqlite_database import SQLiteDatabase
 from .command_event_stream import CommandEventStream
 from .command_models import LightCommandRequest
@@ -192,6 +195,19 @@ def health():
 @app.get("/api/v1/twin")
 def get_twin():
     return twin_store.snapshot()
+
+
+@app.get("/api/v1/climate")
+def get_climate():
+    snapshot = twin_store.snapshot()
+
+    twin = {
+        "domains": snapshot.domains,
+    }
+
+    return build_climate_snapshot(
+        twin
+    ).to_dict()
 
 
 @app.get("/api/v1/twin/{domain_name}")
