@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import Counter
 from datetime import datetime, timezone
 
 from .dependencies import DependencyRecord
@@ -24,44 +25,54 @@ def _escape(
 def render_dependency_inventory(
     records: list[DependencyRecord],
 ) -> str:
+    status_counts = Counter(
+        record.verification_status
+        for record in records
+    )
+
+    unresolved = [
+        record
+        for record in records
+        if record.verification_status
+        == "NON_VERIFICATA"
+    ]
+
     lines = [
         "# DomoticsAI — Dependency Inventory",
         "",
         f"Generato automaticamente: "
         f"`{utc_now_iso()}`",
         "",
-        "> Questo documento censisce le dipendenze "
-        "dichiarate nel repository. I campi relativi "
-        "a licenza, costi, cloud e Raspberry Pi "
-        "devono essere verificati prima di essere "
-        "considerati definitivi.",
+        "> Le informazioni verificate derivano "
+        "dal catalogo versionato del progetto. "
+        "Le dipendenze sconosciute restano "
+        "esplicitamente non verificate.",
         "",
         "## Politica del progetto",
         "",
         "- Nessuna licenza commerciale obbligatoria.",
         "- Nessun abbonamento obbligatorio.",
         "- Nessun cloud obbligatorio.",
-        "- Esecuzione server prevista su Raspberry Pi.",
-        "- Client previsto su smartphone Android.",
-        "- Preferenza per MIT, BSD, Apache-2.0, "
-        "MPL-2.0 e altre licenze open source "
-        "compatibili con il progetto.",
+        "- Server previsto su Raspberry Pi.",
+        "- Client previsto su Android.",
+        "- Le nuove dipendenze devono essere "
+        "registrate nel catalogo prima della release.",
         "",
         "## Riepilogo",
         "",
         f"- Dipendenze dichiarate: `{len(records)}`",
-        f"- Python: "
-        f"`{sum(r.ecosystem == 'Python' for r in records)}`",
-        f"- Android/Gradle: "
-        f"`{sum(r.ecosystem == 'Android/Gradle' for r in records)}`",
-        f"- Node.js/npm: "
-        f"`{sum(r.ecosystem == 'Node.js/npm' for r in records)}`",
+        f"- Verificate esattamente: "
+        f"`{status_counts['VERIFICATA']}`",
+        f"- Verificate per famiglia: "
+        f"`{status_counts['VERIFICATA_FAMIGLIA']}`",
+        f"- Non verificate: "
+        f"`{len(unresolved)}`",
         "",
         "## Inventario",
         "",
-        "| Ecosistema | Dipendenza | Versione/vincolo | "
-        "Ambito | File sorgente | Licenza | Costi | "
-        "Cloud obbligatorio | Raspberry Pi |",
+        "| Ecosistema | Dipendenza | Versione | "
+        "Ambito | Licenza | Costi | Cloud | "
+        "Piattaforma | Stato |",
         "|---|---|---|---|---|---|---|---|---|",
     ]
 
@@ -70,13 +81,10 @@ def render_dependency_inventory(
             "| "
             + " | ".join(
                 [
-                    _escape(
-                        record.ecosystem
-                    ),
+                    _escape(record.ecosystem),
                     f"`{_escape(record.name)}`",
                     f"`{_escape(record.version)}`",
                     _escape(record.scope),
-                    f"`{_escape(record.source_file)}`",
                     _escape(record.license),
                     _escape(record.cost_model),
                     _escape(
@@ -85,36 +93,94 @@ def render_dependency_inventory(
                     _escape(
                         record.raspberry_pi
                     ),
+                    _escape(
+                        record.verification_status
+                    ),
                 ]
             )
             + " |"
         )
 
-    if not records:
+    lines.extend(
+        [
+            "",
+            "## Dettagli di verifica",
+            "",
+            "| Dipendenza | Fonte ufficiale | "
+            "Verificata il | Note |",
+            "|---|---|---|---|",
+        ]
+    )
+
+    for record in records:
+        source = (
+            record.official_source
+            or "—"
+        )
+
+        verified_at = (
+            record.verified_at
+            or "—"
+        )
+
+        notes = (
+            record.notes
+            or "—"
+        )
+
         lines.append(
-            "| — | Nessuna dipendenza rilevata "
-            "| — | — | — | — | — | — | — |"
+            "| "
+            + " | ".join(
+                [
+                    f"`{_escape(record.name)}`",
+                    (
+                        f"[fonte ufficiale]"
+                        f"({_escape(source)})"
+                        if source != "—"
+                        else "—"
+                    ),
+                    _escape(verified_at),
+                    _escape(notes),
+                ]
+            )
+            + " |"
         )
 
     lines.extend(
         [
             "",
-            "## Metodo di verifica previsto",
+            "## Dipendenze da verificare",
             "",
-            "Nella fase successiva ogni dipendenza "
-            "sarà verificata usando, in ordine:",
+        ]
+    )
+
+    if unresolved:
+        for record in unresolved:
+            lines.append(
+                f"- `{record.ecosystem}` / "
+                f"`{record.name}` "
+                f"({record.version})"
+            )
+    else:
+        lines.append(
+            "- Nessuna dipendenza diretta "
+            "rimasta senza classificazione."
+        )
+
+    lines.extend(
+        [
             "",
-            "1. metadati ufficiali del pacchetto;",
-            "2. repository ufficiale del progetto;",
-            "3. file `LICENSE` o documentazione ufficiale;",
-            "4. compatibilità architetturale ARM64/ARMv7;",
-            "5. eventuali dipendenze da servizi cloud;",
-            "6. eventuali componenti premium o "
-            "funzioni con abbonamento.",
+            "## Limiti della verifica",
             "",
-            "Un pacchetto non verrà classificato come "
-            "compatibile finché la verifica non sarà "
-            "supportata da una fonte attendibile.",
+            "- Il catalogo riguarda le dipendenze "
+            "dirette dichiarate.",
+            "- Le dipendenze transitive saranno "
+            "analizzate nello Sprint 10.3C.",
+            "- La compatibilità Raspberry Pi deve "
+            "essere confermata con build e runtime "
+            "sull’hardware destinazione.",
+            "- Questa documentazione non sostituisce "
+            "una valutazione legale professionale.",
             "",
         ]
     )

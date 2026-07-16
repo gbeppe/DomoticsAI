@@ -8,7 +8,9 @@ import re
 import tomllib
 
 from .config import ROOT
-
+from .dependency_catalog import (
+    find_dependency_policy,
+)
 
 @dataclass(frozen=True)
 class DependencyRecord:
@@ -22,6 +24,13 @@ class DependencyRecord:
     cost_model: str = "DA_VERIFICARE"
     cloud_required: str = "DA_VERIFICARE"
     raspberry_pi: str = "DA_VERIFICARE"
+
+    verification_status: str = (
+        "NON_VERIFICATA"
+    )
+    verified_at: str = ""
+    official_source: str = ""
+    notes: str = ""
 
     def sort_key(
         self,
@@ -370,15 +379,57 @@ def collect_npm_dependencies(
     )
 
 
+def enrich_dependency(
+    record: DependencyRecord,
+) -> DependencyRecord:
+    policy = find_dependency_policy(
+        record.ecosystem,
+        record.name,
+    )
+
+    if policy is None:
+        return record
+
+    return DependencyRecord(
+        ecosystem=record.ecosystem,
+        name=record.name,
+        version=record.version,
+        scope=record.scope,
+        source_file=record.source_file,
+        license=policy.license,
+        cost_model=policy.cost_model,
+        cloud_required=(
+            policy.cloud_required
+        ),
+        raspberry_pi=(
+            policy.raspberry_pi
+        ),
+        verification_status=(
+            policy.verification_status
+        ),
+        verified_at=(
+            policy.verified_at
+        ),
+        official_source=(
+            policy.official_source
+        ),
+        notes=policy.notes,
+    )
+
 def collect_all_dependencies(
 ) -> list[DependencyRecord]:
-    records = [
+    raw_records = [
         *collect_python_dependencies(),
         *collect_gradle_dependencies(),
         *collect_npm_dependencies(),
     ]
 
+    enriched = [
+        enrich_dependency(record)
+        for record in raw_records
+    ]
+
     return sorted(
-        set(records),
+        set(enriched),
         key=DependencyRecord.sort_key,
     )
