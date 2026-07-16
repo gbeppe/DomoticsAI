@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "mode": "READ_ONLY_SHADOW",
+  "mode": "READ_ONLY_PRIMARY_CANARY",
   "sourceBaseTopic": "zara/android/domotica",
   "targetBaseTopic": "domoticsai/v1/state",
   "rules": [
@@ -84,27 +84,39 @@
     },
     {
       "source": "env/tempLiving",
-      "target": "climate_shadow/living_temperature_c",
+      "target": "climate/living_temperature_c",
       "type": "number",
-      "unit": "°C"
+      "unit": "°C",
+      "promotionStatus": "PRIMARY_CANARY"
     },
     {
       "source": "env/humidexLiving",
-      "target": "climate_shadow/living_humidex",
+      "target": "climate/living_humidex",
       "type": "number",
-      "unit": null
+      "unit": null,
+      "promotionStatus": "PRIMARY_CANARY"
     },
     {
       "source": "env/humidexBedroom",
-      "target": "climate_shadow/bedroom_humidex",
+      "target": "climate/bedroom_humidex",
       "type": "number",
-      "unit": null
+      "unit": null,
+      "promotionStatus": "PRIMARY_CANARY"
     },
     {
       "source": "vmc/speed/state",
-      "target": "climate_shadow/vmc_speed",
+      "target": "vmc/speed",
       "type": "number",
-      "unit": "level"
+      "unit": "level",
+      "promotionStatus": "PRIMARY_CANARY"
     }
+  ],
+  "primarySource": "production_application_contract",
+  "legacyFallbackEnabled": true,
+  "promotedTopics": [
+    "env/humidexBedroom",
+    "env/humidexLiving",
+    "env/tempLiving",
+    "vmc/speed/state"
   ]
 }
