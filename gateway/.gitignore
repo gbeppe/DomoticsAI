@@ -4,3 +4,5 @@ node_modules/
 flows_cred.json
 *.log
 .env
+.flows.json.before-*
+.climate-shadow-mapping-*.before-*

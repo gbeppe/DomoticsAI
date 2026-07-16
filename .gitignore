@@ -51,3 +51,4 @@ gateway/.*.backup
 
 # Runtime captures
 .captures/
+config/mqtt/.climate-shadow-mapping-*.before-*
