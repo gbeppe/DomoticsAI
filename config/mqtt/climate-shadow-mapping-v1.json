@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "mode": "READ_ONLY_PRIMARY_CANARY",
+  "mode": "READ_ONLY_PRIMARY",
   "sourceBaseTopic": "zara/android/domotica",
   "targetBaseTopic": "domoticsai/v1/state",
   "rules": [
@@ -8,107 +8,141 @@
       "source": "env/humLiving",
       "target": "climate/living_humidity_pct",
       "type": "number",
-      "unit": "%"
+      "unit": "%",
+      "sourceRole": "supplemental",
+      "ingestionMode": "primary"
     },
     {
       "source": "env/tempBedroom",
       "target": "climate/bedroom_temperature_c",
       "type": "number",
-      "unit": "°C"
+      "unit": "°C",
+      "sourceRole": "supplemental",
+      "ingestionMode": "primary"
     },
     {
       "source": "env/humBedroom",
       "target": "climate/bedroom_humidity_pct",
       "type": "number",
-      "unit": "%"
+      "unit": "%",
+      "sourceRole": "supplemental",
+      "ingestionMode": "primary"
     },
     {
       "source": "env/tempOutdoor",
       "target": "climate/outdoor_temperature_c",
       "type": "number",
-      "unit": "°C"
+      "unit": "°C",
+      "sourceRole": "supplemental",
+      "ingestionMode": "primary"
     },
     {
       "source": "env/humOutdoor",
       "target": "climate/outdoor_humidity_pct",
       "type": "number",
-      "unit": "%"
+      "unit": "%",
+      "sourceRole": "supplemental",
+      "ingestionMode": "primary"
     },
     {
       "source": "thermostat/living/target/state",
       "target": "climate/living_target_temperature_c",
       "type": "number",
-      "unit": "°C"
+      "unit": "°C",
+      "sourceRole": "supplemental",
+      "ingestionMode": "primary"
     },
     {
       "source": "acsPufferTemp",
       "target": "thermal/dhw_buffer_temperature_c",
       "type": "number",
-      "unit": "°C"
+      "unit": "°C",
+      "sourceRole": "supplemental",
+      "ingestionMode": "primary"
     },
     {
       "source": "pufferBassoTemp",
       "target": "thermal/buffer_lower_temperature_c",
       "type": "number",
-      "unit": "°C"
+      "unit": "°C",
+      "sourceRole": "supplemental",
+      "ingestionMode": "primary"
     },
     {
       "source": "pufferAltoTemp",
       "target": "thermal/buffer_upper_temperature_c",
       "type": "number",
-      "unit": "°C"
+      "unit": "°C",
+      "sourceRole": "supplemental",
+      "ingestionMode": "primary"
     },
     {
       "source": "casa/stufa/stat/modalita",
       "target": "fireplace/mode",
       "type": "string",
-      "unit": null
+      "unit": null,
+      "sourceRole": "supplemental",
+      "ingestionMode": "primary"
     },
     {
       "source": "casa/stufa/stat/acceso",
       "target": "fireplace/powered",
       "type": "boolean",
-      "unit": null
+      "unit": null,
+      "sourceRole": "supplemental",
+      "ingestionMode": "primary"
     },
     {
       "source": "casa/stufa/stat/potenza",
       "target": "fireplace/power_level",
       "type": "number",
-      "unit": "level"
+      "unit": "level",
+      "sourceRole": "supplemental",
+      "ingestionMode": "primary"
     },
     {
       "source": "casa/clima/stato_completo",
       "target": "climate/complete_snapshot",
       "type": "json_object",
-      "unit": null
+      "unit": null,
+      "sourceRole": "supplemental",
+      "ingestionMode": "primary"
     },
     {
       "source": "env/tempLiving",
       "target": "climate/living_temperature_c",
       "type": "number",
       "unit": "°C",
-      "promotionStatus": "PRIMARY_CANARY"
+      "promotionStatus": "PRIMARY_STABLE",
+      "sourceRole": "primary",
+      "ingestionMode": "primary"
     },
     {
       "source": "env/humidexLiving",
       "target": "climate/living_humidex",
       "type": "number",
       "unit": null,
-      "promotionStatus": "PRIMARY_CANARY"
+      "promotionStatus": "PRIMARY_STABLE",
+      "sourceRole": "primary",
+      "ingestionMode": "primary"
     },
     {
       "source": "env/humidexBedroom",
       "target": "climate/bedroom_humidex",
       "type": "number",
       "unit": null,
-      "promotionStatus": "PRIMARY_CANARY"
+      "promotionStatus": "PRIMARY_STABLE",
+      "sourceRole": "primary",
+      "ingestionMode": "primary"
     },
     {
       "source": "vmc/speed/state",
       "target": "vmc/speed",
       "type": "number",
       "unit": "level",
-      "promotionStatus": "PRIMARY_CANARY"
+      "promotionStatus": "PRIMARY_STABLE",
+      "sourceRole": "primary",
+      "ingestionMode": "primary"
     }
   ],
   "primarySource": "production_application_contract",
@@ -118,5 +152,10 @@
     "env/humidexLiving",
     "env/tempLiving",
     "vmc/speed/state"
+  ],
+  "canaryStatus": "PASSED",
+  "sourcePriority": [
+    "production_application_contract",
+    "legacy_fallback"
   ]
 }

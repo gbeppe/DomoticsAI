@@ -85,7 +85,8 @@ def main() -> int:
             'relative.endsWith("/set")',
             'relative.includes("/set/")',
             "if (!rule)",
-            'ingestionMode: "shadow"',
+            "rule.ingestionMode",
+            "rule.sourceRole",
         ]
 
         for guard in required_guards:

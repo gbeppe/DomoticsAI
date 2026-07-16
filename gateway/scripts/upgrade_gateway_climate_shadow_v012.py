@@ -155,7 +155,12 @@ msg.payload = JSON.stringify({{
         "production_application_contract",
     sourceTopic: sourceTopic,
     ts: new Date().toISOString(),
-    ingestionMode: "shadow"
+    ingestionMode:
+        rule.ingestionMode,
+    sourceRole:
+        rule.sourceRole,
+    contractVersion:
+        "climate-mapping-v1"
 }});
 
 msg.qos = 1;
@@ -276,6 +281,14 @@ def main() -> int:
             "target": rule["target"],
             "type": rule["type"],
             "unit": rule.get("unit"),
+            "sourceRole": rule.get(
+                "sourceRole",
+                "supplemental",
+            ),
+            "ingestionMode": rule.get(
+                "ingestionMode",
+                "primary",
+            ),
         }
         for rule in mapping["rules"]
     }

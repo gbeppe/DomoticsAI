@@ -190,12 +190,15 @@ def main() -> int:
             )
         )
 
-    if mapping.get("mode") != (
-        "READ_ONLY_PRIMARY_CANARY"
-    ):
+    accepted_modes = {
+        "READ_ONLY_PRIMARY_CANARY",
+        "READ_ONLY_PRIMARY",
+    }
+
+    if mapping.get("mode") not in accepted_modes:
         errors.append(
-            "mapping non in modalità "
-            "READ_ONLY_PRIMARY_CANARY"
+            "mapping non in una modalità "
+            "primaria riconosciuta"
         )
 
     if errors:
