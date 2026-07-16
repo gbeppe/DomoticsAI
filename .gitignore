@@ -48,3 +48,6 @@ gateway/context/
 *~
 gateway/*.backup
 gateway/.*.backup
+
+# Runtime captures
+.captures/
