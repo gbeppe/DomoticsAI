@@ -1,0 +1,454 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "1.0.0-draft",
+  "status": "draft",
+  "baseTopic": {
+    "default": "zara/android/domotica",
+    "configurable": true,
+    "normalization": {
+      "stripLeadingSlash": true,
+      "stripTrailingSlash": true,
+      "rejectWildcards": true,
+      "rejectEmpty": true
+    }
+  },
+  "principles": {
+    "applicationUsesOnlyBaseTopic": true,
+    "directDeviceNamespacesForbidden": [
+      "cmnd/",
+      "stat/",
+      "tele/",
+      "shellies/",
+      "zigbee2mqtt/",
+      "homeassistant/",
+      "tasmota/"
+    ],
+    "readOnlyIntegrationInitially": true,
+    "automaticCommandExecution": false
+  },
+  "payloadTypes": {
+    "boolean_on_off": {
+      "accepted": [
+        "ON",
+        "OFF"
+      ],
+      "canonicalState": [
+        "ON",
+        "OFF"
+      ]
+    },
+    "boolean_set": {
+      "accepted": [
+        "1",
+        "0",
+        "TRUE",
+        "FALSE"
+      ],
+      "canonicalPublish": [
+        "1",
+        "0"
+      ]
+    },
+    "number": {
+      "format": "JSON-compatible decimal number"
+    },
+    "json_object": {
+      "format": "UTF-8 JSON object"
+    }
+  },
+  "devices": {
+    "lights": {
+      "pool": [
+        "luciPiscina",
+        "luciPedanaPiscina",
+        "skimmerPiscina",
+        "pompaPiscina"
+      ],
+      "internal": [
+        "tavolinoLettura",
+        "libreria",
+        "sala",
+        "televisione",
+        "lavanderia",
+        "ingressoServizio"
+      ],
+      "external": [
+        "portico"
+      ],
+      "historicalInactive": [
+        "cucina",
+        "esterno"
+      ]
+    }
+  },
+  "scenes": [
+    "ALL_ON",
+    "ALL_OFF",
+    "TV_MODE",
+    "SLEEP_MODE"
+  ],
+  "topics": [
+    {
+      "pattern": "light/{device}/state",
+      "domain": "lights",
+      "entity": "{device}",
+      "kind": "state",
+      "direction": "broker_to_application",
+      "payloadType": "boolean_on_off",
+      "unit": null,
+      "required": true,
+      "retainedExpected": true,
+      "supported": true,
+      "notes": "Stato osservato della luce o del relè."
+    },
+    {
+      "pattern": "light/{device}/set",
+      "domain": "lights",
+      "entity": "{device}",
+      "kind": "command",
+      "direction": "application_to_broker",
+      "payloadType": "boolean_set",
+      "unit": null,
+      "required": false,
+      "retainedExpected": false,
+      "supported": true,
+      "activationPhase": "Sprint 11.3",
+      "notes": "Non pubblicare durante la fase read-only."
+    },
+    {
+      "pattern": "light/scene/set",
+      "domain": "lights",
+      "entity": "scene",
+      "kind": "command",
+      "direction": "application_to_broker",
+      "payloadType": "scene_name",
+      "unit": null,
+      "required": false,
+      "retainedExpected": false,
+      "supported": true,
+      "activationPhase": "Sprint 11.3",
+      "notes": "Payload ammessi: ALL_ON, ALL_OFF, TV_MODE, SLEEP_MODE."
+    },
+    {
+      "pattern": "energy/production",
+      "domain": "energy",
+      "entity": "solar_production",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "W",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "energy/consumption",
+      "domain": "energy",
+      "entity": "house_consumption",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "W",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "energy/battery",
+      "domain": "energy",
+      "entity": "battery_soc",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "%",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "energy/surplus",
+      "domain": "energy",
+      "entity": "energy_surplus",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "W",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true,
+      "notes": "Segno negativo osservato durante consumo superiore alla produzione."
+    },
+    {
+      "pattern": "energy/grid",
+      "domain": "energy",
+      "entity": "grid_power",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "W",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true,
+      "verification": "Semantica del segno da confermare."
+    },
+    {
+      "pattern": "env/tempLiving",
+      "domain": "environment",
+      "entity": "living_temperature",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "°C",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "env/humLiving",
+      "domain": "environment",
+      "entity": "living_humidity",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "%",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "env/tempBedroom",
+      "domain": "environment",
+      "entity": "bedroom_temperature",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "°C",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "env/humBedroom",
+      "domain": "environment",
+      "entity": "bedroom_humidity",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "%",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "env/tempOutdoor",
+      "domain": "environment",
+      "entity": "outdoor_temperature",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "°C",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "env/humOutdoor",
+      "domain": "environment",
+      "entity": "outdoor_humidity",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "%",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "env/humidexLiving",
+      "domain": "environment",
+      "entity": "living_humidex",
+      "kind": "derived_telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": null,
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "env/humidexBedroom",
+      "domain": "environment",
+      "entity": "bedroom_humidex",
+      "kind": "derived_telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": null,
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "thermostat/living/target/state",
+      "domain": "climate",
+      "entity": "living_target_temperature",
+      "kind": "state",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "°C",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "vmc/speed/state",
+      "domain": "ventilation",
+      "entity": "vmc_speed",
+      "kind": "state",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "level",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "acsPufferTemp",
+      "domain": "thermal",
+      "entity": "dhw_buffer_temperature",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "°C",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "pufferBassoTemp",
+      "domain": "thermal",
+      "entity": "buffer_lower_temperature",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "°C",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "pufferAltoTemp",
+      "domain": "thermal",
+      "entity": "buffer_upper_temperature",
+      "kind": "telemetry",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "°C",
+      "required": true,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "casa/stufa/stat/modalita",
+      "domain": "fireplace",
+      "entity": "fireplace_mode",
+      "kind": "state",
+      "direction": "broker_to_application",
+      "payloadType": "string",
+      "unit": null,
+      "required": false,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "casa/stufa/stat/acceso",
+      "domain": "fireplace",
+      "entity": "fireplace_powered",
+      "kind": "state",
+      "direction": "broker_to_application",
+      "payloadType": "boolean",
+      "unit": null,
+      "required": false,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "casa/stufa/stat/potenza",
+      "domain": "fireplace",
+      "entity": "fireplace_power_level",
+      "kind": "state",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "level",
+      "required": false,
+      "retainedExpected": true,
+      "supported": true
+    },
+    {
+      "pattern": "casa/clima/stato_completo",
+      "domain": "climate",
+      "entity": "complete_climate_snapshot",
+      "kind": "snapshot",
+      "direction": "broker_to_application",
+      "payloadType": "json_object",
+      "unit": null,
+      "required": false,
+      "retainedExpected": false,
+      "supported": true,
+      "notes": "Informazione elaborata da Node-RED. Non sostituisce i topic atomici."
+    },
+    {
+      "pattern": "ac_auto/set",
+      "domain": "climate_automation",
+      "entity": "legacy_ac_auto_parameter",
+      "kind": "configuration",
+      "direction": "bidirectional_pending",
+      "payloadType": "boolean_set",
+      "unit": null,
+      "required": false,
+      "retainedExpected": true,
+      "supported": false,
+      "semanticStatus": "distinct_semantics_pending_rename",
+      "notes": "Parametro distinto da system/ac_auto/state."
+    },
+    {
+      "pattern": "system/ac_auto/state",
+      "domain": "system",
+      "entity": "system_ac_auto_parameter",
+      "kind": "state",
+      "direction": "broker_to_application",
+      "payloadType": "boolean",
+      "unit": null,
+      "required": false,
+      "retainedExpected": true,
+      "supported": false,
+      "semanticStatus": "distinct_semantics_pending_rename",
+      "notes": "Parametro distinto da ac_auto/set."
+    },
+    {
+      "pattern": "system/{name}/state",
+      "domain": "system",
+      "entity": "{name}",
+      "kind": "state",
+      "direction": "broker_to_application",
+      "payloadType": "scalar",
+      "unit": null,
+      "required": false,
+      "retainedExpected": true,
+      "supported": false,
+      "notes": "Da analizzare singolarmente; non assumere equivalenza con topic omonimi fuori da system/."
+    },
+    {
+      "pattern": "controlli/{name}",
+      "domain": "controls",
+      "entity": "{name}",
+      "kind": "configuration",
+      "direction": "broker_to_application",
+      "payloadType": "number",
+      "unit": "domain-specific",
+      "required": false,
+      "retainedExpected": true,
+      "supported": false,
+      "notes": "Parametri di controllo da classificare prima di abilitarne la modifica."
+    }
+  ]
+}
