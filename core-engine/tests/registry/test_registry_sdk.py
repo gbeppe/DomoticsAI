@@ -92,3 +92,33 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+def load_test_registry():
+    return load_registry(
+        REPOSITORY_ROOT
+        / "config"
+        / "registry"
+        / "digital-twin-registry.yaml"
+    )
+
+
+def test_registry_resolves_entity_by_id():
+    registry = load_test_registry()
+
+    entity = registry.by_entity_id(
+        "lights.living.power"
+    )
+
+    assert entity is not None
+    assert entity.id == "lights.living.power"
+
+
+def test_registry_returns_none_for_unknown_entity_id():
+    registry = load_test_registry()
+
+    entity = registry.by_entity_id(
+        "lights.unknown.device"
+    )
+
+    assert entity is None

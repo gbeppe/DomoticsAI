@@ -31,6 +31,7 @@ class Registry:
         self._by_state_topic = {}
         self._by_command_topic = {}
         self._by_ack_topic = {}
+        self._by_entity_id = {}
         self._by_legacy_topic = {}
         self._by_domain = {}
         self._build_indexes()
@@ -95,6 +96,9 @@ class Registry:
 
     def by_ack_topic(self, topic: str):
         return self._by_ack_topic.get(topic)
+
+    def by_entity_id(self, entity_id: str):
+        return self._by_entity_id.get(entity_id)
 
     def by_legacy_topic(self, topic: str):
         return tuple(self._by_legacy_topic.get(topic, ()))
@@ -166,6 +170,8 @@ class Registry:
             self._insert_unique(self._by_command_topic, entity.command_topic, entity, "command topic")
             self._insert_unique(self._by_ack_topic, entity.ack_topic, entity, "ack topic")
             self._by_domain.setdefault(entity.domain, []).append(entity)
+            self._insert_unique(
+            self._by_entity_id,entity.id,entity,"entity id",)
 
             for endpoint_name in LEGACY_ENDPOINT_KEYS:
                 endpoint = entity.legacy.get(endpoint_name)
