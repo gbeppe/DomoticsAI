@@ -1,0 +1,105 @@
+id,type,tab,name,disabled,topic,qos,retain,broker_name,broker_host,broker_port,outputs,wire_targets
+684cf25501f3e8a6,tab,,Android APP Bridge,false,,,,,,,,
+6122f365974f8e81,link out,Android APP Bridge,libreria lamp,false,,,,,,,,
+029b611c762d7219,function,Android APP Bridge,Inbound Router Luci,false,,,,,,,2,"8c073d7419d1dffd,70eb35fe1afd6ca1,a89af6972dad9174"
+8c073d7419d1dffd,mqtt out,Android APP Bridge,Esecuzione Hardware,true,,1,false,domopi mqtt,192.168.1.20,1883,,
+ba0948194022d617,mqtt in,Android APP Bridge,Ascolto Hardware Reale,false,zigbee2mqtt/+,1,,domopi mqtt,192.168.1.20,1883,,b5960f2b4677e29c
+b5960f2b4677e29c,function,Android APP Bridge,Outbound Router Luci,false,,,,,,,1,e21a5bab7aaa539f
+e21a5bab7aaa539f,mqtt out,Android APP Bridge,Aggiorna Stato App (Retain),false,,1,true,domopi mqtt,192.168.1.20,1883,,
+966f722b97b6dfd5,function,Android APP Bridge,Gateway Energia,false,,,,,,,1,e21a5bab7aaa539f
+bd8d66b09aae991f,function,Android APP Bridge,Inbound Router Termostati,false,,,,,,,1,e21a5bab7aaa539f
+ac1dc3384afb5a6b,mqtt in,Android APP Bridge,Ascolto Stato AI e TRV,false,casa/clima/stato_completo,1,,domopi mqtt,192.168.1.20,1883,,fc51aac30db89430
+fc51aac30db89430,function,Android APP Bridge,Outbound Router Termostati,false,,,,,,,1,e21a5bab7aaa539f
+893cab22b022f9f7,function,Android APP Bridge,Inbound Router VMC,false,,,,,,,1,cbd2fb713ffc6cb0
+cbd2fb713ffc6cb0,link out,Android APP Bridge,link out 6,false,,,,,,,,
+cb6b6b6eff77245e,function,Android APP Bridge,Outbound Router VMC,false,,,,,,,1,e21a5bab7aaa539f
+5268685dd658fbe0,mqtt in,Android APP Bridge,App -> Target VMC,false,alexa/vmc,1,,emoncms mqtt,192.168.1.15,1883,,cb6b6b6eff77245e
+922c37cd6061d20d,link out,Android APP Bridge,living lamp,false,,,,,,,,
+15807337bbd41c74,link out,Android APP Bridge,tv lamp,false,,,,,,,,
+32cee04caba8f08c,link out,Android APP Bridge,pedana piscina,false,,,,,,,,
+a2dee99a8aabfa65,link out,Android APP Bridge,acqua piscina,false,,,,,,,,
+84c3df06feb9b407,link out,Android APP Bridge,reading lamp,false,,,,,,,,
+24d6cff0d9066ef9,link out,Android APP Bridge,portico lamp,false,,,,,,,,
+e013eff044c3181f,link out,Android APP Bridge,lavanderia lamp,false,,,,,,,,
+43e23783c7995259,link out,Android APP Bridge,ingresso secondario lamp,false,,,,,,,,
+a89af6972dad9174,switch,Android APP Bridge,a89af6972dad9174,false,,,,,,,12,"922c37cd6061d20d,6122f365974f8e81,a2dee99a8aabfa65,32cee04caba8f08c,89954a9f76c30a86,43e23783c7995259,7791ad427b6f5f1c,84c3df06feb9b407,15807337bbd41c74,24d6cff0d9066ef9,e013eff044c3181f"
+b49453f6cdbbab3d,mqtt in,Android APP Bridge,b49453f6cdbbab3d,false,zara/domotics/lights/livinglamp,2,,domopi mqtt,192.168.1.20,1883,,b5960f2b4677e29c
+8e3fcbfc031083cc,mqtt in,Android APP Bridge,8e3fcbfc031083cc,false,zara/domotics/lights/shelflamp,2,,domopi mqtt,192.168.1.20,1883,,b5960f2b4677e29c
+f169b915a19f8af6,mqtt in,Android APP Bridge,f169b915a19f8af6,false,zara/domotics/lights/tvlamp,2,,domopi mqtt,192.168.1.20,1883,,b5960f2b4677e29c
+118da562063f2d9a,mqtt in,Android APP Bridge,118da562063f2d9a,false,shellies/shelly1-771284/relay/0,2,,emoncms mqtt,192.168.1.15,1883,,b5960f2b4677e29c
+3f0b0e50b51f8568,mqtt in,Android APP Bridge,3f0b0e50b51f8568,false,shellies/shelly1-B92AF0/relay/0,2,,emoncms mqtt,192.168.1.15,1883,,b5960f2b4677e29c
+e338f28f56433e4c,mqtt in,Android APP Bridge,e338f28f56433e4c,false,shellies/shelly1-B8C284/relay/0,2,,emoncms mqtt,192.168.1.15,1883,,b5960f2b4677e29c
+c5fbbdc4bdf7fbe0,mqtt in,Android APP Bridge,c5fbbdc4bdf7fbe0,false,zara/domotics/lights/poollight,2,,domopi mqtt,192.168.1.20,1883,,b5960f2b4677e29c
+3174da2bdd10ea30,mqtt in,Android APP Bridge,3174da2bdd10ea30,false,zara/domotics/lights/poolfloor,2,,domopi mqtt,192.168.1.20,1883,,b5960f2b4677e29c
+3f8fefa8f0d98ffd,mqtt in,Android APP Bridge,3f8fefa8f0d98ffd,false,zara/domotics/lights/poolskimmer,2,,domopi mqtt,192.168.1.20,1883,,b5960f2b4677e29c
+04eee2d096fc8523,mqtt in,Android APP Bridge,04eee2d096fc8523,false,zara/domotics/lights/poolpump,2,,domopi mqtt,192.168.1.20,1883,,b5960f2b4677e29c
+7791ad427b6f5f1c,link out,Android APP Bridge,pompa                  piscina,false,,,,,,,,
+89954a9f76c30a86,link out,Android APP Bridge,skimmer piscina,false,,,,,,,,
+30036127a21d4c88,mqtt in,Android APP Bridge,App -> Comando Scene Luci,true,zara/android/domotica/scene/set,2,,domopi mqtt,192.168.1.20,1883,,70eb35fe1afd6ca1
+ab5a8128c40101c8,switch,Android APP Bridge,ab5a8128c40101c8,false,,,,,,,4,"adc28b24d02d7375,38205514f8536bf7,215bafdadd7f6f24,945dbfd0acff705d"
+adc28b24d02d7375,link out,Android APP Bridge,tv mode,false,,,,,,,,
+38205514f8536bf7,link out,Android APP Bridge,sleep mode,false,,,,,,,,
+215bafdadd7f6f24,link out,Android APP Bridge,tutte luci on,false,,,,,,,,
+945dbfd0acff705d,link out,Android APP Bridge,tutte luci off,false,,,,,,,,
+70eb35fe1afd6ca1,change,Android APP Bridge,70eb35fe1afd6ca1,false,,,,,,,,ab5a8128c40101c8
+c8bf45a2bc859241,mqtt in,Android APP Bridge,zigbee2mqtt/Sonoff AirGuard TH camera matrimoniale,false,zigbee2mqtt/Sonoff AirGuard TH camera matrimoniale,2,,emoncms mqtt,192.168.1.15,1883,,84374abab73c53ba
+69d0e373d832b240,mqtt in,Android APP Bridge,MQTT SOC Batt,false,TeslaPowerwall/SOE,2,,emoncms mqtt,192.168.1.15,1883,,966f722b97b6dfd5
+326768da85a5d990,mqtt in,Android APP Bridge,MQTT Potenza Casa (Load W),false,TeslaPowerwall/load_instant_power,2,,emoncms mqtt,192.168.1.15,1883,,966f722b97b6dfd5
+6223c2899c0ae992,mqtt in,Android APP Bridge,MQTT Potenza Produzione FV (FV W),false,TeslaPowerwall/solar_instant_power,2,,emoncms mqtt,192.168.1.15,1883,,966f722b97b6dfd5
+1c21da7cdc55c2ae,mqtt in,Android APP Bridge,MQTT temperatura living,false,emon/emonth5/temperature_calibrated,2,,emoncms mqtt,192.168.1.15,1883,,84374abab73c53ba
+cee938eea10f7bd4,mqtt in,Android APP Bridge,cee938eea10f7bd4,false,zigbee2mqtt/TU-cucinaEsterno,2,,domopi mqtt,192.168.1.20,1883,,
+efe270ec96f87af7,mqtt in,Android APP Bridge,efe270ec96f87af7,false,emon/resolDL2/sensor2,2,,emoncms mqtt,192.168.1.15,1883,,966f722b97b6dfd5
+0b370faa3935fe88,mqtt in,Android APP Bridge,0b370faa3935fe88,false,emon/resolDL2/sensor3,2,,emoncms mqtt,192.168.1.15,1883,,966f722b97b6dfd5
+9ac2eb0ded5a2efd,mqtt in,Android APP Bridge,9ac2eb0ded5a2efd,false,emon/resolDL2/sensor1,2,,emoncms mqtt,192.168.1.15,1883,,966f722b97b6dfd5
+8c0fe215629e8f46,mqtt in,Android APP Bridge,8c0fe215629e8f46,false,emon/shellyACS/tempACS,2,,emoncms mqtt,192.168.1.15,1883,,966f722b97b6dfd5
+84374abab73c53ba,function,Android APP Bridge,Gateway Ambienti,false,,,,,,,1,e21a5bab7aaa539f
+232f8e2188161e4c,mqtt in,Android APP Bridge,MQTT humidity living,false,emon/emonth5/humidity,2,,emoncms mqtt,192.168.1.15,1883,,84374abab73c53ba
+11f0be7d90a47f54,mqtt in,Android APP Bridge,MQTT Sonoff AirGuard TH esterno cucina,false,zigbee2mqtt/Sonoff AirGuard TH esterno cucina,2,,domopi mqtt,192.168.1.20,1883,,84374abab73c53ba
+01283d5864cde9b4,function,Android APP Bridge,Inbound Router Settaggi,false,,,,,,,1,e3e42f614574d29c
+1d09b533095d68c1,mqtt out,Android APP Bridge,1d09b533095d68c1,false,zara/domotics/modalitavacanza,0,true,domopi mqtt,192.168.1.20,1883,,
+e3e42f614574d29c,switch,Android APP Bridge,e3e42f614574d29c,false,,,,,,,8,"1d09b533095d68c1,b51bd73002b7f88b,3bfeb435fb6e3132,a40733727fb29c55,3db3a26c676e583c,0af2db132cc8cd0f,d073880643e29f9e,2b99835ee36a758d"
+b51bd73002b7f88b,mqtt out,Android APP Bridge,b51bd73002b7f88b,false,zara/domotics/luciECO,0,true,domopi mqtt,192.168.1.20,1883,,
+3bfeb435fb6e3132,mqtt out,Android APP Bridge,3bfeb435fb6e3132,false,zara/domotics/luciPiscinaAuto,0,true,domopi mqtt,192.168.1.20,1883,,
+ef9798fe30ae6866,function,Android APP Bridge,App Main Router,false,,,,,,,4,"029b611c762d7219,bd8d66b09aae991f,893cab22b022f9f7,01283d5864cde9b4"
+42c039cfb62a43a2,mqtt in,Android APP Bridge,42c039cfb62a43a2,false,,2,,domopi mqtt,192.168.1.20,1883,,ef9798fe30ae6866
+ad2a868186bbe8b6,function,Android APP Bridge,function 29,false,,,,,,,1,
+5b75b9e882dcebfb,inject,Android APP Bridge,5b75b9e882dcebfb,false,,,,,,,,ad2a868186bbe8b6
+a40733727fb29c55,mqtt out,Android APP Bridge,a40733727fb29c55,false,zara/domotics/ACAuto,0,true,domopi mqtt,192.168.1.20,1883,,
+3db3a26c676e583c,mqtt out,Android APP Bridge,3db3a26c676e583c,false,casa/clima/cmnd/vmc_max_notte,,true,domopi mqtt,192.168.1.20,1883,,
+0af2db132cc8cd0f,mqtt out,Android APP Bridge,0af2db132cc8cd0f,false,casa/clima/cmnd/AI_climate_enabling,,,domopi mqtt,192.168.1.20,1883,,
+4b484152120e2d18,mqtt in,Android APP Bridge,4b484152120e2d18,false,casa/clima/cmnd/AI_climate_enabling,2,,domopi mqtt,192.168.1.20,1883,,cf899af1e8162086
+cf899af1e8162086,function,Android APP Bridge,Outbound Router Settaggi,false,,,,,,,1,e21a5bab7aaa539f
+28256464972b2329,mqtt in,Android APP Bridge,28256464972b2329,false,zara/domotics/modalitavacanza,2,,domopi mqtt,192.168.1.20,1883,,cf899af1e8162086
+c698d126b68e11f8,mqtt in,Android APP Bridge,c698d126b68e11f8,false,zara/domotics/luciECO,2,,domopi mqtt,192.168.1.20,1883,,cf899af1e8162086
+5b7675e55cbc4b81,mqtt in,Android APP Bridge,5b7675e55cbc4b81,false,zara/domotics/luciPiscinaAuto,2,,domopi mqtt,192.168.1.20,1883,,cf899af1e8162086
+6571bf1f8e667903,mqtt in,Android APP Bridge,6571bf1f8e667903,false,zara/domotics/ACAuto,2,,domopi mqtt,192.168.1.20,1883,,cf899af1e8162086
+6bf7b6d43cfb3fc3,mqtt in,Android APP Bridge,6bf7b6d43cfb3fc3,false,casa/clima/stat/vmc_max_notte,2,,domopi mqtt,192.168.1.20,1883,,cf899af1e8162086
+fc0ba16b2241adf1,mqtt in,Android APP Bridge,fc0ba16b2241adf1,false,zara/domotics/porch_sensor,0,,domopi mqtt,192.168.1.20,1883,,cf899af1e8162086
+d073880643e29f9e,mqtt out,Android APP Bridge,d073880643e29f9e,false,zara/domotics/porch_sensor,,,domopi mqtt,192.168.1.20,1883,,
+fe21b464ce170529,mqtt in,Android APP Bridge,fe21b464ce170529,false,casa/clima/stato_completo,2,,domopi mqtt,192.168.1.20,1883,,5c91c3fd74fc6cd6
+5c91c3fd74fc6cd6,change,Android APP Bridge,5c91c3fd74fc6cd6,false,,,,,,,,966f722b97b6dfd5
+db523ff6c9bae47c,mqtt in,Android APP Bridge,MQTT Potenza Produzione FV (FV W),false,TeslaPowerwall/site_instant_power,2,,emoncms mqtt,192.168.1.15,1883,,d433e0dab61b2778
+d433e0dab61b2778,function,Android APP Bridge,function 32,false,,,,,,,1,966f722b97b6dfd5
+f22c31479e1b1d5b,mqtt in,Android APP Bridge,f22c31479e1b1d5b,false,emon/cameraMatrimoniale/humidex,2,,emoncms mqtt,192.168.1.15,1883,,84374abab73c53ba
+831724587f5922f7,mqtt in,Android APP Bridge,humidex living,false,emon/emonth5/humidex,2,,emoncms mqtt,192.168.1.15,1883,,84374abab73c53ba
+mqtt_in_palazzetti,mqtt in,Android APP Bridge,zara/domotics/palazzetti/#,false,zara/domotics/palazzetti/#,0,,emoncms mqtt,192.168.1.15,1883,,funzione_ponte_caminetto
+mqtt_in_app_cmnd,mqtt in,Android APP Bridge,alexa/caminetto,false,alexa/caminetto,0,,emoncms mqtt,192.168.1.15,1883,,funzione_ponte_caminetto
+funzione_ponte_caminetto,function,Android APP Bridge,Ponte Traduttore Caminetto,false,,,,,,,2,"mqtt_out_locale,mqtt_out_alexa"
+mqtt_out_locale,mqtt out,Android APP Bridge,MQTT Locale (App & ESP),false,,1,true,domopi mqtt,192.168.1.20,1883,,
+mqtt_out_alexa,mqtt out,Android APP Bridge,MQTT Esterno (Alexa),true,,1,false,,,,,
+8022e945f076fa2f,mqtt in,Android APP Bridge,8022e945f076fa2f,false,emon/focolare/powerraw,2,,emoncms mqtt,192.168.1.15,1883,,funzione_ponte_caminetto
+5d2d6ba3ad4c3262,mqtt in,Android APP Bridge,5d2d6ba3ad4c3262,false,zara/domotics/lights/readinglight,2,,domopi mqtt,192.168.1.20,1883,,b5960f2b4677e29c
+2b99835ee36a758d,mqtt out,Android APP Bridge,2b99835ee36a758d,false,zara/domotics/time_range,,true,domopi mqtt,192.168.1.20,1883,,
+ab8e8c591cefc337,function,Android APP Bridge,Configurazione Sottoscrizione Dinamica,false,,,,,,,1,42c039cfb62a43a2
+a0d11861533edef2,link in,Android APP Bridge,app_base_topic,false,,,,,,,,ab8e8c591cefc337
+59b830f96fe6bb19,mqtt in,Android APP Bridge,59b830f96fe6bb19,false,,2,,domopi mqtt,192.168.1.20,1883,,c8bcd6a16c1bb598
+c8bcd6a16c1bb598,function,Android APP Bridge,Query Storico 7gg,false,,,,,,,1,6067fbe89079d1b4
+6067fbe89079d1b4,mysql,Android APP Bridge,MariaDB domotica ZaraDomotica / ZaraDomotica,false,,,,,,,,47032d1afbd3badf
+47032d1afbd3badf,function,Android APP Bridge,Formatta Response App,false,,,,,,,1,302a2960a9fdf64f
+bb9aca93c54b36f1,function,Android APP Bridge,function 33,false,,,,,,,1,59b830f96fe6bb19
+df37ade7eb3a3f9e,link in,Android APP Bridge,storico 7gg,false,,,,,,,,bb9aca93c54b36f1
+302a2960a9fdf64f,mqtt out,Android APP Bridge,302a2960a9fdf64f,false,,1,false,domopi mqtt,192.168.1.20,1883,,
+3ed6302a.5af928,mqtt-broker,,domopi mqtt,false,,,,,,,,
+cfd9898e.1367b8,mqtt-broker,,emoncms mqtt,false,,,,,,,,
+77e574ef.c0b7ec,MySQLdatabase,,77e574ef.c0b7ec,false,,,,,,,,
+0228110d0c8583f2,global-config,,0228110d0c8583f2,false,,,,,,,,

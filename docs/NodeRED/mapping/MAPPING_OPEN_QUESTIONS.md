@@ -1,0 +1,37 @@
+# DomoticsAI — Questioni aperte del mapping
+
+- `/thermostat/` (App Main Router): MANUAL_REVIEW.
+- `^${baseTopic}/thermostat/([^/]+)/target/set$` (Inbound Router Termostati): REGEX_ROUTE.
+- `zara/domotics/ACAuto` (a40733727fb29c55): DISTINCT_SEMANTICS.
+- `/command` (Ponte Traduttore Caminetto): MANUAL_REVIEW.
+- `alexa/caminetto/command` (Ponte Traduttore Caminetto): MANUAL_REVIEW.
+- `/` (Ponte Traduttore Caminetto): DYNAMIC_TOPIC.
+- `/esp8266/palazzetti` (Ponte Traduttore Caminetto): MANUAL_REVIEW.
+- `/getstatus` (Ponte Traduttore Caminetto): MANUAL_REVIEW.
+- `/hello` (Ponte Traduttore Caminetto): MANUAL_REVIEW.
+- `/log/message` (Ponte Traduttore Caminetto): MANUAL_REVIEW.
+- `/power` (Ponte Traduttore Caminetto): MANUAL_REVIEW.
+- `alexa/caminetto` (alexa/caminetto): MANUAL_REVIEW.
+- `alexa/caminetto/power` (Ponte Traduttore Caminetto): MANUAL_REVIEW.
+- `zara/android/domotica` (Ponte Traduttore Caminetto): DYNAMIC_TOPIC.
+- `zara/domotics/palazzetti/` (Ponte Traduttore Caminetto): MANUAL_REVIEW.
+- `/scene/set` (Inbound Router Luci): MANUAL_REVIEW.
+- `/set` (Inbound Router Luci): MANUAL_REVIEW.
+- `/light/` (Inbound Router Luci): MANUAL_REVIEW.
+- `/scene/` (App Main Router): MANUAL_REVIEW.
+- `^${baseTopic}/light/([^/]+)/set$` (Inbound Router Luci): REGEX_ROUTE.
+- `zara/android/domotica` (Inbound Router Luci): DYNAMIC_TOPIC.
+- `/maxNightSpeed/set` (App Main Router): MANUAL_REVIEW.
+- `zara/domotics/AC/command` (Inbound Router Termostati): MANUAL_REVIEW.
+- `<dinamico>` (Esecuzione Hardware): DYNAMIC_TOPIC.
+- `/#` (Configurazione Sottoscrizione Dinamica): MANUAL_REVIEW.
+- `emon/resolDL2/sensor1` (9ac2eb0ded5a2efd): MANUAL_REVIEW.
+- `zara/android/domotica` (Gateway Energia): DYNAMIC_TOPIC.
+- `/esp8266/brink/fanspeed` (Inbound Router VMC): MANUAL_REVIEW.
+- `/vmc/` (App Main Router): MANUAL_REVIEW.
+- `^${baseTopic}/vmc/([^/]+)/set$` (Inbound Router VMC): REGEX_ROUTE.
+- `zara/android/domotica` (Inbound Router VMC): DYNAMIC_TOPIC.
+- Confermare se `system/ac_auto/state` e `ac_auto/state` restano parametri distinti.
+- Fornire gli export delle schede contenenti i Link In esterni prima di abilitare i comandi.
+- Confermare i nomi definitivi dei dispositivi luci attivi.
+- Confermare se il namespace canary sarà `${baseTopic}/v2` oppure un base topic separato.

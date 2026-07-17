@@ -1,0 +1,19 @@
+id,type,name,tab,linked_ids,unresolved_external_ids,external_dependency
+6122f365974f8e81,link out,libreria lamp,Android APP Bridge,47f620dc.6ac2c,47f620dc.6ac2c,yes
+cbd2fb713ffc6cb0,link out,link out 6,Android APP Bridge,24aa1379.deb964,24aa1379.deb964,yes
+922c37cd6061d20d,link out,living lamp,Android APP Bridge,9e5f898e.c59138,9e5f898e.c59138,yes
+15807337bbd41c74,link out,tv lamp,Android APP Bridge,c30ff31.adfb29,c30ff31.adfb29,yes
+32cee04caba8f08c,link out,pedana piscina,Android APP Bridge,6df7f7f7.9f7d2,6df7f7f7.9f7d2,yes
+a2dee99a8aabfa65,link out,acqua piscina,Android APP Bridge,fa02d7e9.d1dd98,fa02d7e9.d1dd98,yes
+84c3df06feb9b407,link out,reading lamp,Android APP Bridge,1b158ed508bcebe6,1b158ed508bcebe6,yes
+24d6cff0d9066ef9,link out,portico lamp,Android APP Bridge,80597807.dad32,80597807.dad32,yes
+e013eff044c3181f,link out,lavanderia lamp,Android APP Bridge,9fb74d0e.eaccd8,9fb74d0e.eaccd8,yes
+43e23783c7995259,link out,ingresso secondario lamp,Android APP Bridge,fa6ca68b.fc2a1,fa6ca68b.fc2a1,yes
+7791ad427b6f5f1c,link out,pompa                  piscina,Android APP Bridge,22829371.4cbb3c,22829371.4cbb3c,yes
+89954a9f76c30a86,link out,skimmer piscina,Android APP Bridge,d2f096c1.1f989,d2f096c1.1f989,yes
+adc28b24d02d7375,link out,tv mode,Android APP Bridge,73a44c65.2cfd94,73a44c65.2cfd94,yes
+38205514f8536bf7,link out,sleep mode,Android APP Bridge,3d92676c.84cb88,3d92676c.84cb88,yes
+215bafdadd7f6f24,link out,tutte luci on,Android APP Bridge,a8512076.5af378,a8512076.5af378,yes
+945dbfd0acff705d,link out,tutte luci off,Android APP Bridge,acff3264.d487c,acff3264.d487c,yes
+a0d11861533edef2,link in,app_base_topic,Android APP Bridge,b2f3fb91a5f30a07,b2f3fb91a5f30a07,yes
+df37ade7eb3a3f9e,link in,storico 7gg,Android APP Bridge,"b2f3fb91a5f30a07,94110e1cdf7ba7a3","b2f3fb91a5f30a07,94110e1cdf7ba7a3",yes

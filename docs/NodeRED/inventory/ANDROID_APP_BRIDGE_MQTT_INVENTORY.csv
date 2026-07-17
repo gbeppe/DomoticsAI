@@ -1,0 +1,57 @@
+id,direction,name,topic,classification,dynamic_topic,qos,retain,disabled,broker_name,broker_host,broker_port
+8c073d7419d1dffd,publish,Esecuzione Hardware,,dynamic,yes,1,false,true,domopi mqtt,192.168.1.20,1883
+ba0948194022d617,subscribe,Ascolto Hardware Reale,zigbee2mqtt/+,other,no,1,,false,domopi mqtt,192.168.1.20,1883
+e21a5bab7aaa539f,publish,Aggiorna Stato App (Retain),,dynamic,yes,1,true,false,domopi mqtt,192.168.1.20,1883
+ac1dc3384afb5a6b,subscribe,Ascolto Stato AI e TRV,casa/clima/stato_completo,state,no,1,,false,domopi mqtt,192.168.1.20,1883
+5268685dd658fbe0,subscribe,App -> Target VMC,alexa/vmc,other,no,1,,false,emoncms mqtt,192.168.1.15,1883
+b49453f6cdbbab3d,subscribe,b49453f6cdbbab3d,zara/domotics/lights/livinglamp,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+8e3fcbfc031083cc,subscribe,8e3fcbfc031083cc,zara/domotics/lights/shelflamp,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+f169b915a19f8af6,subscribe,f169b915a19f8af6,zara/domotics/lights/tvlamp,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+118da562063f2d9a,subscribe,118da562063f2d9a,shellies/shelly1-771284/relay/0,other,no,2,,false,emoncms mqtt,192.168.1.15,1883
+3f0b0e50b51f8568,subscribe,3f0b0e50b51f8568,shellies/shelly1-B92AF0/relay/0,other,no,2,,false,emoncms mqtt,192.168.1.15,1883
+e338f28f56433e4c,subscribe,e338f28f56433e4c,shellies/shelly1-B8C284/relay/0,other,no,2,,false,emoncms mqtt,192.168.1.15,1883
+c5fbbdc4bdf7fbe0,subscribe,c5fbbdc4bdf7fbe0,zara/domotics/lights/poollight,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+3174da2bdd10ea30,subscribe,3174da2bdd10ea30,zara/domotics/lights/poolfloor,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+3f8fefa8f0d98ffd,subscribe,3f8fefa8f0d98ffd,zara/domotics/lights/poolskimmer,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+04eee2d096fc8523,subscribe,04eee2d096fc8523,zara/domotics/lights/poolpump,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+30036127a21d4c88,subscribe,App -> Comando Scene Luci,zara/android/domotica/scene/set,command,no,2,,true,domopi mqtt,192.168.1.20,1883
+c8bf45a2bc859241,subscribe,zigbee2mqtt/Sonoff AirGuard TH camera matrimoniale,zigbee2mqtt/Sonoff AirGuard TH camera matrimoniale,other,no,2,,false,emoncms mqtt,192.168.1.15,1883
+69d0e373d832b240,subscribe,MQTT SOC Batt,TeslaPowerwall/SOE,telemetry,no,2,,false,emoncms mqtt,192.168.1.15,1883
+326768da85a5d990,subscribe,MQTT Potenza Casa (Load W),TeslaPowerwall/load_instant_power,telemetry,no,2,,false,emoncms mqtt,192.168.1.15,1883
+6223c2899c0ae992,subscribe,MQTT Potenza Produzione FV (FV W),TeslaPowerwall/solar_instant_power,telemetry,no,2,,false,emoncms mqtt,192.168.1.15,1883
+1c21da7cdc55c2ae,subscribe,MQTT temperatura living,emon/emonth5/temperature_calibrated,telemetry,no,2,,false,emoncms mqtt,192.168.1.15,1883
+cee938eea10f7bd4,subscribe,cee938eea10f7bd4,zigbee2mqtt/TU-cucinaEsterno,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+efe270ec96f87af7,subscribe,efe270ec96f87af7,emon/resolDL2/sensor2,telemetry,no,2,,false,emoncms mqtt,192.168.1.15,1883
+0b370faa3935fe88,subscribe,0b370faa3935fe88,emon/resolDL2/sensor3,telemetry,no,2,,false,emoncms mqtt,192.168.1.15,1883
+9ac2eb0ded5a2efd,subscribe,9ac2eb0ded5a2efd,emon/resolDL2/sensor1,telemetry,no,2,,false,emoncms mqtt,192.168.1.15,1883
+8c0fe215629e8f46,subscribe,8c0fe215629e8f46,emon/shellyACS/tempACS,other,no,2,,false,emoncms mqtt,192.168.1.15,1883
+232f8e2188161e4c,subscribe,MQTT humidity living,emon/emonth5/humidity,telemetry,no,2,,false,emoncms mqtt,192.168.1.15,1883
+11f0be7d90a47f54,subscribe,MQTT Sonoff AirGuard TH esterno cucina,zigbee2mqtt/Sonoff AirGuard TH esterno cucina,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+1d09b533095d68c1,publish,1d09b533095d68c1,zara/domotics/modalitavacanza,other,no,0,true,false,domopi mqtt,192.168.1.20,1883
+b51bd73002b7f88b,publish,b51bd73002b7f88b,zara/domotics/luciECO,other,no,0,true,false,domopi mqtt,192.168.1.20,1883
+3bfeb435fb6e3132,publish,3bfeb435fb6e3132,zara/domotics/luciPiscinaAuto,other,no,0,true,false,domopi mqtt,192.168.1.20,1883
+42c039cfb62a43a2,subscribe,42c039cfb62a43a2,,dynamic,yes,2,,false,domopi mqtt,192.168.1.20,1883
+a40733727fb29c55,publish,a40733727fb29c55,zara/domotics/ACAuto,other,no,0,true,false,domopi mqtt,192.168.1.20,1883
+3db3a26c676e583c,publish,3db3a26c676e583c,casa/clima/cmnd/vmc_max_notte,command,no,,true,false,domopi mqtt,192.168.1.20,1883
+0af2db132cc8cd0f,publish,0af2db132cc8cd0f,casa/clima/cmnd/AI_climate_enabling,command,no,,,false,domopi mqtt,192.168.1.20,1883
+4b484152120e2d18,subscribe,4b484152120e2d18,casa/clima/cmnd/AI_climate_enabling,command,no,2,,false,domopi mqtt,192.168.1.20,1883
+28256464972b2329,subscribe,28256464972b2329,zara/domotics/modalitavacanza,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+c698d126b68e11f8,subscribe,c698d126b68e11f8,zara/domotics/luciECO,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+5b7675e55cbc4b81,subscribe,5b7675e55cbc4b81,zara/domotics/luciPiscinaAuto,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+6571bf1f8e667903,subscribe,6571bf1f8e667903,zara/domotics/ACAuto,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+6bf7b6d43cfb3fc3,subscribe,6bf7b6d43cfb3fc3,casa/clima/stat/vmc_max_notte,state,no,2,,false,domopi mqtt,192.168.1.20,1883
+fc0ba16b2241adf1,subscribe,fc0ba16b2241adf1,zara/domotics/porch_sensor,telemetry,no,0,,false,domopi mqtt,192.168.1.20,1883
+d073880643e29f9e,publish,d073880643e29f9e,zara/domotics/porch_sensor,telemetry,no,,,false,domopi mqtt,192.168.1.20,1883
+fe21b464ce170529,subscribe,fe21b464ce170529,casa/clima/stato_completo,state,no,2,,false,domopi mqtt,192.168.1.20,1883
+db523ff6c9bae47c,subscribe,MQTT Potenza Produzione FV (FV W),TeslaPowerwall/site_instant_power,telemetry,no,2,,false,emoncms mqtt,192.168.1.15,1883
+f22c31479e1b1d5b,subscribe,f22c31479e1b1d5b,emon/cameraMatrimoniale/humidex,telemetry,no,2,,false,emoncms mqtt,192.168.1.15,1883
+831724587f5922f7,subscribe,humidex living,emon/emonth5/humidex,telemetry,no,2,,false,emoncms mqtt,192.168.1.15,1883
+mqtt_in_palazzetti,subscribe,zara/domotics/palazzetti/#,zara/domotics/palazzetti/#,other,no,0,,false,emoncms mqtt,192.168.1.15,1883
+mqtt_in_app_cmnd,subscribe,alexa/caminetto,alexa/caminetto,other,no,0,,false,emoncms mqtt,192.168.1.15,1883
+mqtt_out_locale,publish,MQTT Locale (App & ESP),,dynamic,yes,1,true,false,domopi mqtt,192.168.1.20,1883
+mqtt_out_alexa,publish,MQTT Esterno (Alexa),,dynamic,yes,1,false,true,,,
+8022e945f076fa2f,subscribe,8022e945f076fa2f,emon/focolare/powerraw,telemetry,no,2,,false,emoncms mqtt,192.168.1.15,1883
+5d2d6ba3ad4c3262,subscribe,5d2d6ba3ad4c3262,zara/domotics/lights/readinglight,other,no,2,,false,domopi mqtt,192.168.1.20,1883
+2b99835ee36a758d,publish,2b99835ee36a758d,zara/domotics/time_range,other,no,,true,false,domopi mqtt,192.168.1.20,1883
+59b830f96fe6bb19,subscribe,59b830f96fe6bb19,,dynamic,yes,2,,false,domopi mqtt,192.168.1.20,1883
+302a2960a9fdf64f,publish,302a2960a9fdf64f,,dynamic,yes,1,false,false,domopi mqtt,192.168.1.20,1883
