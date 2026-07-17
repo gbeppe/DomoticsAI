@@ -74,7 +74,8 @@ event_store = EventStore(
 )
 
 twin_store = DigitalTwinStore(
-    event_store
+    event_store,
+    registry=registry,
 )
 
 hub = WebSocketHub()

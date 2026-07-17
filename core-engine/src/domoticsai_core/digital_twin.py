@@ -24,8 +24,9 @@ def utc_now_iso():
 
 
 class DigitalTwinStore:
-    def __init__(self, event_store):
+    def __init__(self, event_store, registry=None):
         self._event_store = event_store
+        self._registry = registry
         self._lock = threading.RLock()
         self._twin = DigitalTwin()
         self._listeners = []
@@ -122,10 +123,19 @@ class DigitalTwinStore:
             self._listeners.append(listener)
 
     def update_from_mqtt(self, topic, payload_text):
+        if self._registry is not None:
+            registry_entity = self._registry.by_state_topic(
+                topic
+            )
+
+            if registry_entity is None:
+                return False
+
         address = map_state_topic(topic)
 
         if address is None:
             return False
+
 
         received_at = utc_now_iso()
         parsed = self._parse_payload(payload_text)
