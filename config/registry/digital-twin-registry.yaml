@@ -1,0 +1,984 @@
+# ==============================================================================
+# ZARA DOMOTICS - DIGITAL TWIN REGISTRY
+# ==============================================================================
+registry:
+  name: DomoticsAI Digital Twin Registry
+  version: 1.0.2
+  generated: "2026-07-17"
+  interface_version: 1
+
+# ==============================================================================
+# BROKERS DEFINITION
+# ==============================================================================
+brokers:
+  home:
+    host: 192.168.1.20
+    port: 1883
+  emon:
+    host: 192.168.1.15
+    port: 1883
+
+# ==============================================================================
+# DOMAIN: LIGHTS
+# ==============================================================================
+lights:
+  living:
+    power:
+      id: lights.living.power
+      description: >
+        Comanda la lampada principale del soggiorno.
+      domain: lights
+      entity_id: living
+      property: power
+      status: legacy
+      source_type: physical_actuator
+      location:
+        id: living
+        label: "Soggiorno"
+      display:
+        name: "Lampada Living"
+        icon: "lightbulb"
+      group: living_room
+      state_update:
+        mode: retained
+      behavior:
+        optimistic_update: false
+        requires_confirmation: true
+      capabilities:
+        readable: true
+        writable: true
+        historized: true
+      interface:
+        state_topic: zara/interface/lights/living/power/stat
+        command_topic: zara/interface/lights/living/power/cmd
+        ack_topic: zara/interface/lights/living/power/stat
+        schema:
+          type: boolean
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform:
+        command:
+          true: "on"
+          false: "off"
+        state:
+          "on": true
+          "off": false
+      legacy:
+        device_id: shelly_livinglamp
+        source:
+          broker: home
+          topic: zara/domotics/lights/livinglamp
+        confirmation:
+          broker: home
+          topic: zara/domotics/lights/livinglamp
+        initial_value_source: retained
+        confirmation_timeout_ms: 3000
+
+  hifi:
+    power:
+      id: lights.hifi.power
+      description: >
+        Comanda la lampada collegata all'impianto HiFi.
+      domain: lights
+      entity_id: hifi
+      property: power
+      status: deprecated
+      source_type: physical_actuator
+      location:
+        id: living
+        label: "Soggiorno"
+      display:
+        name: "Lampada HiFi"
+        icon: "speaker"
+      group: living_room
+      state_update:
+        mode: subscribe
+      behavior:
+        optimistic_update: false
+        requires_confirmation: true
+      capabilities:
+        readable: true
+        writable: true
+        historized: true
+      interface:
+        state_topic: zara/interface/lights/hifi/power/stat
+        command_topic: zara/interface/lights/hifi/power/cmd
+        ack_topic: zara/interface/lights/hifi/power/stat
+        schema:
+          type: boolean
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform:
+        command:
+          true: "1"
+          false: "0"
+        state:
+          "1": true
+          "0": false
+      legacy:
+        device_id: tasmota_86AD14
+        source:
+          broker: home
+          topic: cmnd/tasmota_86AD14/POWER
+        confirmation:
+          broker: home
+          topic: stat/tasmota_86AD14/POWER
+        initial_value_source: query
+        confirmation_timeout_ms: 3000
+
+# ==============================================================================
+# DOMAIN: POOL
+# ==============================================================================
+pool:
+  pump:
+    power:
+      id: pool.pump.power
+      description: >
+        Aziona la pompa di filtrazione principale della piscina.
+      domain: pool
+      entity_id: pump
+      property: power
+      status: legacy
+      source_type: physical_actuator
+      location:
+        id: outdoor
+        label: "Esterno"
+      display:
+        name: "Pompa Piscina"
+        icon: "water"
+      group: piscina
+      state_update:
+        mode: retained
+      behavior:
+        optimistic_update: false
+        requires_confirmation: true
+      capabilities:
+        readable: true
+        writable: true
+        historized: true
+      interface:
+        state_topic: zara/interface/pool/pump/power/stat
+        command_topic: zara/interface/pool/pump/power/cmd
+        ack_topic: zara/interface/pool/pump/power/stat
+        schema:
+          type: boolean
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform:
+        command:
+          true: "on"
+          false: "off"
+        state:
+          "on": true
+          "off": false
+      legacy:
+        device_id: shelly_poolpump
+        source:
+          broker: home
+          topic: zara/domotics/lights/poolpump
+        confirmation:
+          broker: home
+          topic: zara/domotics/lights/poolpump
+        initial_value_source: retained
+        confirmation_timeout_ms: 3000
+
+  skimmer:
+    power:
+      id: pool.skimmer.power
+      description: >
+        Attiva lo skimmer per la pulizia della superficie della piscina.
+      domain: pool
+      entity_id: skimmer
+      property: power
+      status: legacy
+      source_type: physical_actuator
+      location:
+        id: outdoor
+        label: "Esterno"
+      display:
+        name: "Skimmer Piscina"
+        icon: "pool"
+      group: piscina
+      state_update:
+        mode: retained
+      behavior:
+        optimistic_update: false
+        requires_confirmation: true
+      capabilities:
+        readable: true
+        writable: true
+        historized: true
+      interface:
+        state_topic: zara/interface/pool/skimmer/power/stat
+        command_topic: zara/interface/pool/skimmer/power/cmd
+        ack_topic: zara/interface/pool/skimmer/power/stat
+        schema:
+          type: boolean
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform:
+        command:
+          true: "on"
+          false: "off"
+        state:
+          "on": true
+          "off": false
+      legacy:
+        device_id: shelly_poolskimmer
+        source:
+          broker: home
+          topic: zara/domotics/lights/poolskimmer
+        confirmation:
+          broker: home
+          topic: zara/domotics/lights/poolskimmer
+        initial_value_source: retained
+        confirmation_timeout_ms: 3000
+
+# ==============================================================================
+# DOMAIN: ACCESS
+# ==============================================================================
+access:
+  garage_gate_1:
+    trigger:
+      id: access.garage_gate_1.trigger
+      description: >
+        Invia un impulso temporizzato per l'apertura o chiusura del cancello del garage.
+      domain: access
+      entity_id: garage_gate_1
+      property: trigger
+      status: legacy
+      source_type: manual_command
+      location:
+        id: outdoor
+        label: "Esterno"
+      display:
+        name: "Cancello Garage"
+        icon: "garage"
+      group: accessi
+      state_update:
+        mode: none
+      behavior:
+        optimistic_update: true
+        requires_confirmation: false
+      capabilities:
+        readable: false
+        writable: true
+        historized: true
+      interface:
+        state_topic: null
+        command_topic: zara/interface/access/garage_gate_1/trigger/cmd
+        ack_topic: null
+        schema:
+          type: boolean
+      mqtt:
+        qos: 0
+        retain_state: false
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: gpio_relay_garage
+        source: null
+        confirmation: null
+        initial_value_source: null
+
+# ==============================================================================
+# DOMAIN: CLIMATE
+# ==============================================================================
+climate:
+  thermostat_living:
+    target_temperature:
+      id: climate.thermostat_living.target_temperature
+      description: >
+        Imposta la temperatura target desiderata per il riscaldamento del soggiorno.
+      domain: climate
+      entity_id: thermostat_living
+      property: target_temperature
+      status: legacy
+      source_type: configuration
+      location:
+        id: living
+        label: "Soggiorno"
+      display:
+        name: "Termostato Living"
+        icon: "thermostat"
+      group: clima_living
+      state_update:
+        mode: subscribe
+      behavior:
+        optimistic_update: false
+        requires_confirmation: true
+      capabilities:
+        readable: true
+        writable: true
+        historized: true
+      interface:
+        state_topic: zara/interface/climate/thermostat_living/target_temperature/stat
+        command_topic: zara/interface/climate/thermostat_living/target_temperature/cmd
+        ack_topic: zara/interface/climate/thermostat_living/target_temperature/stat
+        schema:
+          type: decimal
+          minimum: 16.0
+          maximum: 22.0
+          unit: "°C"
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: tasmota_F32F4F
+        source:
+          broker: home
+          topic: cmnd/tasmota_F32F4F/TEMPTARGETSET
+        confirmation:
+          broker: home
+          topic: stat/tasmota_F32F4F/TEMPTARGETSET
+        initial_value_source: query
+        confirmation_timeout_ms: 2000
+
+  ac_master:
+    mode:
+      id: climate.ac_master.mode
+      description: >
+        Gestisce la modalità operativa dell'aria condizionata. Il sistema la converte in comandi IR.
+      domain: climate
+      entity_id: ac_master
+      property: mode
+      status: legacy
+      source_type: calculated
+      location:
+        id: living
+        label: "Soggiorno"
+      display:
+        name: "Aria Condizionata"
+        icon: "ac_unit"
+      group: clima_living
+      state_update:
+        mode: retained
+      behavior:
+        optimistic_update: false
+        requires_confirmation: true
+      capabilities:
+        readable: true
+        writable: true
+        historized: true
+      interface:
+        state_topic: zara/interface/climate/ac_master/mode/stat
+        command_topic: zara/interface/climate/ac_master/mode/cmd
+        ack_topic: zara/interface/climate/ac_master/mode/stat
+        schema:
+          type: string
+          enum: ["OFF", "COOLING_ON", "NIGHT_DRY", "HEAT_DIURNO", "HEAT_SICUREZZA_NOTTE", "MANUAL"]
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: broadlink_rm_pro
+        source:
+          broker: home
+          topic: zara/domotics/AC/command
+        confirmation:
+          broker: home
+          topic: casa/clima/stato_completo
+        initial_value_source: retained
+        confirmation_timeout_ms: 5000
+
+  vmc:
+    speed:
+      id: climate.vmc.speed
+      description: >
+        Regola i livelli di velocità dei motori della Ventilazione Meccanica Controllata (VMC).
+      domain: climate
+      entity_id: vmc
+      property: speed
+      status: legacy
+      source_type: physical_actuator
+      location:
+        id: global
+        label: "Tutta la casa"
+      display:
+        name: "Velocità VMC"
+        icon: "air"
+      group: clima_globale
+      state_update:
+        mode: subscribe
+      behavior:
+        optimistic_update: false
+        requires_confirmation: true
+      capabilities:
+        readable: true
+        writable: true
+        historized: true
+      interface:
+        state_topic: zara/interface/climate/vmc/speed/stat
+        command_topic: zara/interface/climate/vmc/speed/cmd
+        ack_topic: zara/interface/climate/vmc/speed/stat
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 4
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: brink_esp8266
+        source:
+          broker: emon
+          topic: /esp8266/brink/fanspeed
+        confirmation:
+          broker: emon
+          topic: /esp8266/brink/fanspeed
+        initial_value_source: query
+        confirmation_timeout_ms: 10000
+
+# ==============================================================================
+# DOMAIN: FIREPLACE
+# ==============================================================================
+fireplace:
+  main:
+    power:
+      id: fireplace.main.power
+      description: >
+        Comanda l'accensione e lo spegnimento della stufa/caminetto a pellet.
+      domain: fireplace
+      entity_id: main
+      property: power
+      status: legacy
+      source_type: physical_actuator
+      location:
+        id: living
+        label: "Soggiorno"
+      display:
+        name: "Accensione Caminetto"
+        icon: "fireplace"
+      group: caminetto
+      state_update:
+        mode: retained
+      behavior:
+        optimistic_update: false
+        requires_confirmation: true
+      capabilities:
+        readable: true
+        writable: true
+        historized: true
+      interface:
+        state_topic: zara/interface/fireplace/main/power/stat
+        command_topic: zara/interface/fireplace/main/power/cmd
+        ack_topic: zara/interface/fireplace/main/power/stat
+        schema:
+          type: boolean
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: palazzetti_esp8266
+        source:
+          broker: emon
+          topic: zara/domotics/palazzetti/set/power
+        confirmation:
+          broker: emon
+          topic: zara/domotics/palazzetti/acceso
+        initial_value_source: retained
+        confirmation_timeout_ms: 8000
+
+    level:
+      id: fireplace.main.level
+      description: >
+        Modula il livello di potenza della ventilazione del caminetto.
+      domain: fireplace
+      entity_id: main
+      property: level
+      status: legacy
+      source_type: physical_actuator
+      location:
+        id: living
+        label: "Soggiorno"
+      display:
+        name: "Potenza Caminetto"
+        icon: "local_fire_department"
+      group: caminetto
+      state_update:
+        mode: subscribe
+      behavior:
+        optimistic_update: false
+        requires_confirmation: true
+      capabilities:
+        readable: true
+        writable: true
+        historized: true
+      interface:
+        state_topic: zara/interface/fireplace/main/level/stat
+        command_topic: zara/interface/fireplace/main/level/cmd
+        ack_topic: zara/interface/fireplace/main/level/stat
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 6
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: palazzetti_esp8266
+        source:
+          broker: emon
+          topic: zara/domotics/palazzetti/set/power
+        confirmation:
+          broker: emon
+          topic: emon/focolare/powerraw
+        initial_value_source: query
+
+# ==============================================================================
+# DOMAIN: HEATING
+# ==============================================================================
+heating:
+  puffer:
+    top_temperature:
+      id: heating.puffer.top_temperature
+      description: >
+        Temperatura rilevata dalla sonda collocata nella parte alta del Puffer.
+      domain: heating
+      entity_id: puffer
+      property: top_temperature
+      status: legacy
+      source_type: physical_sensor
+      location:
+        id: utility_room
+        label: "Centrale Termica"
+      display:
+        name: "Puffer Alto"
+        icon: "thermometer"
+      group: impianto_termico
+      state_update:
+        mode: subscribe
+      behavior:
+        optimistic_update: false
+        requires_confirmation: false
+      capabilities:
+        readable: true
+        writable: false
+        historized: true
+      interface:
+        state_topic: zara/interface/heating/puffer/top_temperature/stat
+        command_topic: null
+        ack_topic: null
+        schema:
+          type: decimal
+          unit: "°C"
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: resolDL2
+        source:
+          broker: emon
+          topic: emon/resolDL2/sensor3
+        confirmation: null
+        initial_value_source: query
+
+  dhw_puffer:
+    temperature:
+      id: heating.dhw_puffer.temperature
+      description: >
+        Temperatura del serbatoio dell'Acqua Calda Sanitaria (ACS).
+      domain: heating
+      entity_id: dhw_puffer
+      property: temperature
+      status: legacy
+      source_type: physical_sensor
+      location:
+        id: utility_room
+        label: "Centrale Termica"
+      display:
+        name: "Puffer ACS"
+        icon: "water_drop"
+      group: impianto_termico
+      state_update:
+        mode: subscribe
+      behavior:
+        optimistic_update: false
+        requires_confirmation: false
+      capabilities:
+        readable: true
+        writable: false
+        historized: true
+      interface:
+        state_topic: zara/interface/heating/dhw_puffer/temperature/stat
+        command_topic: null
+        ack_topic: null
+        schema:
+          type: decimal
+          unit: "°C"
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: shelly_acs
+        source:
+          broker: emon
+          topic: emon/shellyACS/tempACS
+        confirmation: null
+        initial_value_source: query
+
+# ==============================================================================
+# DOMAIN: ENERGY
+# ==============================================================================
+energy:
+  battery:
+    soc:
+      id: energy.battery.soc
+      description: >
+        Percentuale di carica residua (State of Charge) della batteria Tesla Powerwall.
+      domain: energy
+      entity_id: battery
+      property: soc
+      status: legacy
+      source_type: external_system
+      location:
+        id: utility_room
+        label: "Centrale Termica"
+      display:
+        name: "Batteria (SOC)"
+        icon: "battery_charging_full"
+      group: energia
+      state_update:
+        mode: subscribe
+      behavior:
+        optimistic_update: false
+        requires_confirmation: false
+      capabilities:
+        readable: true
+        writable: false
+        historized: true
+      interface:
+        state_topic: zara/interface/energy/battery/soc/stat
+        command_topic: null
+        ack_topic: null
+        schema:
+          type: decimal
+          minimum: 0.0
+          maximum: 100.0
+          unit: "%"
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: tesla_powerwall
+        source:
+          broker: emon
+          topic: TeslaPowerwall/SOE
+        confirmation: null
+        initial_value_source: query
+
+  solar:
+    power:
+      id: energy.solar.power
+      description: >
+        Potenza elettrica istantanea prodotta dall'impianto fotovoltaico.
+      domain: energy
+      entity_id: solar
+      property: power
+      status: legacy
+      source_type: external_system
+      location:
+        id: roof
+        label: "Tetto"
+      display:
+        name: "Fotovoltaico"
+        icon: "solar_power"
+      group: energia
+      state_update:
+        mode: subscribe
+      behavior:
+        optimistic_update: false
+        requires_confirmation: false
+      capabilities:
+        readable: true
+        writable: false
+        historized: true
+      interface:
+        state_topic: zara/interface/energy/solar/power/stat
+        command_topic: null
+        ack_topic: null
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 6000
+          unit: "W"
+      mqtt:
+        qos: 0
+        retain_state: false
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: tesla_powerwall
+        source:
+          broker: emon
+          topic: TeslaPowerwall/solar_instant_power
+        confirmation: null
+        initial_value_source: null
+
+# ==============================================================================
+# DOMAIN: ENV
+# ==============================================================================
+env:
+  living:
+    humidex:
+      id: env.living.humidex
+      description: >
+        Indice di comfort termico (Humidex) calcolato per la zona soggiorno.
+      domain: env
+      entity_id: living
+      property: humidex
+      status: legacy
+      source_type: calculated
+      location:
+        id: living
+        label: "Soggiorno"
+      display:
+        name: "Humidex Living"
+        icon: "water_drop"
+      group: clima_living
+      state_update:
+        mode: retained
+      behavior:
+        optimistic_update: false
+        requires_confirmation: false
+      capabilities:
+        readable: true
+        writable: false
+        historized: true
+      interface:
+        state_topic: zara/interface/env/living/humidex/stat
+        command_topic: null
+        ack_topic: null
+        schema:
+          type: decimal
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: emonth5
+        source:
+          broker: emon
+          topic: emon/emonth5/humidex
+        confirmation: null
+        initial_value_source: query
+
+# ==============================================================================
+# DOMAIN: SETTINGS
+# ==============================================================================
+settings:
+  system:
+    ai_enabled:
+      id: settings.system.ai_enabled
+      description: >
+        Interruttore master per abilitare o disabilitare l'algoritmo climatico AI.
+      domain: settings
+      entity_id: system
+      property: ai_enabled
+      status: legacy
+      source_type: configuration
+      location:
+        id: global
+        label: "Sistema"
+      display:
+        name: "Master Switch AI"
+        icon: "smart_toy"
+      group: impostazioni
+      state_update:
+        mode: retained
+      behavior:
+        optimistic_update: true
+        requires_confirmation: true
+      capabilities:
+        readable: true
+        writable: true
+        historized: true
+      interface:
+        state_topic: zara/interface/settings/system/ai_enabled/stat
+        command_topic: zara/interface/settings/system/ai_enabled/cmd
+        ack_topic: zara/interface/settings/system/ai_enabled/stat
+        schema:
+          type: boolean
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: node_red_global
+        source:
+          broker: home
+          topic: casa/clima/cmnd/AI_climate_enabling
+        confirmation:
+          broker: home
+          topic: casa/clima/cmnd/AI_climate_enabling
+        initial_value_source: node_red_variable
+
+  climate:
+    target_humidex:
+      id: settings.climate.target_humidex
+      description: >
+        Soglia massima di Humidex desiderata durante la notte per l'attivazione della deumidificazione.
+      domain: settings
+      entity_id: climate
+      property: target_humidex
+      status: legacy
+      source_type: configuration
+      location:
+        id: global
+        label: "Sistema"
+      display:
+        name: "Target Humidex Notte"
+        icon: "opacity"
+      group: impostazioni
+      state_update:
+        mode: retained
+      behavior:
+        optimistic_update: true
+        requires_confirmation: true
+      capabilities:
+        readable: true
+        writable: true
+        historized: true
+      interface:
+        state_topic: zara/interface/settings/climate/target_humidex/stat
+        command_topic: zara/interface/settings/climate/target_humidex/cmd
+        ack_topic: zara/interface/settings/climate/target_humidex/stat
+        schema:
+          type: decimal
+          minimum: 26.0
+          maximum: 32.0
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: node_red_global
+        source:
+          broker: home
+          topic: casa/clima/cmnd/target_humidex
+        confirmation:
+          broker: home
+          topic: casa/clima/stat/target_humidex
+        initial_value_source: node_red_variable
+
+    vmc_max_night:
+      id: settings.climate.vmc_max_night
+      description: >
+        Limite massimo di velocità consentito per la VMC durante la fascia notturna per garantire il comfort acustico.
+      domain: settings
+      entity_id: climate
+      property: vmc_max_night
+      status: legacy
+      source_type: configuration
+      location:
+        id: global
+        label: "Sistema"
+      display:
+        name: "VMC Max Notte"
+        icon: "mode_night"
+      group: impostazioni
+      state_update:
+        mode: retained
+      behavior:
+        optimistic_update: true
+        requires_confirmation: true
+      capabilities:
+        readable: true
+        writable: true
+        historized: true
+      interface:
+        state_topic: zara/interface/settings/climate/vmc_max_night/stat
+        command_topic: zara/interface/settings/climate/vmc_max_night/cmd
+        ack_topic: zara/interface/settings/climate/vmc_max_night/stat
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 4
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: node_red_global
+        source:
+          broker: home
+          topic: casa/clima/cmnd/vmc_max_notte
+        confirmation:
+          broker: home
+          topic: casa/clima/stat/vmc_max_notte
+        initial_value_source: node_red_variable
+
+    ai_grace_range:
+      id: settings.climate.ai_grace_range
+      description: >
+        Fascia oraria mattutina per l'applicazione del profilo energetico Grace Mode (es. 08-12).
+      domain: settings
+      entity_id: climate
+      property: ai_grace_range
+      status: legacy
+      source_type: configuration
+      location:
+        id: global
+        label: "Sistema"
+      display:
+        name: "Periodo Grazia AI"
+        icon: "schedule"
+      group: impostazioni
+      state_update:
+        mode: retained
+      behavior:
+        optimistic_update: true
+        requires_confirmation: true
+      capabilities:
+        readable: true
+        writable: true
+        historized: true
+      interface:
+        state_topic: zara/interface/settings/climate/ai_grace_range/stat
+        command_topic: zara/interface/settings/climate/ai_grace_range/cmd
+        ack_topic: zara/interface/settings/climate/ai_grace_range/stat
+        schema:
+          type: string
+          pattern: "^\\d{1,2}-\\d{1,2}$"
+      mqtt:
+        qos: 1
+        retain_state: true
+        retain_command: false
+      transform: null
+      legacy:
+        device_id: node_red_global
+        source:
+          broker: home
+          topic: zara/domotics/time_range
+        confirmation:
+          broker: home
+          topic: zara/domotics/time_range
+        initial_value_source: node_red_variable
