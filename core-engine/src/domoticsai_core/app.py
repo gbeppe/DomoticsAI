@@ -18,6 +18,7 @@ from .digital_twin import DigitalTwinStore
 from .event_store import EventStore
 from .mqtt_service import MqttService
 from .registry import load_registry
+from .topic_mapper import configure_registry
 from .websocket_hub import WebSocketHub
 from .command_manager import CommandManager
 from .command_manager_models import CreateCommandRequest
@@ -52,6 +53,7 @@ REGISTRY_PATH = (
 )
 
 registry = load_registry(REGISTRY_PATH)
+configure_registry(registry)
 registry_summary = registry.summary()
 
 logging.info(
