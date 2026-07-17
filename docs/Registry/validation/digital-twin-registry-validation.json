@@ -1,0 +1,15 @@
+{
+  "valid": true,
+  "registry": "config/registry/digital-twin-registry.yaml",
+  "metadata": {
+    "name": "DomoticsAI Digital Twin Registry",
+    "version": "1.0.2",
+    "generated": "2026-07-17",
+    "interface_version": 1
+  },
+  "brokers": 2,
+  "entities": 19,
+  "errors": 0,
+  "warnings": 0,
+  "findings": []
+}
