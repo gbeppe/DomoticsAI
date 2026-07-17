@@ -1,6 +1,7 @@
 import asyncio
 from contextlib import asynccontextmanager
 import logging
+from pathlib import Path
 
 from fastapi.responses import StreamingResponse
 
@@ -16,6 +17,7 @@ from .config import Settings
 from .digital_twin import DigitalTwinStore
 from .event_store import EventStore
 from .mqtt_service import MqttService
+from .registry import load_registry
 from .websocket_hub import WebSocketHub
 from .command_manager import CommandManager
 from .command_manager_models import CreateCommandRequest
@@ -40,6 +42,26 @@ from .home_snapshot import (
 logging.basicConfig(level=logging.INFO)
 
 settings = Settings.from_env()
+
+REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
+REGISTRY_PATH = (
+    REPOSITORY_ROOT
+    / "config"
+    / "registry"
+    / "digital-twin-registry.yaml"
+)
+
+registry = load_registry(REGISTRY_PATH)
+registry_summary = registry.summary()
+
+logging.info(
+    "Digital Twin Registry loaded: "
+    "version=%s entities=%s domains=%s path=%s",
+    registry.version,
+    len(registry),
+    len(registry_summary["domains"]),
+    REGISTRY_PATH,
+)
 
 database = SQLiteDatabase(
     settings.db_path
@@ -147,6 +169,8 @@ twin_store.add_listener(hub.publish_from_thread)
 
 @asynccontextmanager
 async def lifespan(app):
+    app.state.registry = registry
+
     hub.bind_loop(asyncio.get_running_loop())
     command_event_stream.bind_loop(asyncio.get_running_loop())
     mqtt_service.start()
@@ -166,6 +190,8 @@ app = FastAPI(
 @app.get("/health")
 def health():
     snapshot = twin_store.snapshot()
+    current_registry_summary = registry.summary()
+
     entity_count = sum(
         len(domain)
         for domain in snapshot.domains.values()
@@ -189,6 +215,25 @@ def health():
         "derivedLights": (
             "lights_derived" in snapshot.domains
         ),
+        "registry": {
+            "loaded": True,
+            "version": registry.version,
+            "interfaceVersion": registry.interface_version,
+            "entities": len(registry),
+            "domains": len(
+                current_registry_summary["domains"]
+            ),
+            "brokers": len(registry.brokers),
+            "readable": (
+                current_registry_summary["readable"]
+            ),
+            "writable": (
+                current_registry_summary["writable"]
+            ),
+            "active": (
+                current_registry_summary["active"]
+            ),
+        },
     }
 
 
