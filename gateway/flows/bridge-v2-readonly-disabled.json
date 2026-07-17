@@ -1,0 +1,5104 @@
+[
+  {
+    "id": "d9427ce27a49a151",
+    "type": "tab",
+    "label": "DomoticsAI Production Bridge v2 — READ ONLY CANARY",
+    "disabled": true,
+    "info": "Flow generato automaticamente.\nStato iniziale: DISABLED.\nNessun comando hardware.\nOutput ammesso solo sotto zara/android/domotica/v2/...",
+    "env": []
+  },
+  {
+    "id": "c12c5b09b0e1a624",
+    "type": "comment",
+    "z": "d9427ce27a49a151",
+    "name": "⚠ READ-ONLY CANARY — FLOW DISABILITATO",
+    "info": "Non abilitare prima della revisione.\nQuesto flow deve soltanto leggere topic sorgente e pubblicare copie normalizzate nel namespace zara/android/domotica/v2/...",
+    "x": 300,
+    "y": 40,
+    "wires": []
+  },
+  {
+    "id": "90fc8f0be01f1aa0",
+    "type": "mqtt-broker",
+    "name": "DomoticsAI canary broker",
+    "broker": "192.168.1.20",
+    "port": "1883",
+    "clientid": "",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": "4",
+    "keepalive": "60",
+    "cleansession": true,
+    "autoUnsubscribe": true,
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": "",
+    "birthMsg": {},
+    "closeTopic": "",
+    "closeQos": "0",
+    "closePayload": "",
+    "closeMsg": {},
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": "",
+    "willMsg": {}
+  },
+  {
+    "id": "540d0904a8eb8bad",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] ${APP_BASE}/env/humidexBedroom",
+    "topic": "${APP_BASE}/env/humidexBedroom",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 100,
+    "wires": [
+      [
+        "b03bb105e4522ada"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "b03bb105e4522ada",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humidexBedroom",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/env/humidexBedroom\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humidexBedroom\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 100,
+    "wires": [
+      [
+        "a8dc251a1d1182ee"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "a8dc251a1d1182ee",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humidexBedroom",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 100,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "76eafee1f9c42bea",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] ${APP_BASE}/env/humidexLiving",
+    "topic": "${APP_BASE}/env/humidexLiving",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 160,
+    "wires": [
+      [
+        "c4bb1655b2a23a82"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "c4bb1655b2a23a82",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humidexLiving",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/env/humidexLiving\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humidexLiving\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 160,
+    "wires": [
+      [
+        "fb629539de96cb4e"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "fb629539de96cb4e",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humidexLiving",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 160,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "e87a7933a63e8429",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] casa/clima/stat/vmc_max_notte",
+    "topic": "casa/clima/stat/vmc_max_notte",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 220,
+    "wires": [
+      [
+        "5ccd27211be9170e"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "5ccd27211be9170e",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/vmc/maxNightSpeed/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"casa/clima/stat/vmc_max_notte\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/vmc/maxNightSpeed/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 220,
+    "wires": [
+      [
+        "be0180f3dda829c0"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "be0180f3dda829c0",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/vmc/maxNightSpeed/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 220,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "ec22e6ccc8b5efaa",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] casa/clima/stato_completo",
+    "topic": "casa/clima/stato_completo",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 280,
+    "wires": [
+      [
+        "e1f8bcb16a595d18"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "e1f8bcb16a595d18",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/casa/clima/stato_completo",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"casa/clima/stato_completo\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/casa/clima/stato_completo\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 280,
+    "wires": [
+      [
+        "db6cd3473b02c6ff"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "db6cd3473b02c6ff",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/casa/clima/stato_completo",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 280,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "7f9b0e3e38b49fc0",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] emon/cameraMatrimoniale/humidex",
+    "topic": "emon/cameraMatrimoniale/humidex",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 340,
+    "wires": [
+      [
+        "35d8b4ac418ef3d7"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "35d8b4ac418ef3d7",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humidexBedroom",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"emon/cameraMatrimoniale/humidex\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humidexBedroom\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 340,
+    "wires": [
+      [
+        "c04e8c8fc33d94e0"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "c04e8c8fc33d94e0",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humidexBedroom",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 340,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "ce00ce8ce3a4f59f",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] emon/cameraMatrimoniale/humidity",
+    "topic": "emon/cameraMatrimoniale/humidity",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 400,
+    "wires": [
+      [
+        "1a3aa9d1518fb546"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "1a3aa9d1518fb546",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humBedroom",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"emon/cameraMatrimoniale/humidity\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humBedroom\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 400,
+    "wires": [
+      [
+        "db3892a0bb27901f"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "db3892a0bb27901f",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humBedroom",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 400,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "4238f78af8501316",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] emon/cameraMatrimoniale/temperature",
+    "topic": "emon/cameraMatrimoniale/temperature",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 460,
+    "wires": [
+      [
+        "af9b1b34c2c29354"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "af9b1b34c2c29354",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/tempBedroom",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"emon/cameraMatrimoniale/temperature\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/tempBedroom\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 460,
+    "wires": [
+      [
+        "043de0939de67ebf"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "043de0939de67ebf",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/tempBedroom",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 460,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "9aa7a07e0e37a18e",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] emon/emonth5/humidex",
+    "topic": "emon/emonth5/humidex",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 520,
+    "wires": [
+      [
+        "7f68c8470fab3c4f"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "7f68c8470fab3c4f",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humidexLiving",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"emon/emonth5/humidex\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humidexLiving\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 520,
+    "wires": [
+      [
+        "ae1b2aa3b7be334f"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "ae1b2aa3b7be334f",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humidexLiving",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 520,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "bd5bfc5855ca0bfd",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] emon/emonth5/humidity",
+    "topic": "emon/emonth5/humidity",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 580,
+    "wires": [
+      [
+        "2aebe9fbf05e4e81"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "2aebe9fbf05e4e81",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humLiving",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"emon/emonth5/humidity\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humLiving\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 580,
+    "wires": [
+      [
+        "b55628b5ab459fcf"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "b55628b5ab459fcf",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humLiving",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 580,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "64f7042eaa745122",
+    "type": "mqtt-broker",
+    "name": "Source 192.168.1.15:1883",
+    "broker": "192.168.1.15",
+    "port": "1883",
+    "clientid": "",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": "4",
+    "keepalive": "60",
+    "cleansession": true,
+    "autoUnsubscribe": true,
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": "",
+    "birthMsg": {},
+    "closeTopic": "",
+    "closeQos": "0",
+    "closePayload": "",
+    "closeMsg": {},
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": "",
+    "willMsg": {}
+  },
+  {
+    "id": "4868f943e178044f",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] emon/emonth5/temperature_calibrated",
+    "topic": "emon/emonth5/temperature_calibrated",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "64f7042eaa745122",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 640,
+    "wires": [
+      [
+        "68a5b76c184f80d3"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "68a5b76c184f80d3",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/tempLiving",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"emon/emonth5/temperature_calibrated\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/tempLiving\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 640,
+    "wires": [
+      [
+        "daf3c168b400fca0"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "daf3c168b400fca0",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/tempLiving",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 640,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "2c94cce22064452d",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] zara/android/domotica/env/humidexBedroom",
+    "topic": "zara/android/domotica/env/humidexBedroom",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 700,
+    "wires": [
+      [
+        "b817ad35c078f33a"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "b817ad35c078f33a",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humidexBedroom",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/env/humidexBedroom\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humidexBedroom\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 700,
+    "wires": [
+      [
+        "3d0cb653911002cf"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "3d0cb653911002cf",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humidexBedroom",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 700,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "29626aafc0915033",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] zara/android/domotica/env/humidexLiving",
+    "topic": "zara/android/domotica/env/humidexLiving",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 760,
+    "wires": [
+      [
+        "6450d4ca6930c7b4"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "6450d4ca6930c7b4",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humidexLiving",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/env/humidexLiving\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humidexLiving\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 760,
+    "wires": [
+      [
+        "6ef1c0bb63b2918b"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "6ef1c0bb63b2918b",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humidexLiving",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 760,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "12a919c1e40c4b19",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] zara/android/domotica/system/ac_auto/state",
+    "topic": "zara/android/domotica/system/ac_auto/state",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 820,
+    "wires": [
+      [
+        "7f84306d83eca425"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "7f84306d83eca425",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/system/ac_auto/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/system/ac_auto/state\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/system/ac_auto/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 820,
+    "wires": [
+      [
+        "3a04a336b6d994f6"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "3a04a336b6d994f6",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/system/ac_auto/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 820,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "805a3457903bd012",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] zara/android/domotica/thermostat/${targetRoom}/target/state",
+    "topic": "zara/android/domotica/thermostat/${targetRoom}/target/state",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 880,
+    "wires": [
+      [
+        "391e29dc91e97c93"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "391e29dc91e97c93",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/thermostat/${targetRoom}/target/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/thermostat/${targetRoom}/target/state\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/thermostat/${targetRoom}/target/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 880,
+    "wires": [
+      [
+        "fc54ceda49417d30"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "fc54ceda49417d30",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/thermostat/${targetRoom}/target/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 880,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "e869680c2644a1f8",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[climate] zara/android/domotica/thermostat/([^/]+",
+    "topic": "zara/android/domotica/thermostat/([^/]+",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 940,
+    "wires": [
+      [
+        "a084f8dd33a715a5"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "a084f8dd33a715a5",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/thermostat/([^/]+",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/thermostat/([^/]+\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/thermostat/([^/]+\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 940,
+    "wires": [
+      [
+        "f937178e2b8f3f49"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "f937178e2b8f3f49",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/thermostat/([^/]+",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 940,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "35d3b6626fb8af83",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] ${APP_BASE}/energy/battery",
+    "topic": "${APP_BASE}/energy/battery",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1000,
+    "wires": [
+      [
+        "30c2fcd5c28c9133"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "30c2fcd5c28c9133",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/battery",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/energy/battery\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/battery\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1000,
+    "wires": [
+      [
+        "60beffa784d9b033"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "60beffa784d9b033",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/battery",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1000,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "fed11d995151e19f",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] ${APP_BASE}/energy/consumption",
+    "topic": "${APP_BASE}/energy/consumption",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1060,
+    "wires": [
+      [
+        "1e43c40551573545"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "1e43c40551573545",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/consumption",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/energy/consumption\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/consumption\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1060,
+    "wires": [
+      [
+        "56cc3992af784da1"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "56cc3992af784da1",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/consumption",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1060,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "749e78fa88bbf382",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] ${APP_BASE}/energy/grid",
+    "topic": "${APP_BASE}/energy/grid",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1120,
+    "wires": [
+      [
+        "7b3903165468c178"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "7b3903165468c178",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/grid",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/energy/grid\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/grid\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1120,
+    "wires": [
+      [
+        "755e946585066079"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "755e946585066079",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/grid",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1120,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "45b3b764af2e2749",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] ${APP_BASE}/energy/production",
+    "topic": "${APP_BASE}/energy/production",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1180,
+    "wires": [
+      [
+        "4a2e2d69811666b9"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "4a2e2d69811666b9",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/production",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/energy/production\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/production\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1180,
+    "wires": [
+      [
+        "f276026c6b1641ce"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "f276026c6b1641ce",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/production",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1180,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "601584b0e9c478ff",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] ${APP_BASE}/energy/surplus",
+    "topic": "${APP_BASE}/energy/surplus",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1240,
+    "wires": [
+      [
+        "460cb606a36b0b0b"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "460cb606a36b0b0b",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/surplus",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/energy/surplus\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/surplus\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1240,
+    "wires": [
+      [
+        "d7d74743fed9a6a8"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "d7d74743fed9a6a8",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/surplus",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1240,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "58b01ce55763c2ab",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] TeslaPowerwall/SOE",
+    "topic": "TeslaPowerwall/SOE",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1300,
+    "wires": [
+      [
+        "c8941d9315d04e21"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "c8941d9315d04e21",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/battery",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"TeslaPowerwall/SOE\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/battery\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1300,
+    "wires": [
+      [
+        "541e7470b0e3c48f"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "541e7470b0e3c48f",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/battery",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1300,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "4cd089a6413e8006",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] TeslaPowerwall/load_instant_power",
+    "topic": "TeslaPowerwall/load_instant_power",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1360,
+    "wires": [
+      [
+        "54d7f3b6c8c28e74"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "54d7f3b6c8c28e74",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/consumption",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"TeslaPowerwall/load_instant_power\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/consumption\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1360,
+    "wires": [
+      [
+        "a006a7b1c937cf7e"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "a006a7b1c937cf7e",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/consumption",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1360,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "7d215ddb38e39ad1",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] TeslaPowerwall/site_instant_power",
+    "topic": "TeslaPowerwall/site_instant_power",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1420,
+    "wires": [
+      [
+        "db5e840c1532e68b"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "db5e840c1532e68b",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/grid",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"TeslaPowerwall/site_instant_power\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/grid\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1420,
+    "wires": [
+      [
+        "8d68aeaa7437bc8a"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "8d68aeaa7437bc8a",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/grid",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1420,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "839b87b38fa9aaad",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] TeslaPowerwall/solar_instant_power",
+    "topic": "TeslaPowerwall/solar_instant_power",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1480,
+    "wires": [
+      [
+        "f2feba77715c4ce0"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "f2feba77715c4ce0",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/production",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"TeslaPowerwall/solar_instant_power\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/production\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1480,
+    "wires": [
+      [
+        "f74919d358cde995"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "f74919d358cde995",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/production",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1480,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "5ffebdec0de73016",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] zara/android/domotica/energy/battery",
+    "topic": "zara/android/domotica/energy/battery",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1540,
+    "wires": [
+      [
+        "8a00df93b54390cf"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "8a00df93b54390cf",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/battery",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/energy/battery\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/battery\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1540,
+    "wires": [
+      [
+        "43cc6f97aa3a4e13"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "43cc6f97aa3a4e13",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/battery",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1540,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "2b22b24e04b6218d",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] zara/android/domotica/energy/consumption",
+    "topic": "zara/android/domotica/energy/consumption",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1600,
+    "wires": [
+      [
+        "7aca2ba6b49b5903"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "7aca2ba6b49b5903",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/consumption",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/energy/consumption\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/consumption\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1600,
+    "wires": [
+      [
+        "08a04a3da375c3b9"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "08a04a3da375c3b9",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/consumption",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1600,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "745b21061dddbf92",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] zara/android/domotica/energy/grid",
+    "topic": "zara/android/domotica/energy/grid",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1660,
+    "wires": [
+      [
+        "1efdddcb323cb836"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "1efdddcb323cb836",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/grid",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/energy/grid\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/grid\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1660,
+    "wires": [
+      [
+        "7d1f210a1e2c2856"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "7d1f210a1e2c2856",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/grid",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1660,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "cc7c6d25b99ae945",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] zara/android/domotica/energy/production",
+    "topic": "zara/android/domotica/energy/production",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1720,
+    "wires": [
+      [
+        "637fc5c5c0a78e13"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "637fc5c5c0a78e13",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/production",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/energy/production\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/production\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1720,
+    "wires": [
+      [
+        "3d99893d984c57be"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "3d99893d984c57be",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/production",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1720,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "8700d33092001248",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[energy] zara/android/domotica/energy/surplus",
+    "topic": "zara/android/domotica/energy/surplus",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1780,
+    "wires": [
+      [
+        "702238112a66190a"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "702238112a66190a",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/energy/surplus",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/energy/surplus\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/energy/surplus\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1780,
+    "wires": [
+      [
+        "ff2486a313d8cd5b"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "ff2486a313d8cd5b",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/energy/surplus",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1780,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "d50e415c9cda68eb",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[fireplace] emon/focolare/powerraw",
+    "topic": "emon/focolare/powerraw",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1840,
+    "wires": [
+      [
+        "fabbb2dcfbbccbd4"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "fabbb2dcfbbccbd4",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/casa/stufa/stat/potenza",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"emon/focolare/powerraw\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/casa/stufa/stat/potenza\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1840,
+    "wires": [
+      [
+        "64c81b000fcc4167"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "64c81b000fcc4167",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/casa/stufa/stat/potenza",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1840,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "0b27d0effa06e78b",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[fireplace] zara/android/domotica/casa/stufa/stat/acceso",
+    "topic": "zara/android/domotica/casa/stufa/stat/acceso",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1900,
+    "wires": [
+      [
+        "655b4d3d663b1458"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "655b4d3d663b1458",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/casa/stufa/stat/acceso",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/casa/stufa/stat/acceso\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/casa/stufa/stat/acceso\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1900,
+    "wires": [
+      [
+        "1eb898b84ccb6ed8"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "1eb898b84ccb6ed8",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/casa/stufa/stat/acceso",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1900,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "753ce95ed4494c72",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[fireplace] zara/android/domotica/casa/stufa/stat/modalita",
+    "topic": "zara/android/domotica/casa/stufa/stat/modalita",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 1960,
+    "wires": [
+      [
+        "9d65572838606980"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "9d65572838606980",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/casa/stufa/stat/modalita",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/casa/stufa/stat/modalita\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/casa/stufa/stat/modalita\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 1960,
+    "wires": [
+      [
+        "52e3a73ce2fbe36d"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "52e3a73ce2fbe36d",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/casa/stufa/stat/modalita",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 1960,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "1cb2981e39c896d2",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[fireplace] zara/android/domotica/casa/stufa/stat/potenza",
+    "topic": "zara/android/domotica/casa/stufa/stat/potenza",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2020,
+    "wires": [
+      [
+        "d42693901f2ba92f"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "d42693901f2ba92f",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/casa/stufa/stat/potenza",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/casa/stufa/stat/potenza\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/casa/stufa/stat/potenza\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2020,
+    "wires": [
+      [
+        "7156975161d252f4"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "7156975161d252f4",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/casa/stufa/stat/potenza",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2020,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "d8516804c3190090",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[fireplace] zara/domotics/palazzetti/#",
+    "topic": "zara/domotics/palazzetti/#",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "64f7042eaa745122",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2080,
+    "wires": [
+      [
+        "f4d1baddb75d4f50"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "f4d1baddb75d4f50",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/casa/stufa/stat/#",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/palazzetti/#\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/casa/stufa/stat/#\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2080,
+    "wires": [
+      [
+        "b3c06b596fce4618"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "b3c06b596fce4618",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/casa/stufa/stat/#",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2080,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "796ed059cd85f80c",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[history] zara/android/domotica/history/ac/response",
+    "topic": "zara/android/domotica/history/ac/response",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2140,
+    "wires": [
+      [
+        "f7dcae319a579d4b"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "f7dcae319a579d4b",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/history/ac/response",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/history/ac/response\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/history/ac/response\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2140,
+    "wires": [
+      [
+        "c3385862a07a189b"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "c3385862a07a189b",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/history/ac/response",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2140,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "79632639890ca826",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/android/domotica/light/${targetDevice}/state",
+    "topic": "zara/android/domotica/light/${targetDevice}/state",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2200,
+    "wires": [
+      [
+        "1f22cb3f362f6d0e"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "1f22cb3f362f6d0e",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/light/${targetDevice}/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/light/${targetDevice}/state\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/light/${targetDevice}/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2200,
+    "wires": [
+      [
+        "07984c2fc6410913"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "07984c2fc6410913",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/light/${targetDevice}/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2200,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "35eb1fd55a6a40ab",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/android/domotica/light/([^/]+",
+    "topic": "zara/android/domotica/light/([^/]+",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2260,
+    "wires": [
+      [
+        "102f089629714edd"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "102f089629714edd",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/light/([^/]+",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/light/([^/]+\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/light/([^/]+\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2260,
+    "wires": [
+      [
+        "9e2c1892d43e3753"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "9e2c1892d43e3753",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/light/([^/]+",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2260,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "f01af0d7b6051726",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/android/domotica/system/luci_eco/state",
+    "topic": "zara/android/domotica/system/luci_eco/state",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2320,
+    "wires": [
+      [
+        "6c01d84616dfb481"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "6c01d84616dfb481",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/system/luci_eco/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/system/luci_eco/state\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/system/luci_eco/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2320,
+    "wires": [
+      [
+        "6b6da536ec1ee611"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "6b6da536ec1ee611",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/system/luci_eco/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2320,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "0b48acc1175685d2",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/android/domotica/system/luci_piscina_auto/state",
+    "topic": "zara/android/domotica/system/luci_piscina_auto/state",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2380,
+    "wires": [
+      [
+        "c6cc210017c97228"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "c6cc210017c97228",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/system/luci_piscina_auto/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/system/luci_piscina_auto/state\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/system/luci_piscina_auto/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2380,
+    "wires": [
+      [
+        "a93b40534cdfe2a7"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "a93b40534cdfe2a7",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/system/luci_piscina_auto/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2380,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "efa22599ce682b81",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/domotics/lights/livinglamp",
+    "topic": "zara/domotics/lights/livinglamp",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2440,
+    "wires": [
+      [
+        "ed7ab4c034c0209a"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "ed7ab4c034c0209a",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/light/sala/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/lights/livinglamp\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/light/sala/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2440,
+    "wires": [
+      [
+        "903b7cdaff52f6ed"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "903b7cdaff52f6ed",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/light/sala/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2440,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "9d33616ef2e418fb",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/domotics/lights/poolfloor",
+    "topic": "zara/domotics/lights/poolfloor",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2500,
+    "wires": [
+      [
+        "02f91a746e42f91c"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "02f91a746e42f91c",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/light/luciPedanaPiscina/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/lights/poolfloor\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/light/luciPedanaPiscina/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2500,
+    "wires": [
+      [
+        "ccfd627a10703195"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "ccfd627a10703195",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/light/luciPedanaPiscina/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2500,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "89da67a8f2685c90",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/domotics/lights/poollight",
+    "topic": "zara/domotics/lights/poollight",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2560,
+    "wires": [
+      [
+        "35b676de57374cf5"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "35b676de57374cf5",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/light/luciPiscina/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/lights/poollight\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/light/luciPiscina/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2560,
+    "wires": [
+      [
+        "b36b43250a2977be"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "b36b43250a2977be",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/light/luciPiscina/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2560,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "193202dbd31cfc53",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/domotics/lights/poolpump",
+    "topic": "zara/domotics/lights/poolpump",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2620,
+    "wires": [
+      [
+        "d6dee27c2b278787"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "d6dee27c2b278787",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/light/pompaPiscina/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/lights/poolpump\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/light/pompaPiscina/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2620,
+    "wires": [
+      [
+        "2c6e89cec0830af6"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "2c6e89cec0830af6",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/light/pompaPiscina/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2620,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "602f89bb50efe700",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/domotics/lights/poolskimmer",
+    "topic": "zara/domotics/lights/poolskimmer",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2680,
+    "wires": [
+      [
+        "1c7173bd6313a0ed"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "1c7173bd6313a0ed",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/light/skimmerPiscina/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/lights/poolskimmer\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/light/skimmerPiscina/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2680,
+    "wires": [
+      [
+        "ac98c73c8d995243"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "ac98c73c8d995243",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/light/skimmerPiscina/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2680,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "1801c642b3d5aeb4",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/domotics/lights/readinglight",
+    "topic": "zara/domotics/lights/readinglight",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2740,
+    "wires": [
+      [
+        "add6a1a772770594"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "add6a1a772770594",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/light/tavolinoLettura/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/lights/readinglight\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/light/tavolinoLettura/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2740,
+    "wires": [
+      [
+        "3399c369c395ddfc"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "3399c369c395ddfc",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/light/tavolinoLettura/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2740,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "b614e9402aa748ec",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/domotics/lights/shelflamp",
+    "topic": "zara/domotics/lights/shelflamp",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2800,
+    "wires": [
+      [
+        "eab361a1eb0c26ea"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "eab361a1eb0c26ea",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/light/libreria/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/lights/shelflamp\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/light/libreria/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2800,
+    "wires": [
+      [
+        "04720f9f9a95c081"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "04720f9f9a95c081",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/light/libreria/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2800,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "0046d4bbc31e10c0",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/domotics/lights/tvlamp",
+    "topic": "zara/domotics/lights/tvlamp",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2860,
+    "wires": [
+      [
+        "c7119676a7366046"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "c7119676a7366046",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/light/televisione/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/lights/tvlamp\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/light/televisione/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2860,
+    "wires": [
+      [
+        "e93b85ca12ff9675"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "e93b85ca12ff9675",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/light/televisione/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2860,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "9d662ef99ce19474",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/domotics/luciECO",
+    "topic": "zara/domotics/luciECO",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2920,
+    "wires": [
+      [
+        "1f82e0034ac6a793"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "1f82e0034ac6a793",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/system/luci_eco/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/luciECO\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/system/luci_eco/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2920,
+    "wires": [
+      [
+        "e02ba2fa34f9689e"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "e02ba2fa34f9689e",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/system/luci_eco/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2920,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "32bcdf5ae99aa653",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[lights] zara/domotics/luciPiscinaAuto",
+    "topic": "zara/domotics/luciPiscinaAuto",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 2980,
+    "wires": [
+      [
+        "dca9a9af5377299f"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "dca9a9af5377299f",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/system/luci_piscina_auto/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/luciPiscinaAuto\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/system/luci_piscina_auto/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 2980,
+    "wires": [
+      [
+        "afdd641af17fc08e"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "afdd641af17fc08e",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/system/luci_piscina_auto/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 2980,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "4699e4a21af9946a",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[system] zara/android/domotica/system/enabled/state",
+    "topic": "zara/android/domotica/system/enabled/state",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3040,
+    "wires": [
+      [
+        "c73e9f03583f0003"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "c73e9f03583f0003",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/system/enabled/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/system/enabled/state\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/system/enabled/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3040,
+    "wires": [
+      [
+        "4e1da7645bebf7b6"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "4e1da7645bebf7b6",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/system/enabled/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3040,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "8fb3a32daba2234d",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[system] zara/android/domotica/system/holiday/state",
+    "topic": "zara/android/domotica/system/holiday/state",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3100,
+    "wires": [
+      [
+        "6d24634702ad8066"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "6d24634702ad8066",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/system/holiday/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/system/holiday/state\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/system/holiday/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3100,
+    "wires": [
+      [
+        "3a860a78fcd07b21"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "3a860a78fcd07b21",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/system/holiday/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3100,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "065ec1047fef1ec1",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[system] zara/android/domotica/system/sensore_portico/state",
+    "topic": "zara/android/domotica/system/sensore_portico/state",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3160,
+    "wires": [
+      [
+        "13f1af1134f3ad8e"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "13f1af1134f3ad8e",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/system/sensore_portico/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/system/sensore_portico/state\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/system/sensore_portico/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3160,
+    "wires": [
+      [
+        "bb27288255abe55d"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "bb27288255abe55d",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/system/sensore_portico/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3160,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "933e9970ad6b2163",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[system] zara/android/domotica/system/time_range/state",
+    "topic": "zara/android/domotica/system/time_range/state",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3220,
+    "wires": [
+      [
+        "ff5fd48e8d321321"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "ff5fd48e8d321321",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/system/time_range/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/system/time_range/state\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/system/time_range/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3220,
+    "wires": [
+      [
+        "e3af4537d1b95668"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "e3af4537d1b95668",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/system/time_range/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3220,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "4a3e343c2737258e",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[system] zara/domotics/porch_sensor",
+    "topic": "zara/domotics/porch_sensor",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3280,
+    "wires": [
+      [
+        "e5eb0ffeca62a3d4"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "e5eb0ffeca62a3d4",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/system/sensore_portico/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/porch_sensor\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/system/sensore_portico/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3280,
+    "wires": [
+      [
+        "986ef844b9fac2aa"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "986ef844b9fac2aa",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/system/sensore_portico/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3280,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "d2fe8074db3c665d",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[system] zara/domotics/time_range",
+    "topic": "zara/domotics/time_range",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3340,
+    "wires": [
+      [
+        "3b9af9027d77634b"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "3b9af9027d77634b",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/system/time_range/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/time_range\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/system/time_range/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3340,
+    "wires": [
+      [
+        "11562568993b340f"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "11562568993b340f",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/system/time_range/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3340,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "1dee01e9f3f60979",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] ${APP_BASE}/acsPufferTemp",
+    "topic": "${APP_BASE}/acsPufferTemp",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3400,
+    "wires": [
+      [
+        "0177bbfffeda0b6e"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "0177bbfffeda0b6e",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/acsPufferTemp",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/acsPufferTemp\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/acsPufferTemp\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3400,
+    "wires": [
+      [
+        "2bfd7fa0f003ecd9"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "2bfd7fa0f003ecd9",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/acsPufferTemp",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3400,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "587af956ff0a2d60",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] ${APP_BASE}/env/humBedroom",
+    "topic": "${APP_BASE}/env/humBedroom",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3460,
+    "wires": [
+      [
+        "93bed681a2521fd0"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "93bed681a2521fd0",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humBedroom",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/env/humBedroom\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humBedroom\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3460,
+    "wires": [
+      [
+        "526f653e5d0b43ce"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "526f653e5d0b43ce",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humBedroom",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3460,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "30b7831b028f6758",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] ${APP_BASE}/env/humLiving",
+    "topic": "${APP_BASE}/env/humLiving",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3520,
+    "wires": [
+      [
+        "a66d4b0944113eff"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "a66d4b0944113eff",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humLiving",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/env/humLiving\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humLiving\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3520,
+    "wires": [
+      [
+        "ca19170054b896c0"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "ca19170054b896c0",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humLiving",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3520,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "3b1319c0afb5e98e",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] ${APP_BASE}/env/humOutdoor",
+    "topic": "${APP_BASE}/env/humOutdoor",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3580,
+    "wires": [
+      [
+        "3820f9f7b222e562"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "3820f9f7b222e562",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humOutdoor",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/env/humOutdoor\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humOutdoor\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3580,
+    "wires": [
+      [
+        "db61fa6da49e6114"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "db61fa6da49e6114",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humOutdoor",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3580,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "bab4ff8c4981a602",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] ${APP_BASE}/env/tempBedroom",
+    "topic": "${APP_BASE}/env/tempBedroom",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3640,
+    "wires": [
+      [
+        "6cb61830692db104"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "6cb61830692db104",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/tempBedroom",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/env/tempBedroom\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/tempBedroom\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3640,
+    "wires": [
+      [
+        "c625628ce07dab5f"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "c625628ce07dab5f",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/tempBedroom",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3640,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "9eb28ecfe0cff859",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] ${APP_BASE}/env/tempLiving",
+    "topic": "${APP_BASE}/env/tempLiving",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3700,
+    "wires": [
+      [
+        "dccaf1c1cad2f946"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "dccaf1c1cad2f946",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/tempLiving",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/env/tempLiving\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/tempLiving\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3700,
+    "wires": [
+      [
+        "4d522d65b48c5e43"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "4d522d65b48c5e43",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/tempLiving",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3700,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "fdec41f252a7350b",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] ${APP_BASE}/env/tempOutdoor",
+    "topic": "${APP_BASE}/env/tempOutdoor",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3760,
+    "wires": [
+      [
+        "1053a3c10a0e88f6"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "1053a3c10a0e88f6",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/tempOutdoor",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/env/tempOutdoor\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/tempOutdoor\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3760,
+    "wires": [
+      [
+        "e7e0d3713016570d"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "e7e0d3713016570d",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/tempOutdoor",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3760,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "aa11ae986469529d",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] ${APP_BASE}/pufferAltoTemp",
+    "topic": "${APP_BASE}/pufferAltoTemp",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3820,
+    "wires": [
+      [
+        "9f918b625573591d"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "9f918b625573591d",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/pufferAltoTemp",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/pufferAltoTemp\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/pufferAltoTemp\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3820,
+    "wires": [
+      [
+        "88878b5fe8dc6990"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "88878b5fe8dc6990",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/pufferAltoTemp",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3820,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "724d2df4789890a3",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] ${APP_BASE}/pufferBassoTemp",
+    "topic": "${APP_BASE}/pufferBassoTemp",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3880,
+    "wires": [
+      [
+        "20b578a0d2e8554c"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "20b578a0d2e8554c",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/pufferBassoTemp",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"${APP_BASE}/pufferBassoTemp\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/pufferBassoTemp\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3880,
+    "wires": [
+      [
+        "83fcb2675cb55ff6"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "83fcb2675cb55ff6",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/pufferBassoTemp",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3880,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "4ec294a1f9de9abe",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] emon/resolDL2/sensor2",
+    "topic": "emon/resolDL2/sensor2",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 3940,
+    "wires": [
+      [
+        "4243c6081c41c984"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "4243c6081c41c984",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/pufferBassoTemp",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"emon/resolDL2/sensor2\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/pufferBassoTemp\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 3940,
+    "wires": [
+      [
+        "a2ec0318c5b88750"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "a2ec0318c5b88750",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/pufferBassoTemp",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 3940,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "ea5accd5b4927694",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] emon/resolDL2/sensor3",
+    "topic": "emon/resolDL2/sensor3",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4000,
+    "wires": [
+      [
+        "7d14e6e890c11d0f"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "7d14e6e890c11d0f",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/pufferAltoTemp",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"emon/resolDL2/sensor3\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/pufferAltoTemp\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4000,
+    "wires": [
+      [
+        "27771a172eff3c8a"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "27771a172eff3c8a",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/pufferAltoTemp",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4000,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "159aaaacd08773fc",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] emon/shellyACS/tempACS",
+    "topic": "emon/shellyACS/tempACS",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4060,
+    "wires": [
+      [
+        "b57417c3f6d08b92"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "b57417c3f6d08b92",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/acsPufferTemp",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"emon/shellyACS/tempACS\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/acsPufferTemp\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4060,
+    "wires": [
+      [
+        "d617bd6f933d0577"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "d617bd6f933d0577",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/acsPufferTemp",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4060,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "3c486c3dbed35324",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] zara/android/domotica/acsPufferTemp",
+    "topic": "zara/android/domotica/acsPufferTemp",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4120,
+    "wires": [
+      [
+        "9438761e9765d677"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "9438761e9765d677",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/acsPufferTemp",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/acsPufferTemp\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/acsPufferTemp\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4120,
+    "wires": [
+      [
+        "bcb775cad6305128"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "bcb775cad6305128",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/acsPufferTemp",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4120,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "e59bc82182487d1a",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] zara/android/domotica/env/humBedroom",
+    "topic": "zara/android/domotica/env/humBedroom",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4180,
+    "wires": [
+      [
+        "e2cbfa9f8392bcd7"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "e2cbfa9f8392bcd7",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humBedroom",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/env/humBedroom\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humBedroom\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4180,
+    "wires": [
+      [
+        "32f5416496d8bf0a"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "32f5416496d8bf0a",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humBedroom",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4180,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "378c0d458801e1a9",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] zara/android/domotica/env/humLiving",
+    "topic": "zara/android/domotica/env/humLiving",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4240,
+    "wires": [
+      [
+        "e3e31fb4baf7ff6a"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "e3e31fb4baf7ff6a",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humLiving",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/env/humLiving\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humLiving\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4240,
+    "wires": [
+      [
+        "a8a3b6fb824ac529"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "a8a3b6fb824ac529",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humLiving",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4240,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "9d2ea8f556536a2f",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] zara/android/domotica/env/humOutdoor",
+    "topic": "zara/android/domotica/env/humOutdoor",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4300,
+    "wires": [
+      [
+        "8079b4c5b29eddaf"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "8079b4c5b29eddaf",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/humOutdoor",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/env/humOutdoor\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/humOutdoor\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4300,
+    "wires": [
+      [
+        "df9c5adc5bd699a5"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "df9c5adc5bd699a5",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/humOutdoor",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4300,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "030a8c8ec205ae5b",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] zara/android/domotica/env/tempBedroom",
+    "topic": "zara/android/domotica/env/tempBedroom",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4360,
+    "wires": [
+      [
+        "4458845576c282fe"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "4458845576c282fe",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/tempBedroom",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/env/tempBedroom\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/tempBedroom\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4360,
+    "wires": [
+      [
+        "ea41f756dc672697"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "ea41f756dc672697",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/tempBedroom",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4360,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "865776906e1d81f1",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] zara/android/domotica/env/tempLiving",
+    "topic": "zara/android/domotica/env/tempLiving",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4420,
+    "wires": [
+      [
+        "c5a2f5e490cb77d2"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "c5a2f5e490cb77d2",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/tempLiving",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/env/tempLiving\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/tempLiving\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4420,
+    "wires": [
+      [
+        "14923155171a2c95"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "14923155171a2c95",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/tempLiving",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4420,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "5e7405ce5d2fda5f",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] zara/android/domotica/env/tempOutdoor",
+    "topic": "zara/android/domotica/env/tempOutdoor",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4480,
+    "wires": [
+      [
+        "e19c3390282e6fc7"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "e19c3390282e6fc7",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/env/tempOutdoor",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/env/tempOutdoor\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/env/tempOutdoor\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4480,
+    "wires": [
+      [
+        "6e703ddadd6cd12c"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "6e703ddadd6cd12c",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/env/tempOutdoor",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4480,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "47332e302e08ba60",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] zara/android/domotica/pufferAltoTemp",
+    "topic": "zara/android/domotica/pufferAltoTemp",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4540,
+    "wires": [
+      [
+        "7755ea4a77d61b11"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "7755ea4a77d61b11",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/pufferAltoTemp",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/pufferAltoTemp\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/pufferAltoTemp\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4540,
+    "wires": [
+      [
+        "6bd4b023f7957c74"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "6bd4b023f7957c74",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/pufferAltoTemp",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4540,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "b86f5b5613031b60",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] zara/android/domotica/pufferBassoTemp",
+    "topic": "zara/android/domotica/pufferBassoTemp",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4600,
+    "wires": [
+      [
+        "46c21babba6d86cf"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "46c21babba6d86cf",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/pufferBassoTemp",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/pufferBassoTemp\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/pufferBassoTemp\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4600,
+    "wires": [
+      [
+        "afc2c233446a04c7"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "afc2c233446a04c7",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/pufferBassoTemp",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4600,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "20e1d92452dd3b74",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[unclassified] zara/domotics/modalitavacanza",
+    "topic": "zara/domotics/modalitavacanza",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4660,
+    "wires": [
+      [
+        "264fe20045c4dc3f"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "264fe20045c4dc3f",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/system/holiday/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/domotics/modalitavacanza\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/system/holiday/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4660,
+    "wires": [
+      [
+        "ce4ead0bd79576ef"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "ce4ead0bd79576ef",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/system/holiday/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4660,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "6483afa241eb1120",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[vmc] alexa/vmc",
+    "topic": "alexa/vmc",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4720,
+    "wires": [
+      [
+        "aa9737cebf522265"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "aa9737cebf522265",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/vmc/speed/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"alexa/vmc\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/vmc/speed/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4720,
+    "wires": [
+      [
+        "67a54113344bf94f"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "67a54113344bf94f",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/vmc/speed/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4720,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "98fb567005a37311",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[vmc] zara/android/domotica/vmc/([^/]+",
+    "topic": "zara/android/domotica/vmc/([^/]+",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4780,
+    "wires": [
+      [
+        "201cb614fe925aa2"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "201cb614fe925aa2",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/vmc/([^/]+",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/vmc/([^/]+\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/vmc/([^/]+\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4780,
+    "wires": [
+      [
+        "da2e19404cb729d6"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "da2e19404cb729d6",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/vmc/([^/]+",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4780,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "e8e3aeddda1debaa",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[vmc] zara/android/domotica/vmc/maxNightSpeed/state",
+    "topic": "zara/android/domotica/vmc/maxNightSpeed/state",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4840,
+    "wires": [
+      [
+        "2db391a5fa04e641"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "2db391a5fa04e641",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/vmc/maxNightSpeed/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/vmc/maxNightSpeed/state\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/vmc/maxNightSpeed/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4840,
+    "wires": [
+      [
+        "8746ce93d4c8362c"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "8746ce93d4c8362c",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/vmc/maxNightSpeed/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4840,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "f85cedc38f3c8e9a",
+    "type": "mqtt in",
+    "z": "d9427ce27a49a151",
+    "name": "[vmc] zara/android/domotica/vmc/speed/state",
+    "topic": "zara/android/domotica/vmc/speed/state",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "90fc8f0be01f1aa0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 180,
+    "y": 4900,
+    "wires": [
+      [
+        "2c90b8abd4d84963"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "2c90b8abd4d84963",
+    "type": "function",
+    "z": "d9427ce27a49a151",
+    "name": "Guard + map → zara/android/domotica/v2/vmc/speed/state",
+    "func": "const CANARY_BASE = \"zara/android/domotica/v2\";\nconst SOURCE_TOPIC = \"zara/android/domotica/vmc/speed/state\";\nconst DESTINATION_TOPIC = \"zara/android/domotica/v2/vmc/speed/state\";\n\nif (typeof msg.topic !== 'string') {\n    node.warn('Topic sorgente mancante');\n    return null;\n}\nif (msg.topic.startsWith(CANARY_BASE + '/')) {\n    node.warn('Loop canary bloccato: ' + msg.topic);\n    return null;\n}\nif (msg.topic !== SOURCE_TOPIC) {\n    node.warn('Topic inatteso bloccato: ' + msg.topic);\n    return null;\n}\nmsg.domoticsai = {\n    bridge: 'v2-readonly-canary',\n    sourceTopic: SOURCE_TOPIC,\n    observedAt: new Date().toISOString()\n};\nmsg.topic = DESTINATION_TOPIC;\nreturn msg;\n",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 4900,
+    "wires": [
+      [
+        "e32fa3cdfc4f7ba5"
+      ]
+    ],
+    "d": true
+  },
+  {
+    "id": "e32fa3cdfc4f7ba5",
+    "type": "mqtt out",
+    "z": "d9427ce27a49a151",
+    "name": "zara/android/domotica/v2/vmc/speed/state",
+    "topic": "",
+    "qos": "0",
+    "retain": "true",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "90fc8f0be01f1aa0",
+    "x": 850,
+    "y": 4900,
+    "wires": [],
+    "d": true
+  },
+  {
+    "id": "a93962662bc74778",
+    "type": "comment",
+    "z": "d9427ce27a49a151",
+    "name": "Generation metadata",
+    "info": "{\n  \"generator\": \"generate_readonly_bridge_flow.py\",\n  \"mode\": \"READ_ONLY_CANARY\",\n  \"canaryBaseTopic\": \"zara/android/domotica/v2\",\n  \"generatedMappings\": 81,\n  \"allOperationalNodesDisabled\": true,\n  \"hardwareCommandsEnabled\": false\n}",
+    "x": 250,
+    "y": 4980,
+    "wires": []
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "flow": "gateway/flows/bridge-v2-readonly-disabled.json",
+  "canaryBase": "zara/android/domotica/v2",
+  "errors": 0,
+  "warnings": 0,
+  "findings": []
+}

@@ -1,0 +1,1378 @@
+{
+  "version": "1.0.0-draft",
+  "mode": "READ_ONLY_CANARY",
+  "productionBaseTopic": "zara/android/domotica",
+  "canaryBaseTopic": "zara/android/domotica/v2",
+  "sourceBrokers": {
+    "domotics": {
+      "host": "192.168.1.20",
+      "port": 1883
+    },
+    "telemetry": {
+      "host": "192.168.1.15",
+      "port": 1883
+    }
+  },
+  "safety": {
+    "hardwareCommandsEnabled": false,
+    "subscribeToCanaryCommands": false,
+    "publishOnlyUnderCanaryBaseTopic": true,
+    "allowDynamicPublishTopics": false,
+    "allowRetainedStates": true,
+    "allowRetainedCommands": false
+  },
+  "subscriptions": [
+    {
+      "domain": "climate",
+      "sourceTopic": "${APP_BASE}/env/humidexBedroom",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humidexBedroom",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humidexBedroom",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "${APP_BASE}/env/humidexLiving",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humidexLiving",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humidexLiving",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "casa/clima/stat/vmc_max_notte",
+      "sourceBroker": null,
+      "destinationSuffix": "vmc/maxNightSpeed/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/vmc/maxNightSpeed/state",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "6bf7b6d43cfb3fc3 ; Outbound Router Settaggi",
+      "status": "KEEP_AS_STATE"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "casa/clima/stato_completo",
+      "sourceBroker": "192.168.1.20:1883",
+      "destinationSuffix": "casa/clima/stato_completo",
+      "destinationTopicTemplate": "${canaryBaseTopic}/casa/clima/stato_completo",
+      "payload": "json_object",
+      "retain": "true",
+      "occurrences": 4,
+      "nodes": "Ascolto Stato AI e TRV ; Outbound Router Termostati ; Outbound Router VMC ; fe21b464ce170529",
+      "status": "READ_ONLY_PRIMARY"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "emon/cameraMatrimoniale/humidex",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humidexBedroom",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humidexBedroom",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "Gateway Ambienti ; f22c31479e1b1d5b",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "emon/cameraMatrimoniale/humidity",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humBedroom",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humBedroom",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "emon/cameraMatrimoniale/temperature",
+      "sourceBroker": null,
+      "destinationSuffix": "env/tempBedroom",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/tempBedroom",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "emon/emonth5/humidex",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humidexLiving",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humidexLiving",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "Gateway Ambienti ; humidex living",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "emon/emonth5/humidity",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humLiving",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humLiving",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "Gateway Ambienti ; MQTT humidity living",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "emon/emonth5/temperature_calibrated",
+      "sourceBroker": "192.168.1.15:1883",
+      "destinationSuffix": "env/tempLiving",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/tempLiving",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "Gateway Ambienti ; MQTT temperatura living",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "zara/android/domotica/env/humidexBedroom",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humidexBedroom",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humidexBedroom",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "zara/android/domotica/env/humidexLiving",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humidexLiving",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humidexLiving",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "zara/android/domotica/system/ac_auto/state",
+      "sourceBroker": null,
+      "destinationSuffix": "system/ac_auto/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/system/ac_auto/state",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Outbound Router Settaggi",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "zara/android/domotica/thermostat/${targetRoom}/target/state",
+      "sourceBroker": null,
+      "destinationSuffix": "thermostat/${targetRoom}/target/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/thermostat/${targetRoom}/target/state",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Outbound Router Termostati",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "climate",
+      "sourceTopic": "zara/android/domotica/thermostat/([^/]+",
+      "sourceBroker": null,
+      "destinationSuffix": "thermostat/([^/]+",
+      "destinationTopicTemplate": "${canaryBaseTopic}/thermostat/([^/]+",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Inbound Router Termostati",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "${APP_BASE}/energy/battery",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/battery",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/battery",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "${APP_BASE}/energy/consumption",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/consumption",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/consumption",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "${APP_BASE}/energy/grid",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/grid",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/grid",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "${APP_BASE}/energy/production",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/production",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/production",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "${APP_BASE}/energy/surplus",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/surplus",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/surplus",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "TeslaPowerwall/SOE",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/battery",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/battery",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "Gateway Energia ; MQTT SOC Batt",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "TeslaPowerwall/load_instant_power",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/consumption",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/consumption",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "Gateway Energia ; MQTT Potenza Casa (Load W)",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "TeslaPowerwall/site_instant_power",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/grid",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/grid",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "Gateway Energia ; MQTT Potenza Produzione FV (FV W)",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "TeslaPowerwall/solar_instant_power",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/production",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/production",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "Gateway Energia ; MQTT Potenza Produzione FV (FV W)",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "zara/android/domotica/energy/battery",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/battery",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/battery",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "zara/android/domotica/energy/consumption",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/consumption",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/consumption",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "zara/android/domotica/energy/grid",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/grid",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/grid",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "zara/android/domotica/energy/production",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/production",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/production",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "energy",
+      "sourceTopic": "zara/android/domotica/energy/surplus",
+      "sourceBroker": null,
+      "destinationSuffix": "energy/surplus",
+      "destinationTopicTemplate": "${canaryBaseTopic}/energy/surplus",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "fireplace",
+      "sourceTopic": "emon/focolare/powerraw",
+      "sourceBroker": null,
+      "destinationSuffix": "casa/stufa/stat/potenza",
+      "destinationTopicTemplate": "${canaryBaseTopic}/casa/stufa/stat/potenza",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "8022e945f076fa2f ; Ponte Traduttore Caminetto",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "fireplace",
+      "sourceTopic": "zara/android/domotica/casa/stufa/stat/acceso",
+      "sourceBroker": null,
+      "destinationSuffix": "casa/stufa/stat/acceso",
+      "destinationTopicTemplate": "${canaryBaseTopic}/casa/stufa/stat/acceso",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Ponte Traduttore Caminetto",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "fireplace",
+      "sourceTopic": "zara/android/domotica/casa/stufa/stat/modalita",
+      "sourceBroker": null,
+      "destinationSuffix": "casa/stufa/stat/modalita",
+      "destinationTopicTemplate": "${canaryBaseTopic}/casa/stufa/stat/modalita",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Ponte Traduttore Caminetto",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "fireplace",
+      "sourceTopic": "zara/android/domotica/casa/stufa/stat/potenza",
+      "sourceBroker": null,
+      "destinationSuffix": "casa/stufa/stat/potenza",
+      "destinationTopicTemplate": "${canaryBaseTopic}/casa/stufa/stat/potenza",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Ponte Traduttore Caminetto",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "fireplace",
+      "sourceTopic": "zara/domotics/palazzetti/#",
+      "sourceBroker": "192.168.1.15:1883",
+      "destinationSuffix": "casa/stufa/stat/#",
+      "destinationTopicTemplate": "${canaryBaseTopic}/casa/stufa/stat/#",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "zara/domotics/palazzetti/#",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "history",
+      "sourceTopic": "zara/android/domotica/history/ac/response",
+      "sourceBroker": null,
+      "destinationSuffix": "history/ac/response",
+      "destinationTopicTemplate": "${canaryBaseTopic}/history/ac/response",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Formatta Response App",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/android/domotica/light/${targetDevice}/state",
+      "sourceBroker": null,
+      "destinationSuffix": "light/${targetDevice}/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/light/${targetDevice}/state",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Outbound Router Luci",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/android/domotica/light/([^/]+",
+      "sourceBroker": null,
+      "destinationSuffix": "light/([^/]+",
+      "destinationTopicTemplate": "${canaryBaseTopic}/light/([^/]+",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Inbound Router Luci",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/android/domotica/system/luci_eco/state",
+      "sourceBroker": null,
+      "destinationSuffix": "system/luci_eco/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/system/luci_eco/state",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Outbound Router Settaggi",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/android/domotica/system/luci_piscina_auto/state",
+      "sourceBroker": null,
+      "destinationSuffix": "system/luci_piscina_auto/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/system/luci_piscina_auto/state",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Outbound Router Settaggi",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/domotics/lights/livinglamp",
+      "sourceBroker": null,
+      "destinationSuffix": "light/sala/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/light/sala/state",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "Outbound Router Luci ; b49453f6cdbbab3d",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/domotics/lights/poolfloor",
+      "sourceBroker": null,
+      "destinationSuffix": "light/luciPedanaPiscina/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/light/luciPedanaPiscina/state",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "3174da2bdd10ea30 ; Outbound Router Luci",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/domotics/lights/poollight",
+      "sourceBroker": null,
+      "destinationSuffix": "light/luciPiscina/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/light/luciPiscina/state",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "Outbound Router Luci ; c5fbbdc4bdf7fbe0",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/domotics/lights/poolpump",
+      "sourceBroker": null,
+      "destinationSuffix": "light/pompaPiscina/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/light/pompaPiscina/state",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "04eee2d096fc8523 ; Outbound Router Luci",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/domotics/lights/poolskimmer",
+      "sourceBroker": null,
+      "destinationSuffix": "light/skimmerPiscina/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/light/skimmerPiscina/state",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "3f8fefa8f0d98ffd ; Outbound Router Luci",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/domotics/lights/readinglight",
+      "sourceBroker": null,
+      "destinationSuffix": "light/tavolinoLettura/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/light/tavolinoLettura/state",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "5d2d6ba3ad4c3262 ; Outbound Router Luci",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/domotics/lights/shelflamp",
+      "sourceBroker": null,
+      "destinationSuffix": "light/libreria/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/light/libreria/state",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "8e3fcbfc031083cc ; Outbound Router Luci",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/domotics/lights/tvlamp",
+      "sourceBroker": null,
+      "destinationSuffix": "light/televisione/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/light/televisione/state",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "Outbound Router Luci ; f169b915a19f8af6",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/domotics/luciECO",
+      "sourceBroker": "192.168.1.20:1883",
+      "destinationSuffix": "system/luci_eco/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/system/luci_eco/state",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 3,
+      "nodes": "Outbound Router Settaggi ; b51bd73002b7f88b ; c698d126b68e11f8",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "lights",
+      "sourceTopic": "zara/domotics/luciPiscinaAuto",
+      "sourceBroker": "192.168.1.20:1883",
+      "destinationSuffix": "system/luci_piscina_auto/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/system/luci_piscina_auto/state",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 3,
+      "nodes": "3bfeb435fb6e3132 ; 5b7675e55cbc4b81 ; Outbound Router Settaggi",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "system",
+      "sourceTopic": "zara/android/domotica/system/enabled/state",
+      "sourceBroker": null,
+      "destinationSuffix": "system/enabled/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/system/enabled/state",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Inbound Router Settaggi",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "system",
+      "sourceTopic": "zara/android/domotica/system/holiday/state",
+      "sourceBroker": null,
+      "destinationSuffix": "system/holiday/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/system/holiday/state",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Outbound Router Settaggi",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "system",
+      "sourceTopic": "zara/android/domotica/system/sensore_portico/state",
+      "sourceBroker": null,
+      "destinationSuffix": "system/sensore_portico/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/system/sensore_portico/state",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Outbound Router Settaggi",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "system",
+      "sourceTopic": "zara/android/domotica/system/time_range/state",
+      "sourceBroker": null,
+      "destinationSuffix": "system/time_range/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/system/time_range/state",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Outbound Router Settaggi",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "system",
+      "sourceTopic": "zara/domotics/porch_sensor",
+      "sourceBroker": null,
+      "destinationSuffix": "system/sensore_portico/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/system/sensore_portico/state",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 3,
+      "nodes": "Outbound Router Settaggi ; d073880643e29f9e ; fc0ba16b2241adf1",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "system",
+      "sourceTopic": "zara/domotics/time_range",
+      "sourceBroker": null,
+      "destinationSuffix": "system/time_range/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/system/time_range/state",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "2b99835ee36a758d ; Outbound Router Settaggi",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "${APP_BASE}/acsPufferTemp",
+      "sourceBroker": null,
+      "destinationSuffix": "acsPufferTemp",
+      "destinationTopicTemplate": "${canaryBaseTopic}/acsPufferTemp",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "${APP_BASE}/env/humBedroom",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humBedroom",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humBedroom",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "${APP_BASE}/env/humLiving",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humLiving",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humLiving",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "${APP_BASE}/env/humOutdoor",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humOutdoor",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humOutdoor",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "${APP_BASE}/env/tempBedroom",
+      "sourceBroker": null,
+      "destinationSuffix": "env/tempBedroom",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/tempBedroom",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "${APP_BASE}/env/tempLiving",
+      "sourceBroker": null,
+      "destinationSuffix": "env/tempLiving",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/tempLiving",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "${APP_BASE}/env/tempOutdoor",
+      "sourceBroker": null,
+      "destinationSuffix": "env/tempOutdoor",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/tempOutdoor",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "${APP_BASE}/pufferAltoTemp",
+      "sourceBroker": null,
+      "destinationSuffix": "pufferAltoTemp",
+      "destinationTopicTemplate": "${canaryBaseTopic}/pufferAltoTemp",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "${APP_BASE}/pufferBassoTemp",
+      "sourceBroker": null,
+      "destinationSuffix": "pufferBassoTemp",
+      "destinationTopicTemplate": "${canaryBaseTopic}/pufferBassoTemp",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "emon/resolDL2/sensor2",
+      "sourceBroker": null,
+      "destinationSuffix": "pufferBassoTemp",
+      "destinationTopicTemplate": "${canaryBaseTopic}/pufferBassoTemp",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "Gateway Energia ; efe270ec96f87af7",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "emon/resolDL2/sensor3",
+      "sourceBroker": null,
+      "destinationSuffix": "pufferAltoTemp",
+      "destinationTopicTemplate": "${canaryBaseTopic}/pufferAltoTemp",
+      "payload": "number",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "0b370faa3935fe88 ; Gateway Energia",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "emon/shellyACS/tempACS",
+      "sourceBroker": null,
+      "destinationSuffix": "acsPufferTemp",
+      "destinationTopicTemplate": "${canaryBaseTopic}/acsPufferTemp",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "8c0fe215629e8f46 ; Gateway Energia",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "zara/android/domotica/acsPufferTemp",
+      "sourceBroker": null,
+      "destinationSuffix": "acsPufferTemp",
+      "destinationTopicTemplate": "${canaryBaseTopic}/acsPufferTemp",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "zara/android/domotica/env/humBedroom",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humBedroom",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humBedroom",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "zara/android/domotica/env/humLiving",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humLiving",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humLiving",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "zara/android/domotica/env/humOutdoor",
+      "sourceBroker": null,
+      "destinationSuffix": "env/humOutdoor",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/humOutdoor",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "zara/android/domotica/env/tempBedroom",
+      "sourceBroker": null,
+      "destinationSuffix": "env/tempBedroom",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/tempBedroom",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "zara/android/domotica/env/tempLiving",
+      "sourceBroker": null,
+      "destinationSuffix": "env/tempLiving",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/tempLiving",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "zara/android/domotica/env/tempOutdoor",
+      "sourceBroker": null,
+      "destinationSuffix": "env/tempOutdoor",
+      "destinationTopicTemplate": "${canaryBaseTopic}/env/tempOutdoor",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Ambienti",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "zara/android/domotica/pufferAltoTemp",
+      "sourceBroker": null,
+      "destinationSuffix": "pufferAltoTemp",
+      "destinationTopicTemplate": "${canaryBaseTopic}/pufferAltoTemp",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "zara/android/domotica/pufferBassoTemp",
+      "sourceBroker": null,
+      "destinationSuffix": "pufferBassoTemp",
+      "destinationTopicTemplate": "${canaryBaseTopic}/pufferBassoTemp",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Gateway Energia",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "sourceTopic": "zara/domotics/modalitavacanza",
+      "sourceBroker": "192.168.1.20:1883",
+      "destinationSuffix": "system/holiday/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/system/holiday/state",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 3,
+      "nodes": "1d09b533095d68c1 ; 28256464972b2329 ; Outbound Router Settaggi",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "vmc",
+      "sourceTopic": "alexa/vmc",
+      "sourceBroker": null,
+      "destinationSuffix": "vmc/speed/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/vmc/speed/state",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 2,
+      "nodes": "App -> Target VMC ; Outbound Router VMC",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "vmc",
+      "sourceTopic": "zara/android/domotica/vmc/([^/]+",
+      "sourceBroker": null,
+      "destinationSuffix": "vmc/([^/]+",
+      "destinationTopicTemplate": "${canaryBaseTopic}/vmc/([^/]+",
+      "payload": "unknown",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Inbound Router VMC",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "vmc",
+      "sourceTopic": "zara/android/domotica/vmc/maxNightSpeed/state",
+      "sourceBroker": null,
+      "destinationSuffix": "vmc/maxNightSpeed/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/vmc/maxNightSpeed/state",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Inbound Router Settaggi",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "vmc",
+      "sourceTopic": "zara/android/domotica/vmc/speed/state",
+      "sourceBroker": null,
+      "destinationSuffix": "vmc/speed/state",
+      "destinationTopicTemplate": "${canaryBaseTopic}/vmc/speed/state",
+      "payload": "normalized_scalar",
+      "retain": "true",
+      "occurrences": 1,
+      "nodes": "Outbound Router VMC",
+      "status": "CURRENT_APP_NAMESPACE"
+    }
+  ],
+  "excluded": [
+    {
+      "domain": "climate",
+      "role": "COMMAND",
+      "topic": "casa/clima/cmnd/AI_climate_enabling",
+      "status": "MIGRATE_TO_JSON"
+    },
+    {
+      "domain": "climate",
+      "role": "COMMAND",
+      "topic": "casa/clima/cmnd/vmc_max_notte",
+      "status": "KEEP_AS_COMMAND"
+    },
+    {
+      "domain": "climate",
+      "role": "COMMAND",
+      "topic": "zara/android/domotica/system/ac_auto/set",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "climate",
+      "role": "READ_ONLY",
+      "topic": "/thermostat/",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "climate",
+      "role": "READ_ONLY",
+      "topic": "^${baseTopic}/thermostat/([^/]+)/target/set$",
+      "status": "REGEX_ROUTE"
+    },
+    {
+      "domain": "climate",
+      "role": "READ_ONLY",
+      "topic": "zara/domotics/ACAuto",
+      "status": "DISTINCT_SEMANTICS"
+    },
+    {
+      "domain": "fireplace",
+      "role": "COMMAND",
+      "topic": "/command",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "fireplace",
+      "role": "COMMAND",
+      "topic": "alexa/caminetto/command",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "fireplace",
+      "role": "READ_ONLY",
+      "topic": "/",
+      "status": "DYNAMIC_TOPIC"
+    },
+    {
+      "domain": "fireplace",
+      "role": "READ_ONLY",
+      "topic": "/esp8266/palazzetti",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "fireplace",
+      "role": "READ_ONLY",
+      "topic": "/getstatus",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "fireplace",
+      "role": "READ_ONLY",
+      "topic": "/hello",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "fireplace",
+      "role": "READ_ONLY",
+      "topic": "/log/message",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "fireplace",
+      "role": "READ_ONLY",
+      "topic": "/power",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "fireplace",
+      "role": "READ_ONLY",
+      "topic": "alexa/caminetto",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "fireplace",
+      "role": "READ_ONLY",
+      "topic": "alexa/caminetto/power",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "fireplace",
+      "role": "READ_ONLY",
+      "topic": "zara/android/domotica",
+      "status": "DYNAMIC_TOPIC"
+    },
+    {
+      "domain": "fireplace",
+      "role": "READ_ONLY",
+      "topic": "zara/domotics/palazzetti/",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "fireplace",
+      "role": "READ_ONLY",
+      "topic": "zara/domotics/palazzetti/set/modalita",
+      "status": "LEGACY_MAP"
+    },
+    {
+      "domain": "history",
+      "role": "READ_ONLY",
+      "topic": "/history/ac/request",
+      "status": "LOCAL_SERVICE"
+    },
+    {
+      "domain": "lights",
+      "role": "COMMAND",
+      "topic": "/scene/set",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "lights",
+      "role": "COMMAND",
+      "topic": "/set",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "lights",
+      "role": "COMMAND",
+      "topic": "shellies/shelly1-esterno/relay/0/command",
+      "status": "OBSOLETE"
+    },
+    {
+      "domain": "lights",
+      "role": "COMMAND",
+      "topic": "zara/android/domotica/scene/set",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "lights",
+      "role": "COMMAND",
+      "topic": "zara/android/domotica/system/luci_eco/set",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "lights",
+      "role": "COMMAND",
+      "topic": "zara/android/domotica/system/luci_piscina_auto/set",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "lights",
+      "role": "COMMAND",
+      "topic": "zigbee2mqtt/Luce_Cucina/set",
+      "status": "OBSOLETE"
+    },
+    {
+      "domain": "lights",
+      "role": "READ_ONLY",
+      "topic": "/light/",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "lights",
+      "role": "READ_ONLY",
+      "topic": "/scene/",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "lights",
+      "role": "READ_ONLY",
+      "topic": "^${baseTopic}/light/([^/]+)/set$",
+      "status": "REGEX_ROUTE"
+    },
+    {
+      "domain": "lights",
+      "role": "READ_ONLY",
+      "topic": "shellies/shelly1-771284/relay/0",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "lights",
+      "role": "READ_ONLY",
+      "topic": "shellies/shelly1-B8C284/relay/0",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "lights",
+      "role": "READ_ONLY",
+      "topic": "shellies/shelly1-B92AF0/relay/0",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "lights",
+      "role": "READ_ONLY",
+      "topic": "shellies/shelly1-esterno",
+      "status": "OBSOLETE"
+    },
+    {
+      "domain": "lights",
+      "role": "READ_ONLY",
+      "topic": "zara/android/domotica",
+      "status": "DYNAMIC_TOPIC"
+    },
+    {
+      "domain": "lights",
+      "role": "READ_ONLY",
+      "topic": "zigbee2mqtt/Luce_Cucina",
+      "status": "OBSOLETE"
+    },
+    {
+      "domain": "lights",
+      "role": "READ_ONLY",
+      "topic": "zigbee2mqtt/Luce_Libreria",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "system",
+      "role": "COMMAND",
+      "topic": "zara/android/domotica/system/holiday/set",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "system",
+      "role": "COMMAND",
+      "topic": "zara/android/domotica/system/sensore_portico/set",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "system",
+      "role": "COMMAND",
+      "topic": "zara/android/domotica/system/set",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "system",
+      "role": "COMMAND",
+      "topic": "zara/android/domotica/system/time_range/set",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "unclassified",
+      "role": "COMMAND",
+      "topic": "/maxNightSpeed/set",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "unclassified",
+      "role": "COMMAND",
+      "topic": "zara/domotics/AC/command",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "unclassified",
+      "role": "COMMAND",
+      "topic": "zigbee2mqtt/Termostato_Bagnetto/set",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "unclassified",
+      "role": "COMMAND",
+      "topic": "zigbee2mqtt/Termostato_Bagno/set",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "unclassified",
+      "role": "READ_ONLY",
+      "topic": "",
+      "status": "DYNAMIC_TOPIC"
+    },
+    {
+      "domain": "unclassified",
+      "role": "READ_ONLY",
+      "topic": "/#",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "unclassified",
+      "role": "READ_ONLY",
+      "topic": "emon/resolDL2/sensor1",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "unclassified",
+      "role": "READ_ONLY",
+      "topic": "shellies/shelly1-771284/relay/0",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "unclassified",
+      "role": "READ_ONLY",
+      "topic": "shellies/shelly1-B8C284/relay/0",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "unclassified",
+      "role": "READ_ONLY",
+      "topic": "shellies/shelly1-B92AF0/relay/0",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "unclassified",
+      "role": "READ_ONLY",
+      "topic": "zara/android/domotica",
+      "status": "DYNAMIC_TOPIC"
+    },
+    {
+      "domain": "unclassified",
+      "role": "READ_ONLY",
+      "topic": "zigbee2mqtt/+",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "unclassified",
+      "role": "READ_ONLY",
+      "topic": "zigbee2mqtt/Sonoff AirGuard TH camera matrimoniale",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "unclassified",
+      "role": "READ_ONLY",
+      "topic": "zigbee2mqtt/Sonoff AirGuard TH esterno cucina",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "unclassified",
+      "role": "READ_ONLY",
+      "topic": "zigbee2mqtt/TU-cucinaEsterno",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "unclassified",
+      "role": "STATE",
+      "topic": "zigbee2mqtt/Termostato_Bagnetto",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "unclassified",
+      "role": "STATE",
+      "topic": "zigbee2mqtt/Termostato_Bagno",
+      "status": "PHYSICAL_TOPIC"
+    },
+    {
+      "domain": "vmc",
+      "role": "COMMAND",
+      "topic": "zara/android/domotica/vmc/maxNightSpeed/set",
+      "status": "CURRENT_APP_NAMESPACE"
+    },
+    {
+      "domain": "vmc",
+      "role": "READ_ONLY",
+      "topic": "/esp8266/brink/fanspeed",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "vmc",
+      "role": "READ_ONLY",
+      "topic": "/vmc/",
+      "status": "MANUAL_REVIEW"
+    },
+    {
+      "domain": "vmc",
+      "role": "READ_ONLY",
+      "topic": "^${baseTopic}/vmc/([^/]+)/set$",
+      "status": "REGEX_ROUTE"
+    },
+    {
+      "domain": "vmc",
+      "role": "READ_ONLY",
+      "topic": "zara/android/domotica",
+      "status": "DYNAMIC_TOPIC"
+    }
+  ]
+}
