@@ -14,3 +14,6 @@ __all__ = [
     "RegistryValidationError",
     "load_registry",
 ]
+
+# Public Registry Service API (ADR-019)
+from .service import RegistryService, RegistryTopics
