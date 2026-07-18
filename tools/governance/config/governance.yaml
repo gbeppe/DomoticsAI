@@ -1,0 +1,25 @@
+toolkit: {name: DomoticsAI Governance Toolkit, version: 0.2.0, deterministic: true, destructive_actions: false}
+repository: {default_output_directory: docs/Governance}
+ignore:
+  names: [.git, .gradle, .idea, .pytest_cache, __pycache__, build, dist, node_modules, venv, .venv]
+classification:
+  generated_markers: [.egg-info/, /generated/, /build/, /dist/]
+  runtime_markers: [.logs/, .captures/, /logs/, .pid, .log]
+domains:
+  default: Repository
+  path_rules:
+    - {domain: Governance, prefixes: [tools/governance, tests/governance, docs/Governance]}
+    - {domain: Core Engine, prefixes: [core, core-engine, services/core]}
+    - {domain: Gateway, prefixes: [gateway, node-red, flows]}
+    - {domain: Android, prefixes: [android, app]}
+    - {domain: Registry, prefixes: [registry, docs/Registry]}
+    - {domain: Architecture, prefixes: [docs/Architecture, architecture]}
+    - {domain: Contracts, prefixes: [contracts, docs/Contracts]}
+    - {domain: Testing, prefixes: [tests]}
+    - {domain: Documentation, prefixes: [docs]}
+    - {domain: DevOps, prefixes: [.github, scripts, docker, infra]}
+    - {domain: Project Governance, prefixes: [project, docs/Project]}
+    - {domain: Assets, prefixes: [assets, docs/assets]}
+    - {domain: Design, prefixes: [design, docs/Design]}
+rules:
+  thin_document: {minimum_lines: 8}

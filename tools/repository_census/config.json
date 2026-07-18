@@ -1,0 +1,23 @@
+{
+  "ignored_directories": [".git", ".gradle", ".idea", ".pytest_cache", ".venv", "venv", "__pycache__", "build", "dist", "node_modules"],
+  "ignored_files": [".DS_Store"],
+  "domain_rules": [
+    ["core-engine/", "Core Engine", "Core"],
+    ["android/", "Android", "Android"],
+    ["gateway/", "Gateway", "Gateway"],
+    ["nodered/", "Gateway", "Gateway"],
+    ["config/registry/", "Registry", "Registry"],
+    ["docs/Registry/", "Registry", "Registry"],
+    ["docs/ADR/", "Architecture", "Architecture"],
+    ["docs/Architecture/", "Architecture", "Architecture"],
+    ["docs/AI/", "AI", "AI"],
+    ["docs/MQTT/", "Contracts", "Architecture"],
+    ["docs/NodeRED/", "Gateway", "Gateway"],
+    ["docs/", "Documentation", "Documentation"],
+    ["scripts/", "DevOps", "DevOps"],
+    ["tools/", "Tooling", "Architecture"],
+    ["tests/", "Testing", "QA"],
+    ["test/", "Testing", "QA"],
+    ["config/", "Configuration", "Architecture"]
+  ]
+}
