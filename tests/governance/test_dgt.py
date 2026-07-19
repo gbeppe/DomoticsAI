@@ -1,6 +1,6 @@
 from pathlib import Path
 from tools.governance.governance import main
-from tools.governance.repository_census.engine import category,domain
+from tools.governance.repository_census.classification import category, domain
 def test_category_and_domain():
  c={'classification':{'generated_markers':['.egg-info/'],'runtime_markers':['.logs/']}}
  assert category(Path('docs/README.md'),c)=='Documentation'
