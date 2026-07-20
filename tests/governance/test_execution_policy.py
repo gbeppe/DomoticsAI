@@ -2,7 +2,12 @@ from dataclasses import FrozenInstanceError
 
 import pytest
 
-from tools.governance.execution import ExecutionMode, ExecutionPolicy
+from tools.governance.execution import (
+    ExecutionMode,
+    ExecutionPolicy,
+    ExitCodeStrategy,
+    ExitPolicy,
+)
 
 
 @pytest.mark.parametrize(
@@ -14,6 +19,9 @@ from tools.governance.execution import ExecutionMode, ExecutionPolicy
                 generate_reports=True,
                 fail_on_findings=False,
                 verbose_output=False,
+                exit_policy=ExitPolicy(
+                    strategy=ExitCodeStrategy.SUCCESS,
+                ),
             ),
         ),
         (
@@ -22,6 +30,9 @@ from tools.governance.execution import ExecutionMode, ExecutionPolicy
                 generate_reports=False,
                 fail_on_findings=True,
                 verbose_output=False,
+                exit_policy=ExitPolicy(
+                    strategy=ExitCodeStrategy.FAIL_ON_FINDINGS,
+                ),
             ),
         ),
         (
@@ -30,6 +41,9 @@ from tools.governance.execution import ExecutionMode, ExecutionPolicy
                 generate_reports=False,
                 fail_on_findings=True,
                 verbose_output=True,
+                exit_policy=ExitPolicy(
+                    strategy=ExitCodeStrategy.FAIL_ON_FINDINGS,
+                ),
             ),
         ),
     ],

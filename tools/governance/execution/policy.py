@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 
+from .exit_policy import ExitCodeStrategy, ExitPolicy
 from .mode import ExecutionMode
 
 
@@ -12,6 +13,7 @@ class ExecutionPolicy:
     generate_reports: bool
     fail_on_findings: bool
     verbose_output: bool
+    exit_policy: ExitPolicy
 
     @classmethod
     def from_mode(cls, mode: ExecutionMode) -> "ExecutionPolicy":
@@ -21,16 +23,25 @@ class ExecutionPolicy:
                 generate_reports=True,
                 fail_on_findings=False,
                 verbose_output=False,
+                exit_policy=ExitPolicy(
+                    strategy=ExitCodeStrategy.SUCCESS,
+                ),
             ),
             ExecutionMode.CHECK: cls(
                 generate_reports=False,
                 fail_on_findings=True,
                 verbose_output=False,
+                exit_policy=ExitPolicy(
+                    strategy=ExitCodeStrategy.FAIL_ON_FINDINGS,
+                ),
             ),
             ExecutionMode.CI: cls(
                 generate_reports=False,
                 fail_on_findings=True,
                 verbose_output=True,
+                exit_policy=ExitPolicy(
+                    strategy=ExitCodeStrategy.FAIL_ON_FINDINGS,
+                ),
             ),
         }
 
