@@ -15,7 +15,7 @@ def emit(r,j):
 def main(argv=None):
  p=argparse.ArgumentParser(prog='governance');p.add_argument('--repo',default='.');p.add_argument('--config');p.add_argument('--json',action='store_true');p.add_argument('--mode',default='generate');sp=p.add_subparsers(dest='command',required=True)
  for c in ('version','doctor','plugins','report','validate'): sp.add_parser(c)
- c=sp.add_parser('census');c.add_argument('--output-dir',default='docs/Governance');c.add_argument('--fail-on',choices=['none','low','medium','high'],default='none')
+ c=sp.add_parser('census');c.add_argument('--output-dir',default='docs/Governance');c.add_argument('--fail-on',choices=['none','low','medium','high'],default=None)
  a=p.parse_args(argv)
  if a.command=='version': return emit(CommandResult(True,f'DomoticsAI Governance Toolkit {__version__}'),a.json)
  try: repo=Path(a.repo).resolve();cfg=load_configuration(repo,Path(a.config).resolve() if a.config else None)
@@ -31,7 +31,8 @@ def main(argv=None):
   inv=run_census(ctx);details={'files':inv.statistics['file_count'],'findings':inv.statistics['finding_count']}
   if policy.generate_reports:
    out=repo/a.output_dir;md=write_markdown(inv,out/'Repository_Census.md');js=write_json(inv,out/'repository-census.json');details.update({'markdown':str(md),'json':str(js)})
-  rank={'none':99,'low':1,'medium':2,'high':3};code=0 if a.fail_on=='none' or not any({'LOW':1,'MEDIUM':2,'HIGH':3}[i.severity]>=rank[a.fail_on] for i in inv.issues) else 3
+  effective_threshold=policy.finding_policy.threshold.value if a.fail_on is None else a.fail_on
+  rank={'none':99,'low':1,'medium':2,'high':3};code=0 if effective_threshold=='none' or not any({'LOW':1,'MEDIUM':2,'HIGH':3}[i.severity]>=rank[effective_threshold] for i in inv.issues) else 3
   return emit(CommandResult(code==0,'Repository Census completed',details,code),a.json)
  return emit(CommandResult(True,f'{a.command} framework available; implementation scheduled for a later release.'),a.json)
 if __name__=='__main__': raise SystemExit(main())

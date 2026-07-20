@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 import tools.governance.governance as governance
+from tools.governance.common.models import Inventory, Issue
 from tools.governance.execution import ExecutionMode, ExecutionPolicy
 from tools.governance.governance import main
 from tools.governance.repository_census.classification import category, domain
@@ -126,3 +127,97 @@ def test_census_report_generation_follows_execution_policy(
     else:
         assert "markdown:" not in output
         assert "json:" not in output
+
+
+def inventory_with_severity(severity: str) -> Inventory:
+    issue = Issue(
+        rule_id="DGT-TEST-001",
+        severity=severity,
+        message="Synthetic test finding",
+        path="README.md",
+    )
+
+    return Inventory(
+        root=".",
+        files=[],
+        issues=[issue],
+        statistics={
+            "file_count": 0,
+            "total_size_bytes": 0,
+            "text_file_count": 0,
+            "categories": {},
+            "domains": {},
+            "severities": {
+                severity: 1,
+            },
+            "finding_count": 1,
+        },
+    )
+
+@pytest.mark.parametrize(
+    ("mode", "expected_exit_code"),
+    [
+        ("generate", 0),
+        ("check", 3),
+        ("ci", 3),
+    ],
+)
+def test_census_default_threshold_follows_execution_policy(
+    tmp_path,
+    monkeypatch,
+    mode,
+    expected_exit_code,
+):
+    monkeypatch.setattr(
+        governance,
+        "run_census",
+        lambda ctx: inventory_with_severity("LOW"),
+    )
+
+    assert main(
+        [
+            "--repo",
+            str(tmp_path),
+            "--mode",
+            mode,
+            "census",
+        ]
+    ) == expected_exit_code
+
+
+@pytest.mark.parametrize(
+    ("threshold", "severity", "expected_exit_code"),
+    [
+        ("none", "HIGH", 0),
+        ("medium", "LOW", 0),
+        ("medium", "MEDIUM", 3),
+        ("medium", "HIGH", 3),
+        ("high", "LOW", 0),
+        ("high", "MEDIUM", 0),
+        ("high", "HIGH", 3),
+    ],
+)
+def test_census_fail_on_overrides_execution_policy(
+    tmp_path,
+    monkeypatch,
+    threshold,
+    severity,
+    expected_exit_code,
+):
+    monkeypatch.setattr(
+        governance,
+        "run_census",
+        lambda ctx: inventory_with_severity(severity),
+    )
+
+    assert main(
+        [
+            "--repo",
+            str(tmp_path),
+            "--mode",
+            "check",
+            "census",
+            "--fail-on",
+            threshold,
+        ]
+    ) == expected_exit_code
