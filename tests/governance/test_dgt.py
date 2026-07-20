@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 
 import tools.governance.governance as governance
-from tools.governance.execution import ExecutionMode
+from tools.governance.execution import ExecutionMode, ExecutionPolicy
 from tools.governance.governance import main
 from tools.governance.repository_census.classification import category, domain
 def test_category_and_domain():
@@ -29,7 +29,7 @@ def test_cli(tmp_path,capsys):
         (["--mode", "ci"], ExecutionMode.CI),
     ],
 )
-def test_cli_builds_context_with_execution_mode(
+def test_cli_builds_context_with_execution_policy(
     tmp_path,
     monkeypatch,
     arguments,
@@ -38,9 +38,20 @@ def test_cli_builds_context_with_execution_mode(
     captured = {}
     original_build_context = governance.build_context
 
-    def capture_build_context(repo, cfg, execution_mode):
+    def capture_build_context(
+        repo,
+        cfg,
+        execution_mode,
+        execution_policy,
+    ):
         captured["execution_mode"] = execution_mode
-        return original_build_context(repo, cfg, execution_mode)
+        captured["execution_policy"] = execution_policy
+        return original_build_context(
+            repo,
+            cfg,
+            execution_mode,
+            execution_policy,
+        )
 
     monkeypatch.setattr(
         governance,
@@ -56,4 +67,8 @@ def test_cli_builds_context_with_execution_mode(
             "plugins",
         ]
     ) == 0
+
     assert captured["execution_mode"] is expected_mode
+    assert captured["execution_policy"] == ExecutionPolicy.from_mode(
+        expected_mode
+    )
