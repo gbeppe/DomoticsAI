@@ -28,7 +28,10 @@ def main(argv=None):
  if a.command=='plugins':
   r=discover(ctx.package_root);return emit(CommandResult(True,'Plugin discovery completed',{'rules':r.rules,'metrics':r.metrics,'reporters':r.reporters}),a.json)
  if a.command=='census':
-  inv=run_census(ctx);out=repo/a.output_dir;md=write_markdown(inv,out/'Repository_Census.md');js=write_json(inv,out/'repository-census.json');rank={'none':99,'low':1,'medium':2,'high':3};code=0 if a.fail_on=='none' or not any({'LOW':1,'MEDIUM':2,'HIGH':3}[i.severity]>=rank[a.fail_on] for i in inv.issues) else 3
-  return emit(CommandResult(code==0,'Repository Census completed',{'files':inv.statistics['file_count'],'findings':inv.statistics['finding_count'],'markdown':str(md),'json':str(js)},code),a.json)
+  inv=run_census(ctx);details={'files':inv.statistics['file_count'],'findings':inv.statistics['finding_count']}
+  if policy.generate_reports:
+   out=repo/a.output_dir;md=write_markdown(inv,out/'Repository_Census.md');js=write_json(inv,out/'repository-census.json');details.update({'markdown':str(md),'json':str(js)})
+  rank={'none':99,'low':1,'medium':2,'high':3};code=0 if a.fail_on=='none' or not any({'LOW':1,'MEDIUM':2,'HIGH':3}[i.severity]>=rank[a.fail_on] for i in inv.issues) else 3
+  return emit(CommandResult(code==0,'Repository Census completed',details,code),a.json)
  return emit(CommandResult(True,f'{a.command} framework available; implementation scheduled for a later release.'),a.json)
 if __name__=='__main__': raise SystemExit(main())

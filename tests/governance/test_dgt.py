@@ -72,3 +72,57 @@ def test_cli_builds_context_with_execution_policy(
     assert captured["execution_policy"] == ExecutionPolicy.from_mode(
         expected_mode
     )
+
+
+@pytest.mark.parametrize(
+    ("mode", "reports_expected"),
+    [
+        ("generate", True),
+        ("check", False),
+        ("ci", False),
+    ],
+)
+def test_census_report_generation_follows_execution_policy(
+    tmp_path,
+    capsys,
+    mode,
+    reports_expected,
+):
+    (tmp_path / "README.md").write_text(
+        "# Demo\nEnough\nLines\nFor\nThe\nRule\nHere\nNow\n"
+    )
+
+    exit_code = main(
+        [
+            "--repo",
+            str(tmp_path),
+            "--mode",
+            mode,
+            "census",
+        ]
+    )
+
+    output = capsys.readouterr().out
+    markdown_path = (
+        tmp_path
+        / "docs"
+        / "Governance"
+        / "Repository_Census.md"
+    )
+    json_path = (
+        tmp_path
+        / "docs"
+        / "Governance"
+        / "repository-census.json"
+    )
+
+    assert exit_code == 0
+    assert markdown_path.exists() is reports_expected
+    assert json_path.exists() is reports_expected
+
+    if reports_expected:
+        assert "markdown:" in output
+        assert "json:" in output
+    else:
+        assert "markdown:" not in output
+        assert "json:" not in output
