@@ -7,6 +7,8 @@ from tools.governance.execution import (
     ExecutionPolicy,
     ExitCodeStrategy,
     ExitPolicy,
+    FindingPolicy,
+    FindingThreshold,
 )
 
 
@@ -17,7 +19,9 @@ from tools.governance.execution import (
             ExecutionMode.GENERATE,
             ExecutionPolicy(
                 generate_reports=True,
-                fail_on_findings=False,
+                finding_policy=FindingPolicy(
+                    threshold=FindingThreshold.NONE,
+                ),
                 verbose_output=False,
                 exit_policy=ExitPolicy(
                     strategy=ExitCodeStrategy.SUCCESS,
@@ -28,7 +32,9 @@ from tools.governance.execution import (
             ExecutionMode.CHECK,
             ExecutionPolicy(
                 generate_reports=False,
-                fail_on_findings=True,
+                finding_policy=FindingPolicy(
+                    threshold=FindingThreshold.LOW,
+                ),
                 verbose_output=False,
                 exit_policy=ExitPolicy(
                     strategy=ExitCodeStrategy.FAIL_ON_FINDINGS,
@@ -39,7 +45,9 @@ from tools.governance.execution import (
             ExecutionMode.CI,
             ExecutionPolicy(
                 generate_reports=False,
-                fail_on_findings=True,
+                finding_policy=FindingPolicy(
+                    threshold=FindingThreshold.LOW,
+                ),
                 verbose_output=True,
                 exit_policy=ExitPolicy(
                     strategy=ExitCodeStrategy.FAIL_ON_FINDINGS,

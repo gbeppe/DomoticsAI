@@ -3,6 +3,7 @@
 from dataclasses import dataclass
 
 from .exit_policy import ExitCodeStrategy, ExitPolicy
+from .finding_policy import FindingPolicy, FindingThreshold
 from .mode import ExecutionMode
 
 
@@ -11,7 +12,7 @@ class ExecutionPolicy:
     """Describe the behavior associated with an execution mode."""
 
     generate_reports: bool
-    fail_on_findings: bool
+    finding_policy: FindingPolicy
     verbose_output: bool
     exit_policy: ExitPolicy
 
@@ -21,7 +22,9 @@ class ExecutionPolicy:
         policies = {
             ExecutionMode.GENERATE: cls(
                 generate_reports=True,
-                fail_on_findings=False,
+                finding_policy=FindingPolicy(
+                    threshold=FindingThreshold.NONE,
+                ),
                 verbose_output=False,
                 exit_policy=ExitPolicy(
                     strategy=ExitCodeStrategy.SUCCESS,
@@ -29,7 +32,9 @@ class ExecutionPolicy:
             ),
             ExecutionMode.CHECK: cls(
                 generate_reports=False,
-                fail_on_findings=True,
+                finding_policy=FindingPolicy(
+                    threshold=FindingThreshold.LOW,
+                ),
                 verbose_output=False,
                 exit_policy=ExitPolicy(
                     strategy=ExitCodeStrategy.FAIL_ON_FINDINGS,
@@ -37,7 +42,9 @@ class ExecutionPolicy:
             ),
             ExecutionMode.CI: cls(
                 generate_reports=False,
-                fail_on_findings=True,
+                finding_policy=FindingPolicy(
+                    threshold=FindingThreshold.LOW,
+                ),
                 verbose_output=True,
                 exit_policy=ExitPolicy(
                     strategy=ExitCodeStrategy.FAIL_ON_FINDINGS,
