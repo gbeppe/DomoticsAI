@@ -32,7 +32,7 @@ def main(argv=None):
   if policy.generate_reports:
    out=repo/a.output_dir;md=write_markdown(inv,out/'Repository_Census.md');js=write_json(inv,out/'repository-census.json');details.update({'markdown':str(md),'json':str(js)})
   effective_threshold=policy.finding_policy.threshold.value if a.fail_on is None else a.fail_on
-  rank={'none':99,'low':1,'medium':2,'high':3};code=0 if effective_threshold=='none' or not any({'LOW':1,'MEDIUM':2,'HIGH':3}[i.severity]>=rank[effective_threshold] for i in inv.issues) else 3
+  rank={'none':99,'low':1,'medium':2,'high':3};has_findings=effective_threshold!='none' and any({'LOW':1,'MEDIUM':2,'HIGH':3}[i.severity]>=rank[effective_threshold] for i in inv.issues);code=policy.exit_policy.exit_code(has_findings)
   return emit(CommandResult(code==0,'Repository Census completed',details,code),a.json)
  return emit(CommandResult(True,f'{a.command} framework available; implementation scheduled for a later release.'),a.json)
 if __name__=='__main__': raise SystemExit(main())

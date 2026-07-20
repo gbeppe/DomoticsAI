@@ -16,3 +16,13 @@ class ExitPolicy:
     """Describe the exit-code strategy for an execution policy."""
 
     strategy: ExitCodeStrategy
+
+    def exit_code(self, has_findings: bool) -> int:
+        """Return the process exit code for the execution result."""
+        if (
+            self.strategy is ExitCodeStrategy.FAIL_ON_FINDINGS
+            and has_findings
+        ):
+            return 3
+
+        return 0

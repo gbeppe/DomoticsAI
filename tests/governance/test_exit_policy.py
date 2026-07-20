@@ -22,6 +22,30 @@ def test_exit_policy_describes_fail_on_findings_strategy() -> None:
     assert policy.strategy is ExitCodeStrategy.FAIL_ON_FINDINGS
 
 
+def test_success_strategy_always_returns_zero() -> None:
+    policy = ExitPolicy(strategy=ExitCodeStrategy.SUCCESS)
+
+    assert policy.exit_code(has_findings=False) == 0
+    assert policy.exit_code(has_findings=True) == 0
+
+
+def test_fail_on_findings_strategy_returns_zero_without_findings() -> None:
+    policy = ExitPolicy(
+        strategy=ExitCodeStrategy.FAIL_ON_FINDINGS,
+    )
+
+    assert policy.exit_code(has_findings=False) == 0
+
+
+def test_fail_on_findings_strategy_returns_three_with_findings() -> None:
+    policy = ExitPolicy(
+        strategy=ExitCodeStrategy.FAIL_ON_FINDINGS,
+    )
+
+    assert policy.exit_code(has_findings=True) == 3
+
+
+
 def test_exit_policy_is_immutable() -> None:
     policy = ExitPolicy(strategy=ExitCodeStrategy.SUCCESS)
 
