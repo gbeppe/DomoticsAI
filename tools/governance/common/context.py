@@ -10,4 +10,4 @@ class ExecutionContext:
  repository_root:Path; package_root:Path; configuration:dict[str,Any]; execution_mode:ExecutionMode=ExecutionMode.GENERATE
 
 
-def build_context(repo,cfg): return ExecutionContext(repo,Path(__file__).resolve().parents[1],cfg)
+def build_context(repo,cfg,execution_mode=ExecutionMode.GENERATE): return ExecutionContext(repo,Path(__file__).resolve().parents[1],cfg,execution_mode)

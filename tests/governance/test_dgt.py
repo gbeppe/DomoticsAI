@@ -1,4 +1,9 @@
 from pathlib import Path
+
+import pytest
+
+import tools.governance.governance as governance
+from tools.governance.execution import ExecutionMode
 from tools.governance.governance import main
 from tools.governance.repository_census.classification import category, domain
 def test_category_and_domain():
@@ -14,3 +19,41 @@ def test_cli(tmp_path,capsys):
  assert main(['--repo',str(tmp_path),'census'])==0
  assert (tmp_path/'docs/Governance/Repository_Census.md').exists()
  assert (tmp_path/'docs/Governance/repository-census.json').exists()
+
+@pytest.mark.parametrize(
+    ("arguments", "expected_mode"),
+    [
+        ([], ExecutionMode.GENERATE),
+        (["--mode", "generate"], ExecutionMode.GENERATE),
+        (["--mode", "check"], ExecutionMode.CHECK),
+        (["--mode", "ci"], ExecutionMode.CI),
+    ],
+)
+def test_cli_builds_context_with_execution_mode(
+    tmp_path,
+    monkeypatch,
+    arguments,
+    expected_mode,
+):
+    captured = {}
+    original_build_context = governance.build_context
+
+    def capture_build_context(repo, cfg, execution_mode):
+        captured["execution_mode"] = execution_mode
+        return original_build_context(repo, cfg, execution_mode)
+
+    monkeypatch.setattr(
+        governance,
+        "build_context",
+        capture_build_context,
+    )
+
+    assert main(
+        [
+            "--repo",
+            str(tmp_path),
+            *arguments,
+            "plugins",
+        ]
+    ) == 0
+    assert captured["execution_mode"] is expected_mode
